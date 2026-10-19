@@ -1,49 +1,52 @@
 # Project Status — Sphere Brawl: Rolling Rampage
 
-**Updated:** 2026-10-20
+Current-state snapshot. History lives in [WORK_LOG.md](WORK_LOG.md) (earlier versions of this file are in Git history, for example commit `fc109f8`).
+
+**Updated:** 2026-10-20, session S-20261020-03 (lead: Claude Code 2.1.303, Opus 5.5)
 **Milestone:** Gate 0 (TASK-00), environment and physics-authority feasibility
-**Current step:** Step 0 complete; waiting on the owner's Studio handoff before the Gate 0 runtime tests
-**Branch:** `alpha` (baseline `f726ddd` on `main`)
-**Next approved task:** TASK-00 runtime tests only. TASK-01 is not authorized until Gate 0 passes with evidence.
+**Overall status:** IN PROGRESS. Gate 0 has **not** passed. TASK-01 has **not** started and is not authorized.
+**Branches:**
+- `main`: `f726ddd`, untouched spec baseline.
+- `alpha`: approved work and records.
+- `gate0-spike`: Gate 0 prototype only, never merged. Currently equal to `fc109f8` plus stash `stash@{0}` holding the unanalyzed draft `src/shared/Gate0Sim.luau`.
 
-## Completed
-| Step | Evidence |
-|---|---|
-| Step 0.1: git baseline | `f726ddd` "Import spec pack (baseline, untouched)" on `main`; branch `alpha` created |
-| Step 0.2: layout | `src/shared`, `src/server`, `src/client` (`.gitkeep` only); `build/` and `place/` created and gitignored; `.gitattributes` keeps LF line endings |
-| Step 0.3: tooling | Rokit 1.2.0; pinned Rojo 7.4.4, luau-lsp 1.70.1, StyLua 2.6.0, Selene 0.32.0 (`rokit.toml`); `globalTypes.d.luau` pinned to luau-lsp commit `8e8a4e7` |
-| Step 0.4: build | `rojo build default.project.json -o build/Gate0.rbxlx` exit 0; sourcemap (with `--include-non-scripts`) shows 10 remotes and 3 mapped folders |
-| Step 0.5: checks | StyLua PASS, Selene PASS (both trivial, 0 files); luau-lsp "no files provided" (not counted); analyzer smoke test outside the repo shows the definitions and strict analysis work |
-| Step 0.6: decisions/docs | D-019 to D-023 and D-025 recorded; D-024 reserved; synchronized insert-only edits in the master plan (v1.2), design constants, TASK-00/04/06/07/08, STUDIO_GATE_00 and the acceptance checklist. An automated diff check confirmed no existing text or locked value was removed. |
-| Step 0.8: Studio MCP | pre-existing local-scope `Roblox_Studio` registration verified (Connected); no duplicate added |
+**Last verified commit:** `fc109f8` on `alpha` (Step 0). This session's governance commit is recorded in the work log.
 
-Full details: `docs/GATE_0_REPORT.md`.
+## Completed (verified)
+- Step 0 ([WORK_LOG.md](WORK_LOG.md) S-20261020-01):
+  - git baseline;
+  - Rokit-pinned toolchain;
+  - `src/` layout;
+  - `rojo build` and sourcemap PASS;
+  - decisions D-019 to D-023 and D-025 recorded (D-024 reserved);
+  - insert-only doc sync.
+- Owner Studio handoff (S-20261020-02): `place/Gate0.rbxl` open in Studio, `rojo serve` 7.4.4 running and synced (T-G0-003).
+- G0-1 API probe: all Path A APIs present (T-G0-004). Script access to `AuthorityMode` is restricted, as expected (T-G0-005).
+- Cross-AI development system (S-20261020-03): `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, [AI_DEVELOPMENT_PROTOCOL.md](AI_DEVELOPMENT_PROTOCOL.md), five `.claude/agents/` specialists, and the audit-trail registers.
 
-## Tests
-- Passed: Rojo build, sourcemap, StyLua check, Selene (trivial, no sources).
-- Failed: none.
-- Not run: every Studio runtime criterion (G0-1, C1–C5, A1–A6 / B1–B7); the 4-client smoke test is deferred to TASK-10.
+## Failed, blocked or open
+- [FAIL-004](FAILURES_AND_FIXES.md): Studio MCP tools not loaded in the Claude session. Fix FIXED-UNVERIFIED (user-scope registration); workaround is a direct stdio client.
+- [FAIL-006](FAILURES_AND_FIXES.md): the saved `place/Gate0.rbxl` has `AuthorityMode = Automatic`; the live session shows Server. OPEN, needs the owner to save.
+- A1 dependent settings not yet visible in evidence (T-G0-006 INCONCLUSIVE).
 
-## Features
-- Implemented: none (no gameplay code is authorized before Gate 0).
-- Partial: none.
-- Missing: everything in TASK-01 to TASK-10.
+## Outstanding tests (Gate 0)
+C1–C5 and A2–A6 are NOT RUN (T-G0-009 to T-G0-015). The 4-client smoke test is deferred to TASK-10. See [TEST_RESULTS.md](TEST_RESULTS.md) and [GATE_0_REPORT.md](GATE_0_REPORT.md).
 
-## Assets
-- Concept board: VERIFIED (visual reference only).
-- `sphere.shell.rammer`, `audio.hazard_warning`: ASSET_PENDING (unchanged from the spec pack).
+## Known risks
+- Path A input bridge (world-space Scriptable binding fired by the client) is unverified until C1/C2 run.
+- Rollback may not trigger reliably at 150 ms (A5 has a defined retry and INCONCLUSIVE rule).
+- MCP play is solo only; multi-client tests depend on the owner.
+- Antigravity loading of `AGENTS.md`/`GEMINI.md` is unverified (third-party documentation only).
 
-## Blockers
-1. **Owner action required:** the Studio handoff below. MCP tools load only when Claude Code starts.
-2. Multi-client tests (2 clients for C2/A3–A5) need the owner to start Test ▸ Clients and Servers.
+## Prerequisites
+- Studio 0.743 with `place/Gate0.rbxl` open, `AuthorityMode = Server` **saved**, Rojo connected (`rojo serve default.project.json` from the repo root).
+- Rokit tools resolve only inside the repo.
+- Start Claude Code in the repo root.
 
-## Files created or modified in Step 0
-Verified with `git show --stat 86b9a65` (21 files, 17,641 insertions, 13 deletions; the 13 deletions are lines rewritten with inserted text only):
-- New: `.gitattributes`, `.gitignore`, `rokit.toml`, `stylua.toml`, `selene.toml`, `globalTypes.d.luau`, `src/{shared,server,client}/.gitkeep`, `docs/GATE_0_REPORT.md`, `docs/PROJECT_STATUS.md`
-- Modified: `DECISION_LOG.md`, `MASTER_IMPLEMENTATION_PLAN.md`, `specs/DESIGN_CONSTANTS.md`, `specs/STUDIO_GATE_00.md`, `ALPHA_ACCEPTANCE_CHECKLIST.md`, `tasks/TASK-00`, `TASK-04`, `TASK-06`, `TASK-07`, `TASK-08`
-- Untracked by design (gitignored): `build/Gate0.rbxlx`, `sourcemap.json`, `place/`
+## Evidence and reports
+[GATE_0_REPORT.md](GATE_0_REPORT.md), [TEST_RESULTS.md](TEST_RESULTS.md), [FAILURES_AND_FIXES.md](FAILURES_AND_FIXES.md), `docs/evidence/gate0/` (untracked until the Gate 0 docs-only close-out commit), [DECISION_LOG](../DECISION_LOG.md).
 
-## Resume steps (next session)
-1. Owner completes the Studio handoff (in the final report of this session).
-2. Claude Code opened in `C:\Sphere_ball_rblox\Sphere_Brawl_AI_Agent_Task_Pack`: `git switch -c gate0-spike` from `alpha`, then G0-1 via the `Roblox_Studio` MCP tools.
-3. Follow plan rev 4 Gate 0 steps 2–6; close out with a docs-only commit on `alpha`.
+## Next three actions
+1. Owner: in Studio, press Ctrl+S on `Gate0.rbxl` (keeping `AuthorityMode = Server`) and screenshot the Workspace Properties showing the five dependent settings (clears FAIL-006 and T-G0-006).
+2. Lead: switch to `gate0-spike`, restore the stashed draft, finish and analyze the prototype, and run C1 and A2 in MCP solo play.
+3. Owner + lead: two-client session (C2–C5, A3–A6), including 150 ms Network Simulation for A5.

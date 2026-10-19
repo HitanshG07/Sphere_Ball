@@ -79,3 +79,32 @@ All items below require the Studio session (owner handoff). None has been execut
 - MCP may not reach Test-mode client windows; if not, the owner pastes each window's Output and the report records that as the evidence source.
 - Properties-panel screenshots come from the owner (MCP `screen_capture` captures the viewport).
 - The tooling addition `.gitattributes` (`* text=auto eol=lf`) was not in the rev 4 file list. It keeps working-copy line endings LF despite the global `core.autocrlf` conversion, so `stylua --check` stays reproducible across branch switches.
+
+## 7. Progress update (appended 2026-10-20, sessions S-20261020-02 and S-20261020-03)
+
+Sections 1–6 above are unchanged; this section records what happened after the owner's Studio handoff. Test IDs refer to [TEST_RESULTS.md](TEST_RESULTS.md); failure IDs to [FAILURES_AND_FIXES.md](FAILURES_AND_FIXES.md).
+
+**Handoff state verified:**
+- Studio window title `...\place\Gate0.rbxl` (process started 01:56:20);
+- `rojo serve` 7.4.4 reachable at `localhost:34872`;
+- the Gate0 DataModel contains the 10 remotes and the `Shared`/`Server`/`Client` folders (T-G0-003).
+
+**MCP connection:**
+- The `Roblox_Studio` tools did not load into the Claude Code session (FAIL-004, T-G0-001). It was also registered at user scope (FAIL-005 fixed along the way); that fix is unverified until a new session.
+- This session talks to the same server through a direct stdio JSON-RPC client. The handshake passed (T-G0-002).
+
+**G0-1 results:**
+
+| Check | Result | Status |
+|---|---|---|
+| Path A APIs and enums | all present (T-G0-004) | PASS |
+| Script access to `AuthorityMode` | `lacking capability RobloxScript` for read and write, as the definitions predicted; not unavailability evidence (T-G0-005) | PASS (expected) |
+| Properties panel (owner screenshot) | `AuthorityMode = Server` in the live session; dependent settings not visible (T-G0-006) | INCONCLUSIVE |
+| Saved `place/Gate0.rbxl` | `AuthorityMode = Automatic`; NextGenerationReplication Default; PlayerScriptsUseInputActionSystem Enabled; SignalBehavior Deferred; StreamingEnabled true; UseFixedSimulation Default (T-G0-007) | FAIL (FAIL-006, owner save needed) |
+| `inspect_instance(Workspace)` | returns no properties (T-G0-008) | INCONCLUSIVE (tool limitation) |
+
+**Path decision:** none yet. Path A APIs exist and AuthorityMode can be set to Server in the Properties panel, so the D-018/D-025 rule keeps Path A as the path under test; Path B is not triggered.
+
+**Prototype:** branch `gate0-spike` created from `alpha` at `fc109f8`. A draft `src/shared/Gate0Sim.luau` was written but not analyzed or committed; it was stashed (`stash@{0}`) when governance setup work began.
+
+**Runtime criteria C1–C5 and A2–A6:** still NOT RUN.
