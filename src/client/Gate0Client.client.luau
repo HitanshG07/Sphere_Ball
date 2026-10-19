@@ -26,7 +26,6 @@ end
 -- Counters (observed outside the simulation) -----------------------------------------------------
 local rollbacks, mispredictions = 0, 0
 local rawFx, uniqueFx = 0, 0
-local fxSeen: { [string]: boolean } = {}
 local maxCorrection, maxRoll = 0, 0
 RunService.Rollback:Connect(function()
 	rollbacks += 1
@@ -52,15 +51,19 @@ local mispredictionOk, mispredictionErr = pcall(function()
 end)
 log("Misprediction connectable=%s err=%s", tostring(mispredictionOk), tostring(mispredictionErr))
 
+-- FAIL-008: on a predicted root the server-written sequence attributes replicate (GetAttribute is current)
+-- but GetAttributeChangedSignal does not fire. Presentation therefore polls the simulation results once per
+-- rendered frame and presents each sequence number at most once (D-025). The signal counter is kept only as
+-- evidence of that engine behaviour.
+local signalFx = 0
+local regressions = 0 -- observed value moved backwards (for example during a rollback)
+local FX_ATTRS = { "HitSeq", "KickSeq" }
+local lastValue: { [string]: number } = {}
+local presented: { [string]: number } = {} -- highest sequence number already presented per root/attribute
 local function watchFx(root: Instance)
-	for _, attr in { "HitSeq", "KickSeq" } do
+	for _, attr in FX_ATTRS do
 		root:GetAttributeChangedSignal(attr):Connect(function()
-			rawFx += 1
-			local key = root.Name .. ":" .. attr .. ":" .. tostring(root:GetAttribute(attr))
-			if not fxSeen[key] then
-				fxSeen[key] = true
-				uniqueFx += 1
-			end
+			signalFx += 1
 		end)
 	end
 end
@@ -68,6 +71,34 @@ for _, root in spheres:GetChildren() do
 	watchFx(root)
 end
 spheres.ChildAdded:Connect(watchFx)
+spheres.ChildRemoved:Connect(function(root: Instance)
+	for _, attr in FX_ATTRS do
+		lastValue[root.Name .. ":" .. attr] = nil
+		presented[root.Name .. ":" .. attr] = nil -- a respawned root reuses the name and restarts at 0
+	end
+end)
+RunService.PreRender:Connect(function()
+	for _, root in spheres:GetChildren() do
+		for _, attr in FX_ATTRS do
+			local value = num(root, attr, 0)
+			local key = root.Name .. ":" .. attr
+			local last = lastValue[key] or 0
+			if value ~= last then
+				rawFx += 1
+				if value < last then
+					regressions += 1
+				end
+				lastValue[key] = value
+			end
+			-- Present every sequence number at most once, even if the value regresses and returns.
+			local done = presented[key] or 0
+			if value > done then
+				uniqueFx += value - done
+				presented[key] = value
+			end
+		end
+	end
+end)
 
 -- Hardware input: client-only context (never replicated) --------------------------------------------
 local hardware = Instance.new("InputContext")
@@ -320,7 +351,7 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 			then string.format("%.3f", (own.Position - ref).Magnitude)
 			else "n/a"
 		log(
-			"report %s uid=%d rollbacks=%d mispredictions=%d simSteps=%d resimSteps=%d maxCorrection=%.3f rawFx=%d uniqueFx=%d maxCameraRollY=%.5f refPosDelta=%s",
+			"report %s uid=%d rollbacks=%d mispredictions=%d simSteps=%d resimSteps=%d maxCorrection=%.3f rawFx=%d uniqueFx=%d signalFx=%d regressions=%d maxCameraRollY=%.5f refPosDelta=%s",
 			value,
 			player.UserId,
 			rollbacks,
@@ -330,6 +361,8 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 			maxCorrection,
 			rawFx,
 			uniqueFx,
+			signalFx,
+			regressions,
 			maxRoll,
 			refDelta
 		)
