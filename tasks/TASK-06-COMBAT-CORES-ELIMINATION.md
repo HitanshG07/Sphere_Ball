@@ -23,6 +23,7 @@ Implement exactly as defined in Master Plan Section 8.3:
 - Kinetic Overdrive Dash: 8-second cooldown, +22 studs/s toward input/current motion/facing fallback, max speed 55, 1.25 outgoing impact factor for 1 second.
 - Cryo Anchor Brake: 9-second cooldown, remove 85% lateral drift, ignore ice/magnetic hazard forces for 2.5 seconds, incoming knockback factor 1/1.5 for 2 seconds.
 - Magnetic Pulse Tether: 10-second cooldown, nearest eligible opponent within 24 studs, deterministic tie-break, +16 studs/s toward caster, speed cap. No valid target means feedback and no cooldown consumption.
+- Burst boost (D-019, available to every core): AbilityService validates it; +12 studs/s one-time along move input (fallback: velocity, then facing), 4-second cooldown, speed cap 55, outgoing impact factor 1.0.
 
 ## Elimination
 - Void threshold Y<15.

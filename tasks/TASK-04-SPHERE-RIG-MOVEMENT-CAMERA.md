@@ -17,7 +17,7 @@ Deliver a controllable sphere with a stable horizon and separated visual roll.
 
 ## Requirements
 1. Use the architecture selected and documented at Gate 0. Path A uses Server Authority + `BindToSimulation`; pre-approved Path B uses `SetNetworkOwner(nil)` and validated client input intent only. Do not use `SetNetworkOwner(player)` as a fallback. Never accept client-authoritative collisions, knockback, or eliminations.
-2. Inputs: WASD/left stick, Shift boost, Space brake, E core ability. On touch, show equivalent buttons. Keep movement and core simulation deterministic according to the authority model.
+2. Inputs: WASD/left stick, Shift boost (Burst boost per D-019: +12 studs/s, 4 s cooldown, cap 55), Space brake, E core ability. On touch, show equivalent buttons. Keep movement and core simulation deterministic according to the authority model. Under Path A follow D-025: client-side `SetPredictionMode` on the own root, the world-space `Scriptable` input bridge with a magnitude clamp in the simulation, and no side effects inside `BindToSimulation`. Apply the D-023 ReplicationFocus and restore matrix for the sphere, camera and input bindings.
 3. SphereRoot is a 6-stud invisible collidable sphere. Configure attachment/forces/constraints only as verified by the target simulation API.
 4. Visible shell is client-only and non-colliding; never anchor it as a child of the physics assembly. For all visible sphere roots, create shells in a separate client visual folder and update them on PreRender.
 5. Compute visual roll from position delta and sphere radius, with stable axis handling for low/zero movement. Large corrections are interpolated visually without rotating camera.

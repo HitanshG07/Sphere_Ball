@@ -16,8 +16,8 @@ Build every Alpha UI state and responsive input without dead controls or unappro
 
 ## UI modules
 1. `HubNavigationGui`: Play/Quick Queue, Customize, Inventory (Coming Soon), Shop (Coming Soon), Quests (Coming Soon), Settings; queue status and Leave Queue.
-2. `CustomizationModalGui`: category tabs, rotatable 3D ViewportFrame preview, item cards, equipped state, server confirmation and loadout-lock state.
-3. `ArenaCombatHUDGui`: next-hazard name/icon/timer, alive counter, ring collapse countdown, boost/brake/core ability buttons and cooldowns.
+2. `CustomizationModalGui`: category tabs, rotatable 3D ViewportFrame preview, item cards, equipped state, server confirmation and loadout-lock state. Tabs per D-021: Build = chassis, Skins = sphere skin (Gold/Void shown locked per D-020), Core, Trails (`None`, `CoreStreak`, `CyanStreak`), Effects (`StandardSpark`, `CoreBurst`); the Ball tab is disabled and labelled `COMING SOON`.
+3. `ArenaCombatHUDGui`: next-hazard name/icon/timer, alive counter, ring collapse countdown, boost/brake/core ability buttons and cooldowns. The boost button is the D-019 Burst boost with its 4-second cooldown overlay.
 4. `MatchResultsGui`: winner/tie, placement, KOs, survival time and Return to Hub.
 
 ## Behavior

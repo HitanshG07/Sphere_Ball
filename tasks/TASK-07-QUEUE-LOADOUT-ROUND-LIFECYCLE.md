@@ -28,10 +28,10 @@ Connect the full player journey from physical lobby queue to the results screen 
 Use exact states from Master Plan Section 4.2. Transition only from the one master manager. Opening=two 28s pulses, collapse D4, MidGame=two 21s pulses, collapse D3, SuddenDeath=15s pulse loops to survivor or 150s hard timeout. Cancel/reset hazard before collapse. Results lasts 8 seconds, followed by cleanup.
 
 ## Avatar and sphere lifecycle
-Save every property changed on R15 avatar and restore original values exactly. Move avatar into holding pod with movement disabled during play; spawn separate sphere for active player. On cleanup destroy sphere/visuals, return avatar to hub, restore controls and clear state. Do not respawn/replace the whole Character to swap forms.
+Save every property changed on R15 avatar and restore original values exactly. Move avatar into holding pod with movement disabled during play; spawn separate sphere for active player. On cleanup destroy sphere/visuals, return avatar to hub, restore controls and clear state. Do not respawn/replace the whole Character to swap forms. Use the D-023 holding pods (`GameConfig.Lobby`), ReplicationFocus rules and restore matrix for elimination, disconnect and match end, ending with the cleanup invariant check. D-020 governs locked skins.
 
 ## Results
-Compute placements, KOs and survival time on server. Hard timeout tiebreak: placement score, then valid KOs, then survival time; if still equal, shared tie. Do not display coins/XP until real reward logic is implemented.
+Compute placements, KOs and survival time on server. Hard timeout tiebreak: placement score (defined in D-022), then valid KOs, then survival time; if still equal, shared tie. Do not display coins/XP until real reward logic is implemented.
 
 ## Tests
 - every queue rule in Master Plan Section 5

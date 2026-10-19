@@ -10,6 +10,10 @@ Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is
 - [ ] Server owns authoritative movement outcome under selected model: hit, knockback, ability effects, elimination, queue, match timer and result state.
 - [ ] No client-applied authoritative impulse or client-authoritative hit/KO path exists.
 - [ ] `docs/GATE_0_REPORT.md` identifies the selected path, exact settings, test evidence, unrun tests and known limitations.
+- [ ] `Workspace.AuthorityMode` and dependent settings are verified in the Studio Properties panel, not only by script (D-025).
+- [ ] Path A only: client-side `SetPredictionMode` gives `Predicted` on the owning client and `Authoritative` on the server; at least one rollback is observed under the defined stimulus and unique client FX equals server hits + kicks (no duplicate presentation under resimulation).
+- [ ] Path B only: root ownership stays `nil`; input validation and the 20/s rate limit pass; Path A prediction/rollback checks are not applied.
+- [ ] The simulation clamps move-input magnitude to <= 1; Gate 0 AutoDrive test input is Studio-gated and absent from production code (D-025).
 
 ## Repository and type contracts
 - [ ] Rojo project builds, if Rojo is used.
@@ -61,6 +65,7 @@ Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is
 - [ ] Magnetic ability selects nearest valid target with deterministic tie-break.
 - [ ] Magnetic ability with no valid target shows feedback and does not consume cooldown.
 - [ ] Horizontal speed remains capped at 55 studs/s.
+- [ ] Burst boost (D-019) gives +12 studs/s, enforces its 4-second cooldown, and respects the 55 studs/s cap.
 - [ ] Client cannot select attacker, victim, hit normal, velocity, KO or reward.
 
 ## Queue, loadout and lobby
@@ -73,6 +78,7 @@ Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is
 - [ ] Less than four players never starts a match.
 - [ ] Queue decrease below minimum cancels/repairs countdown correctly.
 - [ ] Loadout locks at T-5 and invalid IDs/locked items are rejected.
+- [ ] Gold and Void skins are locked and rejected; Default and Neon can be equipped (D-020). Only the D-021 trail/effect IDs are accepted, and the Ball tab shows `COMING SOON`.
 - [ ] R15 avatar properties restore exactly after match/elimination/disconnect.
 - [ ] Hub main spawn faces +Z toward the physical queue portal (`CFrame.lookAt` assertion passes); route to customization, mode board and shop is unobstructed.
 
@@ -86,6 +92,8 @@ Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is
 - [ ] Results compute placements, KOs and survival time server-side.
 - [ ] Results panel lasts 8 seconds and has working Return to Hub.
 - [ ] Three sequential rounds complete with no stale tile/hazard/connection state.
+- [ ] Hard-timeout placements follow D-022.
+- [ ] D-023 restore matrix passes for elimination, disconnect and match end: ReplicationFocus, camera, input bindings, connections, spheres and avatar properties are restored as specified, and the cleanup invariant check passes.
 
 ## UI / visuals / audio / accessibility
 - [ ] All active lobby buttons work; unimplemented features are disabled/Coming Soon.

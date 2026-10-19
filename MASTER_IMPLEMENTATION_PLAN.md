@@ -1,7 +1,7 @@
 # SPHERE BRAWL: ROLLING RAMPAGE
 ## Master Implementation Plan and AI-Agent Production Specification
 
-**Document version:** 1.1 - Consolidated source of truth with Gate 0 and spawn corrections  
+**Document version:** 1.2 - Consolidated source of truth with Gate 0 and spawn corrections; adds owner decisions D-019 to D-023 and Path A API usage D-025 (2026-10-20)  
 **Status:** Approved design target; implementation values are initial tuning values unless marked as invariant  
 **Engine:** Roblox Studio  
 **Code:** Luau with `--!strict`  
@@ -183,8 +183,8 @@ All stations must be reachable by walking, not only by UI. The main queue pad mu
 - R15 avatars in lobby; separate invisible collision sphere plus client-rendered visual shell in arena.
 - Four selectable chassis names: Rammer, Trickster, Magnetar, Bulwark. For the first Alpha, these are cosmetic silhouettes with identical combat stats; sidegrade stats are LATER.
 - Three selectable cores with the abilities defined in Section 8.
-- Four starter sphere skins: Default, Neon, Gold, Void. If a skin is not unlocked, it appears locked and cannot be equipped.
-- Basic trails and collision/impact effects. Cosmetic only.
+- Four starter sphere skins: Default, Neon, Gold, Void. If a skin is not unlocked, it appears locked and cannot be equipped. Alpha unlock rule (D-020): Default and Neon are unlocked; Gold and Void are previewable but locked and are rejected by LoadoutService; the unlock inventory is session-only on the server.
+- Basic trails and collision/impact effects. Cosmetic only. IDs (D-021): `TrailId` = `None`, `CoreStreak`, `CyanStreak`; `EffectId` = `StandardSpark`, `CoreBurst`; all unlocked.
 - Physical queue pad, Quick Queue, leave queue, queue counter, countdown, loadout lock, spawn assignment.
 - Three timed hazards: Ice Corridor, Magnetic Storm, Boost Runway.
 - Two scheduled ring collapses.
@@ -263,7 +263,7 @@ No other service may set the master phase. `RoundManager` owns transitions; othe
 | Results | Freeze combat, produce placements, show results for 8 seconds | Timer ends |
 | Cleanup | Despawn spheres, restore avatars, clear events/connections | Reset invariants pass |
 
-**Cycle timing invariant:** Opening is exactly two 28-second cycles (56 seconds) before Collapse1. MidGame is exactly two 21-second cycles (42 seconds) before Collapse2. SuddenDeath pulses repeat until one survivor or a 150-second hard match elapsed time is reached. On hard timeout, use the defined tiebreak: highest current placement score, then highest valid knockouts, then longest survival time; if still tied, declare a shared tie rather than randomizing.
+**Cycle timing invariant:** Opening is exactly two 28-second cycles (56 seconds) before Collapse1. MidGame is exactly two 21-second cycles (42 seconds) before Collapse2. SuddenDeath pulses repeat until one survivor or a 150-second hard match elapsed time is reached. On hard timeout, use the defined tiebreak: highest current placement score, then highest valid knockouts, then longest survival time; if still tied, declare a shared tie rather than randomizing. Placement score (D-022): every player alive at the timeout outranks every eliminated player; eliminated players rank by elimination time, latest first, and eliminations in the same server step share a placement.
 
 ## 4.3 Match-start conditions
 
@@ -324,13 +324,23 @@ Keep Roblox `Player.Character` as the lobby avatar. Do not replace/destroy it fo
 
 At match start:
 1. Save exact original values for every changed character part/decoration property and Humanoid movement property.
-2. Move the avatar to a dedicated off-map holding pod from `LobbyConfig` (one unique pod per player, no collision with arena/lobby, anchored safe floor), remove it from collision interactions, anchor/disable the root as required, disable movement, and hide it without losing saved appearance properties. Never put the holding pod inside the active arena or in the player's camera view.
+2. Move the avatar to a dedicated off-map holding pod from `LobbyConfig`, implemented as the `GameConfig.Lobby` section (D-023: six pods, anchored 10x1x10 floor, top Y=200, centred at `(2000 + 20*(i-1), 200, 2000)` for i = 1..6) (one unique pod per player, no collision with arena/lobby, anchored safe floor), remove it from collision interactions, anchor/disable the root as required, disable movement, and hide it without losing saved appearance properties. Never put the holding pod inside the active arena or in the player's camera view.
 3. Spawn a separate `SphereRoot` physics instance in the match arena, registered against the player's UserId.
 4. Bind client controls/camera to the sphere root or the approved predicted visual state.
 5. On elimination, disable sphere input and ability requests, enter spectator camera, and keep avatar hidden until results.
 6. On match cleanup, destroy sphere, restore every saved avatar property exactly, restore movement, and move character to a Hub spawn.
 
 If the player disconnects at any phase, destroy their sphere, remove queue/roster references, clear connections, and update remaining-player count.
+
+**Replication focus and restore matrix (D-023):** `Player.ReplicationFocus` follows the player's SphereRoot during play and the spectated root or an arena focus part while spectating, so StreamingEnabled streams the arena rather than the holding pod. Step 5 above is unchanged: the avatar stays hidden after elimination until Results/Cleanup.
+
+| Event | Sphere | Input / ability | Camera | ReplicationFocus | Avatar |
+|---|---|---|---|---|---|
+| Elimination | removed from simulation, then destroyed | client bindings unbound; server rejects requests | spectator follow | spectated root or arena focus part | stays hidden in pod |
+| Disconnect | destroyed; registry and references cleared | connections disconnected | n/a | n/a | saved-property record deleted |
+| Match end, then Cleanup | all roots destroyed; client shells destroyed | all bindings unbound | `Custom`, subject = Humanoid | `nil` (default) | saved properties restored exactly, unanchored, moved to Hub spawn; missing Character triggers `LoadCharacter` |
+
+Cleanup ends with an invariant check: no SphereRoot remains, no saved-property records remain, every player's ReplicationFocus is nil, and connection counts are back to baseline.
 
 ---
 
@@ -550,6 +560,7 @@ Each player equips one core and gets exactly one active core ability. Server con
 | Magnetic max acceleration | 22 studs/s^2 |
 | Magnetic inward contribution cap | 12 studs/s |
 | Boost runway delta | +18 studs/s one-time |
+| Burst boost (Shift / touch Boost, D-019) | +12 studs/s one-time, 4 s cooldown, outgoing impact factor 1.0 |
 
 These are tuning values. Unit tests verify the math; Studio multi-client playtests verify feel, safety, and stability. Do not silently alter them.
 
@@ -595,6 +606,9 @@ Gate 0 has two **pre-approved** paths. Try Path A first. If the current Studio b
 - Put physics-affecting simulation and shared simulation state in a ModuleScript bound through `RunService:BindToSimulation()` and initialized on both client and server, following the current Creator Hub contract.
 - Use Input Action System inputs for simulation inputs; use synchronized simulation time (`time()`) inside rollback/resimulation callbacks. Keep VFX, sounds, and other presentation outside simulation callbacks.
 - Keep gameplay outcomes, knockback, elimination, queue state, and results server-authoritative.
+- Prediction (D-025): the server creates the SphereRoot; each client calls `RunService:SetPredictionMode(ownRoot, Enum.PredictionMode.On)` after the root replicates and verifies `GetPredictionStatus(ownRoot) == Enum.PredictionStatus.Predicted`. Server code never calls `SetPredictionMode`.
+- Input bridge (D-025): the simulation `Move` action is a world-space Direction2D (`Vector2(x, y)` maps to world `(x, 0, y)`) with one `Scriptable` binding. The client converts camera-relative hardware input to world space and fires `InputBinding:Fire` each frame outside the simulation; the simulation clamps the magnitude to <= 1. Never use the deprecated `InputAction:Fire`. Test automation feeds the same bridge, is gated by `RunService:IsStudio()`, and never ships in production controllers.
+- Rollback safety (D-025): simulation callbacks write only synchronized state (velocities, attributes on predicted instances). Server-only outcomes are written as attributes with monotonically increasing sequence IDs; presentation and logging observe them outside the simulation and deduplicate by sequence ID.
 
 **Path B - Server-owned physics fallback (pre-approved only when Path A is unavailable in the target environment):**
 - Set every live `SphereRoot` assembly to server network ownership with `SphereRoot:SetNetworkOwner(nil)` on the server. This is not the Roblox Server Authority/rollback model; document it as server-owned simulation with server-authoritative outcomes.
@@ -836,7 +850,7 @@ Build four modular ScreenGuis with `ResetOnSpawn=false` and a clear state owner:
 - Physical queue pad in world remains visible and usable even if HUD is hidden.
 
 ### Customization modal
-- Left category tabs: Build, Ball, Skins, Core, Trails, Effects.
+- Left category tabs: Build, Ball, Skins, Core, Trails, Effects. (D-021: Build = chassis, Skins = sphere skin, Core, Trails, Effects; the Ball tab is shown disabled as `COMING SOON`.)
 - Center: rotatable 3D preview in a ViewportFrame, with no physics and no persistent frame loop after close.
 - Right: selection cards for Rammer, Trickster, Magnetar, Bulwark; available cosmetics; Cryo/Magnetic/Kinetic cores.
 - Equip/apply confirmation state with server response. Lockout state while roster countdown <=5 seconds.
@@ -845,7 +859,7 @@ Build four modular ScreenGuis with `ResetOnSpawn=false` and a clear state owner:
 - Hazard banner: `NEXT HAZARD`, name, timer and icon.
 - Alive counter.
 - Ring-collapse timer.
-- Ability button with cooldown overlay; Shift boost, Space brake, E core ability on keyboard; touch controls for all three.
+- Ability button with cooldown overlay; Shift boost (Burst boost, D-019), Space brake, E core ability on keyboard; touch controls for all three.
 - Optional center warning text that is short and fades, never hides a large portion of the field.
 
 ### Results
