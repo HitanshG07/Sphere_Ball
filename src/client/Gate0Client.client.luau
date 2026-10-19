@@ -14,8 +14,11 @@ local camera = workspace.CurrentCamera
 local spheres = workspace:WaitForChild("Gate0Spheres")
 local bogus = ReplicatedStorage:WaitForChild("Gate0Bogus") :: RemoteEvent
 
+local clientLog = ReplicatedStorage:WaitForChild("Gate0ClientLog") :: RemoteEvent
 local function log(fmt: string, ...: any)
-	print("[G0C] " .. string.format(fmt, ...))
+	local line = string.format(fmt, ...)
+	print("[G0C] " .. line)
+	clientLog:FireServer(line) -- test-only evidence forwarding (data only on the server)
 end
 
 local function num(inst: Instance, name: string, default: number): number

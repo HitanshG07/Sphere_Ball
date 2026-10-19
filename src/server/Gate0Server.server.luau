@@ -66,6 +66,33 @@ spheres.Parent = workspace
 local bogus = Instance.new("RemoteEvent")
 bogus.Name = "Gate0Bogus"
 bogus.Parent = ReplicatedStorage
+-- Test-only evidence channel: clients forward their [G0C] log lines so one Server Output holds all evidence.
+-- Data only: never affects simulation state; length- and rate-capped.
+local clientLog = Instance.new("RemoteEvent")
+clientLog.Name = "Gate0ClientLog"
+clientLog.Parent = ReplicatedStorage
+type LogBudget = { count: number, window: number }
+local clientLogBudget: { [Player]: LogBudget } = {}
+clientLog.OnServerEvent:Connect(function(player: Player, line: any)
+	if typeof(line) ~= "string" then
+		return
+	end
+	local now = os.clock()
+	local budget: LogBudget = clientLogBudget[player] or { count = 0, window = now }
+	if now - budget.window >= 1 then
+		budget.count = 0
+		budget.window = now
+	end
+	clientLogBudget[player] = budget
+	budget.count += 1
+	if budget.count > 30 then
+		return
+	end
+	print(string.format("[G0C<-%d] %s", player.UserId, string.sub(line, 1, 400)))
+end)
+Players.PlayerRemoving:Connect(function(player: Player)
+	clientLogBudget[player] = nil
+end)
 
 -- Per-player state ---------------------------------------------------------------------------
 type SavedAvatar = {
