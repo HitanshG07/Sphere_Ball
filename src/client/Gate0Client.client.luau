@@ -31,16 +31,26 @@ local maxCorrection, maxRoll = 0, 0
 RunService.Rollback:Connect(function()
 	rollbacks += 1
 end)
-RunService.Misprediction:Connect(function(t: number, instances: { any }, stats: { [string]: any })
-	mispredictions += 1
-	if mispredictions <= 3 then
-		local keys = {}
-		for k, v in stats do
-			table.insert(keys, tostring(k) .. "=" .. tostring(v))
+-- FAIL-007: Misprediction needs plugin/Open Cloud capability; a LocalScript may not connect it.
+local mispredictionOk, mispredictionErr = pcall(function()
+	RunService.Misprediction:Connect(function(t: number, instances: { any }, stats: { [string]: any })
+		mispredictions += 1
+		if mispredictions <= 3 then
+			local keys = {}
+			for k, v in stats do
+				table.insert(keys, tostring(k) .. "=" .. tostring(v))
+			end
+			log(
+				"misprediction #%d t=%.3f instances=%d stats={%s}",
+				mispredictions,
+				t,
+				#instances,
+				table.concat(keys, ", ")
+			)
 		end
-		log("misprediction #%d t=%.3f instances=%d stats={%s}", mispredictions, t, #instances, table.concat(keys, ", "))
-	end
+	end)
 end)
+log("Misprediction connectable=%s err=%s", tostring(mispredictionOk), tostring(mispredictionErr))
 
 local function watchFx(root: Instance)
 	for _, attr in { "HitSeq", "KickSeq" } do

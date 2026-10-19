@@ -64,3 +64,10 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Fix required:** owner saves the place (Ctrl+S) with `AuthorityMode = Server`; then re-decode the saved file. Not a code failure.
 - **Evidence:** `docs/evidence/gate0/20261020-021341_G0-1_saved-place-workspace-settings.txt`, `docs/evidence/gate0/20261020-015946_A1_owner-screenshot_properties-panel_AuthorityMode-Server.png`
 - **Status:** OPEN
+
+## FAIL-007 — Client harness stopped: `RunService.Misprediction` not connectable from game scripts
+- **Session / discovered:** S-20261020-04, first MCP solo Play of prototype `8517adb` (test T-G0-017).
+- **Error:** `The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)` at `Players.<user>.PlayerScripts.Client.Gate0Client`, line 34. The uncaught error ended the LocalScript, so client prediction setup, the input bridge and the camera never ran.
+- **Cause (confirmed):** `RunService.Misprediction` requires plugin or Open Cloud capability; LocalScripts cannot connect it. `RunService.Rollback` (line 31) connected without error.
+- **Fix:** guard the `Misprediction` connection with `pcall` and log its availability; keep the `Rollback` event and the in-simulation resimulation counter as the game-script measures for A5; try `Misprediction` from the plugin-capable MCP `execute_luau` Client context during A5.
+- **Status:** INVESTIGATING (fix in progress)
