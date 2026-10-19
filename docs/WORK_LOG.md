@@ -126,3 +126,8 @@ Append-only chronological history for every AI and human working on the project.
   - Frontmatter check: all five agents have name, description, tools and model, and the name matches the filename. A first run reported every file as BAD because of a path-separator bug in the checker itself; after the fix all were OK.
   - Relative-link check: the first run found 11 missing references: `docs/WORK_LOG.md` (not yet written at that point) and the future TASK-01 contract file `src/shared/Types.luau` (intentional). The re-run after writing this log is recorded in the next entry.
 - **Commit:** pending at the time of writing; recorded in the next entry.
+
+### S-20261020-03 (continued) — commit and branch sync
+- Link re-check after writing this log: 105 references in 14 files; 6 unresolved, all intentional: `src/shared/Types.luau` (future TASK-01 contract file, 3 mentions) and `src/shared/Gate0Sim.luau` (exists only on `gate0-spike`/stash, 3 mentions).
+- Commit `2d55f5e` on `alpha` at 02:19:42: 14 files, 656 insertions, 46 deletions (the deletions are the `PROJECT_STATUS.md` snapshot rewrite; `GATE_0_REPORT.md` received additions only). `main` still at `f726ddd`. Evidence files remain untracked until the Gate 0 close-out commit.
+- Next: fast-forward `gate0-spike` to `alpha` (alpha into the spike only; the spike is never merged into `alpha`) so the rule files exist on both branches, restore `stash@{0}`, and resume Gate 0 under session S-20261020-04.
