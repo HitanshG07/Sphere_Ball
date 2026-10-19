@@ -38,7 +38,10 @@ Full details: `docs/GATE_0_REPORT.md`.
 2. Multi-client tests (2 clients for C2/A3–A5) need the owner to start Test ▸ Clients and Servers.
 
 ## Files created or modified in Step 0
-Pending verification with `git show --stat` after the Step 0 commit (recorded in the follow-up commit).
+Verified with `git show --stat 86b9a65` (21 files, 17,641 insertions, 13 deletions; the 13 deletions are lines rewritten with inserted text only):
+- New: `.gitattributes`, `.gitignore`, `rokit.toml`, `stylua.toml`, `selene.toml`, `globalTypes.d.luau`, `src/{shared,server,client}/.gitkeep`, `docs/GATE_0_REPORT.md`, `docs/PROJECT_STATUS.md`
+- Modified: `DECISION_LOG.md`, `MASTER_IMPLEMENTATION_PLAN.md`, `specs/DESIGN_CONSTANTS.md`, `specs/STUDIO_GATE_00.md`, `ALPHA_ACCEPTANCE_CHECKLIST.md`, `tasks/TASK-00`, `TASK-04`, `TASK-06`, `TASK-07`, `TASK-08`
+- Untracked by design (gitignored): `build/Gate0.rbxlx`, `sourcemap.json`, `place/`
 
 ## Resume steps (next session)
 1. Owner completes the Studio handoff (in the final report of this session).
