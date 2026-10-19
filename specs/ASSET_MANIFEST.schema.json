@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sphere Brawl Asset Manifest Entry",
+  "type": "object",
+  "required": ["id", "name", "kind", "status", "destination", "source", "rightsStatus", "notes"],
+  "properties": {
+    "id": { "type": "string", "description": "Stable internal asset key used by code/build scripts." },
+    "name": { "type": "string" },
+    "kind": { "enum": ["model", "mesh", "texture", "material", "animation", "audio", "vfx", "ui", "concept"] },
+    "status": { "enum": ["PROCEDURAL", "SOURCE_CREATED", "EXPORTED", "IMPORTED_STUDIO", "VERIFIED", "ASSET_PENDING", "REJECTED"] },
+    "destination": { "type": "string" },
+    "source": { "type": "string", "description": "Path to source file/script or verified platform asset reference." },
+    "rightsStatus": { "enum": ["ORIGINAL_GENERATED", "LICENSE_VERIFIED", "ROBLOX_OWNED", "PENDING_VERIFICATION", "REJECTED"] },
+    "robloxAssetId": { "type": ["string", "null"], "description": "Only fill after the asset is imported and permission-tested in the target experience." },
+    "triangles": { "type": ["integer", "null"], "minimum": 0 },
+    "textureResolution": { "type": ["string", "null"] },
+    "collision": { "enum": ["NONE", "AUTHORITATIVE_COLLIDER", "VISUAL_ONLY"] },
+    "platformBudget": { "enum": ["DESKTOP_AND_MOBILE", "DESKTOP_ONLY", "OPTIONAL_LOW_QUALITY_FALLBACK"] },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

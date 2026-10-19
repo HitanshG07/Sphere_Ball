@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "game": "Sphere Brawl: Rolling Rampage",
+  "assets": [
+    {
+      "id": "concept.final_lobby_flow",
+      "name": "Approved combined concept board",
+      "kind": "concept",
+      "status": "VERIFIED",
+      "destination": "docs/visual-reference",
+      "source": "assets/concept/Sphere_Brawl_Rolling_Rampage_Final_Concept.png",
+      "rightsStatus": "ORIGINAL_GENERATED",
+      "robloxAssetId": null,
+      "triangles": null,
+      "textureResolution": null,
+      "collision": "NONE",
+      "platformBudget": "DESKTOP_AND_MOBILE",
+      "notes": "Visual direction only. Follow master plan text for authoritative layout and dimensions."
+    },
+    {
+      "id": "sphere.shell.rammer",
+      "name": "Rammer visual shell",
+      "kind": "model",
+      "status": "ASSET_PENDING",
+      "destination": "ReplicatedStorage.Assets.SphereShells.Rammer",
+      "source": "To be generated procedurally or from Blender source under TASK-09",
+      "rightsStatus": "ORIGINAL_GENERATED",
+      "robloxAssetId": null,
+      "triangles": null,
+      "textureResolution": null,
+      "collision": "VISUAL_ONLY",
+      "platformBudget": "DESKTOP_AND_MOBILE",
+      "notes": "Must remain inside the 5.6-stud visible envelope; does not affect collider or stats."
+    },
+    {
+      "id": "audio.hazard_warning",
+      "name": "Hazard warning cue",
+      "kind": "audio",
+      "status": "ASSET_PENDING",
+      "destination": "SoundService or client AudioController",
+      "source": "To be generated/imported and permission-verified",
+      "rightsStatus": "PENDING_VERIFICATION",
+      "robloxAssetId": null,
+      "triangles": null,
+      "textureResolution": null,
+      "collision": "NONE",
+      "platformBudget": "DESKTOP_AND_MOBILE",
+      "notes": "Do not use an unverified SoundId; use silence or an original generated cue until the asset is approved."
+    }
+  ]
+}

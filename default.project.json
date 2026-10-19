@@ -1,0 +1,62 @@
+{
+  "name": "SphereBrawlRollingRampage",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Shared": {
+        "$path": "src/shared"
+      },
+      "Remotes": {
+        "$className": "Folder",
+        "BoardPulseEvent": {
+          "$className": "RemoteEvent"
+        },
+        "MatchStateEvent": {
+          "$className": "RemoteEvent"
+        },
+        "QueueRequest": {
+          "$className": "RemoteEvent"
+        },
+        "QueueStateEvent": {
+          "$className": "RemoteEvent"
+        },
+        "LoadoutRequest": {
+          "$className": "RemoteEvent"
+        },
+        "LoadoutStateEvent": {
+          "$className": "RemoteEvent"
+        },
+        "AbilityRequest": {
+          "$className": "RemoteEvent"
+        },
+        "InputIntentRemote": {
+          "$className": "RemoteEvent"
+        },
+        "CombatFXEvent": {
+          "$className": "UnreliableRemoteEvent"
+        },
+        "ResultEvent": {
+          "$className": "RemoteEvent"
+        }
+      }
+    },
+    "ServerScriptService": {
+      "Server": {
+        "$path": "src/server"
+      }
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Client": {
+          "$path": "src/client"
+        }
+      }
+    },
+    "Workspace": {
+      "$properties": {
+        "Gravity": 196.2,
+        "StreamingEnabled": true
+      }
+    }
+  }
+}
