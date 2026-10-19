@@ -42,3 +42,32 @@ Backfill note: rows T-S0-001 to T-G0-016 were written on 2026-10-20 in session S
 | T-G0-014 | A2 client prediction status | client `SetPredictionMode` + `GetPredictionStatus` | Predicted / Authoritative | not executed | NOT RUN | |
 | T-G0-015 | A3–A6 responsiveness, correction, rollback, server-only outcomes | per plan rev 4 | per plan | not executed | NOT RUN | A5 needs 150 ms Network Simulation set by the owner |
 | T-G0-016 | 4-client smoke test | owner-run | per task card | deferred | NOT RUN | deferred to TASK-10 per TASK-00 card |
+
+## Gate 0 runs — sessions S-20261020-04 and S-20261020-05 (MCP solo Play unless stated)
+
+Placeholders T-G0-009 to T-G0-015 above stay as written; the rows below are the actual runs. Solo results do **not** satisfy criteria that require two clients or 150 ms latency. Evidence files are in `docs/evidence/gate0/`.
+
+| ID | Requirement | Command / procedure | Expected | Actual | Status | Evidence / notes |
+|---|---|---|---|---|---|---|
+| T-G0-017 | First solo Play of prototype `8517adb` | `start_stop_play`; console | harness starts | server OK; client LocalScript died at line 34 (`Misprediction` capability) | FAIL | FAIL-007; `20261020-022400_T-G0-017_solo-play-1_console.txt` |
+| T-G0-018 | A1 functional: Server Authority active in the live session | server probe `root:SetNetworkOwner(player)` | error under Server Authority | `Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.` (every session) | PASS | live session only; saved file still Automatic (FAIL-006) |
+| T-G0-019 | A2 prediction status (retest after FAIL-007 fix, `b7beeef`) | client `SetPredictionMode(own, On)`; `GetPredictionStatus` on client and server | Predicted / Authoritative | client `Predicted after=0.00s`; server `Authoritative`; repeated after respawn | PASS | solo; also observed: own root already Predicted before the client call (automatic mode) |
+| T-G0-020 | C1 speed | `drive_c1.luau` Forward run, server samples each Heartbeat | 42 ± 2, <= 55 | max 42.00; >= 40 after 0.583 s (includes attribute replication); 42.00 at 1.0 s | PASS | `20261020-022651_T-G0-018-024_solo-play-2_results.txt` |
+| T-G0-021 | C3 oversized input clamp | AutoDrive `Oversize` fires `Vector2(0,10)` | same as unit input | max 42.00 | PASS | same file |
+| T-G0-022 | C3 tamper (solo part) | client writes +150 Y locally and fires bogus KO | no server effect | server max Vy 0.00, dY 0.00; server log `bogus claim ... ignored` | PASS | two-client part pending |
+| T-G0-023 | C1 fall and single elimination | AutoDrive `EdgeFall` | natural fall, one elimination, no Y snap | eliminated at 1.42 s, once; max upward step 0.025 stud/frame; KOCredit 0 (environment) | PASS | same file |
+| T-G0-024 | C5 restore matrix (solo part) | `restore`, `respawn`, `restore` commands | avatar hidden after elimination; exact restore; camera Custom; focus nil; no double-bind | after elimination hidden and anchored, focus `Gate0ArenaFocus`; both restores: mismatches 0, focus nil, savedRecords 0, roundConns 0, camera Custom with Humanoid subject; HRP streamed back | PASS | disconnect part NOT RUN (needs 2 clients) |
+| T-G0-025 | C4 camera roll | client max `abs(RightVector.Y)` | 0 | 0.00000 | PASS | solo |
+| T-G0-026 | A3 responsiveness at 0 ms | client frames from first fired input to predicted motion | same or next frame | 1 frame | PASS | 0 ms only; 150 ms NOT RUN |
+| T-G0-027 | Preliminary kick stimulus (`7640809`), 0 ms | `drive_kick.luau`: 5 server kicks | unique client FX = 5 | rollbacks 6, resimSteps 27, plugin mispredictions 6, client FX 0 | FAIL | FAIL-008; `20261020-023057_T-G0-025_prelim-kick-rollback_solo-0ms.txt` (file name uses an earlier provisional ID) |
+| T-G0-028 | Retest of T-G0-027 with polling observer (`5493108`) | same driver | unique FX = kicks, no duplicates, at least 1 rollback | rollbacks 6, resimSteps 31, plugin mispredictions 6, rawFx 5, uniqueFx 5, signalFx 0, regressions 0 | PASS | preliminary only: A5 requires 150 ms and head-on runs |
+| T-G0-029 | Correction convergence (preliminary for A4) | client `refPosDelta` after settling | <= 0.5 stud | 0.039 stud | PASS | solo; A4 needs 2 clients |
+| T-G0-030 | `Misprediction` from plugin context | MCP `execute_luau` Client datamodel | connects | connected; counted 6 | PASS | tool capability only |
+| T-G0-031 | Strict analysis of prototype `8517adb` (first run) | `luau-lsp analyze ... src` | 0 errors | 2 errors (union iteration over `roundConns[player] or {}`) | FAIL | fixed before commit |
+| T-G0-032 | Retest of T-G0-031 | same plus StyLua, Selene, `rojo build` | clean | all clean (974 lines) | PASS | |
+| T-G0-033 | Static checks for `30d2978` (first run) | luau-lsp | 0 errors | optional-table and sealed/unsealed union errors in the log budget | FAIL | fixed with a named type |
+| T-G0-034 | Retest of T-G0-033 | luau-lsp, StyLua, Selene on `src` and `tests`, `rojo build` | clean | all clean | PASS | every prototype commit (`b7beeef`, `7640809`, `5493108`, `30d2978`) passed these checks before committing |
+| T-G0-035 | Client log forwarding and driver smoke test (`30d2978`) | solo Play; run `tests/gate0/G0_two_client_driver.luau` in the Server datamodel | forwarded `[G0C<-uid]` lines; driver aborts with 1 player | both as expected; driver read `incomingReplicationLag=0` | PASS | |
+| T-G0-036 | C2, C3 (two-client), A3 at 150 ms, A4, A5, C5 disconnect | owner-run two-client sessions with the driver | per plan rev 4 | not executed | NOT RUN | owner session pending |
+| T-G0-037 | FAIL-009 experiment: extra replication focus (`48c619d`) | solo Play; client and server character probes; `drive_c5.luau` rerun | client keeps parked HRP; no Animate infinite yield; restore unchanged | client `hrp=true` at the pod; 0 infinite-yield warnings; own root Predicted; elimination and two restore cycles unchanged | PASS | spike only; product adoption needs D-026 approval |
+| T-G0-038 | Assumption check: attribute names containing `-` (Studio test UserIds are negative) | Edit `execute_luau`: `workspace:SetAttribute("Gate0RefPos_-1", ...)` | (assumed) error | accepted without error | PASS | assumption disproved; the prepared helper was reverted (never committed); the stray Edit attribute was removed and verified empty |

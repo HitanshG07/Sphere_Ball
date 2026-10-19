@@ -108,3 +108,33 @@ Sections 1–6 above are unchanged; this section records what happened after the
 **Prototype:** branch `gate0-spike` created from `alpha` at `fc109f8`. A draft `src/shared/Gate0Sim.luau` was written but not analyzed or committed; it was stashed (`stash@{0}`) when governance setup work began.
 
 **Runtime criteria C1–C5 and A2–A6:** still NOT RUN.
+
+## 8. Criteria status after solo testing (appended 2026-10-20, sessions S-20261020-04 and S-20261020-05)
+
+**Path decision:** Path A remains the path under test. Its APIs exist, and Server Authority is demonstrably active in the live session (T-G0-018). Path B conditions are not met.
+
+**Gate 0 status:** **NOT PASSED.** Two-client and 150 ms criteria are outstanding.
+
+| Criterion | Status | Evidence (TEST_RESULTS IDs) |
+|---|---|---|
+| A1 configuration | PARTIAL: live session runs Server Authority (PASS, T-G0-018); Properties panel shows `AuthorityMode = Server` but the dependent settings are not yet captured (T-G0-006 INCONCLUSIVE); saved `Gate0.rbxl` still `Automatic` (T-G0-007 FAIL, FAIL-006) | owner save and screenshot needed |
+| A2 prediction status | PASS in solo (T-G0-019); re-check every root in the 2-client session | |
+| A3 responsiveness | PASS at 0 ms (1 frame, T-G0-026); 150 ms NOT RUN | |
+| A4 authoritative correction | NOT RUN (2 clients); solo preliminary 0.039 stud (T-G0-029) | |
+| A5 rollback reproducibility | NOT RUN at 150 ms; mechanism verified in solo at 0 ms after FAIL-008 fix (T-G0-028) | |
+| A6 server-only outcomes | partial: solo tamper and input clamp PASS (T-G0-021, T-G0-022); independent code review RV-01 pending or recorded in the work log | |
+| C1 movement, fall, elimination | PASS in solo (T-G0-020, T-G0-023) | |
+| C2 two-client server-only hit | NOT RUN | |
+| C3 security | PASS in solo (T-G0-021, T-G0-022); two-client part NOT RUN | |
+| C4 camera | PASS in solo (T-G0-025) | |
+| C5 restore matrix | PASS for elimination, restore and re-entry in solo (T-G0-024, T-G0-037); disconnect NOT RUN | |
+
+**Engine findings during solo testing** (details in `FAILURES_AND_FIXES.md`):
+- `RunService.Misprediction` is plugin/Open Cloud only (FAIL-007).
+- Change signals do not fire for server-written attributes on predicted roots (FAIL-008); presentation must poll.
+- The parked avatar streams out on its owner's client unless an extra replication focus is added (FAIL-009); proposed as D-026.
+
+**Prepared for the owner session:**
+- `tests/gate0/G0_two_client_driver.luau` (C2, C3, A4 and the A5 stimulus in one run).
+- Client logs forwarded into the Server Output.
+- Step-by-step instructions in `PROJECT_STATUS.md`, "Owner actions".

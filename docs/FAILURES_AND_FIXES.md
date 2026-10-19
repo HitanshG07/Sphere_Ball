@@ -71,3 +71,27 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Cause (confirmed):** `RunService.Misprediction` requires plugin or Open Cloud capability; LocalScripts cannot connect it. `RunService.Rollback` (line 31) connected without error.
 - **Fix:** guard the `Misprediction` connection with `pcall` and log its availability; keep the `Rollback` event and the in-simulation resimulation counter as the game-script measures for A5; try `Misprediction` from the plugin-capable MCP `execute_luau` Client context during A5.
 - **Status:** INVESTIGATING (fix in progress)
+
+### FAIL-007 update (S-20261020-04)
+- **Fix committed:** `b7beeef` wraps the `Misprediction` connection in `pcall` and logs its availability.
+- **Retest:** T-G0-019. The client logged `Misprediction connectable=false err=... PluginOrOpenCloud` and continued normally (A2 `Predicted`, input bridge working). A plugin-context connection through MCP `execute_luau` works (T-G0-030), so A5 can still count mispredictions.
+- **Status:** FIXED-VERIFIED
+
+## FAIL-008 — Client never observed server-written sequence attributes through change signals
+- **Session / discovered:** S-20261020-04, preliminary kick stimulus at 0 ms in solo Play (T-G0-027, prototype `7640809`).
+- **Error / observation (confirmed):** the server applied 5 kicks (`KickSeq` 1..5). The client observer, built on `GetAttributeChangedSignal`, counted 0 effects, while the client still read `KickSeq = 5` with `GetAttribute` on its predicted root. 6 rollbacks and 27 resimulated steps occurred during the run.
+- **Cause:** confirmed that the change signal does not fire for these updates on a predicted instance in Studio 0.743. Not documented. The `IsResimulating` reference page even says property-changed signals fire for replayed steps (architect research RA-01). Hypothesis: values restored during rollback do not raise change signals.
+- **Fix:** `5493108` makes presentation poll the sequence attributes once per rendered frame and present each sequence number at most once (monotonic "highest presented" counter, reset when a root is removed). This matches the documented Creator Hub pattern (effects in a render-step function that compares with previous state). The signal counter is kept as evidence only.
+- **Retest:** T-G0-028, same stimulus. Rollbacks 6, resimulated steps 31, plugin-context mispredictions 6, polled raw 5, unique 5, signals 0, regressions 0.
+- **Remaining:** the A5 conditions (150 ms, 2 clients, head-on hits, non-predicted remote roots) are not yet tested.
+- **Prevention:** recorded for D-025 implementation in TASK-04/05/06: never drive gameplay presentation from change signals on predicted instances.
+- **Status:** FIXED-VERIFIED (for the solo 0 ms failure; A5 is tracked separately in T-G0-036)
+
+## FAIL-009 — Parked avatar streamed out on its owner's client
+- **Session / discovered:** S-20261020-04, first solo Play (T-G0-017).
+- **Observation (confirmed):** with StreamingEnabled and `ReplicationFocus = SphereRoot`, the avatar parked at the D-023 pod (about 2,800 studs away) had no `HumanoidRootPart` on the client (server had it). The default `Animate` script logged `Infinite yield possible on ... WaitForChild("HumanoidRootPart")`. After restore (`ReplicationFocus = nil`, avatar back at the hub) it streamed in again.
+- **Cause (confirmed):** documented streaming behavior. The client only streams content near the replication focus.
+- **Fix attempted (spike experiment, `48c619d`):** server `player:AddReplicationFocus(hrp)` after parking, `RemoveReplicationFocus(hrp)` on restore (architect RA-01 recommendation; both APIs are server-only, Security None).
+- **Retest:** T-G0-037. Client keeps the HRP at the pod, 0 infinite-yield warnings, own root still `Predicted`, elimination and two restore cycles unchanged.
+- **Remaining:** adopting this in the product changes D-023 (owner decision) and is proposed as D-026 (awaiting owner approval). Extra foci add server streaming load (documented); measure in the 4- and 6-client tests.
+- **Status:** FIXED-UNVERIFIED (works in the spike; product adoption pending owner approval of D-026)

@@ -167,3 +167,17 @@ D-001 through D-018 are unchanged. The entries below fill specification gaps fou
 - **Migration/backward compatibility:** None (no code exists yet).
 - **Tests required:** Gate 0 A2 (prediction status), A5 (rollback with FX deduplication) and C3 (input magnitude clamp); verification that the Scriptable bridge reaches the server simulation and of which side must create the binding.
 - **Status:** APPROVED
+
+### D-026: Gate 0 findings — streaming focus, D-025 wording, presentation polling (PROPOSED)
+- **Date:** 2026-10-20
+- **Requested by:** Lead agent (session S-20261020-05), based on Gate 0 spike evidence and architect research RA-01
+- **Approved by:** — (awaiting owner)
+- **Proposal:**
+  1. **Amend D-023:** after parking the avatar, the server calls `player:AddReplicationFocus(<avatar HumanoidRootPart>)` in addition to `ReplicationFocus = SphereRoot`, and calls `RemoveReplicationFocus` for it at restore, cleanup and disconnect. The cleanup invariant also requires that no extra replication focus remains. Evidence: FAIL-009, T-G0-037.
+  2. **Correct the rationale of D-025 item 2:** "the server has no camera" is outdated. Under Server Authority, `Player:GetCameraState()` exposes the client camera CFrame replicated in the input stream (Simulation Access; present in the pinned definitions). The world-space Scriptable input bridge stays as decided: it is simpler, deterministic and verified (T-G0-020, T-G0-021). Whether to use `GetCameraState` instead is left to TASK-04 design.
+  3. **Clarify D-025 item 3:** client presentation of server-authoritative outcomes must poll state in `PreRender`/`RenderStepped` and present each sequence ID at most once. It must not rely on attribute or property change signals of predicted instances, which did not fire in Studio 0.743 (FAIL-008, T-G0-027/T-G0-028).
+- **Rationale:** keeps the owner's avatar and its scripts streamed during matches, fixes an inaccurate stated reason without changing a decision, and records an engine behavior that would otherwise break effects.
+- **Alternatives considered:** `ModelStreamingMode = PersistentPerPlayer` on the character (undocumented for engine-spawned characters at runtime); `ReplicationFocus = nil` plus `AddReplicationFocus(root)` (equivalent load; less aligned with D-023 wording).
+- **Files/contracts affected if approved:** Master Plan §5.4 and §9.2 notes; `specs/DESIGN_CONSTANTS.md`; Tasks 04, 07; future `PlayerLifecycle`, `CleanupService`, client visualizers.
+- **Tests required if approved:** extra focus present during play and removed after restore in 4- and 6-client sessions; server streaming load reviewed in TASK-10; presentation deduplication under 150 ms latency (A5).
+- **Status:** PROPOSED
