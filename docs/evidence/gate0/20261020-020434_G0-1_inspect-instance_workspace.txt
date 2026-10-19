@@ -1,0 +1,3 @@
+INIT: {"name": "RobloxStudio", "version": "1.0.0"}
+=== [0] inspect_instance
+{"path":"Workspace","name":"Workspace","className":"Workspace","uniqueId":"09d3c74a-3b0a-b6ba-0ae8-16ec00000002","children":{"immediateChildren":[{"path":"Workspace.Camera","className":"Camera"},{"path":"Workspace.Baseplate","className":"Part"},{"path":"Workspace.Terrain","className":"Terrain"},{"path":"Workspace.SpawnLocation","className":"SpawnLocation"}],"totalDescendants":6,"childrenCount":4},"properties":[]}

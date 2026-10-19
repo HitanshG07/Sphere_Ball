@@ -1,0 +1,37 @@
+# Preliminary kick stimulus, solo play, 0 ms added latency (prototype 7640809). NOT the A5 test (A5 = 150 ms, 2 clients, kicks + head-on).
+## Plugin-context Misprediction (MCP execute_luau, Client datamodel)
+plugin-context Misprediction connect ok=true err=nil
+plugin-context mispredictions=6 (read after the 5 kicks)
+## drive_kick result (server datamodel)
+kick 1 serverKickSeq=1 pos=(10.8,54.0,-36.0)
+kick 2 serverKickSeq=2 pos=(0.3,54.0,-36.0)
+kick 3 serverKickSeq=3 pos=(10.8,54.0,-36.0)
+kick 4 serverKickSeq=4 pos=(0.3,54.0,-36.0)
+kick 5 serverKickSeq=5 pos=(10.9,54.0,-36.0)
+## Post-run attribute probe
+side=server root=1272229789 KickSeq=5 HitSeq=0 status=Authoritative
+side=client root=1272229789 KickSeq=5 HitSeq=0 status=Predicted
+## Gate 0 console lines
+[G0] server ready authority-probe: see SetNetworkOwner lines; studio=true
+[G0] SetNetworkOwner(player) probe uid=1272229789 ok=false err=Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.
+[G0] spawn uid=1272229789 slot=1 pos=0, 54.150001525878906, -36 conns=1
+[G0C] Misprediction connectable=false err=The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)
+[G0C] unbind reason=rebind roundConns=0
+[G0C] A2 uid=1272229789 own=1272229789 status=Predicted after=0.00s
+[G0C] client ready uid=1272229789 studio=true
+[G0] park uid=1272229789 slot=1 pod=2000, 200, 2000
+[G0] cmd report#11
+[G0] report report#11 uid=1272229789 pos=(0.00,54.00,-36.00) hspeed=0.00 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=0 elim=false focus=1272229789
+[G0] report report#11 server simSteps=629 resimSteps=0 savedRecords=1 roundConns=1
+[G0C] report report#11 uid=1272229789 rollbacks=0 mispredictions=0 simSteps=624 resimSteps=0 maxCorrection=0.079 rawFx=0 uniqueFx=0 maxCameraRollY=0.00000 refPosDelta=0.000
+[G0] kick uid=1272229789 seq=1 hspeed=20.00
+[G0C] autodrive start run=12 mode=Hold frame=665
+[G0] kick uid=1272229789 seq=2 hspeed=19.50
+[G0] kick uid=1272229789 seq=3 hspeed=19.50
+[G0] kick uid=1272229789 seq=4 hspeed=19.51
+[G0] kick uid=1272229789 seq=5 hspeed=19.50
+[G0] cmd report#13
+[G0] report report#13 uid=1272229789 pos=(10.85,54.00,-36.00) hspeed=0.50 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=5 elim=false focus=1272229789
+[G0] report report#13 server simSteps=1293 resimSteps=0 savedRecords=1 roundConns=1
+[G0C] report report#13 uid=1272229789 rollbacks=6 mispredictions=0 simSteps=1314 resimSteps=27 maxCorrection=2.135 rawFx=0 uniqueFx=0 maxCameraRollY=0.00000 refPosDelta=0.039
+[G0C] autodrive stop run=12 mode=Hold reason=time

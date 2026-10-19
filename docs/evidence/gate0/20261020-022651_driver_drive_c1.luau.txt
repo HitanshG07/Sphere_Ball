@@ -1,0 +1,42 @@
+local RS = game:GetService("RunService")
+local spheres = workspace:WaitForChild("Gate0Spheres")
+local root = spheres:GetChildren()[1] :: BasePart
+local out = {}
+local function hs(): number
+	local v = root.AssemblyLinearVelocity
+	return Vector3.new(v.X, 0, v.Z).Magnitude
+end
+local function settle(cmd: string)
+	workspace:SetAttribute("Gate0Cmd", cmd)
+	task.wait(1.5)
+end
+local function run(mode: string, id: number, seconds: number)
+	workspace:SetAttribute("Gate0AutoDriveMode", mode)
+	local t0 = os.clock()
+	workspace:SetAttribute("Gate0AutoDrive", id)
+	local maxS, t40, at1 = 0, -1, -1
+	while os.clock() - t0 < seconds do
+		local s = hs()
+		maxS = math.max(maxS, s)
+		if t40 < 0 and s >= 40 then t40 = os.clock() - t0 end
+		if at1 < 0 and os.clock() - t0 >= 1.0 then at1 = s end
+		RS.Heartbeat:Wait()
+	end
+	table.insert(out, string.format("C1 %s run=%d maxHSpeed=%.2f t>=40=%.3fs hspeed@1.0s=%.2f pos=(%.1f,%.1f,%.1f)", mode, id, maxS, t40, at1, root.Position.X, root.Position.Y, root.Position.Z))
+end
+task.wait(2)
+settle("reset#1")
+run("Forward", 1, 2.2)
+settle("reset#2")
+run("Oversize", 2, 2.2)
+settle("reset#3")
+-- C3 tamper: the client writes +150 Y locally and fires a bogus KO claim; the server must not follow.
+local maxVy, y0 = -math.huge, root.Position.Y
+local t0 = os.clock()
+workspace:SetAttribute("Gate0Cmd", "tamper#4")
+while os.clock() - t0 < 1.5 do
+	maxVy = math.max(maxVy, root.AssemblyLinearVelocity.Y)
+	RS.Heartbeat:Wait()
+end
+table.insert(out, string.format("C3 tamper serverMaxVy=%.2f dY=%.2f elim=%s", maxVy, root.Position.Y - y0, tostring(root:GetAttribute("Eliminated"))))
+return table.concat(out, "\n")

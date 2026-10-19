@@ -1,0 +1,14 @@
+# Studio MCP connection evidence (2026-10-20 02:13:42)
+## Claude Code MCP logs for Roblox_Studio (only short health-check connections; no long-lived session connection)
+### c--Sphere-ball-rblox
+2026-10-19T20-31-33-099Z.jsonl
+### C--Sphere-ball-rblox-Sphere-Brawl-AI-Agent-Task-Pack
+2026-10-19T19-49-51-374Z.jsonl
+2026-10-19T19-50-03-505Z.jsonl
+2026-10-19T20-31-36-257Z.jsonl
+2026-10-19T20-32-19-657Z.jsonl
+## Direct stdio handshake (scratchpad mcpcall.py)
+INIT: {"name": "RobloxStudio", "version": "1.0.0"}
+TOOLS: ['upload_image', 'search_game_tree', 'script_search', 'skill', 'multi_edit', 'start_stop_play', 'get_console_output', 'user_mouse_input', 'store_image', 'http_get', 'character_navigation', 'script_read', 'get_studio_state', 'screen_capture', 'script_grep', 'wait_job_finished', 'generate_procedural_model', 'generate_texture', 'segment_mesh', 'user_keyboard_input', 'generate_mesh', 'subagent', 'execute_luau', 'generate_material', 'inspect_instance', 'search_asset', 'insert_asset', 'list_roblox_studios']
+=== [1] list_roblox_studios
+{"studios":[{"id":"082e378a-d699-429a-88ed-557091cff28d","name":"Place1"}]}

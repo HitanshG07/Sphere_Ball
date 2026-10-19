@@ -1,0 +1,15 @@
+local out = {}
+local spheres = workspace:WaitForChild("Gate0Spheres")
+workspace:SetAttribute("Gate0Cmd", "report#11")
+task.wait(1)
+workspace:SetAttribute("Gate0AutoDriveMode", "Hold")
+workspace:SetAttribute("Gate0AutoDrive", 12)
+local root = spheres:GetChildren()[1] :: BasePart
+for k = 1, 5 do
+	workspace:SetAttribute("Gate0Kick", k)
+	task.wait(2)
+	table.insert(out, string.format("kick %d serverKickSeq=%s pos=(%.1f,%.1f,%.1f)", k, tostring(root:GetAttribute("KickSeq")), root.Position.X, root.Position.Y, root.Position.Z))
+end
+workspace:SetAttribute("Gate0Cmd", "report#13")
+task.wait(1)
+return table.concat(out, "\n")
