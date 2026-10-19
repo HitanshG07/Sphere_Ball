@@ -99,6 +99,7 @@ type SavedAvatar = {
 	character: Model,
 	parts: { [BasePart]: number },
 	decals: { [Decal]: number },
+	hrp: BasePart,
 	hrpAnchored: boolean,
 	walkSpeed: number,
 	jumpPower: number,
@@ -187,6 +188,7 @@ local function park(player: Player, character: Model, slot: number)
 		character = character,
 		parts = {},
 		decals = {},
+		hrp = hrp,
 		hrpAnchored = hrp.Anchored,
 		walkSpeed = humanoid.WalkSpeed,
 		jumpPower = humanoid.JumpPower,
@@ -206,8 +208,11 @@ local function park(player: Player, character: Model, slot: number)
 	humanoid.JumpHeight = 0
 	hrp.Anchored = true
 	character:PivotTo(CFrame.new(podCenter(slot) + Vector3.new(0, 3, 0)))
+	-- FAIL-009 experiment (proposed D-023 amendment, not yet approved): keep the parked avatar streamed on its
+	-- owner's client with an extra replication focus while ReplicationFocus follows the sphere.
+	player:AddReplicationFocus(hrp)
 	saved[player] = rec
-	log("park uid=%d slot=%d pod=%s", player.UserId, slot, tostring(podCenter(slot)))
+	log("park uid=%d slot=%d pod=%s extraFocus=HRP", player.UserId, slot, tostring(podCenter(slot)))
 end
 
 local function spawnRound(player: Player)
@@ -277,6 +282,7 @@ local function restore(player: Player)
 		if hrp and hrp:IsA("BasePart") then
 			hrp.Anchored = rec.hrpAnchored
 		end
+		player:RemoveReplicationFocus(rec.hrp)
 		local spawn = workspace:FindFirstChildOfClass("SpawnLocation")
 		rec.character:PivotTo(CFrame.new((if spawn then spawn.Position else Vector3.zero) + Vector3.new(0, 4, 0)))
 		for part, t in rec.parts do

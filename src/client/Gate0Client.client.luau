@@ -346,15 +346,12 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 	local verb = string.match(value, "^(%a+)") or ""
 	if verb == "report" then
 		local steps, resim = Gate0Sim.counters()
-		local own = spheres:FindFirstChild(tostring(player.UserId))
-		local ref = workspace:GetAttribute("Gate0RefPos_" .. player.UserId)
-		local refDelta = if own
-				and own:IsA("BasePart")
-				and typeof(ref) == "Vector3"
-			then string.format("%.3f", (own.Position - ref).Magnitude)
-			else "n/a"
+		local statuses = {}
+		for _, r in spheres:GetChildren() do
+			table.insert(statuses, r.Name .. ":" .. RunService:GetPredictionStatus(r).Name)
+		end
 		log(
-			"report %s uid=%d rollbacks=%d mispredictions=%d simSteps=%d resimSteps=%d maxCorrection=%.3f rawFx=%d uniqueFx=%d signalFx=%d regressions=%d maxCameraRollY=%.5f refPosDelta=%s",
+			"report %s uid=%d rollbacks=%d mispredictions=%d simSteps=%d resimSteps=%d maxCorrection=%.3f rawFx=%d uniqueFx=%d signalFx=%d regressions=%d maxCameraRollY=%.5f predictionStatus=[%s]",
 			value,
 			player.UserId,
 			rollbacks,
@@ -367,7 +364,7 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 			signalFx,
 			regressions,
 			maxRoll,
-			refDelta
+			table.concat(statuses, ", ")
 		)
 	elseif verb == "tamper" then
 		for _, r in spheres:GetChildren() do
@@ -377,6 +374,22 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 			end
 		end
 		log("C3 tamper sent uid=%d", player.UserId)
+	end
+end)
+
+-- A4: measure when the server's reference position for this player arrives (Workspace is not predicted, so its
+-- attribute signal fires), avoiding a race with the report command under latency.
+workspace:GetAttributeChangedSignal("Gate0RefPos_" .. player.UserId):Connect(function()
+	local ref = workspace:GetAttribute("Gate0RefPos_" .. player.UserId)
+	local own = spheres:FindFirstChild(tostring(player.UserId))
+	if typeof(ref) == "Vector3" and own and own:IsA("BasePart") then
+		local v = own.AssemblyLinearVelocity
+		log(
+			"A4 refPosDelta=%.3f ownHSpeed=%.2f status=%s",
+			(own.Position - ref).Magnitude,
+			Vector3.new(v.X, 0, v.Z).Magnitude,
+			RunService:GetPredictionStatus(own).Name
+		)
 	end
 end)
 
