@@ -138,3 +138,9 @@ Sections 1–6 above are unchanged; this section records what happened after the
 - `tests/gate0/G0_two_client_driver.luau` (C2, C3, A4 and the A5 stimulus in one run).
 - Client logs forwarded into the Server Output.
 - Step-by-step instructions in `PROJECT_STATUS.md`, "Owner actions".
+
+## 9. Independent review (appended 2026-10-20, session S-20261020-05)
+- **RV-01:** read-only review by a `sphere-reviewer` role agent (Opus 5.5). No server-authority or rollback-safety defects. Confirmed C2-validity defect B2 (FAIL-010); B1 disputed by Studio evidence (T-G0-038). Medium and low items fixed in `0c02823`; solo regression T-G0-039 PASS.
+- **RV-02 re-review:** requested; result recorded in the work log.
+- **Owner question Q-1:** §8.5 alone separates colliding spheres only for closing speeds of about 32.9–40 studs/s; above that, engine contact also shapes the result. The 2-client driver now logs the applied §8.5 change and the engine contribution separately (see `PROJECT_STATUS.md`).
+- **Gate 0 status:** unchanged, **NOT PASSED** (two-client and 150 ms criteria outstanding).

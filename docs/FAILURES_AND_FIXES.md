@@ -95,3 +95,11 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Retest:** T-G0-037. Client keeps the HRP at the pod, 0 infinite-yield warnings, own root still `Predicted`, elimination and two restore cycles unchanged.
 - **Remaining:** adopting this in the product changes D-023 (owner decision) and is proposed as D-026 (awaiting owner approval). Extra foci add server streaming load (documented); measure in the 4- and 6-client tests.
 - **Status:** FIXED-UNVERIFIED (works in the spike; product adoption pending owner approval of D-026)
+
+## FAIL-010 — C2 instrumentation could not validate the §8.5 knockback math
+- **Session / discovered:** S-20261020-05, independent review RV-01 (finding B2) of `2291ccf`. Found by code review before any 2-client run.
+- **Defect (confirmed from code):** the driver compared `appliedDv` with `expectedDv`, both computed from the same formula and closing speed, so they always matched. The only independent numbers were sampled at Heartbeat, after the engine's own contact solve, so the §8.5 application could not be isolated.
+- **Fix:** `0c02823`. The simulation records `HitNormal`, `HitVictimPre/Post` and `HitAttackerPre/Post` at the moment it applies the hit. The driver checks the applied victim and attacker velocity changes along the normal against the formula, and reports the engine's after-contact contribution separately.
+- **Retest:** needs the owner's 2-client session (C2 in T-G0-036). Solo regression T-G0-039 shows no breakage.
+- **Related design question (for the owner, not a defect):** the review computed, and the lead re-derived, that §8.5 alone separates a colliding pair only for closing speeds from about 32.9 to 40 studs/s. With dv = (c − 10) × 1.15 clamped to 32 plus 0.25 recoil, the pair stops closing only if 1.25 × dv ≥ c. Above that (a symmetric head-on at 42 + 42 = 84 still closes at 44 after the hit), the engine contact with elasticity 0 also changes the outcome. Recorded as owner question Q-1 in `PROJECT_STATUS.md`; no locked value was changed.
+- **Status:** FIXED-UNVERIFIED (awaiting the 2-client run)

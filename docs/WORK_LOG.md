@@ -217,3 +217,21 @@ Append-only chronological history for every AI and human working on the project.
 - **Disproved assumption (S-20261020-05):** I expected attribute names with a `-` (from negative Studio test UserIds, for example `Gate0RefPos_-1`) to be rejected and wrote a sign-safe helper. A probe showed the name is accepted (T-G0-038), so the helper was reverted before any commit.
   - The probe left `Gate0RefPos_-1` on the **Edit** workspace. It was removed immediately, and the Edit workspace attribute list was verified empty, so nothing stray will be saved into the owner's place.
 - **Records updated:** `TEST_RESULTS.md` (T-G0-017 to T-G0-038), `FAILURES_AND_FIXES.md` (FAIL-007 update, FAIL-008, FAIL-009), `DECISION_LOG.md` (D-026 PROPOSED), `GATE_0_REPORT.md` section 8, `PROJECT_STATUS.md` (snapshot plus step-by-step owner actions).
+- **RV-01 independent review received** (`sphere-reviewer` role, Opus 5.5, read-only; reviewed HEAD `2291ccf`; its checks were all clean). Disposition by the lead:
+
+  | Finding | Disposition |
+  |---|---|
+  | B1 (attribute name with `-` will throw) | Disputed: T-G0-038 showed Studio accepts it, and the reviewer had not reproduced it. Replaced anyway by `Player` attributes `Gate0RefPos` + `Gate0RefSeq` (simpler; the sequence also fixes identical-position repeats). |
+  | B2 (C2 cannot validate §8.5) | Accepted: FAIL-010; instrumentation added. Design question Q-1 raised for the owner. |
+  | M1 (A4 timing) | Accepted: A4 now sampled at +1 s and +3 s after a hit and after a kick. |
+  | M2 (lifetime `maxCorrection`) | Accepted: per-interval metric, reset teleports skipped for 0.75 s. |
+  | M3 (A5 tally false-fail risks) | Accepted: SpawnId-keyed presentation and an elimination-proof Heartbeat tally in the driver. |
+  | L1 (infinite input) | Accepted: explicit finite check. |
+  | L2 (respawn blocked after elimination) | Kept as a deliberate guard, now logged; respawning before restore would save the hidden avatar as its "original" appearance. |
+  | L3 (bind race) | Accepted: generation guard. |
+  | L4 (leaks) | Accepted: `forgetRoot`, `restoreCount` cleanup, extra focus removed on disconnect and re-park. |
+  | L5 (§8.6 KO-credit gaps, horizontal-only contact) | Accepted as spike limitations; to be handled in TASK-06. |
+  | L6 (rate limits, AutoDrive deviations) | Rate limit and drop counts added. Deviations recorded here: AutoDrive run limits (Forward/Oversize 1.5 s, EdgeFall 3 s, HeadOn 4 s, Hold 12 s), the added `Oversize` and `Hold` modes, and kicks alternating ±X while holding still instead of +X while driving Forward, so the sphere stays on the board. |
+  | L7 (client may predict the opponent's root) | Noted; observed via `predictionStatus` in the 2-client reports. |
+
+- **RV-01 fixes:** commit `0c02823`. Solo regression T-G0-039 PASS. Re-review RV-02 requested from the same reviewer agent (read-only).

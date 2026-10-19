@@ -28,12 +28,14 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
   - 1-frame response at 0 ms.
 - **FAIL-007 and FAIL-008 fixed and retested;** FAIL-009 fix works in the spike (product adoption proposed as D-026).
 - **Two-client test driver ready:** `tests/gate0/G0_two_client_driver.luau`.
+- **Independent review RV-01** (Opus, read-only) applied in `0c02823`. Solo regression T-G0-039 PASS. A re-review (RV-02) of the fixes was requested; see the work log for its result.
 
 ## Failed, blocked or open
 - **FAIL-004:** Studio MCP tools did not load into the Claude session. User-scope registration added; verify in the next session (FIXED-UNVERIFIED). The workaround (direct stdio client) works.
 - **FAIL-006:** saved `place/Gate0.rbxl` still has `AuthorityMode = Automatic`. **Owner must save.**
 - **FAIL-009:** parked-avatar streaming. Spike fix works; **owner decision D-026 needed** to adopt it.
 - **A1:** dependent settings not yet captured in a screenshot.
+- **FAIL-010:** C2 instrumentation fixed (`0c02823`); unverified until the 2-client run. Related owner question Q-1.
 
 ## Outstanding tests (Gate 0)
 C2, C3 (two-client part), A3 at 150 ms, A4, A5, C5 disconnect: all need the owner's 2-client session (T-G0-036). The 4-client smoke test is deferred to TASK-10. Details: [TEST_RESULTS.md](TEST_RESULTS.md), [GATE_0_REPORT.md](GATE_0_REPORT.md) section 8.
@@ -73,7 +75,15 @@ C2, C3 (two-client part), A3 at 150 ms, A4, A5, C5 disconnect: all need the owne
 
 **D. Decisions for the owner**
 14. Approve or reject **D-026** in `DECISION_LOG.md` (extra replication focus for the parked avatar; D-025 wording corrections).
-15. Optional: open the repo in Antigravity and confirm it shows the `AGENTS.md`/`GEMINI.md` rules; tell Claude the result.
+15. **Q-1 (knockback feel; no change made yet).** The locked §8.5 knockback fully separates two colliding spheres only when they close at about 32.9–40 studs/s. In a full-speed head-on (about 84 studs/s) they are still closing at about 44 studs/s after the knockback, so Roblox's own contact physics also shapes the outcome (FAIL-010).
+
+    The 2-client run will log both parts. Options to decide after seeing it:
+    - (a) accept it and tune at playtest;
+    - (b) stop sphere–sphere physical collision and resolve contacts only with §8.5 (changes the locked collision matrix in §6.2);
+    - (c) cancel the remaining closing speed before applying §8.5 (changes the formula's meaning).
+
+    No action is needed until the 2-client results are in.
+16. Optional: open the repo in Antigravity and confirm it shows the `AGENTS.md`/`GEMINI.md` rules; tell Claude the result.
 
 ## Next three actions (after the owner's session)
 1. Lead: analyze the two Server Outputs, record C2/C3/A3/A4/A5/C5 results and decide PASS/FAIL/INCONCLUSIVE per plan rev 4.
