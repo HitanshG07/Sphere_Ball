@@ -108,6 +108,7 @@ local autoRun, autoMode, autoStart = 0, "", 0
 local autoHits: { [Instance]: number } = {}
 local consumedRuns: { [number]: boolean } = {}
 local firstMoveFrame: number? = nil
+local a3Armed = false -- measure A3 once per AutoDrive run
 local frame = 0
 
 local function liveOthers(own: BasePart): { BasePart }
@@ -143,6 +144,7 @@ local function autoDriveVector(own: BasePart): Vector2?
 			autoHits[r] = num(r, "HitSeq", 0)
 		end
 		firstMoveFrame = nil
+		a3Armed = true
 		log("autodrive start run=%d mode=%s frame=%d", run, autoMode, frame)
 	end
 	if autoRun == 0 then
@@ -193,6 +195,7 @@ local function unbindRound(reason: string)
 		c:Disconnect()
 	end
 	table.clear(roundConns)
+	autoRun = 0 -- an AutoDrive run never carries over to a new root
 	log("unbind reason=%s roundConns=%d", reason, #roundConns)
 end
 
@@ -224,7 +227,8 @@ local function bindRound(root: BasePart)
 				local auto = autoDriveVector(root)
 				local move = if auto then auto else hardwareWorldMove()
 				bridge:Fire(move)
-				if auto and auto.Magnitude > 0 and not firstMoveFrame then
+				if a3Armed and auto and auto.Magnitude > 0 then
+					a3Armed = false
 					firstMoveFrame = frame
 				end
 				local v = root.AssemblyLinearVelocity
