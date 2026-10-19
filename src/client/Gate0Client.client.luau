@@ -61,8 +61,10 @@ log("Misprediction connectable=%s err=%s", tostring(mispredictionOk), tostring(m
 local signalFx = 0
 local regressions = 0 -- observed value moved backwards (for example during a rollback)
 local FX_ATTRS = { "HitSeq", "KickSeq" }
+-- Keys include the server's SpawnId: a respawned root starts a fresh sequence, while a root that streams out and
+-- back in keeps its key, so its sequence numbers are never presented twice (RV-01 M3).
 local lastValue: { [string]: number } = {}
-local presented: { [string]: number } = {} -- highest sequence number already presented per root/attribute
+local presented: { [string]: number } = {} -- highest sequence number already presented per root spawn/attribute
 local function watchFx(root: Instance)
 	for _, attr in FX_ATTRS do
 		root:GetAttributeChangedSignal(attr):Connect(function()
@@ -74,17 +76,11 @@ for _, root in spheres:GetChildren() do
 	watchFx(root)
 end
 spheres.ChildAdded:Connect(watchFx)
-spheres.ChildRemoved:Connect(function(root: Instance)
-	for _, attr in FX_ATTRS do
-		lastValue[root.Name .. ":" .. attr] = nil
-		presented[root.Name .. ":" .. attr] = nil -- a respawned root reuses the name and restarts at 0
-	end
-end)
 RunService.PreRender:Connect(function()
 	for _, root in spheres:GetChildren() do
 		for _, attr in FX_ATTRS do
 			local value = num(root, attr, 0)
-			local key = root.Name .. ":" .. attr
+			local key = root.Name .. ":" .. tostring(root:GetAttribute("SpawnId")) .. ":" .. attr
 			local last = lastValue[key] or 0
 			if value ~= last then
 				rawFx += 1
@@ -224,7 +220,10 @@ end
 
 -- Round binding (re-entrant: every own root that appears gets one fresh set of connections) ------------
 local roundConns: { RBXScriptConnection } = {}
+local bindGeneration = 0 -- bumped on every unbind; a bind that yielded across an unbind abandons itself (RV-01 L3)
+local ignoreCorrectionUntil = 0 -- reset teleports are not corrections (RV-01 M2)
 local function unbindRound(reason: string)
+	bindGeneration += 1
 	for _, c in roundConns do
 		c:Disconnect()
 	end
@@ -235,10 +234,14 @@ end
 
 local function bindRound(root: BasePart)
 	unbindRound("rebind")
+	local generation = bindGeneration
+	local function stale(): boolean
+		return generation ~= bindGeneration or root.Parent == nil
+	end
 	RunService:SetPredictionMode(root, Enum.PredictionMode.On)
 	local t0 = os.clock()
 	local status = RunService:GetPredictionStatus(root)
-	while status ~= Enum.PredictionStatus.Predicted and os.clock() - t0 < 5 do
+	while status ~= Enum.PredictionStatus.Predicted and os.clock() - t0 < 5 and not stale() do
 		task.wait(0.1)
 		status = RunService:GetPredictionStatus(root)
 	end
@@ -246,6 +249,10 @@ local function bindRound(root: BasePart)
 
 	local ctx = player:WaitForChild("Gate0Input")
 	local bridge = ctx:WaitForChild("Move"):WaitForChild("Bridge") :: InputBinding
+	if stale() then
+		log("bind abandoned: root replaced or restored while binding")
+		return
+	end
 	local eliminated = false
 	local spectating: BasePart? = nil
 	camera.CameraType = Enum.CameraType.Scriptable
@@ -274,7 +281,9 @@ local function bindRound(root: BasePart)
 			-- Correction estimate (approximation: predicted position vs last position + velocity * dt).
 			if root.Parent then
 				local expected = lastPos + lastVel * dt
-				maxCorrection = math.max(maxCorrection, (root.Position - expected).Magnitude)
+				if os.clock() >= ignoreCorrectionUntil then
+					maxCorrection = math.max(maxCorrection, (root.Position - expected).Magnitude)
+				end
 				lastPos, lastVel = root.Position, root.AssemblyLinearVelocity
 			end
 			-- Camera: position-only follow, no roll.
@@ -351,7 +360,7 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 			table.insert(statuses, r.Name .. ":" .. RunService:GetPredictionStatus(r).Name)
 		end
 		log(
-			"report %s uid=%d rollbacks=%d mispredictions=%d simSteps=%d resimSteps=%d maxCorrection=%.3f rawFx=%d uniqueFx=%d signalFx=%d regressions=%d maxCameraRollY=%.5f predictionStatus=[%s]",
+			"report %s uid=%d rollbacks=%d mispredictions=%d simSteps=%d resimSteps=%d maxCorrectionSinceLastReport=%.3f rawFx=%d uniqueFx=%d signalFx=%d regressions=%d maxCameraRollY=%.5f predictionStatus=[%s]",
 			value,
 			player.UserId,
 			rollbacks,
@@ -366,6 +375,9 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 			maxRoll,
 			table.concat(statuses, ", ")
 		)
+		maxCorrection = 0 -- per-interval metric (RV-01 M2)
+	elseif verb == "reset" then
+		ignoreCorrectionUntil = os.clock() + 0.75
 	elseif verb == "tamper" then
 		for _, r in spheres:GetChildren() do
 			if r:IsA("BasePart") then
@@ -377,15 +389,16 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 	end
 end)
 
--- A4: measure when the server's reference position for this player arrives (Workspace is not predicted, so its
--- attribute signal fires), avoiding a race with the report command under latency.
-workspace:GetAttributeChangedSignal("Gate0RefPos_" .. player.UserId):Connect(function()
-	local ref = workspace:GetAttribute("Gate0RefPos_" .. player.UserId)
+-- A4: measure when the server's reference position for this player arrives. The Player is not predicted, so its
+-- attribute signal fires; the sequence number changes on every report even if the position does not.
+player:GetAttributeChangedSignal("Gate0RefSeq"):Connect(function()
+	local ref = player:GetAttribute("Gate0RefPos")
 	local own = spheres:FindFirstChild(tostring(player.UserId))
 	if typeof(ref) == "Vector3" and own and own:IsA("BasePart") then
 		local v = own.AssemblyLinearVelocity
 		log(
-			"A4 refPosDelta=%.3f ownHSpeed=%.2f status=%s",
+			"A4 refSeq=%s refPosDelta=%.3f ownHSpeed=%.2f status=%s",
+			tostring(player:GetAttribute("Gate0RefSeq")),
 			(own.Position - ref).Magnitude,
 			Vector3.new(v.X, 0, v.Z).Magnitude,
 			RunService:GetPredictionStatus(own).Name

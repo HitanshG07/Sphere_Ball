@@ -4,6 +4,7 @@
 -- the Studio MCP (execute_luau, datamodel_type "Server") or by pasting it into the Server window's Command Bar.
 -- It only sets the documented Gate 0 test attributes and samples authoritative state; it never moves roots itself.
 -- Clients forward their [G0C] lines to the server, so the Server window's Output holds all evidence.
+-- Revised after independent review RV-01 (B2, M1, M3).
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
@@ -17,6 +18,10 @@ end
 local function num(inst: Instance, name: string, default: number): number
 	local v = inst:GetAttribute(name)
 	return if typeof(v) == "number" then v else default
+end
+local function vec(inst: Instance, name: string): Vector3
+	local v = inst:GetAttribute(name)
+	return if typeof(v) == "Vector3" then v else Vector3.zero
 end
 local function roots(): { BasePart }
 	local list = {}
@@ -39,6 +44,19 @@ local function cmd(verb: string)
 	workspace:SetAttribute("Gate0Cmd", verb .. "#" .. id())
 end
 
+-- Event tally that survives eliminations and root removal (RV-01 M3): accumulates positive sequence deltas.
+local tally = { kick = 0, hit = 0 }
+local lastSeq: { [Instance]: { kick: number, hit: number } } = {}
+local tallyConn = RunService.Heartbeat:Connect(function()
+	for _, r in spheres:GetChildren() do
+		local prev = lastSeq[r] or { kick = num(r, "KickSeq", 0), hit = num(r, "HitSeq", 0) }
+		local k, h = num(r, "KickSeq", 0), num(r, "HitSeq", 0)
+		tally.kick += math.max(0, k - prev.kick)
+		tally.hit += math.max(0, h - prev.hit)
+		lastSeq[r] = { kick = k, hit = h }
+	end
+end)
+
 local lagOk, lag = pcall(function()
 	return (settings() :: any).Network.IncomingReplicationLag
 end)
@@ -51,6 +69,7 @@ say(
 )
 if #Players:GetPlayers() < 2 or #roots() < 2 then
 	say("ABORT: need 2 players with live roots (got %d players, %d roots)", #Players:GetPlayers(), #roots())
+	tallyConn:Disconnect()
 	return table.concat(out, "\n")
 end
 for _, r in roots() do
@@ -63,15 +82,14 @@ for _, r in roots() do
 	)
 end
 
--- C2 + A4: one head-on run with measured velocity changes at the hit frame -------------------------------
+-- C2: one head-on run. Validates the §8.5 velocities this step applied (recorded inside the simulation at the hit),
+-- and reports separately what the engine's contact solve changed afterwards (RV-01 B2).
 local function headOn(label: string): boolean
 	cmd("reset")
 	task.wait(2)
 	workspace:SetAttribute("Gate0AutoDriveMode", "HeadOn")
-	local before: { [BasePart]: Vector3 } = {}
 	local hitBefore: { [BasePart]: number } = {}
 	for _, r in roots() do
-		before[r] = r.AssemblyLinearVelocity
 		hitBefore[r] = num(r, "HitSeq", 0)
 	end
 	workspace:SetAttribute("Gate0AutoDrive", id())
@@ -82,46 +100,66 @@ local function headOn(label: string): boolean
 			if num(victim, "HitSeq", 0) ~= hitBefore[victim] then
 				local attackerId = tostring(num(victim, "LastHitBy", 0))
 				local attacker = spheres:FindFirstChild(attackerId)
-				local dv = num(victim, "HitDeltaV", -1)
+				local n = vec(victim, "HitNormal")
 				local closing = num(victim, "HitClosing", -1)
 				local expected = math.clamp((closing - 10) * 1.15, 0, 32)
-				if attacker and attacker:IsA("BasePart") then
-					local d = victim.Position - attacker.Position
-					local n = Vector3.new(d.X, 0, d.Z).Unit
-					local victimDv = (victim.AssemblyLinearVelocity - before[victim]):Dot(n)
-					local attackerDv = (attacker.AssemblyLinearVelocity - before[attacker]):Dot(n)
-					say(
-						"%s HIT victim=%s attacker=%s closing=%.2f appliedDv=%.2f expectedDv=%.2f measuredVictimDv=%.2f measuredAttackerDv=%.2f expectedRecoil=%.2f",
-						label,
-						victim.Name,
-						attackerId,
-						closing,
-						dv,
-						expected,
-						victimDv,
-						attackerDv,
-						-0.25 * dv
-					)
-				else
-					say("%s HIT victim=%s attacker=%s (attacker root missing)", label, victim.Name, attackerId)
-				end
+				local victimPre, victimPost = vec(victim, "HitVictimPre"), vec(victim, "HitVictimPost")
+				local attackerPre, attackerPost = vec(victim, "HitAttackerPre"), vec(victim, "HitAttackerPost")
+				local appliedVictim = (victimPost - victimPre):Dot(n)
+				local appliedAttacker = (attackerPost - attackerPre):Dot(n)
+				local victimHeartbeat = victim.AssemblyLinearVelocity
+				local attackerHeartbeat = if attacker and attacker:IsA("BasePart")
+					then attacker.AssemblyLinearVelocity
+					else attackerPost
+				say(
+					"%s HIT victim=%s attacker=%s closing=%.2f expectedDv=%.2f appliedVictimDv=%.2f appliedAttackerDv=%.2f expectedRecoil=%.2f capped=%s",
+					label,
+					victim.Name,
+					attackerId,
+					closing,
+					expected,
+					appliedVictim,
+					appliedAttacker,
+					-0.25 * expected,
+					tostring(victimPost.Magnitude >= 54.99 or attackerPost.Magnitude >= 54.99)
+				)
+				say(
+					"%s ENGINE after-contact (Heartbeat minus applied, along n): victim=%.2f attacker=%.2f relativeClosingAfterApply=%.2f",
+					label,
+					(victimHeartbeat - victimPost):Dot(n),
+					(attackerHeartbeat - attackerPost):Dot(n),
+					(attackerPost - victimPost):Dot(n)
+				)
 				return true
 			end
-		end
-		for _, r in roots() do
-			before[r] = r.AssemblyLinearVelocity
 		end
 	end
 	say("%s NO HIT within 5 s", label)
 	return false
 end
 
-headOn("C2")
-task.wait(3) -- let both spheres settle for A4
-cmd("report") -- server publishes Gate0RefPos_<uid>; each client reports refPosDelta (A4 needs <= 0.5)
-task.wait(1.5)
+-- A4: reference positions at +1 s and +3 s (RV-01 M1). Each client logs "A4 refSeq=.. refPosDelta=..".
+local function a4Samples(label: string)
+	task.wait(1)
+	say("%s A4 sample +1s", label)
+	cmd("report")
+	task.wait(2)
+	say("%s A4 sample +3s", label)
+	cmd("report")
+	task.wait(1)
+end
 
--- C3: tamper under two clients ----------------------------------------------------------------------------
+headOn("C2")
+a4Samples("after-hit")
+
+cmd("reset")
+task.wait(2)
+workspace:SetAttribute("Gate0AutoDriveMode", "Hold")
+workspace:SetAttribute("Gate0AutoDrive", id())
+workspace:SetAttribute("Gate0Kick", id())
+a4Samples("after-kick")
+
+-- C3: tamper under two clients -------------------------------------------------------------------------------
 cmd("reset")
 task.wait(2)
 local maxVy = -math.huge
@@ -135,19 +173,11 @@ while os.clock() - t0 < 1.5 do
 end
 say("C3 tamper serverMaxVy=%.2f (expect about 0)", maxVy)
 
--- A5 stimulus: 5 server kicks (clients hold still), then 5 head-on runs ------------------------------------
-local function totals(): (number, number)
-	local k, h = 0, 0
-	for _, r in spheres:GetChildren() do
-		k += num(r, "KickSeq", 0)
-		h += num(r, "HitSeq", 0)
-	end
-	return k, h
-end
+-- A5 stimulus: 5 server kicks (clients hold still), then 5 head-on runs ----------------------------------------
 cmd("reset")
 task.wait(2)
-local baseKick, baseHit = totals()
-cmd("report") -- baseline client counters
+local baseKick, baseHit = tally.kick, tally.hit
+cmd("report") -- baseline client counters (also resets each client's correction maximum)
 task.wait(1)
 workspace:SetAttribute("Gate0AutoDriveMode", "Hold")
 workspace:SetAttribute("Gate0AutoDrive", id())
@@ -163,15 +193,16 @@ for i = 1, 5 do
 	task.wait(1)
 end
 task.wait(1)
-local endKick, endHit = totals()
+local kicks, hitEvents = tally.kick - baseKick, tally.hit - baseHit
 say(
 	"A5 server deltas: kickEvents=%d hitEvents=%d headOnRunsWithHit=%d/5 expectedUniqueFxDeltaPerClient=%d (compare with each client's uniqueFx change between the A5 baseline and final reports)",
-	endKick - baseKick,
-	endHit - baseHit,
+	kicks,
+	hitEvents,
 	hits,
-	(endKick - baseKick) + (endHit - baseHit)
+	kicks + hitEvents
 )
 cmd("report") -- final client counters (rollbacks, resimSteps, rawFx, uniqueFx, signalFx, regressions)
 task.wait(1.5)
+tallyConn:Disconnect()
 say("driver done. Next: close ONE client window to exercise disconnect cleanup (C5), then copy the Server Output.")
 return table.concat(out, "\n")

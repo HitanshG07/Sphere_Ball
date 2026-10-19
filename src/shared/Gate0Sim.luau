@@ -58,7 +58,11 @@ function Gate0Sim.readMove(player: Player): Vector2
 		return Vector2.zero
 	end
 	local state = action:GetState()
-	if typeof(state) ~= "Vector2" or state.X ~= state.X or state.Y ~= state.Y then
+	if typeof(state) ~= "Vector2" then
+		return Vector2.zero
+	end
+	local mag = state.Magnitude
+	if mag ~= mag or mag == math.huge then -- NaN or infinite input (RV-01 L1)
 		return Vector2.zero
 	end
 	if state.Magnitude > 1 then
@@ -147,12 +151,17 @@ local function serverStep(live: { BasePart }, dt: number)
 							attacker, victim, dir = b, a, -n
 						end
 						local dv = Gate0Sim.knockback(closing)
-						victim.AssemblyLinearVelocity =
-							capHorizontal(victim.AssemblyLinearVelocity + dir * dv, Gate0Sim.HARD_CAP)
-						attacker.AssemblyLinearVelocity = capHorizontal(
-							attacker.AssemblyLinearVelocity - dir * (dv * Gate0Sim.RECOIL),
-							Gate0Sim.HARD_CAP
-						)
+						local victimPre, attackerPre = victim.AssemblyLinearVelocity, attacker.AssemblyLinearVelocity
+						victim.AssemblyLinearVelocity = capHorizontal(victimPre + dir * dv, Gate0Sim.HARD_CAP)
+						attacker.AssemblyLinearVelocity =
+							capHorizontal(attackerPre - dir * (dv * Gate0Sim.RECOIL), Gate0Sim.HARD_CAP)
+						-- RV-01 B2: record the exact velocities this step applied, so C2 can check the §8.5 math
+						-- independently of the engine's later contact solve.
+						victim:SetAttribute("HitNormal", dir)
+						victim:SetAttribute("HitVictimPre", victimPre)
+						victim:SetAttribute("HitVictimPost", victim.AssemblyLinearVelocity)
+						victim:SetAttribute("HitAttackerPre", attackerPre)
+						victim:SetAttribute("HitAttackerPost", attacker.AssemblyLinearVelocity)
 						victim:SetAttribute("HitSeq", num(victim, "HitSeq", 0) + 1)
 						victim:SetAttribute("LastHitBy", num(attacker, "OwnerUserId", 0))
 						victim:SetAttribute("LastHitAt", now)

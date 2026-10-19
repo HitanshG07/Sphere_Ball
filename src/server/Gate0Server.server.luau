@@ -71,27 +71,36 @@ bogus.Parent = ReplicatedStorage
 local clientLog = Instance.new("RemoteEvent")
 clientLog.Name = "Gate0ClientLog"
 clientLog.Parent = ReplicatedStorage
-type LogBudget = { count: number, window: number }
-local clientLogBudget: { [Player]: LogBudget } = {}
-clientLog.OnServerEvent:Connect(function(player: Player, line: any)
-	if typeof(line) ~= "string" then
-		return
-	end
+-- Per-player one-second budget; dropped messages are counted and reported (RV-01 L6).
+type LogBudget = { count: number, window: number, dropped: number }
+local function withinBudget(budgets: { [Player]: LogBudget }, player: Player, limit: number, label: string): boolean
 	local now = os.clock()
-	local budget: LogBudget = clientLogBudget[player] or { count = 0, window = now }
+	local budget: LogBudget = budgets[player] or { count = 0, window = now, dropped = 0 }
 	if now - budget.window >= 1 then
-		budget.count = 0
-		budget.window = now
+		if budget.dropped > 0 then
+			print(string.format("[G0] %s uid=%d: %d dropped by rate limit", label, player.UserId, budget.dropped))
+		end
+		budget.count, budget.window, budget.dropped = 0, now, 0
 	end
-	clientLogBudget[player] = budget
+	budgets[player] = budget
 	budget.count += 1
-	if budget.count > 30 then
+	if budget.count > limit then
+		budget.dropped += 1
+		return false
+	end
+	return true
+end
+local clientLogBudget: { [Player]: LogBudget } = {}
+local bogusBudget: { [Player]: LogBudget } = {}
+clientLog.OnServerEvent:Connect(function(player: Player, line: any)
+	if typeof(line) ~= "string" or not withinBudget(clientLogBudget, player, 30, "client log") then
 		return
 	end
 	print(string.format("[G0C<-%d] %s", player.UserId, string.sub(line, 1, 400)))
 end)
 Players.PlayerRemoving:Connect(function(player: Player)
 	clientLogBudget[player] = nil
+	bogusBudget[player] = nil
 end)
 
 -- Per-player state ---------------------------------------------------------------------------
@@ -110,6 +119,12 @@ local roots: { [Player]: BasePart } = {}
 local roundConns: { [Player]: { RBXScriptConnection } } = {}
 local seen: { [BasePart]: { hit: number, kick: number, elim: boolean } } = {}
 local restoreCount: { [Player]: number } = {}
+local maxSpeed: { [BasePart]: number } = {}
+
+local function forgetRoot(root: BasePart)
+	seen[root] = nil
+	maxSpeed[root] = nil -- RV-01 L4
+end
 
 local function connCount(): number
 	local n = 0
@@ -184,6 +199,10 @@ local function park(player: Player, character: Model, slot: number)
 		log("park FAIL uid=%d: character incomplete", player.UserId)
 		return
 	end
+	local previous = saved[player]
+	if previous then -- a new character while parked: release the old extra focus (RV-01 L4)
+		player:RemoveReplicationFocus(previous.hrp)
+	end
 	local rec: SavedAvatar = {
 		character = character,
 		parts = {},
@@ -215,10 +234,15 @@ local function park(player: Player, character: Model, slot: number)
 	log("park uid=%d slot=%d pod=%s extraFocus=HRP", player.UserId, slot, tostring(podCenter(slot)))
 end
 
+local spawnCounter = 0
 local function spawnRound(player: Player)
 	if roots[player] then
+		-- Deliberate guard (RV-01 L2): an eliminated player's record stays until restore; respawning first would
+		-- save the hidden avatar as its "original" appearance.
+		log("respawn skipped uid=%d: round record exists; restore first", player.UserId)
 		return
 	end
+	spawnCounter += 1
 	ensureInputBridge(player)
 	local slot = freeSlot(player)
 	local root = Instance.new("Part")
@@ -230,6 +254,7 @@ local function spawnRound(player: Player)
 	root.Transparency = 0.25
 	root.Color = if slot % 2 == 1 then Color3.fromRGB(0, 195, 255) else Color3.fromRGB(255, 125, 0)
 	root:SetAttribute("OwnerUserId", player.UserId)
+	root:SetAttribute("SpawnId", spawnCounter) -- lets presentation tell a respawned root from a streamed-back one
 	root:SetAttribute("Slot", slot)
 	root:SetAttribute("SpawnPos", SLOTS[slot])
 	root:SetAttribute("HitSeq", 0)
@@ -298,7 +323,7 @@ local function restore(player: Player)
 	player.ReplicationFocus = nil
 	local root = roots[player]
 	if root then
-		seen[root] = nil
+		forgetRoot(root)
 		root:Destroy()
 	end
 	roots[player] = nil
@@ -337,7 +362,10 @@ local function report(tag: string)
 			tostring(root:GetAttribute("Eliminated")),
 			tostring(player.ReplicationFocus)
 		)
-		workspace:SetAttribute("Gate0RefPos_" .. player.UserId, root.Position)
+		-- A4 reference on the Player (not predicted, so its change signal fires); the sequence number makes a
+		-- repeated identical position still produce a change (RV-01 B1/M1).
+		player:SetAttribute("Gate0RefPos", root.Position)
+		player:SetAttribute("Gate0RefSeq", num(player, "Gate0RefSeq", 0) + 1)
 	end
 	local steps, resim = Gate0Sim.counters()
 	log(
@@ -374,6 +402,9 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 end)
 
 bogus.OnServerEvent:Connect(function(player: Player, ...: any)
+	if not withinBudget(bogusBudget, player, 10, "bogus claims") then
+		return
+	end
 	local args = table.pack(...)
 	local parts = {}
 	for i = 1, args.n do
@@ -383,7 +414,6 @@ bogus.OnServerEvent:Connect(function(player: Player, ...: any)
 end)
 
 -- Observer outside the simulation: logs sequence changes once and handles elimination side effects.
-local maxSpeed: { [BasePart]: number } = {}
 RunService.Heartbeat:Connect(function()
 	for player, root in roots do
 		local state = seen[root]
@@ -429,7 +459,7 @@ RunService.Heartbeat:Connect(function()
 			player.ReplicationFocus = target
 			task.delay(0.5, function()
 				if roots[player] == root then
-					seen[root] = nil
+					forgetRoot(root)
 					root:Destroy()
 					log("ELIM root destroyed uid=%d focus=%s", player.UserId, tostring(player.ReplicationFocus))
 				end
@@ -445,11 +475,16 @@ end
 Players.PlayerRemoving:Connect(function(player: Player)
 	local root = roots[player]
 	if root then
-		seen[root] = nil
+		forgetRoot(root)
 		root:Destroy()
 	end
 	roots[player] = nil
+	local rec = saved[player]
+	if rec then
+		player:RemoveReplicationFocus(rec.hrp) -- D-026 proposal: no extra focus survives a disconnect (RV-01 L4)
+	end
 	saved[player] = nil
+	restoreCount[player] = nil
 	disconnectRound(player)
 	log(
 		"C5 disconnect cleanup uid=%d remainingRoots=%d savedRecords=%d roundConns=%d",
