@@ -1,0 +1,139 @@
+{
+  "package_name": "Sphere_Brawl_Stage4_Validated_Prototypes_Package",
+  "project": "Sphere Brawl: Rolling Rampage",
+  "stage": "Stage 4 \u2014 Prototype Refinement & Validation",
+  "unit_scale": "1.0 Unit = 1.0 Roblox Stud (+Y Up, +Z Forward)",
+  "files": [
+    {
+      "filename": "QueuePortalArch_Prototype.obj",
+      "purpose": "Corrected Prototype A 3D mesh (Wavefront OBJ, 3,168 tris, 0 degenerate faces, R_xz >= 15.02 studs floor clearance, 30.00-stud horizontal opening)"
+    },
+    {
+      "filename": "QueuePortalArch_Prototype.mtl",
+      "purpose": "Self-contained companion Wavefront Material Library for QueuePortalArch_Prototype.obj (MAT_DarkNeutral, MAT_AltNeutral, MAT_LightTrim, EMI_Cyan)"
+    },
+    {
+      "filename": "QueuePortalArch_Prototype.glb",
+      "purpose": "Binary glTF 2.0 3D model for Prototype A with embedded PBR metallic-roughness and emissive factors"
+    },
+    {
+      "filename": "generate_queue_portal_blender.py",
+      "purpose": "Synchronized deterministic Blender 3.6+/4.x Python generator script producing exact Prototype A geometry"
+    },
+    {
+      "filename": "PrototypeA_QueuePortalArch_Stage4_Previews.png",
+      "purpose": "4-view technical verification render sheet (Front, Side, Top Plan with R=14.0 pad keep-out circle, and 3/4 Shaded+Wireframe)"
+    },
+    {
+      "filename": "Chassis_Rammer_Prototype.obj",
+      "purpose": "Corrected Prototype B 3D mesh (Wavefront OBJ, 3,236 tris, 0 degenerate faces, max vertex radius R = 2.96801 studs <= 2.970 limit, +Z forward ram)"
+    },
+    {
+      "filename": "Chassis_Rammer_Prototype.mtl",
+      "purpose": "Self-contained companion Wavefront Material Library for Chassis_Rammer_Prototype.obj (MAT_DarkNeutral, MAT_AltNeutral, MAT_LightTrim, EMI_Cyan, EMI_Kinetic)"
+    },
+    {
+      "filename": "Chassis_Rammer_Prototype.glb",
+      "purpose": "Binary glTF 2.0 3D model for Prototype B with embedded PBR metallic-roughness and emissive factors"
+    },
+    {
+      "filename": "generate_rammer_chassis_blender.py",
+      "purpose": "Synchronized deterministic Blender 3.6+/4.x Python generator script producing exact Prototype B geometry"
+    },
+    {
+      "filename": "PrototypeB_ChassisRammer_Stage4_Previews.png",
+      "purpose": "6-view technical verification render sheet (Front +Z, Side +X, Rear -Z, Top +Y, 3/4 with +Z/+Y axis arrows, and Pure Wireframe with R=2.970/3.000 cage)"
+    },
+    {
+      "filename": "Stage4_Prototype_Validation_and_Quality_Report.md",
+      "purpose": "Complete Stage 4 inspection findings, Before/After validation tables, Studio material setup instructions, and manual Roblox Studio acceptance checklist"
+    },
+    {
+      "filename": "MANIFEST.json",
+      "purpose": "Machine-readable inventory of all files in the self-contained Stage 4 prototype package"
+    }
+  ],
+  "verified_metrics": {
+    "PrototypeA_QueuePortalArch": {
+      "file": "QueuePortalArch_Prototype.obj",
+      "vertices": 9504,
+      "normals": 3168,
+      "triangles": 3168,
+      "groups_count": 50,
+      "materials": [
+        "EMI_Cyan",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "mtllib": [
+        "QueuePortalArch_Prototype.mtl"
+      ],
+      "mtl_resolved_on_disk": true,
+      "degenerate_triangles": 0,
+      "normal_mismatches": 0,
+      "bbox_min": [
+        -20.4,
+        0.0,
+        -13.9151
+      ],
+      "bbox_max": [
+        20.4,
+        26.65,
+        13.9151
+      ],
+      "dimensions": [
+        40.8,
+        26.65,
+        27.8302
+      ],
+      "max_3d_radius": 28.04577,
+      "min_3d_radius": 15.14247,
+      "verts_over_2970": 9504,
+      "verts_over_3000": 9504,
+      "min_floor_xz_radius_Y_le_6": 15.0187,
+      "verts_inside_R14_at_floor": 0,
+      "clear_opening_width_X": 30.0,
+      "lower_clear_arch_height_Y": 20.9278
+    },
+    "PrototypeB_ChassisRammer": {
+      "file": "Chassis_Rammer_Prototype.obj",
+      "vertices": 9708,
+      "normals": 3236,
+      "triangles": 3236,
+      "groups_count": 38,
+      "materials": [
+        "EMI_Cyan",
+        "EMI_Kinetic",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "mtllib": [
+        "Chassis_Rammer_Prototype.mtl"
+      ],
+      "mtl_resolved_on_disk": true,
+      "degenerate_triangles": 0,
+      "normal_mismatches": 0,
+      "bbox_min": [
+        -2.9587,
+        -2.88,
+        -2.8941
+      ],
+      "bbox_max": [
+        2.9587,
+        2.88,
+        2.9141
+      ],
+      "dimensions": [
+        5.9175,
+        5.76,
+        5.8082
+      ],
+      "max_3d_radius": 2.96801,
+      "min_3d_radius": 2.47499,
+      "verts_over_2970": 0,
+      "verts_over_3000": 0
+    }
+  }
+}
