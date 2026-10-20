@@ -5,7 +5,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 **Updated:** 2026-10-20, session S-20261020-06 (lead: Claude Code 2.1.303, Opus 5.5)
 **Milestone:** Gate 0 (TASK-00), environment and physics-authority feasibility
 **Overall status:** IN PROGRESS. **Gate 0 has not passed.** TASK-01 has not started and is not authorized.
-**Waiting on:** the owner's two-client Studio session (Owner actions B and C). FAIL-006 was fixed at 12:06 (place saved with Server Authority).
+**Waiting on:** two-client **session 2 at 150 ms** (Owner actions C). Session 1 at 0 ms is done (C2, C3, A4 and C5 disconnect PASS; A5 preliminary PASS; FAIL-011 camera found, fixed and verified in solo).
 **Branches:**
 - `main` = `f726ddd` (untouched spec baseline).
 - `alpha` = `cff1063` (rules and records as of S-20261020-03).

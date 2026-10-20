@@ -1,0 +1,53 @@
+# FAIL-011 camera fix + C5 client elimination fix, solo Play (uncommitted tree, committed next)
+## Final rendered camera (BindToRenderStep at Last+200): final cam=0, 62.997, -54 type=Scriptable distToSphere=20.12 rollY=0.00000 (sphere 0, 53.997, -36)
+## Screen capture: Gate0_solo_camera_after_FAIL011_fix (sphere on the arena floor visible)
+## Before the fix (2-client session, client -1): final cam=2000, 209.03, 1988.35 type=Custom (camera at the holding pod)
+## Gate 0 console lines
+[G0] server ready authority-probe: see SetNetworkOwner lines; studio=true
+[G0] SetNetworkOwner(player) probe uid=1272229789 ok=false err=Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.
+[G0] spawn uid=1272229789 slot=1 pos=0, 54.150001525878906, -36 conns=1
+[G0C<-1272229789] Misprediction connectable=false err=The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)
+[G0C<-1272229789] unbind reason=rebind roundConns=0
+[G0C<-1272229789] A2 uid=1272229789 own=1272229789 status=Predicted after=0.00s
+[G0C<-1272229789] client ready uid=1272229789 studio=true
+[G0C] Misprediction connectable=false err=The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)
+[G0C] unbind reason=rebind roundConns=0
+[G0C] A2 uid=1272229789 own=1272229789 status=Predicted after=0.00s
+[G0C] client ready uid=1272229789 studio=true
+[G0] park uid=1272229789 slot=1 pod=2000, 200, 2000 extraFocus=HRP
+[G0] cmd reset#5
+[G0C] autodrive start run=6 mode=EdgeFall frame=1549
+[G0C] A3 response frames=1
+[G0C<-1272229789] autodrive start run=6 mode=EdgeFall frame=1549
+[G0C<-1272229789] A3 response frames=1
+[G0] ELIM uid=1272229789 credit=0 y=12.82 maxHSpeed=42.00
+[G0C] C5 eliminated: input unbound hardwareEnabled=false spectating=Gate0ArenaFocus
+[G0C<-1272229789] C5 eliminated: input unbound hardwareEnabled=false spectating=Gate0ArenaFocus
+[G0] ELIM root destroyed uid=1272229789 focus=Gate0ArenaFocus
+[G0] cmd report#6
+[G0] report report#6 uid=1272229789 pos=(0.00,3.00,-102.05) hspeed=41.33 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=0 elim=true focus=Gate0ArenaFocus
+[G0] report report#6 server simSteps=1692 resimSteps=0 savedRecords=1 roundConns=1
+[G0C] A4 refSeq=1 refPosDelta=2.754 ownHSpeed=41.29 ping=0.000 status=Predicted
+[G0C] report report#6 uid=1272229789 rollbacks=1 mispredictions=0 simSteps=1689 resimSteps=4 maxCorrectionSinceLastReport=1.519 rawFx=0 uniqueFx=0 signalFx=0 regressions=0 maxCameraRollY=0.00000 cameraOverrides=1 maxFinalCamDistError=14.39 predictionStatus=[1272229789:Predicted]
+[G0C<-1272229789] A4 refSeq=1 refPosDelta=2.754 ownHSpeed=41.29 ping=0.000 status=Predicted
+[G0C<-1272229789] report report#6 uid=1272229789 rollbacks=1 mispredictions=0 simSteps=1689 resimSteps=4 maxCorrectionSinceLastReport=1.519 rawFx=0 uniqueFx=0 signalFx=0 regressions=0 maxCameraRollY=0.00000 cameraOverrides=1 maxFinalCamDistError=14.39 predictionStatus=[1272229789:Predicted]
+[G0] cmd restore#7
+[G0] C5 restore uid=1272229789 hadRecord=true mismatches=0 focusNil=true savedRecords=0 roundConns=0
+[G0C] unbind reason=restore roundConns=0
+[G0C] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0
+[G0C<-1272229789] unbind reason=restore roundConns=0
+[G0C<-1272229789] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0
+[G0] cmd respawn#8
+[G0] SetNetworkOwner(player) probe uid=1272229789 ok=false err=Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.
+[G0] park uid=1272229789 slot=1 pod=2000, 200, 2000 extraFocus=HRP
+[G0] spawn uid=1272229789 slot=1 pos=0, 54.150001525878906, -36 conns=1
+[G0C] unbind reason=rebind roundConns=0
+[G0C<-1272229789] unbind reason=rebind roundConns=0
+[G0C] A2 uid=1272229789 own=1272229789 status=Predicted after=0.12s
+[G0C<-1272229789] A2 uid=1272229789 own=1272229789 status=Predicted after=0.12s
+[G0] cmd restore#9
+[G0] C5 restore uid=1272229789 hadRecord=true mismatches=0 focusNil=true savedRecords=0 roundConns=0
+[G0C] unbind reason=restore roundConns=0
+[G0C] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0
+[G0C<-1272229789] unbind reason=restore roundConns=0
+[G0C<-1272229789] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0

@@ -260,3 +260,20 @@ Append-only chronological history for every AI and human working on the project.
   - Synced by insertion into `MASTER_IMPLEMENTATION_PLAN.md` (§5.4 parked-avatar streaming paragraph; §9.2 D-025 rationale note and the polling rule), `specs/DESIGN_CONSTANTS.md`, `ALPHA_ACCEPTANCE_CHECKLIST.md` (restore-matrix item), and Tasks 04 and 07.
   - These docs-only edits are committed on `gate0-spike` and will be copied to `alpha` in the Gate 0 close-out commit with the records.
   - Q-1 deferred until the 2-client data exists, as agreed.
+- **Two-client session 1 at 0 ms** (owner started Test ▸ Clients and Servers with 2 players, ~12:25):
+  - MCP reached all four instances: server `ce664470…`, clients `05ef1b72…` and `49adfb10…`, edit `f67105bf…`.
+  - Sanity: Server Authority active; both clients `Predicted` before the driver started.
+  - Driver run through MCP (`tests/gate0/G0_two_client_driver.luau` at `2612832`), all 0 ms:
+    - C2 PASS: §8.5 applied exactly (+32 / −8).
+    - C3 PASS.
+    - A4 PASS: ≤ 0.013 stud settled.
+    - A5 preliminary PASS: 15 unique FX per client, rollbacks observed.
+    - A3 1 frame.
+  - C5 disconnect PASS, using a server-side kick of player -2.
+  - Q-1 data: the engine contact adds about ±22 studs/s after the §8.5 step until closing reaches 0.
+  - Remote spheres are also `Predicted` on each client.
+- **The owner's "only sky" report** led to FAIL-011: the default camera overrode the harness camera.
+  - It also invalidated the solo C4 result, and C5's client-elimination step, which had not actually been verified (FAIL-008 class: the client listened to the `Eliminated` change signal). Corrections were appended to the test register.
+  - Fix `554bcdf`, verified in solo (T-G0-045).
+  - The same heredoc parse failure as FAIL-003 happened once while appending these records; nothing was written, and the records were appended from Write-tool files instead.
+- **Next:** two-client session 2 at 150 ms (A3, A5, plus camera confirmation), then the Q-1 decision and the Gate 0 close-out.

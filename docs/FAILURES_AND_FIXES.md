@@ -119,3 +119,13 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Retest:** T-G0-042 (decoded file and five Properties-panel screenshots) and T-G0-043 (Server Authority active in Play: SetNetworkOwner rejected, roots Predicted).
 - **Prevention:** owner instructions now stress that the setting must be saved; T-G0-041 showed that an unsaved setting is lost when Studio reopens the place.
 - **Status:** FIXED-VERIFIED
+
+## FAIL-011 — Clients rendered only sky: default camera overrode the sphere camera
+- **Session / discovered:** S-20261020-06, first two-client session. The owner reported "only sky"; MCP probes confirmed it.
+- **Observation (confirmed):** both clients' workspaces contained the floor and both spheres. The client `CameraType` was `Custom` with the avatar's Humanoid as subject, and the final rendered camera (probe at RenderPriority Last) was at (2000, 209, 1988), the holding pod beyond the 2048-stud baseplate, so only sky and void were visible.
+- **Cause (confirmed):** the default PlayerModule camera script resets `CameraType` to `Custom` when the avatar spawns, and its render-step update ran after the harness's `PreRender` camera write every frame.
+- **Collateral finding:** the solo C4 measurement (T-G0-025) read the camera inside the harness's own update, so it measured the intended camera, not the rendered one. That result is invalidated by a correction in the test register.
+- **Fix:** `554bcdf`. The sphere camera is driven with `BindToRenderStep` at `RenderPriority.Camera + 1` and re-asserts `Scriptable`. C4 is measured from the final camera at `RenderPriority.Last + 1`, with an override counter and a final-distance-error metric. Both bindings are unbound on unbind and restore.
+- **Retest:** T-G0-045 (solo): final camera at the intended 20.12-stud offset, roll 0, sphere visible in a screen capture. Two-client confirmation is due in the 150 ms session.
+- **Prevention for TASK-04:** the production CameraController must own the camera after the default camera update (or disable the default camera module) and be tested on the rendered result, not its own writes.
+- **Status:** FIXED-UNVERIFIED (solo verified; two-client confirmation pending)
