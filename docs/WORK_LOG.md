@@ -386,3 +386,13 @@ Append-only chronological history for every AI and human working on the project.
 - **Spec gaps the reviewer found** (not TASK-01 defects; for the owner before TASK-04/06/07): the §8.5 "contact tolerance" and the "near zero" direction thresholds (§8.3, D-019) are undefined; there is no named channel for ability feedback (NO TARGET, cooldowns); it is unclear who chooses the spectate target that D-023's ReplicationFocus follows; there is no default loadout.
 - **Checklist:** `ALPHA_ACCEPTANCE_CHECKLIST.md` grid round-trip item marked PASS (T-T01-007, T-T01-014). The ring and collapse items need GridService (TASK-02) and stay open.
 - **TASK-01 gate: PASSED** (table in `TEST_RESULTS.md`).
+- **Pre-push audit (TASK-01):** commits `c2d1038..c843af4` (6 commits, 19 files). Secret and owner-identifier scan of the added lines: none. No `build/`, `sourcemap.json`, lock files or Gate 0 prototype files. Largest tracked file is still the 2.7 MB concept PNG.
+- **Push and merge:**
+  - `git push -u origin task01` created `origin/task01` at `c843af4`.
+  - `alpha` fast-forwarded to `task01` (`git merge --ff-only`); `git push origin alpha` → `c2d1038..c843af4  alpha -> alpha`.
+  - `git ls-remote origin`: `alpha` `c843af4`, `task01` `c843af4`, `HEAD` `c843af4`, `main` `f726ddd`, `gate-0` `bc4cfa7` (both unchanged).
+- **Session end state:**
+  - On `alpha`; this record is the last commit (its hash is in `git log`, pushed to `origin/alpha`).
+  - Working tree clean apart from ignored outputs; no stash; `place/Gate0.rbxl` unchanged.
+  - Studio is in Edit mode with Rojo serving the repo.
+- **Stopped for owner approval before TASK-02**, as instructed. Next actions are in `PROJECT_STATUS.md`.
