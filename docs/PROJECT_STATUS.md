@@ -5,7 +5,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 **Updated:** 2026-10-20, session S-20261020-06 (lead: Claude Code 2.1.303, Opus 5.5)
 **Milestone:** Gate 0 (TASK-00), environment and physics-authority feasibility
 **Overall status:** IN PROGRESS. **Gate 0 has not passed.** TASK-01 has not started and is not authorized.
-**Waiting on:** **BLOCKER FAIL-006.** Studio reopened the saved place and is no longer running Server Authority. The owner must set `AuthorityMode = Server` and save (Owner actions A1–A2) before any further test. After that: the two-client session.
+**Waiting on:** the owner's two-client Studio session (Owner actions B and C). FAIL-006 was fixed at 12:06 (place saved with Server Authority).
 **Branches:**
 - `main` = `f726ddd` (untouched spec baseline).
 - `alpha` = `cff1063` (rules and records as of S-20261020-03).
@@ -32,9 +32,9 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 
 ## Failed, blocked or open
 - **FAIL-004:** resolved. The native Studio MCP tools work in the current session (T-G0-040, FIXED-VERIFIED).
-- **FAIL-006 (BLOCKING):** saved `place/Gate0.rbxl` still has `AuthorityMode = Automatic`. Studio reopened it at 11:48, so the live session lost Server Authority (T-G0-041). **Owner must set it in the Properties panel and press Ctrl+S.**
+- **FAIL-006:** fixed. Place saved with `AuthorityMode = Server`; A1 fully evidenced (T-G0-042); solo regression passes (T-G0-043).
 - **FAIL-009:** parked-avatar streaming. Spike fix works; **owner decision D-026 needed** to adopt it.
-- **A1:** dependent settings not yet captured in a screenshot.
+- **A1:** complete (T-G0-042).
 - **FAIL-010:** C2 instrumentation fixed (`0c02823`); unverified until the 2-client run. Related owner question Q-1.
 
 ## Outstanding tests (Gate 0)

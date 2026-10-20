@@ -113,3 +113,9 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Observation (confirmed):** after the owner reconnected Studio (place lock file 11:48:15), Studio was running `place/Gate0.rbxl` from disk, still saved with `AuthorityMode = Automatic` (re-decoded: value 1). The live session lost Server Authority: `SetNetworkOwner(player)` succeeded, client roots were `Authoritative`, and server velocity writes had no effect (T-G0-041).
 - **Impact:** all Path A Studio tests are blocked until `AuthorityMode = Server` is set in the Properties panel **and saved**. A script cannot set it (`lacking capability RobloxScript`, T-G0-005).
 - **Status:** OPEN — blocking (owner action)
+
+### FAIL-006 update (S-20261020-06) — fixed
+- **Fix:** owner set `AuthorityMode = Server` in the Properties panel and saved (`place/Gate0.rbxl`, 12:06:15).
+- **Retest:** T-G0-042 (decoded file and five Properties-panel screenshots) and T-G0-043 (Server Authority active in Play: SetNetworkOwner rejected, roots Predicted).
+- **Prevention:** owner instructions now stress that the setting must be saved; T-G0-041 showed that an unsaved setting is lost when Studio reopens the place.
+- **Status:** FIXED-VERIFIED
