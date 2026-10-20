@@ -1,0 +1,51 @@
+# FAIL-009 experiment: server Player:AddReplicationFocus(HRP) while ReplicationFocus = SphereRoot; solo Play
+side=server uid=1272229789 char=true hrp=true hrpPos=2000, 203, 2000 focus=1272229789 root=true rootStatus=Authoritative
+side=client uid=1272229789 char=true hrp=true hrpPos=2000, 203, 2000 focus=1272229789 root=true rootStatus=Predicted
+Infinite yield warnings in console: 0
+## drive_c5 rerun
+afterRestore1 hrpAnchored=false headTransparency=0 walkSpeed=16 focus=nil roots=0; afterRestore2 identical
+## Gate 0 console lines
+[G0] server ready authority-probe: see SetNetworkOwner lines; studio=true
+[G0] SetNetworkOwner(player) probe uid=1272229789 ok=false err=Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.
+[G0] spawn uid=1272229789 slot=1 pos=0, 54.150001525878906, -36 conns=1
+[G0C<-1272229789] Misprediction connectable=false err=The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)
+[G0C<-1272229789] unbind reason=rebind roundConns=0
+[G0C<-1272229789] A2 uid=1272229789 own=1272229789 status=Predicted after=0.00s
+[G0C<-1272229789] client ready uid=1272229789 studio=true
+[G0C] Misprediction connectable=false err=The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)
+[G0C] unbind reason=rebind roundConns=0
+[G0C] A2 uid=1272229789 own=1272229789 status=Predicted after=0.00s
+[G0C] client ready uid=1272229789 studio=true
+[G0] park uid=1272229789 slot=1 pod=2000, 200, 2000 extraFocus=HRP
+[G0] cmd reset#5
+[G0C] autodrive start run=6 mode=EdgeFall frame=897
+[G0C] A3 response frames=1
+[G0C<-1272229789] autodrive start run=6 mode=EdgeFall frame=897
+[G0C<-1272229789] A3 response frames=1
+[G0] ELIM uid=1272229789 credit=0 y=12.82 maxHSpeed=42.00
+[G0] ELIM root destroyed uid=1272229789 focus=Gate0ArenaFocus
+[G0] cmd report#6
+[G0] report report#6 uid=1272229789 pos=(0.00,3.00,-102.05) hspeed=41.33 rawMove=0, -1 clampedMove=0, -1 hit=0 kick=0 elim=true focus=Gate0ArenaFocus
+[G0] report report#6 server simSteps=1030 resimSteps=0 savedRecords=1 roundConns=1
+[G0C] report report#6 uid=1272229789 rollbacks=2 mispredictions=0 simSteps=1040 resimSteps=10 maxCorrection=1.469 rawFx=0 uniqueFx=0 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[]
+[G0C<-1272229789] report report#6 uid=1272229789 rollbacks=2 mispredictions=0 simSteps=1040 resimSteps=10 maxCorrection=1.469 rawFx=0 uniqueFx=0 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[]
+[G0] cmd restore#7
+[G0] C5 restore uid=1272229789 hadRecord=true mismatches=0 focusNil=true savedRecords=0 roundConns=0
+[G0C] unbind reason=restore roundConns=0
+[G0C] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0
+[G0C<-1272229789] unbind reason=restore roundConns=0
+[G0C<-1272229789] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0
+[G0] cmd respawn#8
+[G0] SetNetworkOwner(player) probe uid=1272229789 ok=false err=Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.
+[G0] park uid=1272229789 slot=1 pod=2000, 200, 2000 extraFocus=HRP
+[G0] spawn uid=1272229789 slot=1 pos=0, 54.150001525878906, -36 conns=1
+[G0C] unbind reason=rebind roundConns=0
+[G0C] A2 uid=1272229789 own=1272229789 status=Predicted after=0.00s
+[G0C<-1272229789] unbind reason=rebind roundConns=0
+[G0C<-1272229789] A2 uid=1272229789 own=1272229789 status=Predicted after=0.00s
+[G0] cmd restore#9
+[G0] C5 restore uid=1272229789 hadRecord=true mismatches=0 focusNil=true savedRecords=0 roundConns=0
+[G0C] unbind reason=restore roundConns=0
+[G0C] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0
+[G0C<-1272229789] unbind reason=restore roundConns=0
+[G0C<-1272229789] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0

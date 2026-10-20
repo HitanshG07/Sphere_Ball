@@ -3,17 +3,17 @@
 Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is blocked by every FAIL or NOT RUN item. Do not convert a failure into a pass by weakening a test.
 
 ## Gate 0 - Studio and network architecture
-- [ ] Target Studio/version and exact feature/settings availability are recorded.
-- [ ] Exactly one architecture path is selected and documented: Path A (Roblox Server Authority) or, only if Path A's required setting/API is genuinely unavailable, Path B (server-owned physics fallback).
-- [ ] Path A settings/API and two-client movement/prediction/correction smoke test pass, OR Path B server ownership (`SetNetworkOwner(nil)`), validated input-intent rate limit (<=20 updates/second per player), two-client test, and representative-latency test pass.
-- [ ] Four-client movement/collision smoke test passes before Alpha acceptance.
-- [ ] Server owns authoritative movement outcome under selected model: hit, knockback, ability effects, elimination, queue, match timer and result state.
-- [ ] No client-applied authoritative impulse or client-authoritative hit/KO path exists.
-- [ ] `docs/GATE_0_REPORT.md` identifies the selected path, exact settings, test evidence, unrun tests and known limitations.
-- [ ] `Workspace.AuthorityMode` and dependent settings are verified in the Studio Properties panel, not only by script (D-025).
-- [ ] Path A only: client-side `SetPredictionMode` gives `Predicted` on the owning client and `Authoritative` on the server; at least one rollback is observed under the defined stimulus and unique client FX equals server hits + kicks (no duplicate presentation under resimulation).
-- [ ] Path B only: root ownership stays `nil`; input validation and the 20/s rate limit pass; Path A prediction/rollback checks are not applied.
-- [ ] The simulation clamps move-input magnitude to <= 1; Gate 0 AutoDrive test input is Studio-gated and absent from production code (D-025).
+- [x] Target Studio/version and exact feature/settings availability are recorded. **PASS** (Studio 0.743.0.7431133; `docs/GATE_0_REPORT.md` §1, §4, §7)
+- [x] **PASS: Path A selected (D-024).** Exactly one architecture path is selected and documented: Path A (Roblox Server Authority) or, only if Path A's required setting/API is genuinely unavailable, Path B (server-owned physics fallback).
+- [x] **PASS (Path A):** T-G0-042, T-G0-044, T-G0-046. Path A settings/API and two-client movement/prediction/correction smoke test pass, OR Path B server ownership (`SetNetworkOwner(nil)`), validated input-intent rate limit (<=20 updates/second per player), two-client test, and representative-latency test pass.
+- [ ] Four-client movement/collision smoke test passes before Alpha acceptance. **NOT RUN:** deferred to TASK-10 per the TASK-00 card (T-G0-016).
+- [ ] **PARTIAL:** hit, knockback and elimination PASS at Gate 0 (T-G0-044b/d, T-G0-046, T-G0-023); ability effects, queue, match timer and result state do not exist yet and are verified in TASK-06/07/10. Server owns authoritative movement outcome under selected model: hit, knockback, ability effects, elimination, queue, match timer and result state.
+- [x] No client-applied authoritative impulse or client-authoritative hit/KO path exists. **PASS for the Gate 0 prototype** (C3 tamper and fake KO ignored at 0 and 150 ms; reviews RV-01/RV-02); re-check at TASK-10 for production code.
+- [x] **PASS** (`docs/GATE_0_REPORT.md` §10). `docs/GATE_0_REPORT.md` identifies the selected path, exact settings, test evidence, unrun tests and known limitations.
+- [x] `Workspace.AuthorityMode` and dependent settings are verified in the Studio Properties panel, not only by script (D-025). **PASS** (T-G0-042: six owner screenshots plus the decoded saved place).
+- [x] **PASS** (T-G0-019, T-G0-044a, T-G0-046: Predicted/Authoritative; at 150 ms rollbacks 24 to 114 and 21 to 112 with unique FX 15 = server events 15, no duplicates). Path A only: client-side `SetPredictionMode` gives `Predicted` on the owning client and `Authoritative` on the server; at least one rollback is observed under the defined stimulus and unique client FX equals server hits + kicks (no duplicate presentation under resimulation).
+- [ ] **N/A:** Path B not selected. Path B only: root ownership stays `nil`; input validation and the 20/s rate limit pass; Path A prediction/rollback checks are not applied.
+- [x] **PASS** (T-G0-021 oversized input gives 42.00; AutoDrive is `RunService:IsStudio()`-gated and exists only on `gate0-spike`; no production code exists yet; re-check at TASK-10). The simulation clamps move-input magnitude to <= 1; Gate 0 AutoDrive test input is Studio-gated and absent from production code (D-025).
 
 ## Repository and type contracts
 - [ ] Rojo project builds, if Rojo is used.
@@ -93,7 +93,7 @@ Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is
 - [ ] Results panel lasts 8 seconds and has working Return to Hub.
 - [ ] Three sequential rounds complete with no stale tile/hazard/connection state.
 - [ ] Hard-timeout placements follow D-022.
-- [ ] D-023 restore matrix passes for elimination, disconnect and match end: ReplicationFocus, camera, input bindings, connections, spheres and avatar properties are restored as specified, and the cleanup invariant check passes.
+- [ ] D-023 restore matrix passes for elimination, disconnect and match end: ReplicationFocus, camera, input bindings, connections, spheres and avatar properties are restored as specified, and the cleanup invariant check passes, including removal of the D-026 extra replication focus.
 
 ## UI / visuals / audio / accessibility
 - [ ] All active lobby buttons work; unimplemented features are disabled/Coming Soon.

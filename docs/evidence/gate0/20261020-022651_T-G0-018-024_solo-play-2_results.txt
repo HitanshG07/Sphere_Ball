@@ -1,0 +1,48 @@
+# Solo play session 2 (prototype b7beeef). Driver scripts: drive_c1.luau, drive_c5.luau (server datamodel).
+## drive_c1 result
+C1 Forward run=1 maxHSpeed=42.00 t>=40=0.583s hspeed@1.0s=42.00 pos=(0.0,54.0,32.3)
+C1 Oversize run=2 maxHSpeed=42.00 t>=40=0.584s hspeed@1.0s=42.00 pos=(0.0,54.0,32.1)
+C3 tamper serverMaxVy=0.00 dY=0.00 elim=false
+## drive_c5 result
+before hrpAnchored=true headTransparency=1 walkSpeed=0 pos=2000, 203, 2000 focus=1272229789 roots=1
+C1 EdgeFall lastY=3.00 maxUpwardStepPerFrame=0.025 eliminatedAt=1.42s KOCredit=0 rootStillParented=false
+afterElim hrpAnchored=true headTransparency=1 walkSpeed=0 pos=2000, 203, 2000 focus=Gate0ArenaFocus roots=0
+afterRestore1 hrpAnchored=false headTransparency=0 walkSpeed=16 pos=0, 4.890625, 0 focus=nil roots=0
+afterRespawn hrpAnchored=true headTransparency=1 walkSpeed=0 pos=2000, 203, 2000 focus=1272229789 roots=1
+afterRestore2 hrpAnchored=false headTransparency=0 walkSpeed=16 pos=0, 4.9296875, 0 focus=nil roots=0
+client cameraType=Custom subjectIsHumanoid=true hrpStreamedIn=true hardwareEnabled=true
+## Gate 0 console lines (A3 'frames=0' spam lines removed; full raw console in the _raw file)
+[G0C] Misprediction connectable=false err=The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)
+[G0C] unbind reason=rebind roundConns=0
+[G0C] A2 uid=1272229789 own=1272229789 status=Predicted after=0.00s
+[G0C] client ready uid=1272229789 studio=true
+[G0] server ready authority-probe: see SetNetworkOwner lines; studio=true
+[G0] SetNetworkOwner(player) probe uid=1272229789 ok=false err=Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.
+[G0] spawn uid=1272229789 slot=1 pos=0, 54.150001525878906, -36 conns=1
+[G0] park uid=1272229789 slot=1 pod=2000, 200, 2000
+[G0] cmd reset#1
+[G0C] autodrive start run=1 mode=Forward frame=748
+[G0C] A3 response frames=1
+[G0C] autodrive stop run=1 mode=Forward reason=time
+[G0] cmd reset#2
+[G0C] autodrive start run=2 mode=Oversize frame=972
+[G0C] autodrive stop run=2 mode=Oversize reason=time
+[G0] cmd reset#3
+[G0] cmd tamper#4
+[G0C] C3 tamper sent uid=1272229789
+[G0] C3 bogus claim from uid=1272229789 ignored (args: KO, 1272229789, table: 0xc6abb385df7431bb)
+[G0] cmd reset#5
+[G0C] autodrive start run=6 mode=EdgeFall frame=3367
+[G0] ELIM uid=1272229789 credit=0 y=12.82 maxHSpeed=42.00
+[G0] ELIM root destroyed uid=1272229789 focus=Gate0ArenaFocus
+[G0] cmd report#6
+[G0] report report#6 uid=1272229789 pos=(0.00,3.00,-102.73) hspeed=41.32 rawMove=0, -1 clampedMove=0, -1 hit=0 kick=0 elim=true focus=Gate0ArenaFocus
+[G0] report report#6 server simSteps=3501 resimSteps=0 savedRecords=1 roundConns=1
+[G0C] report report#6 uid=1272229789 rollbacks=3 mispredictions=0 simSteps=3511 resimSteps=12 maxCorrection=69.534 rawFx=0 uniqueFx=0 maxCameraRollY=0.00000 refPosDelta=n/a
+[G0] cmd restore#7
+[G0] C5 restore uid=1272229789 hadRecord=true mismatches=0 focusNil=true savedRecords=0 roundConns=0
+[G0C] unbind reason=restore roundConns=0
+[G0C] C5 client restore cameraType=Custom subjectIsHumanoid=true roundConns=0
+[G0] cmd respawn#8
+[G0C] autodrive stop run=6 mode=EdgeFall reason=time
+[G0] cmd restore#9

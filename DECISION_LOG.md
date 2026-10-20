@@ -151,8 +151,14 @@ D-001 through D-018 are unchanged. The entries below fill specification gaps fou
 - **Tests required:** Gate 0 C5 (miniature); TASK-04 and TASK-07 full matrix tests for elimination, disconnect, match end and three consecutive rounds.
 - **Status:** APPROVED
 
-### D-024: Gate 0 physics-architecture selection (RESERVED)
-- Reserved. Written at Gate 0 close-out with the selected path (A or B) and links to evidence in `docs/GATE_0_REPORT.md`.
+### D-024: Gate 0 physics-architecture selection — Path A (APPROVED / LOCKED)
+- **Date:** 2026-10-20
+- **Requested by:** Lead agent at Gate 0 close-out (session S-20261020-06)
+- **Approved by:** Gate 0 decision rule D-011/D-018 (Path A available and passed its criteria); owner informed in session
+- **Decision:** Path A, Roblox Server Authority with client prediction and rollback, is the physics architecture for Sphere Brawl. Path B is not used. `Workspace.AuthorityMode = Server` must be saved in the place (FAIL-006 lesson). D-025 and D-026 API rules apply.
+- **Evidence:** `docs/GATE_0_REPORT.md` §10. A1 T-G0-042; A2 T-G0-019 and T-G0-044a; A3 1 frame at 0 and 150 ms (T-G0-044g, T-G0-046); A4 at most 0.037 stud settled at 150 ms (T-G0-046); A5 rollbacks observed with exact effect deduplication at 150 ms (T-G0-046); A6 and C1–C5 (T-G0-020 to T-G0-023, T-G0-044, T-G0-045, T-G0-046).
+- **Not covered by Gate 0:** the 4-client smoke test (deferred to TASK-10 per the task card); ability, queue, timer and result authority (TASK-06/07/10); owner question Q-1 on knockback feel.
+- **Status:** APPROVED / LOCKED
 
 ### D-025: Path A API usage rules (APPROVED; correction to §9.2 wording, no gameplay change)
 - **Date:** 2026-10-20
@@ -167,3 +173,17 @@ D-001 through D-018 are unchanged. The entries below fill specification gaps fou
 - **Migration/backward compatibility:** None (no code exists yet).
 - **Tests required:** Gate 0 A2 (prediction status), A5 (rollback with FX deduplication) and C3 (input magnitude clamp); verification that the Scriptable bridge reaches the server simulation and of which side must create the binding.
 - **Status:** APPROVED
+
+### D-026: Gate 0 findings — streaming focus, D-025 wording, presentation polling (APPROVED)
+- **Date:** 2026-10-20
+- **Requested by:** Lead agent (session S-20261020-05), based on Gate 0 spike evidence and architect research RA-01
+- **Approved by:** Project owner ("Approve all", 2026-10-20, session S-20261020-06)
+- **Proposal:**
+  1. **Amend D-023:** after parking the avatar, the server calls `player:AddReplicationFocus(<avatar HumanoidRootPart>)` in addition to `ReplicationFocus = SphereRoot`, and calls `RemoveReplicationFocus` for it at restore, cleanup and disconnect. The cleanup invariant also requires that no extra replication focus remains. Evidence: FAIL-009, T-G0-037.
+  2. **Correct the rationale of D-025 item 2:** "the server has no camera" is outdated. Under Server Authority, `Player:GetCameraState()` exposes the client camera CFrame replicated in the input stream (Simulation Access; present in the pinned definitions). The world-space Scriptable input bridge stays as decided: it is simpler, deterministic and verified (T-G0-020, T-G0-021). Whether to use `GetCameraState` instead is left to TASK-04 design.
+  3. **Clarify D-025 item 3:** client presentation of server-authoritative outcomes must poll state in `PreRender`/`RenderStepped` and present each sequence ID at most once. It must not rely on attribute or property change signals of predicted instances, which did not fire in Studio 0.743 (FAIL-008, T-G0-027/T-G0-028).
+- **Rationale:** keeps the owner's avatar and its scripts streamed during matches, fixes an inaccurate stated reason without changing a decision, and records an engine behavior that would otherwise break effects.
+- **Alternatives considered:** `ModelStreamingMode = PersistentPerPlayer` on the character (undocumented for engine-spawned characters at runtime); `ReplicationFocus = nil` plus `AddReplicationFocus(root)` (equivalent load; less aligned with D-023 wording).
+- **Files/contracts affected if approved:** Master Plan §5.4 and §9.2 notes; `specs/DESIGN_CONSTANTS.md`; Tasks 04, 07; future `PlayerLifecycle`, `CleanupService`, client visualizers.
+- **Tests required if approved:** extra focus present during play and removed after restore in 4- and 6-client sessions; server streaming load reviewed in TASK-10; presentation deduplication under 150 ms latency (A5).
+- **Status:** APPROVED (all three parts)

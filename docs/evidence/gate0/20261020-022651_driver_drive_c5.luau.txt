@@ -1,0 +1,43 @@
+local RS = game:GetService("RunService")
+local Players = game:GetService("Players")
+local spheres = workspace:WaitForChild("Gate0Spheres")
+local out = {}
+local player = Players:GetPlayers()[1]
+local function avatarState(tag: string)
+	local c = player.Character
+	local hrp = c and c:FindFirstChild("HumanoidRootPart") :: BasePart?
+	local hum = c and c:FindFirstChildOfClass("Humanoid")
+	local head = c and c:FindFirstChild("Head") :: BasePart?
+	table.insert(out, string.format("%s hrpAnchored=%s headTransparency=%s walkSpeed=%s pos=%s focus=%s roots=%d",
+		tag, tostring(hrp and hrp.Anchored), tostring(head and head.Transparency), tostring(hum and hum.WalkSpeed),
+		hrp and tostring(hrp.Position) or "n/a", tostring(player.ReplicationFocus), #spheres:GetChildren()))
+end
+avatarState("before")
+workspace:SetAttribute("Gate0Cmd", "reset#5")
+task.wait(1.5)
+local root = spheres:GetChildren()[1] :: BasePart
+workspace:SetAttribute("Gate0AutoDriveMode", "EdgeFall")
+workspace:SetAttribute("Gate0AutoDrive", 6)
+local lastY, maxUp, t0, elimSeenAt = root.Position.Y, 0, os.clock(), -1
+while os.clock() - t0 < 3.5 and root.Parent do
+	local y = root.Position.Y
+	maxUp = math.max(maxUp, y - lastY)
+	lastY = y
+	if elimSeenAt < 0 and root:GetAttribute("Eliminated") == true then elimSeenAt = os.clock() - t0 end
+	RS.Heartbeat:Wait()
+end
+table.insert(out, string.format("C1 EdgeFall lastY=%.2f maxUpwardStepPerFrame=%.3f eliminatedAt=%.2fs KOCredit=%s rootStillParented=%s",
+	lastY, maxUp, elimSeenAt, tostring(root:GetAttribute("KOCredit")), tostring(root.Parent ~= nil)))
+avatarState("afterElim")
+workspace:SetAttribute("Gate0Cmd", "report#6")
+task.wait(1)
+workspace:SetAttribute("Gate0Cmd", "restore#7")
+task.wait(2)
+avatarState("afterRestore1")
+workspace:SetAttribute("Gate0Cmd", "respawn#8")
+task.wait(3)
+avatarState("afterRespawn")
+workspace:SetAttribute("Gate0Cmd", "restore#9")
+task.wait(2)
+avatarState("afterRestore2")
+return table.concat(out, "\n")

@@ -1,0 +1,25 @@
+INIT: {"name": "RobloxStudio", "version": "1.0.0"}
+=== [0] inspect_instance
+(isError)
+Missing required argument: path
+=== [1] execute_luau
+workspace.AuthorityMode                      ERR The current thread cannot read 'AuthorityMode' (lacking capability RobloxScript)
+workspace.NextGenerationReplication          ERR NextGenerationReplication is not a valid member of Workspace "Workspace"
+workspace.PlayerScriptsUseInputActionSystem  ERR The current thread cannot read 'PlayerScriptsUseInputActionSystem' (lacking capability RobloxScript)
+workspace.SignalBehavior                     ERR SignalBehavior is not a valid member of Workspace "Workspace"
+workspace.UseFixedSimulation                 ERR UseFixedSimulation is not a valid member of Workspace "Workspace"
+workspace.StreamingEnabled                   OK  true
+Enum.AuthorityMode items                     OK  Server,Automatic
+Enum.PredictionMode items                    OK  Automatic,On,Off
+Enum.PredictionStatus items                  OK  Authoritative,Predicted,None
+Enum.InputBindingType items                  OK  Automatic,Scriptable
+Enum.InputActionType items                   OK  Bool,Direction1D,Direction2D,Direction3D,ViewportPosition
+Enum.StepFrequency items                     OK  Hz60,Hz30,Hz15,Hz10,Hz5,Hz1
+RunService.BindToSimulation                  OK  function
+RunService.SetPredictionMode                 OK  function
+RunService.GetPredictionStatus               OK  function
+RunService.IsResimulating                    OK  function
+RunService.Rollback event                    OK  RBXScriptSignal
+RunService.Misprediction event               OK  RBXScriptSignal
+InputContext/InputAction/InputBinding new    OK  ctx=InputContext action.Type=Enum.InputActionType.Direction2D binding.Type=Enum.InputBindingType.Scriptable Fire=function GetState=function
+set AuthorityMode by script (expected to fail) ERR The current thread cannot write 'AuthorityMode' (lacking capability RobloxScript)

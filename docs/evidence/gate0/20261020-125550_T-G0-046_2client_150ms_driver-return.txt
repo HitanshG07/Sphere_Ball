@@ -1,0 +1,24 @@
+driver start runBase=100 players=2 roots=2 incomingReplicationLag=0.15
+root uid=-1 slot=1 pos=0, 53.9967041015625, -36 status=Authoritative
+root uid=-2 slot=2 pos=36, 53.9967041015625, -24 status=Authoritative
+C2 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+C2 ENGINE after 1 Heartbeats (along n, change vs applied): victim=22.00 attacker=-22.01 closingAfterApply=44.00 closingNow=-0.00 separation=5.95
+after-hit A4 sample +1s (informational, latency skew expected) serverMaxHSpeed=2.78
+after-hit A4 sample settled (after 1.4 s) serverMaxHSpeed=0.20
+after-hit A4 sample settled+1s serverMaxHSpeed=0.03
+after-kick A4 sample +1s (informational, latency skew expected) serverMaxHSpeed=3.22
+after-kick A4 sample settled (after 1.5 s) serverMaxHSpeed=0.21
+after-kick A4 sample settled+1s serverMaxHSpeed=0.03
+C3 tamper serverMaxVy=0.00 (expect about 0)
+A5-headon-1 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+A5-headon-1 ENGINE after 10 Heartbeats (along n, change vs applied): victim=22.00 attacker=-22.00 closingAfterApply=44.00 closingNow=0.01 separation=5.95
+A5-headon-2 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+A5-headon-2 ENGINE after 1 Heartbeats (along n, change vs applied): victim=22.00 attacker=-22.00 closingAfterApply=44.00 closingNow=-0.01 separation=5.94
+A5-headon-3 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+A5-headon-3 ENGINE after 1 Heartbeats (along n, change vs applied): victim=22.00 attacker=-22.00 closingAfterApply=44.00 closingNow=-0.00 separation=5.94
+A5-headon-4 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+A5-headon-4 ENGINE after 10 Heartbeats (along n, change vs applied): victim=21.99 attacker=-22.00 closingAfterApply=44.00 closingNow=0.01 separation=5.95
+A5-headon-5 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+A5-headon-5 ENGINE after 10 Heartbeats (along n, change vs applied): victim=22.00 attacker=-22.00 closingAfterApply=44.00 closingNow=0.01 separation=5.95
+A5 server deltas: kickEvents=10 hitEvents=5 headOnRunsWithHit=5/5 expectedUniqueFxDeltaPerClient=15 (compare with each client's uniqueFx change between the A5 baseline and final reports)
+driver done. Next: close ONE client window to exercise disconnect cleanup (C5), then copy the Server Output.

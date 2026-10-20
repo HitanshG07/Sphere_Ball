@@ -1,0 +1,181 @@
+INIT: {"name": "RobloxStudio", "version": "1.0.0"}
+=== [0] get_console_output
+[G0] server ready authority-probe: see SetNetworkOwner lines; studio=true
+ContentId: rbxassetid://203785492 failed due to: Asset type does not match requested type
+[G0] SetNetworkOwner(player) probe uid=-1 ok=false err=Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.
+[G0] spawn uid=-1 slot=1 pos=0, 54.150001525878906, -36 conns=1
+[G0] SetNetworkOwner(player) probe uid=-2 ok=false err=Can not call Network Ownership API when workspace.AuthorityMode = Enums.AuthorityMode.Server.
+[G0] spawn uid=-2 slot=2 pos=36, 54.150001525878906, -24 conns=2
+[G0C<--1] Misprediction connectable=false err=The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)
+[G0C<--1] client ready uid=-1 studio=true
+[G0C<--1] unbind reason=rebind roundConns=0
+[G0C<--1] A2 uid=-1 own=-1 status=Predicted after=0.00s
+[G0C<--2] Misprediction connectable=false err=The current thread cannot connect 'Misprediction' (lacking capability PluginOrOpenCloud)
+[G0C<--2] unbind reason=rebind roundConns=0
+[G0C<--2] A2 uid=-2 own=-2 status=Predicted after=0.00s
+[G0C<--2] client ready uid=-2 studio=true
+[G0] park uid=-1 slot=1 pod=2000, 200, 2000 extraFocus=HRP
+[G0] park uid=-2 slot=2 pod=2020, 200, 2000 extraFocus=HRP
+[G0D] driver start runBase=100 players=2 roots=2 incomingReplicationLag=0
+[G0D] root uid=-1 slot=1 pos=0, 53.9967041015625, -36 status=Authoritative
+[G0D] root uid=-2 slot=2 pos=36, 53.9967041015625, -24 status=Authoritative
+[G0] cmd reset#101
+[G0C<--1] autodrive start run=102 mode=HeadOn frame=3833
+[G0C<--2] autodrive start run=102 mode=HeadOn frame=4164
+[G0C<--1] A3 response frames=1
+[G0C<--2] A3 response frames=1
+[G0D] C2 HIT victim=-2 attacker=-1 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+[G0] hit victim=-2 seq=1 by=-1 closing=84.00 deltaV=32.00 expected=32.00
+[G0C<--1] autodrive stop run=102 mode=HeadOn reason=hit
+[G0C<--2] autodrive stop run=102 mode=HeadOn reason=hit
+[G0D] C2 ENGINE after 10 Heartbeats (along n, change vs applied): victim=20.14 attacker=-23.85 closingAfterApply=44.00 closingNow=0.00 separation=5.95
+[G0D] after-hit A4 sample +1s (informational, latency skew expected) serverMaxHSpeed=1.58
+[G0] cmd report#103
+[G0] report report#103 uid=-1 pos=(22.22,54.00,-28.60) hspeed=1.58 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=0 elim=false focus=-1
+[G0] report report#103 uid=-2 pos=(27.87,54.00,-26.71) hspeed=1.58 rawMove=0, 0 clampedMove=0, 0 hit=1 kick=0 elim=false focus=-2
+[G0] report report#103 server simSteps=13140 resimSteps=0 savedRecords=2 roundConns=2
+[G0C<--2] A4 refSeq=1 refPosDelta=0.098 ownHSpeed=1.40 ping=0.005 status=Predicted
+[G0C<--2] report report#103 uid=-2 rollbacks=15 mispredictions=0 simSteps=12575 resimSteps=45 maxCorrectionSinceLastReport=2.516 rawFx=1 uniqueFx=1 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-2:Predicted, -1:Predicted]
+[G0C<--1] A4 refSeq=1 refPosDelta=0.098 ownHSpeed=1.40 ping=0.002 status=Predicted
+[G0C<--1] report report#103 uid=-1 rollbacks=16 mispredictions=0 simSteps=12585 resimSteps=51 maxCorrectionSinceLastReport=1.218 rawFx=1 uniqueFx=1 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-1:Predicted, -2:Predicted]
+[G0D] after-hit A4 sample settled (after 1.1 s) serverMaxHSpeed=0.20
+[G0] cmd report#104
+[G0] report report#104 uid=-1 pos=(22.93,54.00,-28.37) hspeed=0.20 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=0 elim=false focus=-1
+[G0] report report#104 uid=-2 pos=(28.58,54.00,-26.48) hspeed=0.20 rawMove=0, 0 clampedMove=0, 0 hit=1 kick=0 elim=false focus=-2
+[G0] report report#104 server simSteps=13208 resimSteps=0 savedRecords=2 roundConns=2
+[G0C<--2] A4 refSeq=2 refPosDelta=0.009 ownHSpeed=0.18 ping=0.004 status=Predicted
+[G0C<--2] report report#104 uid=-2 rollbacks=15 mispredictions=0 simSteps=12642 resimSteps=45 maxCorrectionSinceLastReport=0.006 rawFx=1 uniqueFx=1 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-2:Predicted, -1:Predicted]
+[G0C<--1] report report#104 uid=-1 rollbacks=16 mispredictions=0 simSteps=12652 resimSteps=51 maxCorrectionSinceLastReport=0.007 rawFx=1 uniqueFx=1 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-1:Predicted, -2:Predicted]
+[G0C<--1] A4 refSeq=2 refPosDelta=0.009 ownHSpeed=0.18 ping=0.001 status=Predicted
+[G0D] after-hit A4 sample settled+1s serverMaxHSpeed=0.03
+[G0] cmd report#105
+[G0] report report#105 uid=-1 pos=(23.02,54.00,-28.34) hspeed=0.03 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=0 elim=false focus=-1
+[G0] report report#105 uid=-2 pos=(28.66,54.00,-26.45) hspeed=0.03 rawMove=0, 0 clampedMove=0, 0 hit=1 kick=0 elim=false focus=-2
+[G0] report report#105 server simSteps=13269 resimSteps=0 savedRecords=2 roundConns=2
+[G0C<--2] A4 refSeq=3 refPosDelta=0.002 ownHSpeed=0.03 ping=0.003 status=Predicted
+[G0C<--2] report report#105 uid=-2 rollbacks=15 mispredictions=0 simSteps=12704 resimSteps=45 maxCorrectionSinceLastReport=0.002 rawFx=1 uniqueFx=1 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-2:Predicted, -1:Predicted]
+[G0C<--1] report report#105 uid=-1 rollbacks=16 mispredictions=0 simSteps=12715 resimSteps=51 maxCorrectionSinceLastReport=0.003 rawFx=1 uniqueFx=1 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-1:Predicted, -2:Predicted]
+[G0C<--1] A4 refSeq=3 refPosDelta=0.002 ownHSpeed=0.03 ping=0.002 status=Predicted
+[G0] cmd reset#106
+[G0] kick uid=-1 seq=1 hspeed=20.00
+[G0] kick uid=-2 seq=1 hspeed=20.00
+[G0C<--2] autodrive start run=107 mode=Hold frame=4270
+[G0C<--1] autodrive start run=107 mode=Hold frame=3940
+[G0D] after-kick A4 sample +1s (informational, latency skew expected) serverMaxHSpeed=3.32
+[G0] cmd report#109
+[G0] report report#109 uid=-1 pos=(-9.32,54.00,-36.00) hspeed=3.32 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=1 elim=false focus=-1
+[G0] report report#109 uid=-2 pos=(26.68,54.00,-24.00) hspeed=3.32 rawMove=0, 0 clampedMove=0, 0 hit=1 kick=1 elim=false focus=-2
+[G0] report report#109 server simSteps=13510 resimSteps=0 savedRecords=2 roundConns=2
+[G0C<--2] A4 refSeq=4 refPosDelta=0.156 ownHSpeed=3.03 ping=0.007 status=Predicted
+[G0C<--2] report report#109 uid=-2 rollbacks=18 mispredictions=0 simSteps=12953 resimSteps=54 maxCorrectionSinceLastReport=1.855 rawFx=3 uniqueFx=3 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-2:Predicted, -1:Predicted]
+[G0C<--1] A4 refSeq=4 refPosDelta=0.156 ownHSpeed=3.03 ping=0.002 status=Predicted
+[G0C<--1] report report#109 uid=-1 rollbacks=19 mispredictions=0 simSteps=12963 resimSteps=60 maxCorrectionSinceLastReport=2.403 rawFx=3 uniqueFx=3 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-1:Predicted, -2:Predicted]
+[G0D] after-kick A4 sample settled (after 1.5 s) serverMaxHSpeed=0.21
+[G0] cmd report#110
+[G0] report report#110 uid=-1 pos=(-11.00,54.00,-36.00) hspeed=0.21 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=1 elim=false focus=-1
+[G0] report report#110 uid=-2 pos=(25.00,54.00,-24.00) hspeed=0.21 rawMove=0, 0 clampedMove=0, 0 hit=1 kick=1 elim=false focus=-2
+[G0] report report#110 server simSteps=13601 resimSteps=0 savedRecords=2 roundConns=2
+[G0C<--2] A4 refSeq=5 refPosDelta=0.010 ownHSpeed=0.19 ping=0.005 status=Predicted
+[G0C<--2] report report#110 uid=-2 rollbacks=18 mispredictions=0 simSteps=13044 resimSteps=54 maxCorrectionSinceLastReport=0.019 rawFx=3 uniqueFx=3 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-2:Predicted, -1:Predicted]
+[G0C<--1] report report#110 uid=-1 rollbacks=19 mispredictions=0 simSteps=13055 resimSteps=60 maxCorrectionSinceLastReport=0.021 rawFx=3 uniqueFx=3 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-1:Predicted, -2:Predicted]
+[G0C<--1] A4 refSeq=5 refPosDelta=0.013 ownHSpeed=0.18 ping=0.001 status=Predicted
+[G0D] after-kick A4 sample settled+1s serverMaxHSpeed=0.03
+[G0] cmd report#111
+[G0] report report#111 uid=-1 pos=(-11.10,54.00,-36.00) hspeed=0.03 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=1 elim=false focus=-1
+[G0] report report#111 uid=-2 pos=(24.90,54.00,-24.00) hspeed=0.03 rawMove=0, 0 clampedMove=0, 0 hit=1 kick=1 elim=false focus=-2
+[G0] report report#111 server simSteps=13662 resimSteps=0 savedRecords=2 roundConns=2
+[G0C<--2] A4 refSeq=6 refPosDelta=0.001 ownHSpeed=0.03 ping=0.008 status=Predicted
+[G0C<--2] report report#111 uid=-2 rollbacks=18 mispredictions=0 simSteps=13105 resimSteps=54 maxCorrectionSinceLastReport=0.001 rawFx=3 uniqueFx=3 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-2:Predicted, -1:Predicted]
+[G0C<--1] report report#111 uid=-1 rollbacks=19 mispredictions=0 simSteps=13116 resimSteps=60 maxCorrectionSinceLastReport=0.002 rawFx=3 uniqueFx=3 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-1:Predicted, -2:Predicted]
+[G0C<--1] A4 refSeq=6 refPosDelta=0.002 ownHSpeed=0.03 ping=0.002 status=Predicted
+[G0] cmd reset#112
+[G0] cmd tamper#113
+[G0] C3 bogus claim from uid=-2 ignored (args: KO, -2, table: 0xc2aece5fcc2c14b7)
+[G0] C3 bogus claim from uid=-2 ignored (args: KO, -1, table: 0x66d4370a75ded504)
+[G0C<--2] C3 tamper sent uid=-2
+[G0] C3 bogus claim from uid=-1 ignored (args: KO, -1, table: 0xcbd3460ed2560fc4)
+[G0] C3 bogus claim from uid=-1 ignored (args: KO, -2, table: 0xe524f77cd09cba2c)
+[G0C<--1] C3 tamper sent uid=-1
+[G0D] C3 tamper serverMaxVy=0.00 (expect about 0)
+[G0] cmd reset#114
+[G0] cmd report#115
+[G0] report report#115 uid=-1 pos=(0.00,54.00,-36.00) hspeed=0.00 rawMove=0, 0 clampedMove=0, 0 hit=0 kick=1 elim=false focus=-1
+[G0] report report#115 uid=-2 pos=(36.00,54.00,-24.00) hspeed=0.00 rawMove=0, 0 clampedMove=0, 0 hit=1 kick=1 elim=false focus=-2
+[G0] report report#115 server simSteps=14055 resimSteps=0 savedRecords=2 roundConns=2
+[G0C<--2] A4 refSeq=7 refPosDelta=0.000 ownHSpeed=0.00 ping=0.006 status=Predicted
+[G0C<--2] report report#115 uid=-2 rollbacks=20 mispredictions=0 simSteps=13505 resimSteps=61 maxCorrectionSinceLastReport=4.877 rawFx=3 uniqueFx=3 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-2:Predicted, -1:Predicted]
+[G0C<--1] A4 refSeq=7 refPosDelta=0.000 ownHSpeed=0.00 ping=0.002 status=Predicted
+[G0C<--1] report report#115 uid=-1 rollbacks=21 mispredictions=0 simSteps=13514 resimSteps=66 maxCorrectionSinceLastReport=7.234 rawFx=3 uniqueFx=3 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-1:Predicted, -2:Predicted]
+[G0] kick uid=-1 seq=2 hspeed=20.00
+[G0] kick uid=-2 seq=2 hspeed=20.00
+[G0C<--2] autodrive start run=116 mode=Hold frame=4436
+[G0C<--1] autodrive start run=116 mode=Hold frame=4106
+[G0] kick uid=-1 seq=3 hspeed=19.50
+[G0] kick uid=-2 seq=3 hspeed=19.50
+[G0] kick uid=-1 seq=4 hspeed=19.51
+[G0] kick uid=-2 seq=4 hspeed=19.51
+[G0] kick uid=-1 seq=5 hspeed=19.51
+[G0] kick uid=-2 seq=5 hspeed=19.51
+[G0] kick uid=-1 seq=6 hspeed=19.51
+[G0] kick uid=-2 seq=6 hspeed=19.51
+[G0] cmd reset#122
+[G0C<--2] autodrive stop run=116 mode=Hold reason=time
+[G0C<--1] autodrive start run=123 mode=HeadOn frame=4287
+[G0C<--2] autodrive start run=123 mode=HeadOn frame=4618
+[G0C<--1] A3 response frames=1
+[G0C<--2] A3 response frames=1
+[G0D] A5-headon-1 HIT victim=-2 attacker=-1 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+[G0] hit victim=-2 seq=2 by=-1 closing=84.00 deltaV=32.00 expected=32.00
+[G0C<--1] autodrive stop run=123 mode=HeadOn reason=hit
+[G0C<--2] autodrive stop run=123 mode=HeadOn reason=hit
+[G0D] A5-headon-1 ENGINE after 10 Heartbeats (along n, change vs applied): victim=19.35 attacker=-24.64 closingAfterApply=44.00 closingNow=0.01 separation=5.95
+[G0] cmd reset#124
+[G0C<--1] autodrive start run=125 mode=HeadOn frame=4346
+[G0C<--2] autodrive start run=125 mode=HeadOn frame=4677
+[G0C<--1] A3 response frames=1
+[G0C<--2] A3 response frames=1
+[G0D] A5-headon-2 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+[G0] hit victim=-1 seq=1 by=-2 closing=84.00 deltaV=32.00 expected=32.00
+[G0C<--1] autodrive stop run=125 mode=HeadOn reason=hit
+[G0C<--2] autodrive stop run=125 mode=HeadOn reason=hit
+[G0D] A5-headon-2 ENGINE after 8 Heartbeats (along n, change vs applied): victim=22.66 attacker=-21.34 closingAfterApply=44.00 closingNow=-0.00 separation=5.95
+[G0] cmd reset#126
+[G0C<--2] autodrive start run=127 mode=HeadOn frame=4735
+[G0C<--1] autodrive start run=127 mode=HeadOn frame=4405
+[G0C<--2] A3 response frames=1
+[G0C<--1] A3 response frames=1
+[G0D] A5-headon-3 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+[G0] hit victim=-1 seq=2 by=-2 closing=84.00 deltaV=32.00 expected=32.00
+[G0D] A5-headon-3 ENGINE after 1 Heartbeats (along n, change vs applied): victim=22.00 attacker=-22.00 closingAfterApply=44.00 closingNow=-0.00 separation=5.95
+[G0C<--2] autodrive stop run=127 mode=HeadOn reason=hit
+[G0C<--1] autodrive stop run=127 mode=HeadOn reason=hit
+[G0] cmd reset#128
+[G0C<--1] autodrive start run=129 mode=HeadOn frame=4461
+[G0C<--2] autodrive start run=129 mode=HeadOn frame=4792
+[G0C<--1] A3 response frames=1
+[G0C<--2] A3 response frames=1
+[G0D] A5-headon-4 HIT victim=-2 attacker=-1 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+[G0] hit victim=-2 seq=3 by=-1 closing=84.00 deltaV=32.00 expected=32.00
+[G0D] A5-headon-4 ENGINE after 1 Heartbeats (along n, change vs applied): victim=22.00 attacker=-22.00 closingAfterApply=44.00 closingNow=-0.00 separation=5.95
+[G0C<--1] autodrive stop run=129 mode=HeadOn reason=hit
+[G0C<--2] autodrive stop run=129 mode=HeadOn reason=hit
+[G0] cmd reset#130
+[G0C<--1] autodrive start run=131 mode=HeadOn frame=4518
+[G0C<--2] autodrive start run=131 mode=HeadOn frame=4849
+[G0C<--1] A3 response frames=1
+[G0C<--2] A3 response frames=1
+[G0D] A5-headon-5 HIT victim=-1 attacker=-2 closing=84.00 expectedDv=32.00 appliedVictimDv=32.00 appliedAttackerDv=-8.00 expectedRecoil=-8.00 capped=false
+[G0] hit victim=-1 seq=3 by=-2 closing=84.00 deltaV=32.00 expected=32.00
+[G0D] A5-headon-5 ENGINE after 1 Heartbeats (along n, change vs applied): victim=22.01 attacker=-22.00 closingAfterApply=44.00 closingNow=-0.00 separation=5.95
+[G0C<--1] autodrive stop run=131 mode=HeadOn reason=hit
+[G0C<--2] autodrive stop run=131 mode=HeadOn reason=hit
+[G0D] A5 server deltas: kickEvents=10 hitEvents=5 headOnRunsWithHit=5/5 expectedUniqueFxDeltaPerClient=15 (compare with each client's uniqueFx change between the A5 baseline and final reports)
+[G0] cmd report#132
+[G0] report report#132 uid=-1 pos=(7.83,54.00,-33.40) hspeed=0.39 rawMove=0, 0 clampedMove=0, 0 hit=3 kick=6 elim=false focus=-1
+[G0] report report#132 uid=-2 pos=(13.48,54.00,-31.50) hspeed=0.39 rawMove=0, 0 clampedMove=0, 0 hit=3 kick=6 elim=false focus=-2
+[G0] report report#132 server simSteps=15931 resimSteps=0 savedRecords=2 roundConns=2
+[G0C<--2] A4 refSeq=8 refPosDelta=0.019 ownHSpeed=0.36 ping=0.002 status=Predicted
+[G0C<--2] report report#132 uid=-2 rollbacks=104 mispredictions=0 simSteps=15640 resimSteps=320 maxCorrectionSinceLastReport=2.667 rawFx=18 uniqueFx=18 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-2:Predicted, -1:Predicted]
+[G0C<--1] A4 refSeq=8 refPosDelta=0.019 ownHSpeed=0.36 ping=0.002 status=Predicted
+[G0C<--1] report report#132 uid=-1 rollbacks=107 mispredictions=0 simSteps=15651 resimSteps=327 maxCorrectionSinceLastReport=2.666 rawFx=18 uniqueFx=18 signalFx=0 regressions=0 maxCameraRollY=0.00000 predictionStatus=[-1:Predicted, -2:Predicted]
+[G0D] driver done. Next: close ONE client window to exercise disconnect cleanup (C5), then copy the Server Output.

@@ -1,0 +1,6 @@
+class#81 AuthorityMode                        enum value 0
+class#81 NextGenerationReplication            enum value 2
+class#81 PlayerScriptsUseInputActionSystem    enum value 2
+class#81 SignalBehavior2                      enum value 2
+class#81 StreamingEnabled                     bool True
+class#81 UseFixedSimulation                   enum value 2

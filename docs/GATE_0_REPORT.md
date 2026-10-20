@@ -108,3 +108,71 @@ Sections 1–6 above are unchanged; this section records what happened after the
 **Prototype:** branch `gate0-spike` created from `alpha` at `fc109f8`. A draft `src/shared/Gate0Sim.luau` was written but not analyzed or committed; it was stashed (`stash@{0}`) when governance setup work began.
 
 **Runtime criteria C1–C5 and A2–A6:** still NOT RUN.
+
+## 8. Criteria status after solo testing (appended 2026-10-20, sessions S-20261020-04 and S-20261020-05)
+
+**Path decision:** Path A remains the path under test. Its APIs exist, and Server Authority is demonstrably active in the live session (T-G0-018). Path B conditions are not met.
+
+**Gate 0 status:** **NOT PASSED.** Two-client and 150 ms criteria are outstanding.
+
+| Criterion | Status | Evidence (TEST_RESULTS IDs) |
+|---|---|---|
+| A1 configuration | PARTIAL: live session runs Server Authority (PASS, T-G0-018); Properties panel shows `AuthorityMode = Server` but the dependent settings are not yet captured (T-G0-006 INCONCLUSIVE); saved `Gate0.rbxl` still `Automatic` (T-G0-007 FAIL, FAIL-006) | owner save and screenshot needed |
+| A2 prediction status | PASS in solo (T-G0-019); re-check every root in the 2-client session | |
+| A3 responsiveness | PASS at 0 ms (1 frame, T-G0-026); 150 ms NOT RUN | |
+| A4 authoritative correction | NOT RUN (2 clients); solo preliminary 0.039 stud (T-G0-029) | |
+| A5 rollback reproducibility | NOT RUN at 150 ms; mechanism verified in solo at 0 ms after FAIL-008 fix (T-G0-028) | |
+| A6 server-only outcomes | partial: solo tamper and input clamp PASS (T-G0-021, T-G0-022); independent code review RV-01 pending or recorded in the work log | |
+| C1 movement, fall, elimination | PASS in solo (T-G0-020, T-G0-023) | |
+| C2 two-client server-only hit | NOT RUN | |
+| C3 security | PASS in solo (T-G0-021, T-G0-022); two-client part NOT RUN | |
+| C4 camera | PASS in solo (T-G0-025) | |
+| C5 restore matrix | PASS for elimination, restore and re-entry in solo (T-G0-024, T-G0-037); disconnect NOT RUN | |
+
+**Engine findings during solo testing** (details in `FAILURES_AND_FIXES.md`):
+- `RunService.Misprediction` is plugin/Open Cloud only (FAIL-007).
+- Change signals do not fire for server-written attributes on predicted roots (FAIL-008); presentation must poll.
+- The parked avatar streams out on its owner's client unless an extra replication focus is added (FAIL-009); proposed as D-026.
+
+**Prepared for the owner session:**
+- `tests/gate0/G0_two_client_driver.luau` (C2, C3, A4 and the A5 stimulus in one run).
+- Client logs forwarded into the Server Output.
+- Step-by-step instructions in `PROJECT_STATUS.md`, "Owner actions".
+
+## 9. Independent review (appended 2026-10-20, session S-20261020-05)
+- **RV-01:** read-only review by a `sphere-reviewer` role agent (Opus 5.5). No server-authority or rollback-safety defects. Confirmed C2-validity defect B2 (FAIL-010); B1 disputed by Studio evidence (T-G0-038). Medium and low items fixed in `0c02823`; solo regression T-G0-039 PASS.
+- **RV-02 re-review:** requested; result recorded in the work log.
+- **Owner question Q-1:** §8.5 alone separates colliding spheres only for closing speeds of about 32.9–40 studs/s; above that, engine contact also shapes the result. The 2-client driver now logs the applied §8.5 change and the engine contribution separately (see `PROJECT_STATUS.md`).
+- **Gate 0 status:** unchanged, **NOT PASSED** (two-client and 150 ms criteria outstanding).
+
+## 10. Gate 0 verdict (appended 2026-10-20, session S-20261020-06)
+
+**Result: PASS. Selected architecture: Path A, Roblox Server Authority (D-024).**
+
+| Criterion | Status | Evidence |
+|---|---|---|
+| A1 configuration | PASS | T-G0-042 (six Properties-panel screenshots; saved place decoded: AuthorityMode Server, dependent settings on) |
+| A2 prediction status | PASS | T-G0-019, T-G0-044a, T-G0-046a (client Predicted after client-side SetPredictionMode; server Authoritative) |
+| A3 responsiveness | PASS | 1 frame at 0 ms and at 150 ms (T-G0-044g, T-G0-046e) |
+| A4 authoritative correction | PASS | ≤ 0.013 stud at 0 ms, ≤ 0.037 stud at 150 ms, settled (T-G0-044e, T-G0-046f) |
+| A5 rollback reproducibility | PASS | 150 ms: about 90 rollbacks per client during the stimulus; unique FX 15 = server events 15, no duplicates (T-G0-046g) |
+| A6 server-only outcomes | PASS | hits, knockback, kicks and KO only from the server branch; tamper and fake KO ignored at 0 and 150 ms (T-G0-044b/d, T-G0-046b/d); reviews RV-01 and RV-02 |
+| C1 movement, fall, elimination | PASS | T-G0-020, T-G0-021, T-G0-023, T-G0-043 |
+| C2 two-client server-only hit | PASS | §8.5 applied exactly (T-G0-044b, T-G0-046b) |
+| C3 security | PASS | T-G0-021, T-G0-022, T-G0-044d, T-G0-046d |
+| C4 camera | PASS | T-G0-046h (rendered camera, two clients); the earlier solo result T-G0-025 was invalidated (FAIL-011) |
+| C5 restore matrix | PASS | server parts T-G0-024/T-G0-043; client elimination T-G0-045; disconnect T-G0-044i and T-G0-046i (server kick) |
+
+**Not covered (by design or deferred):**
+- 4-client smoke test: TASK-10 (T-G0-016).
+- Ability, queue, timer and result authority: TASK-06/07/10.
+- Owner question **Q-1** (engine contact adds about ±22 studs/s after the §8.5 knockback in full-speed head-ons): a design decision for TASK-06, not a Gate 0 criterion.
+
+**Engine findings carried into implementation:**
+- `Misprediction` is plugin-only (FAIL-007).
+- Change signals do not fire on predicted instances; presentation must poll (FAIL-008, D-026).
+- Parked avatars need an extra replication focus (FAIL-009, D-026).
+- The default camera overrides custom cameras unless driven after it (FAIL-011).
+- `AuthorityMode` must be saved in the place (FAIL-006).
+
+**Spike:** the prototype stays on `gate0-spike` (never merged; last prototype commit `554bcdf`). Records and docs move to `alpha` in the docs-only close-out commit.

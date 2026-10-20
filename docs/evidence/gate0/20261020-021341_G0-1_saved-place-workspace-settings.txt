@@ -1,0 +1,9 @@
+# Saved place Workspace settings (decoded from place/Gate0.rbxl, mtime 2026-10-20 01:57:23)
+# decoder: scratchpad rbxlprops.py (binary PROP chunks, ZSTD raw blocks)
+class#75 AuthorityMode                        enum value 1
+class#75 NextGenerationReplication            enum value 0
+class#75 PlayerScriptsUseInputActionSystem    enum value 2
+class#75 SignalBehavior2                      enum value 2
+class#75 StreamingEnabled                     bool True
+class#75 UseFixedSimulation                   enum value 0
+# Enum tables from Studio (execute_luau, Edit): AuthorityMode: Server=0, Automatic=1 | SignalBehavior: Default=0, Immediate=1, Deferred=2, AncestryDeferred=3 | RolloutState: Default=0, Disabled=1, Enabled=2
