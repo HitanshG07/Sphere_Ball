@@ -285,3 +285,8 @@ Append-only chronological history for every AI and human working on the project.
   - D-024 written (the reserved stub replaced as planned).
   - Report §10 and checklist Gate 0 boxes updated: 4-client NOT RUN (deferred); abilities, queue and timer authority PARTIAL (later tasks); Path B N/A.
   - Docs-only close-out commit to `alpha` follows.
+
+## S-20261020-07 — Owner answers after Gate 0
+- Owner chose for Q-1 "Keep it, tune at playtest", recorded as **D-027 (APPROVED)**.
+- Owner confirmed Incoming Replication Lag was reset to 0.
+- Owner approved **TASK-01 planning**: `docs/TASK-01_PLAN.md` written (PROPOSED; no code until approved).

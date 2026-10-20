@@ -187,3 +187,11 @@ D-001 through D-018 are unchanged. The entries below fill specification gaps fou
 - **Files/contracts affected if approved:** Master Plan §5.4 and §9.2 notes; `specs/DESIGN_CONSTANTS.md`; Tasks 04, 07; future `PlayerLifecycle`, `CleanupService`, client visualizers.
 - **Tests required if approved:** extra focus present during play and removed after restore in 4- and 6-client sessions; server streaming load reviewed in TASK-10; presentation deduplication under 150 ms latency (A5).
 - **Status:** APPROVED (all three parts)
+
+### D-027: Q-1 knockback feel — keep engine contact, tune at playtest (APPROVED)
+- **Date:** 2026-10-20
+- **Requested by:** Lead agent (Gate 0 finding FAIL-010 / Q-1)
+- **Approved by:** Project owner ("Keep it, tune at playtest", 2026-10-20)
+- **Decision:** Keep the locked §8.5 knockback and the locked sphere–sphere physical collision (§6.2). Gate 0 measured that in full-speed head-ons (closing about 84 studs/s) §8.5 applies exactly (+32 victim / −8 attacker), and the engine contact then adds about ±22 studs/s until closing reaches 0 (T-G0-044c, T-G0-046c). No change now; judge the feel in TASK-06/TASK-10 playtests, and change constants only through a TUNING decision backed by playtest evidence.
+- **Files/contracts affected:** none now; TASK-06 must log both contributions (as the Gate 0 driver did) in its combat tests.
+- **Status:** APPROVED

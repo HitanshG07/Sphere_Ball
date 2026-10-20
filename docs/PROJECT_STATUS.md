@@ -5,7 +5,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 **Updated:** 2026-10-20, session S-20261020-06 (lead: Claude Code 2.1.303, Opus 5.5)
 **Milestone:** Gate 0 (TASK-00), environment and physics-authority feasibility
 **Overall status:** **Gate 0 PASSED (2026-10-20), Path A selected (D-024).** TASK-01 has not started; it needs a TASK-01 plan approved by the owner first.
-**Waiting on:** owner approval to plan TASK-01, and the owner's Q-1 decision (needed before TASK-06).
+**Waiting on:** owner approval of . Q-1 was decided as D-027 (keep, tune at playtest).
 **Branches:**
 - `main` = `f726ddd` (untouched spec baseline).
 - `alpha` = `cff1063` (rules and records as of S-20261020-03).
