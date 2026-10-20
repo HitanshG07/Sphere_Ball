@@ -2,7 +2,7 @@
 
 Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of this file are in Git history.
 
-**Updated:** 2026-10-20, session S-20261020-05 (lead: Claude Code 2.1.303, Opus 5.5)
+**Updated:** 2026-10-20, session S-20261020-06 (lead: Claude Code 2.1.303, Opus 5.5)
 **Milestone:** Gate 0 (TASK-00), environment and physics-authority feasibility
 **Overall status:** IN PROGRESS. **Gate 0 has not passed.** TASK-01 has not started and is not authorized.
 **Waiting on:** the owner's two-client Studio session (see Owner actions).
@@ -31,7 +31,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 - **Independent review RV-01** (Opus, read-only) applied in `0c02823`. Solo regression T-G0-039 PASS. A re-review (RV-02) of the fixes was requested; see the work log for its result.
 
 ## Failed, blocked or open
-- **FAIL-004:** Studio MCP tools did not load into the Claude session. User-scope registration added; verify in the next session (FIXED-UNVERIFIED). The workaround (direct stdio client) works.
+- **FAIL-004:** resolved. The native Studio MCP tools work in the current session (T-G0-040, FIXED-VERIFIED).
 - **FAIL-006:** saved `place/Gate0.rbxl` still has `AuthorityMode = Automatic`. **Owner must save.**
 - **FAIL-009:** parked-avatar streaming. Spike fix works; **owner decision D-026 needed** to adopt it.
 - **A1:** dependent settings not yet captured in a screenshot.
@@ -55,10 +55,7 @@ C2, C3 (two-client part), A3 at 150 ms, A4, A5, C5 disconnect: all need the owne
 1. In Studio (`Gate0.rbxl`), select **Workspace**. In the Properties panel confirm `AuthorityMode = Server`. Clear the search filter and take a screenshot showing NextGenerationReplication, PlayerScriptsUseInputActionSystem, SignalBehavior, UseFixedSimulation and StreamingEnabled (several screenshots are fine). Save them in `docs/evidence/gate0/` named like `YYYYMMDD-HHMMSS_A1_owner-screenshot_dependent-settings.png`.
 2. Press **Ctrl+S** to save `Gate0.rbxl`. This clears FAIL-006.
 3. Make sure `rojo serve default.project.json` is running in the repo root and the Rojo plugin shows **Connected**. Explorer should show `ServerScriptService.Server.Gate0Server`, `StarterPlayer.StarterPlayerScripts.Client.Gate0Client` and `ReplicatedStorage.Shared.Gate0Sim`.
-4. Restart Claude Code **in the repo root** (VS Code: File ▸ Open Folder ▸ `C:\Sphere_ball_rblox\Sphere_Brawl_AI_Agent_Task_Pack`). In the new session:
-   - run `/context` and confirm `CLAUDE.md` is listed;
-   - run `/mcp` and confirm `Roblox_Studio` shows tools (this verifies FAIL-004);
-   - then say **"continue Gate 0 two-client tests"**.
+4. Optional (FAIL-004 is already verified fixed): when you next restart Claude Code, open it in the repo root and run `/context` to confirm `CLAUDE.md` loads; the five `sphere-*` specialists should then be usable by name (they load only when Claude Code starts).
 
 **B. Session 1: 0 ms latency**
 5. Studio: **File ▸ Studio Settings ▸ Network ▸ Incoming Replication Lag = 0** (it reads 0 now). Alternatively, tell Claude to set it through the MCP.

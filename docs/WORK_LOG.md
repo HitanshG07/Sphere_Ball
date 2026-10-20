@@ -235,3 +235,13 @@ Append-only chronological history for every AI and human working on the project.
   | L7 (client may predict the opponent's root) | Noted; observed via `predictionStatus` in the 2-client reports. |
 
 - **RV-01 fixes:** commit `0c02823`. Solo regression T-G0-039 PASS. Re-review RV-02 requested from the same reviewer agent (read-only).
+- **RV-02 attempt 1 failed (no result):** the resumed reviewer agent stopped with an API error: `You've hit your session limit · resets 4:40am (Asia/Kolkata)` (HTTP 429, model `claude-opus-5-5`). No review findings were produced; nothing is claimed from it.
+
+## S-20261020-06 — Gate 0 resumed (owner reconnected Studio and Rojo)
+- **When:** 2026-10-20 from 11:50.
+- **Lead:** Claude Code 2.1.303, Opus 5.5. Branch `gate0-spike` at `5e676d3`, working tree clean, no stash. The "changed on disk" notices for record files came from Git line-ending normalization during the earlier commits; content matched HEAD (`git status` clean).
+- **Owner message:** Studio and Rojo connected; continue the work.
+- **MCP:** the native `Roblox_Studio` tools are now available in this Claude session. `list_roblox_studios` gives one instance `f67105bf-15c4-42a9-bd03-3a0599a811f8` ("Gate0.rbxl"); `get_studio_state` shows Edit; `search_game_tree` and `execute_luau` work (T-G0-040). This retests FAIL-004.
+- **Sync check:** Studio script sources match the repository byte for byte (Gate0Sim 7395, Gate0Server 15569, Gate0Client 14620; all contain the RV-01 markers). The Edit workspace has no stray attributes.
+- **FAIL-006 still open:** `place/Gate0.rbxl` is unchanged (mtime 01:57:23) and the decoded `AuthorityMode` is still 1 (Automatic).
+- **RV-02 attempt 2:** launching `sphere-reviewer` by name failed again (`Agent type 'sphere-reviewer' not found`). This is the same Claude process; project agents load at process start. Fallback: `general-purpose` with the role file, Opus 5.5, read-only. Result recorded when received.

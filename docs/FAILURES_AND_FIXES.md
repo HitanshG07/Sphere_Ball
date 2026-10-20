@@ -103,3 +103,8 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Retest:** needs the owner's 2-client session (C2 in T-G0-036). Solo regression T-G0-039 shows no breakage.
 - **Related design question (for the owner, not a defect):** the review computed, and the lead re-derived, that §8.5 alone separates a colliding pair only for closing speeds from about 32.9 to 40 studs/s. With dv = (c − 10) × 1.15 clamped to 32 plus 0.25 recoil, the pair stops closing only if 1.25 × dv ≥ c. Above that (a symmetric head-on at 42 + 42 = 84 still closes at 44 after the hit), the engine contact with elasticity 0 also changes the outcome. Recorded as owner question Q-1 in `PROJECT_STATUS.md`; no locked value was changed.
 - **Status:** FIXED-UNVERIFIED (awaiting the 2-client run)
+
+### FAIL-004 update (S-20261020-06)
+- **Retest:** T-G0-040. The native `Roblox_Studio` MCP tools are available in the current Claude session (28 tools) and work against the Studio instance `Gate0.rbxl`. The direct stdio workaround is no longer needed.
+- **Remaining uncertainty:** the path-case hypothesis was not tested directly; the user-scope registration made it irrelevant.
+- **Status:** FIXED-VERIFIED
