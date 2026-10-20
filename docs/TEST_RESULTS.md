@@ -149,3 +149,36 @@ Placeholders T-G0-009 to T-G0-015 above stay as written; the rows below are the 
 | 6. Independent review has no open high-severity finding | PASS | T-T01-015 |
 
 Not run in TASK-01: multi-client tests (none apply to pure contracts).
+
+## TASK-02 (S-20261021-01, branch `task02`)
+
+Evidence: `docs/evidence/task02/`. Studio runs used solo Play started through the Studio MCP, with code delivered by Rojo 7.4.4 from the repo root; the place was never saved.
+
+| ID | Requirement | Procedure | Expected | Actual | Status | Evidence / notes |
+|---|---|---|---|---|---|---|
+| T-T02-001 | Static checks on the TASK-02 code | `rojo build default.project.json -o build/Gate0.rbxlx`; `rojo sourcemap default.project.json --include-non-scripts -o sourcemap.json`; `luau-lsp analyze --definitions=globalTypes.d.luau --sourcemap=sourcemap.json src`; `stylua --check src`; `selene src` | all clean | build OK; sourcemap OK; Selene 0/0/0; **luau-lsp: 3 TypeErrors in `GridService.spec`** (`pcall` on a `() -> ()` callback; `PhysicalProperties ~= nil` on a non-optional property type; `{ Part }` passed as `{ BasePart }`); **StyLua: formatting diff** (long lines in the spec) | FAIL | same error classes as T-T01-003; fixes in T-T02-002 |
+| T-T02-002 | Retest of T-T02-001 | same five commands after: callbacks typed `() -> ...any`; `CustomPhysicalProperties :: PhysicalProperties?` then `assert`; `withParts(parts: { Part }, ...)`; `stylua src` | all clean | build OK; luau-lsp 0 errors; StyLua clean; Selene 0/0/0 | PASS | committed as `f61075a`. The analyzer reported errors in the new spec, so the new files are analyzed (sourcemap lists `Core/GridService` and `GridService.spec`) |
+| T-T02-003 | Asset manifest matches `specs/ASSET_MANIFEST.schema.json` | Python `jsonschema` 4.25.1, `Draft202012Validator` on each entry; unique ids; negative control: an entry with `collision = "SOLID"` and an extra key | 5 valid entries; control rejected | 5 entries VALID, 0 errors; ids unique; control gave the enum error and "Additional properties are not allowed" | PASS | `arena.tile.collision` (PROCEDURAL, `AUTHORITATIVE_COLLIDER`), `arena.tile.visual` (PROCEDURAL, `VISUAL_ONLY`), rights `ORIGINAL_GENERATED`, `robloxAssetId` null. A first hand-written check crashed on a bug in the check script itself (`NameError`) before giving any result; replaced by `jsonschema` |
+| T-T02-004 | Rojo has synced `f61075a` into the Studio Edit datamodel before Play | read-only Edit probe of `ServerScriptService.Server.Core.GridService`, `GridService.spec`, GameConfig source; `curl` of the Rojo server API (`/api/rojo`, `/api/read`) | new modules present | **not synced:** Edit datamodel still at the TASK-01 tree. The Rojo server (session `42620dad…`, project `SphereBrawlRollingRampage`) did have `Core`, `GridService`, `GridService.spec` and the D-028 GameConfig. Studio Output: `C stack overflow (when calling anonymous function on line 298 in user_RojoManagedPlugin.rbxm.Rojo.Packages.Promise)` | BLOCKED | FAIL-014. Owner reconnected the Rojo plugin; afterwards the four changed modules in Edit matched the repo byte sizes (7297 / 17457 / 7879 / 10283) |
+| T-T02-005 | Full suite in Studio (TASK-02 tests 1–12 and TASK-01 regressions) | solo Play via MCP; Server pre-run probe; `require(ServerScriptService.Server.Tests.TestRunner).run()` at `f61075a` | 4 specs, 0 failed | `4 specs, 37 passed, 1 failed`: `01 counts and IDs ...: key -4,-4 has the wrong format`. Output: only the 14 expected `[GridService] ... rejected` warnings and Studio's own lines; no GridService error | FAIL | `docs/evidence/task02/20261021-003337_T-T02-005_studio-testrunner.txt`. Test defect (FAIL-015): the Lua pattern `^-?%d,-?%d$` from the plan never matches |
+| T-T02-006 | Static checks after the FAIL-015 fix | the five commands at `3c624c7` | all clean | build OK; luau-lsp 0 errors; StyLua clean; Selene 0/0/0 | PASS | |
+| T-T02-007 | Retest of T-T02-005 | new solo Play session; Edit sync verified first (`GridService.spec` 17549 bytes, fixed pattern present); Server `TestRunner.run()` at `3c624c7` | 4 specs, 0 failed | `[TestRunner] 4 specs, 38 passed, 0 failed` (Config 18 incl. D-028, CoordinateUtils 6, Remotes 2, GridService 12), 6.93 s | PASS | `docs/evidence/task02/20261021-003505_T-T02-007_studio-testrunner.txt` |
+| T-T02-008 | Each test reported by name | same Play session: every spec test called in `pcall`, sorted, with timing | 38 PASS lines | 38 PASS, 0 FAIL; the yielding tests took 1.93 s (06), 1.94 s (09), 3.02 s (12) | PASS | same evidence file |
+| T-T02-009 | Measured values behind the asserts | same Play session: ResetArena; balls dropped at a cell center, the seam x = 6 and the corner (6, 6); CollapseRing(4) with a mid-sink sample and a ball over cell 4,0 | rest Y 54 ± 0.1; collider gone first; Destroyed after 0.65 s; ball below Y 15 | rest Y 53.9968 at all three points, drift 0.0000, speed 0.0000; right after CollapseRing(4): 49/32/0, 49 colliders, 81 visuals, collider 4,0 absent; at 0.32 s visual 4,0 sunk 0.950 studs, transparency 0.238; at 0.97 s 49/0/32, 49 visuals; ball over 4,0 at Y 5.265 after 1.5 s; no probe parts left | PASS | same evidence file. Balls are in the Default collision group (ArenaSphere does not exist yet) |
+| T-T02-010 | Handoff top-down captures (card) | same Play session: Client CoreGui disabled (PlayerList false; client saw 81 + 81 parts); MCP `screen_capture` from (0, 200, 0.05) and (0, 80, 0.05) looking at (0, 50, 0); Server CollapseRing(4), then (3) | board, collapsed boards and grooves visible; no owner identifier | four images: 81-cell board, 49 after ring 4, 25 after ring 3, groove close-up. Each inspected: no username, name tag, player list or avatar | PASS | `20261021-003621_…_topdown-board-81-cells.jpg`, `20261021-003641_…_topdown-after-ring4-49-cells.jpg`, `20261021-004205_…_topdown-after-ring3-25-cells.jpg`, `20261021-004208_…_groove-detail-25-cells.jpg`. Discarded: one capture showing the owner's avatar (MCP reset the Scriptable camera) and two parallel captures that interfered |
+
+### TASK-02 implementation gate (lead verdict, S-20261021-01): PASSED — acceptance review by Antigravity pending
+
+| Gate item (`docs/TASK-02_PLAN.md`) | Result | Evidence |
+|---|---|---|
+| GridService tests 1–12 pass in Studio | PASS | T-T02-007, T-T02-008 (first run T-T02-005 failed on a test defect, FAIL-015) |
+| TASK-01 regressions pass (Config incl. D-028, Remotes, CoordinateUtils) | PASS | T-T02-007, T-T02-008 |
+| Five static checks clean | PASS | T-T02-006 (T-T02-001 failed, fixed in T-T02-002) |
+| Manifest validates against the schema | PASS | T-T02-003 |
+| Top-down capture saved | PASS | T-T02-010 |
+| §15: exactly 81 live cells, unique IDs | PASS | spec 01 |
+| §15: one collidable part per cell, no collider gaps | PASS | specs 02, 04, 06 (`expectBoard` checks colliders = live cells after every step), 12; T-T02-009 |
+| §15: correct ring counts (32/24; 81 → 49 → 25) | PASS | specs 05, 06 |
+| §15: regeneration works twice | PASS | specs 08, 09 |
+
+**Not run / not covered:** multi-client runs (not applicable to TASK-02; the client view was checked in T-T02-010 only); `CollapseRing` and `GetCell` before the first `ResetArena` in a server (by code reading only: the module state cannot be reset inside one Play session); the independent acceptance review (Antigravity, after this session).

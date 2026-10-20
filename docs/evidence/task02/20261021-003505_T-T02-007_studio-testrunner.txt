@@ -1,0 +1,93 @@
+T-T02-007 to T-T02-010 — Studio TestRunner retest, per-test listing, measurement probe and captures
+Session S-20261021-01. Source: task02 at 3c624c7 (f61075a plus the GridService.spec key-pattern fix, FAIL-015),
+delivered by Rojo 7.4.4 (`rojo serve`, repo root). GridService.spec in the Edit datamodel was 17549 bytes with the
+fixed pattern present before Play. Environment: Roblox Studio, Gate0.rbxl, a fresh solo Play session started through
+the Studio MCP (start_stop_play); code run through MCP execute_luau. The place was not saved.
+
+=== T-T02-007: TestRunner (Server, UTC 2026-10-20T19:05:05Z, elapsed 6.93 s) ===
+Command: require(game:GetService("ServerScriptService").Server.Tests.TestRunner).run()
+modules: Config.spec=10283, CoordinateUtils.spec=6191, GridService.spec=17549, GridService=7297, Remotes.spec=2047, TestRunner=1817
+Arena before run: nil
+[TestRunner] 4 specs, 38 passed, 0 failed
+
+=== T-T02-008: every test run by name, same Play session (Server, UTC 2026-10-20T19:05:21Z) ===
+(Each spec module required and each test called in pcall, sorted like TestRunner; time = os.clock delta.)
+PASS | Config.spec | 0.00 s | Burst boost matches D-019
+PASS | Config.spec | 0.00 s | Opening lasts 56 s and MidGame 42 s
+PASS | Config.spec | 0.00 s | arena geometry matches §3.3 and §6
+PASS | Config.spec | 0.00 s | asset manifest holds no unverified ids (D-010)
+PASS | Config.spec | 0.00 s | chassis are cosmetic with all multipliers 1.0 (D-008)
+PASS | Config.spec | 0.00 s | collision groups match the §6.2 matrix
+PASS | Config.spec | 0.00 s | core abilities match §8.3
+PASS | Config.spec | 0.00 s | cosmetic ids and unlocks match D-020 and D-021
+PASS | Config.spec | 0.00 s | cycle totals are 28, 21 and 15 s (D-017)
+PASS | Config.spec | 0.00 s | hazard cap is floor(live * 0.35)
+PASS | Config.spec | 0.00 s | hazard values match §7.4-7.6
+PASS | Config.spec | 0.00 s | lobby spawn faces the queue portal (D-015) and pods match D-023
+PASS | Config.spec | 0.00 s | movement and combat values match §8.4-8.5
+PASS | Config.spec | 0.00 s | named cycle values match §7.2
+PASS | Config.spec | 0.00 s | palette matches §2.2
+PASS | Config.spec | 0.00 s | round and queue values match §3.3 and §4.3
+PASS | Config.spec | 0.00 s | speed caps are 42 and 55
+PASS | Config.spec | 0.00 s | tile physics and collapse visual match D-028
+PASS | CoordinateUtils.spec | 0.00 s | off-board input returns nil
+PASS | CoordinateUtils.spec | 0.00 s | ring counts are 81, 32, 24, then 49 and 25 after the collapses
+PASS | CoordinateUtils.spec | 0.00 s | round trip returns the same cell for all 81 cells
+PASS | CoordinateUtils.spec | 0.00 s | rounding is deterministic at interior edges and Y is ignored
+PASS | CoordinateUtils.spec | 0.00 s | spawn slots match §6.5
+PASS | CoordinateUtils.spec | 0.00 s | the arena center is applied once
+PASS | GridService.spec | 0.00 s | 01 counts and IDs: 81 unique cells, one collider and one visual each, no scripts
+PASS | GridService.spec | 0.00 s | 02 collider geometry and D-028 physics
+PASS | GridService.spec | 0.00 s | 03 visual geometry: inset, non-colliding, checkerboard
+PASS | GridService.spec | 0.00 s | 04 edge to edge with no stacked colliders (query and negative controls)
+PASS | GridService.spec | 0.00 s | 05 ring 4 has 32 cells and ring 3 has 24
+PASS | GridService.spec | 1.93 s | 06 collapse sequence 81 -> 49 -> 25, collider removed first
+PASS | GridService.spec | 0.00 s | 07 invalid inputs are rejected without change
+PASS | GridService.spec | 0.01 s | 08 reset twice after both collapses restores 81 cells with the same order
+PASS | GridService.spec | 1.94 s | 09 reset during a collapse cancels the pending sink
+PASS | GridService.spec | 0.00 s | 10 returned cells are copies
+PASS | GridService.spec | 0.00 s | 11 the six spawn slots are live and each sphere fits inside its tile (D-016)
+PASS | GridService.spec | 3.02 s | 12 physics: balls rest on a center, a seam and a corner, and fall through a collapsed cell
+PASS | Remotes.spec | 0.00 s | Remotes folder holds exactly the 10 contract remotes
+PASS | Remotes.spec | 0.00 s | no remotes outside the Remotes folder and no KnockbackEvent (game containers)
+
+=== T-T02-009: measurement probe (Server, UTC 2026-10-20T19:05:40Z) ===
+(ResetArena; three diameter-6 Default-group balls dropped from Y 54.15; 1.5 s; then CollapseRing(4) and a ball over
+cell 4,0. All probe parts destroyed at the end.)
+after reset: Live/Pending/Destroyed 81/0/0, colliders 81, visuals 81
+ball center rest Y 53.9968 (expected 54 +- 0.1), horizontal drift 0.0000 studs, speed 0.0000
+ball seam   rest Y 53.9968 (expected 54 +- 0.1), horizontal drift 0.0000 studs, speed 0.0000
+ball corner rest Y 53.9968 (expected 54 +- 0.1), horizontal drift 0.0000 studs, speed 0.0000
+immediately after CollapseRing(4): Live/Pending/Destroyed 49/32/0, colliders 49, visuals 81; collider 4,0 present: false
+visual 4,0 at t=0.32 s: sunk 0.950 studs, transparency 0.238, CanCollide false
+at t=0.97 s: Live/Pending/Destroyed 49/0/32, colliders 49, visuals 49; visual 4,0 parent: nil
+ball over collapsed 4,0 after 1.5 s: Y 5.265 (VoidY 15)
+after final reset: Live/Pending/Destroyed 81/0/0, colliders 81, visuals 81
+probe parts left in Workspace: 0
+(Quad-In easing at t/T = 0.49 gives 0.24 of the 4-stud sink = 0.96 studs: consistent with 0.950.)
+
+=== T-T02-010: handoff captures (same Play session) ===
+Client: StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, false); PlayerList enabled: false; the client saw
+Workspace.Arena with 81 colliders and 81 visuals (StreamingEnabled true).
+Captures by MCP screen_capture with camera_position (0, 200, 0.05) / (0, 80, 0.05) looking at (0, 50, 0):
+- 20261021-003621_T-T02-010_topdown-board-81-cells.jpg: full 9x9 checkerboard with groove lines (after ResetArena).
+- 20261021-003641_T-T02-010_topdown-after-ring4-49-cells.jpg: Server CollapseRing(4) true; after 1.0 s live 49,
+  colliders 49, visuals 49 (UTC 19:06:35Z); 7x7 board.
+- 20261021-004205_T-T02-010_topdown-after-ring3-25-cells.jpg: Server CollapseRing(3) true; after 1.0 s live 25,
+  colliders 25, visuals 25 (UTC 19:06:50Z); 5x5 board.
+- 20261021-004208_T-T02-010_groove-detail-25-cells.jpg: close-up from Y 80 showing the 0.2-stud grooves.
+Discarded (not committed): a first capture taken with a Scriptable client camera showed the default camera near the
+character instead of the board, because the MCP execute_luau resets a Scriptable camera to Custom after each call
+(Output: "The execute_luau changed camera type. Resetting from Enum.CameraType.Scriptable back to
+Enum.CameraType.Custom"); that image also showed the owner's avatar. Two captures requested in parallel interfered (one
+returned the other's view, the other timed out); both were retaken one at a time.
+Each committed image was inspected: no username, name tag, player list or avatar is visible.
+
+=== Studio Output during this Play session ===
+Only: Studio CorePackages UIBlox "FoundationProvider not found" warnings and "rbxassetid://203785492 ... Asset type does
+not match" lines (Studio's own); the 14 expected "[GridService] CollapseRing(...) rejected" warnings from tests 06/07,
+printed twice (TestRunner run and per-test listing); "[TestRunner] 4 specs, 38 passed, 0 failed"; the MCP camera reset
+line above. No error from GridService or any spec (test 09 reset-mid-sink produced no error).
+
+After Stop: the Edit datamodel has no Workspace.Arena and ArenaTile is not registered in Edit; place/Gate0.rbxl
+modification time is still 2026-10-20 13:36:18 (not saved).

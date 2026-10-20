@@ -151,3 +151,22 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Fix:** `git remote set-head origin -a` (local `origin/HEAD` now points to `origin/alpha`). The lead now creates agent worktrees explicitly from the task commit (`git worktree add -b <branch> <path> <commit>`) and gives the agents the path.
 - **Prevention:** for task work, never rely on automatic worktree isolation; create the worktree from the frozen task commit. Every delegation brief keeps the commit setup check.
 - **Status:** FIXED-VERIFIED (both new worktrees at `4a132cc`, checked with `git worktree list`)
+
+## FAIL-014 — Rojo plugin crashed in Studio; new code did not reach the Edit datamodel
+- **Session / discovered:** S-20261021-01, TASK-02, before the first Studio run (T-T02-004).
+- **Observation (confirmed):** after `f61075a` the Studio Edit datamodel still held the TASK-01 tree (no `ServerScriptService.Server.Core`, old GameConfig). The `rojo serve` process (Rojo 7.4.4, started 2026-10-20 11:48) answered `/api/rojo` and its `/api/read` tree already contained `Core`, `GridService`, `GridService.spec` and the D-028 GameConfig. The last Studio Output line was `C stack overflow (when calling anonymous function on line 298 in user_RojoManagedPlugin.rbxm.Rojo.Packages.Promise)`.
+- **Cause (likely, not confirmed):** the Rojo Studio plugin hit a stack overflow inside its Promise library and stopped applying patches. The server side was healthy. The trigger is unknown (the plugin had been connected for about 13 hours across many Play sessions).
+- **Impact:** a Studio run before the check would have tested the TASK-01 code and could not have found `GridService`. No wrong result was recorded: the sync check ran first.
+- **Fix:** the owner reconnected the Rojo plugin in Studio (owner answer in session). The lead then confirmed the four changed modules in Edit matched the repo byte sizes (7297 / 17457 / 7879 / 10283) before starting Play.
+- **Prevention:** before every Studio test run, compare the Edit datamodel with the repo (module presence and `#Source` against `wc -c`) instead of trusting that Rojo is connected. If the plugin stops syncing, the owner reconnects it; code is not injected into Studio by other means.
+- **Status:** FIXED-VERIFIED (sync confirmed for `f61075a` and again for `3c624c7` before T-T02-005 and T-T02-007)
+
+## FAIL-015 — Cell-key format test used an invalid Lua pattern
+- **Session / discovered:** S-20261021-01, TASK-02, first Studio run T-T02-005.
+- **Observation (confirmed):** `GridService.spec` test 01 failed with `key -4,-4 has the wrong format`; the other 37 tests passed.
+- **Cause (confirmed):** the pattern `^-?%d,-?%d$` (copied from the approved plan) is wrong in Lua: a bare `-` is the lazy-repetition quantifier, so `,-?` means "zero or more commas, then a literal `?`". No key could match. A literal minus is `%-`.
+- **Impact:** test defect only; GridService was unchanged. The static checks cannot catch it (the pattern is a valid string).
+- **Fix:** `^%-?%d,%-?%d$` in `GridService.spec` (`3c624c7`), with a comment. `docs/TASK-02_PLAN.md` test 1 text corrected with a note.
+- **Retest:** T-T02-007 (`4 specs, 38 passed, 0 failed`).
+- **Prevention:** in Lua patterns, escape `-` `+` `*` `?` `.` `%` `(` `)` `[` `]` `^` `$` with `%` when they are meant literally.
+- **Status:** FIXED-VERIFIED

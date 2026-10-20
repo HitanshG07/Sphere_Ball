@@ -23,21 +23,21 @@ Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is
 - [ ] Decision log contains all approved departures from baseline.
 
 ## Grid and collision surface
-- [ ] Grid generation creates exactly 81 unique cells.
-- [ ] Each cell has exactly one collidable `CollisionTile` and non-colliding visuals.
+- [x] Grid generation creates exactly 81 unique cells. **PASS** (TASK-02 `GridService.spec` 01 in Studio: T-T02-007, T-T02-008)
+- [x] Each cell has exactly one collidable `CollisionTile` and non-colliding visuals. **PASS** (`Workspace.Arena.Collision/<key>` and `Visual/<key>`; specs 01-04, collider query with negative controls: T-T02-007, T-T02-008)
 - [x] Grid coordinate round-trip passes for every coordinate in [-4,4]. **PASS** (TASK-01 `CoordinateUtils.spec` in Studio: T-T01-007, T-T01-014)
-- [ ] Ring D=4 contains 32 cells; first collapse leaves 49.
-- [ ] Ring D=3 contains 24 cells; second collapse leaves 25.
-- [ ] Tiles are edge-to-edge with no collision gaps; no stacked colliders.
-- [ ] Regeneration creates 81 cells and resets all tile state after each round.
-- [ ] Six initial sphere spawns use the exact D=3 cell centers in `specs/DESIGN_CONSTANTS.md`, are fully above live tiles, and are pairwise at least 12 studs apart.
+- [x] Ring D=4 contains 32 cells; first collapse leaves 49. **PASS** (specs 05-06: T-T02-007, T-T02-008; measured in T-T02-009)
+- [x] Ring D=3 contains 24 cells; second collapse leaves 25. **PASS** (specs 05-06: T-T02-007, T-T02-008)
+- [x] Tiles are edge-to-edge with no collision gaps; no stacked colliders. **PASS** (spec 04 neighbour spacing and `GetPartBoundsInBox` query with 82/81 negative controls; spec 12 and T-T02-009: balls rest at Y 53.9968 on a center, a seam and a 4-cell corner: T-T02-007, T-T02-008, T-T02-009)
+- [x] Regeneration creates 81 cells and resets all tile state after each round. **PASS at GridService level** (specs 08-09: reset twice after both collapses, reset during a pending sink: T-T02-007, T-T02-008); round-to-round use is verified with RoundManager in TASK-07
+- [x] Six initial sphere spawns use the exact D=3 cell centers in `specs/DESIGN_CONSTANTS.md`, are fully above live tiles, and are pairwise at least 12 studs apart. **PASS at grid level** (exact centers and spacing: `CoordinateUtils.spec`, T-T01-007/T-T01-014 and T-T02-007, T-T02-008; live and footprint inside the tile: `GridService.spec` 11, T-T02-007, T-T02-008); spawning real spheres is TASK-04/07
 
 ## Sphere movement and camera
 - [ ] Sphere collider diameter is 6 studs; visual shell never collides.
 - [ ] Visual shell is not anchored/welded into physics assembly.
 - [ ] Camera horizon remains stable; shell roll never rotates camera.
 - [ ] Acceleration, braking, top speed and speed cap meet configured tolerance.
-- [ ] No seam snag or unexplained vertical bounce in the arena.
+- [ ] No seam snag or unexplained vertical bounce in the arena. **PARTIAL:** dropped balls rest without bounce or drift on a cell center, a seam and a 4-cell corner (T-T02-009); rolling over seams is tested in TASK-04
 - [ ] Sphere can fall naturally and is not Y-snapped back onto the board.
 - [ ] Desktop, touch and supported controller inputs route into the same validated input state.
 
