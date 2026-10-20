@@ -10,7 +10,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 **GitHub:** `https://github.com/HitanshG07/Sphere_Ball`, PUBLIC (owner decision), default branch `alpha` (set S-20261020-09).
 **Branches:**
 - `main` = `f726ddd` (untouched spec baseline; `origin/main`).
-- `alpha` = integration branch; last pushed hash in the work log (S-20261020-09).
+- `alpha` = integration branch. Part A pushed as `5743137` (verified with `git ls-remote`); the record commit on top of it is in the work log.
 - `gate-0` = `bc4cfa7` (Gate 0 prototype; `origin/gate-0`; never merged into `alpha`). Local alias `gate0-spike` tracks `origin/gate-0`; a duplicate local `gate-0` branch is kept until the owner authorizes deleting it.
 - `task01` = TASK-01 work, branched from `alpha`.
 

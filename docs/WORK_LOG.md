@@ -328,3 +328,7 @@ Append-only chronological history for every AI and human working on the project.
   - `README.md`: repository and canonical place section.
 - **GitHub settings:** `gh repo edit HitanshG07/Sphere_Ball --default-branch alpha`; `gh repo view --json defaultBranchRef,visibility` → `alpha`, `PUBLIC`.
 - **Branches:** `git branch --set-upstream-to=origin/gate-0 gate0-spike` (now tracks `origin/gate-0`). The duplicate local `gate-0` branch is left as is.
+- **Pre-push audit:** 9 files staged (8 docs/config files plus `place/Gate0.rbxl`, 76,122 bytes). Secret and identifier scan of the added lines: one hit, the protocol's own description of the scan (`github_pat_` as text). No `src/`, `tests/`, `build/`, `sourcemap.json` or lock files staged.
+- **Commit and push:** `5743137` on `alpha`; `git push origin alpha` → `d68f644..5743137  alpha -> alpha` (fast-forward). `git ls-remote origin`: `alpha` `5743137`, `HEAD` `5743137` (default branch now `alpha`), `main` `f726ddd`, `gate-0` `bc4cfa7` (both unchanged).
+- **Part A verification:** `gh repo view` → `alpha`, `PUBLIC`. `git grep` on `alpha` for the owner's Roblox username and UserId: only the 10 evidence files from before this session. `git ls-files place/` → `place/Gate0.rbxl`.
+- **Part A result:** done. This record is committed and pushed next; its hash is in the following line of this log once known.
