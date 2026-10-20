@@ -117,7 +117,8 @@ return {
 		local seen: { [string]: boolean } = {}
 		for _, cell in GridService.GetLiveCells() do
 			local key = `{cell.X},{cell.Z}`
-			assert(string.match(key, "^-?%d,-?%d$") ~= nil, `key {key} has the wrong format`)
+			-- "%-" is a literal minus; a bare "-" is Lua's lazy-repetition quantifier (FAIL-015).
+			assert(string.match(key, "^%-?%d,%-?%d$") ~= nil, `key {key} has the wrong format`)
 			assert(not seen[key], `duplicate cell {key}`)
 			seen[key] = true
 			assert(cell.State == "Live", `{key} is {cell.State}`)

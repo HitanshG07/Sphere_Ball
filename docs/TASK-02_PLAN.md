@@ -55,7 +55,7 @@
 ## Tests (Studio TestRunner, `GridService.spec.luau`)
 Each test starts with `ResetArena()`. Temporary parts and test balls are checked while present, inside a pcall wrapper that always destroys them and then re-raises any failure.
 
-1. **Counts and IDs.** 81 unique cells; keys match `^-?%d,-?%d$` and equal `x..","..z`; 81 colliders and 81 visual tiles with unique names; no `LuaSourceContainer` under `Arena`.
+1. **Counts and IDs.** 81 unique cells; keys match `^%-?%d,%-?%d$` and equal `x..","..z` (correction, S-20261021-01: the approved plan wrote `^-?%d,-?%d$`, which is wrong in Lua patterns because a bare `-` is a quantifier; FAIL-015, T-T02-005); 81 colliders and 81 visual tiles with unique names; no `LuaSourceContainer` under `Arena`.
 2. **Collider geometry and physics.** Size (12, 2, 12), anchored, collidable, Transparency 1, group `ArenaTile`, friction 0, elasticity 0, weights 100, center = `gridToWorld(x, z)` within 1e-4, top surface Y 51.
 3. **Visual geometry.** Size (11.8, 2, 11.8), `CanCollide` and `CanTouch` false, same center as the collider, checkerboard colors.
 4. **Edge to edge with no stacking.**

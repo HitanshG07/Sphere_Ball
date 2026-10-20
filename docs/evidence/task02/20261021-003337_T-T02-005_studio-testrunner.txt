@@ -1,0 +1,52 @@
+T-T02-005 — Studio TestRunner, first TASK-02 run (session S-20261021-01)
+Source: task02 at f61075a, delivered by Rojo 7.4.4 (`rojo serve`, repo root) after the owner reconnected the
+Rojo plugin (FAIL-014). Byte sizes in the Edit datamodel matched the repo files before Play:
+GridService 7297, GridService.spec 17457, GameConfig 7879, Config.spec 10283.
+Environment: Roblox Studio, Gate0.rbxl, solo Play started through the Studio MCP (start_stop_play); code run in the
+Server datamodel through MCP execute_luau. The place was not saved.
+
+--- Pre-run probe (Server, UTC 2026-10-20T19:03:25Z) ---
+module: ServerScriptService.Server.Tests.TestRunner (1817 bytes)
+module: ServerScriptService.Server.Tests.Unit.Config.spec (10283 bytes)
+module: ServerScriptService.Server.Tests.Unit.CoordinateUtils.spec (6191 bytes)
+module: ServerScriptService.Server.Tests.Unit.Remotes.spec (2047 bytes)
+module: ServerScriptService.Server.Tests.Unit.GridService.spec (17457 bytes)
+GridService: 7297
+Workspace before run: Camera[Camera], Baseplate[Part], Terrain[Terrain], SpawnLocation[SpawnLocation], <owner-roblox-user>[Model]
+StreamingEnabled: true, Gravity: 196.1999969482422
+ArenaTile registered before run: false
+Baseplate top Y: 0
+(An earlier attempt of this probe also read Workspace.AuthorityMode and failed with "The current thread cannot read
+'AuthorityMode' (lacking capability RobloxScript)": a limit of the MCP command context, not a test. The saved place
+setting was verified in T-PUB-001.)
+
+--- Command (Server) ---
+local report = require(game:GetService("ServerScriptService").Server.Tests.TestRunner).run()
+
+--- Result (UTC 2026-10-20T19:03:37Z, elapsed 6.93 s) ---
+[TestRunner] 4 specs, 37 passed, 1 failed
+GridService.spec > 01 counts and IDs: 81 unique cells, one collider and one visual each, no scripts: ServerScriptService.Server.Tests.Unit.GridService.spec:120: key -4,-4 has the wrong format
+
+--- Studio Output during the run (CorePackages UIBlox "FoundationProvider not found" warnings and the
+"rbxassetid://203785492 ... Asset type does not match" lines are Studio's own and are omitted) ---
+[GridService] CollapseRing(3) rejected: next ring is 4, arena built: true
+[GridService] CollapseRing(4) rejected: next ring is 3, arena built: true
+[GridService] CollapseRing(4) rejected: next ring is nil, arena built: true
+[GridService] CollapseRing(3) rejected: next ring is nil, arena built: true
+[GridService] CollapseRing(2) rejected: next ring is nil, arena built: true
+[GridService] CollapseRing(1) rejected: next ring is nil, arena built: true
+[GridService] CollapseRing(0) rejected: next ring is 4, arena built: true
+[GridService] CollapseRing(2) rejected: next ring is 4, arena built: true
+[GridService] CollapseRing(5) rejected: next ring is 4, arena built: true
+[GridService] CollapseRing(2.5) rejected: next ring is 4, arena built: true
+[GridService] CollapseRing(nan) rejected: next ring is 4, arena built: true
+[GridService] CollapseRing(-4) rejected: next ring is 4, arena built: true
+[GridService] CollapseRing(inf) rejected: next ring is 4, arena built: true
+[GridService] CollapseRing(-inf) rejected: next ring is 4, arena built: true
+[TestRunner] 4 specs, 37 passed, 1 failed
+No error from GridService or the specs other than the reported failure.
+
+--- Analysis ---
+Test defect, not a GridService defect. The key-format pattern "^-?%d,-?%d$" (as written in the plan) is wrong in Lua
+patterns: "-" is the lazy-repetition quantifier, so ",-?" means "zero or more commas, then a literal '?'".
+"-4,-4" (and every other key) cannot match it. Correct pattern: "^%-?%d,%-?%d$". Retest: T-T02-007.
