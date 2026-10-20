@@ -397,10 +397,11 @@ player:GetAttributeChangedSignal("Gate0RefSeq"):Connect(function()
 	if typeof(ref) == "Vector3" and own and own:IsA("BasePart") then
 		local v = own.AssemblyLinearVelocity
 		log(
-			"A4 refSeq=%s refPosDelta=%.3f ownHSpeed=%.2f status=%s",
+			"A4 refSeq=%s refPosDelta=%.3f ownHSpeed=%.2f ping=%.3f status=%s",
 			tostring(player:GetAttribute("Gate0RefSeq")),
 			(own.Position - ref).Magnitude,
 			Vector3.new(v.X, 0, v.Z).Magnitude,
+			player:GetNetworkPing(),
 			RunService:GetPredictionStatus(own).Name
 		)
 	end

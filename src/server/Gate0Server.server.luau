@@ -126,6 +126,16 @@ local function forgetRoot(root: BasePart)
 	maxSpeed[root] = nil -- RV-01 L4
 end
 
+-- RV-02 NEW-3: never let focus removal (for example on an already-destroyed part) abort cleanup or its evidence.
+local function releaseFocus(player: Player, hrp: BasePart)
+	local ok, err = pcall(function()
+		player:RemoveReplicationFocus(hrp)
+	end)
+	if not ok then
+		log("RemoveReplicationFocus failed uid=%d err=%s", player.UserId, tostring(err))
+	end
+end
+
 local function connCount(): number
 	local n = 0
 	for _, list in roundConns do
@@ -201,7 +211,7 @@ local function park(player: Player, character: Model, slot: number)
 	end
 	local previous = saved[player]
 	if previous then -- a new character while parked: release the old extra focus (RV-01 L4)
-		player:RemoveReplicationFocus(previous.hrp)
+		releaseFocus(player, previous.hrp)
 	end
 	local rec: SavedAvatar = {
 		character = character,
@@ -307,7 +317,7 @@ local function restore(player: Player)
 		if hrp and hrp:IsA("BasePart") then
 			hrp.Anchored = rec.hrpAnchored
 		end
-		player:RemoveReplicationFocus(rec.hrp)
+		releaseFocus(player, rec.hrp)
 		local spawn = workspace:FindFirstChildOfClass("SpawnLocation")
 		rec.character:PivotTo(CFrame.new((if spawn then spawn.Position else Vector3.zero) + Vector3.new(0, 4, 0)))
 		for part, t in rec.parts do
@@ -481,7 +491,7 @@ Players.PlayerRemoving:Connect(function(player: Player)
 	roots[player] = nil
 	local rec = saved[player]
 	if rec then
-		player:RemoveReplicationFocus(rec.hrp) -- D-026 proposal: no extra focus survives a disconnect (RV-01 L4)
+		releaseFocus(player, rec.hrp) -- D-026 proposal: no extra focus survives a disconnect (RV-01 L4)
 	end
 	saved[player] = nil
 	restoreCount[player] = nil

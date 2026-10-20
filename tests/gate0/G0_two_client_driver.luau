@@ -2,6 +2,8 @@
 -- GATE 0 SPIKE ONLY (branch gate0-spike). Two-client test driver for C2, C3, A4 and the A5 stimulus.
 -- Run it in the SERVER context of a Studio "Test > Clients and Servers" session with 2 players, either through
 -- the Studio MCP (execute_luau, datamodel_type "Server") or by pasting it into the Server window's Command Bar.
+-- Start it only after BOTH clients have printed "[G0C<-uid] A2 ... status=Predicted" in the Server Output.
+-- A full run takes about 1.5-2 minutes; if an MCP call times out, use the Command Bar instead (RV-02 NEW-4).
 -- It only sets the documented Gate 0 test attributes and samples authoritative state; it never moves roots itself.
 -- Clients forward their [G0C] lines to the server, so the Server window's Output holds all evidence.
 -- Revised after independent review RV-01 (B2, M1, M3).
@@ -107,10 +109,10 @@ local function headOn(label: string): boolean
 				local attackerPre, attackerPost = vec(victim, "HitAttackerPre"), vec(victim, "HitAttackerPost")
 				local appliedVictim = (victimPost - victimPre):Dot(n)
 				local appliedAttacker = (attackerPost - attackerPre):Dot(n)
-				local victimHeartbeat = victim.AssemblyLinearVelocity
-				local attackerHeartbeat = if attacker and attacker:IsA("BasePart")
-					then attacker.AssemblyLinearVelocity
-					else attackerPost
+				local attackerPart: BasePart? = if attacker and attacker:IsA("BasePart") then attacker else nil
+				local function horizontalSpeed(v: Vector3): number
+					return Vector3.new(v.X, 0, v.Z).Magnitude
+				end
 				say(
 					"%s HIT victim=%s attacker=%s closing=%.2f expectedDv=%.2f appliedVictimDv=%.2f appliedAttackerDv=%.2f expectedRecoil=%.2f capped=%s",
 					label,
@@ -121,14 +123,35 @@ local function headOn(label: string): boolean
 					appliedVictim,
 					appliedAttacker,
 					-0.25 * expected,
-					tostring(victimPost.Magnitude >= 54.99 or attackerPost.Magnitude >= 54.99)
+					tostring(horizontalSpeed(victimPost) >= 54.99 or horizontalSpeed(attackerPost) >= 54.99)
 				)
+				-- RV-02 NEW-1: the engine contact may land a step later, so follow the pair until it stops closing
+				-- (at most 10 Heartbeats) before reading the engine's contribution. The change also includes a little
+				-- drag and input, so it is reported as "change vs applied", not as a pure engine impulse.
+				local frames, closingNow = 0, (attackerPost - victimPost):Dot(n)
+				while frames < 10 and closingNow > 0 do
+					RunService.Heartbeat:Wait()
+					frames += 1
+					local va = if attackerPart then attackerPart.AssemblyLinearVelocity else attackerPost
+					closingNow = (va - victim.AssemblyLinearVelocity):Dot(n)
+				end
+				local vaNow = if attackerPart then attackerPart.AssemblyLinearVelocity else attackerPost
+				local separation = if attackerPart
+					then Vector3.new(
+						victim.Position.X - attackerPart.Position.X,
+						0,
+						victim.Position.Z - attackerPart.Position.Z
+					).Magnitude
+					else -1
 				say(
-					"%s ENGINE after-contact (Heartbeat minus applied, along n): victim=%.2f attacker=%.2f relativeClosingAfterApply=%.2f",
+					"%s ENGINE after %d Heartbeats (along n, change vs applied): victim=%.2f attacker=%.2f closingAfterApply=%.2f closingNow=%.2f separation=%.2f",
 					label,
-					(victimHeartbeat - victimPost):Dot(n),
-					(attackerHeartbeat - attackerPost):Dot(n),
-					(attackerPost - victimPost):Dot(n)
+					frames,
+					(victim.AssemblyLinearVelocity - victimPost):Dot(n),
+					(vaNow - attackerPost):Dot(n),
+					(attackerPost - victimPost):Dot(n),
+					closingNow,
+					separation
 				)
 				return true
 			end
@@ -138,13 +161,31 @@ local function headOn(label: string): boolean
 	return false
 end
 
--- A4: reference positions at +1 s and +3 s (RV-01 M1). Each client logs "A4 refSeq=.. refPosDelta=..".
+-- A4 (criterion: converge within 0.5 stud within 1 s of settling). Each client logs
+-- "A4 refSeq=.. refPosDelta=.. ownHSpeed=.. ping=..". While a sphere still moves, the predicted client runs about
+-- one round trip ahead of the server reference, so the +1 s sample is informational only (RV-02 NEW-2); the
+-- judged samples are taken once every root has settled, and again 1 s later.
+local function maxServerHSpeed(): number
+	local m = 0
+	for _, r in roots() do
+		local v = r.AssemblyLinearVelocity
+		m = math.max(m, Vector3.new(v.X, 0, v.Z).Magnitude)
+	end
+	return m
+end
 local function a4Samples(label: string)
 	task.wait(1)
-	say("%s A4 sample +1s", label)
+	say("%s A4 sample +1s (informational, latency skew expected) serverMaxHSpeed=%.2f", label, maxServerHSpeed())
 	cmd("report")
-	task.wait(2)
-	say("%s A4 sample +3s", label)
+	local t0 = os.clock()
+	while maxServerHSpeed() > 0.3 and os.clock() - t0 < 8 do
+		RunService.Heartbeat:Wait()
+	end
+	task.wait(0.2)
+	say("%s A4 sample settled (after %.1f s) serverMaxHSpeed=%.2f", label, os.clock() - t0, maxServerHSpeed())
+	cmd("report")
+	task.wait(1)
+	say("%s A4 sample settled+1s serverMaxHSpeed=%.2f", label, maxServerHSpeed())
 	cmd("report")
 	task.wait(1)
 end
