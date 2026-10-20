@@ -15,7 +15,8 @@
 | `f61075a` | GridService, GridService.spec, D-028 config fields and assert, manifest entries |
 | `3c624c7` | Spec fix: cell-key Lua pattern (FAIL-015); first-run evidence; plan text note |
 | `6b1c8d8` | Studio evidence, test rows, FAIL-014/015, checklist |
-| later | this package, status and work-log records, push record (see `git log cb8c5ce..origin/task02`) |
+| `96dde1c` | this package, status and work log; first push of `task02` (verified with `git ls-remote`) |
+| next | push record (T-T02-011/012); the current head is shown by `git log cb8c5ce..origin/task02` |
 
 ## 2. Changed files
 | File | Purpose |

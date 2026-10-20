@@ -11,7 +11,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 **Branches:**
 - `main` = `f726ddd` (untouched spec baseline).
 - `alpha` = `cb8c5ce` (TASK-01 merged; unchanged in this session).
-- `task02` = TASK-02 work, branched from `alpha` at `cb8c5ce`; reviewed code at `3c624c7`; pushed to `origin/task02` (hash verified with `git ls-remote`, recorded in the work log).
+- `task02` = TASK-02 work, branched from `alpha` at `cb8c5ce`; reviewed code at `3c624c7`. Pushed: `origin/task02` = `96dde1c` (verified with `git ls-remote`, T-T02-012); the push-record commit follows it (head in `git log`).
 - `task01` = `c843af4` (finished TASK-01 branch).
 - `gate-0` = `bc4cfa7` (Gate 0 prototype; never merged into `alpha`). The local alias `gate0-spike` tracks `origin/gate-0`; a duplicate local `gate-0` branch is kept until the owner authorizes deleting it.
 
