@@ -46,6 +46,36 @@
       "collision": "NONE",
       "platformBudget": "DESKTOP_AND_MOBILE",
       "notes": "Do not use an unverified SoundId; use silence or an original generated cue until the asset is approved."
+    },
+    {
+      "id": "arena.tile.collision",
+      "name": "Arena collision tile (one per grid cell)",
+      "kind": "model",
+      "status": "PROCEDURAL",
+      "destination": "Workspace.Arena.Collision.<x,z>",
+      "source": "src/server/Core/GridService.luau",
+      "rightsStatus": "ORIGINAL_GENERATED",
+      "robloxAssetId": null,
+      "triangles": null,
+      "textureResolution": null,
+      "collision": "AUTHORITATIVE_COLLIDER",
+      "platformBudget": "DESKTOP_AND_MOBILE",
+      "notes": "Invisible anchored 12x2x12 Part, group ArenaTile, D-028 physics; exactly one per cell (D-012, Master Plan 6.2)."
+    },
+    {
+      "id": "arena.tile.visual",
+      "name": "Arena visual tile (one per grid cell)",
+      "kind": "model",
+      "status": "PROCEDURAL",
+      "destination": "Workspace.Arena.Visual.<x,z>",
+      "source": "src/server/Core/GridService.luau",
+      "rightsStatus": "ORIGINAL_GENERATED",
+      "robloxAssetId": null,
+      "triangles": null,
+      "textureResolution": null,
+      "collision": "VISUAL_ONLY",
+      "platformBudget": "DESKTOP_AND_MOBILE",
+      "notes": "Greybox anchored 11.8x2x11.8 SmoothPlastic Part, CanCollide and CanTouch false, checkerboard colors; final meshes come later."
     }
   ]
 }

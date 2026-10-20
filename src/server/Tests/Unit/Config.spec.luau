@@ -102,6 +102,14 @@ return {
 		assert(a.CollapseWarning == 3, "collapse warning 3 s")
 	end,
 
+	["tile physics and collapse visual match D-028"] = function()
+		local a = GameConfig.Arena
+		assert(a.TileFriction == 0 and a.TileElasticity == 0, "tile friction 0, elasticity 0")
+		assert(a.TilePropertyWeight == 100, "tile property weights 100")
+		assert(a.CollapseSinkTime == 0.65 and a.CollapseSinkDepth == 4, "sink 4 studs over 0.65 s")
+		assert(a.CollapseSinkTime >= 0.5 and a.CollapseSinkTime <= 0.8, "sink time inside §11.4's 0.5-0.8 s")
+	end,
+
 	["round and queue values match §3.3 and §4.3"] = function()
 		local r = GameConfig.Round
 		assert(r.MinPlayers == 4 and r.MaxPlayers == 6 and r.HubCapacity == 12, "players")
