@@ -142,3 +142,12 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Fix:** S-20261020-09 rewrote the line in `PROJECT_STATUS.md`.
 - **Prevention:** never put Markdown containing backticks or `$` in double-quoted shell strings. Write records with the editor's file tools, or with a single-quoted heredoc file that is then appended. Related: FAIL-003 (heredoc parse failure on record text).
 - **Status:** FIXED-VERIFIED (line rewritten; `git diff` inspected)
+
+## FAIL-013 — Agent worktrees were created from the Gate 0 prototype instead of the task branch
+- **Session / discovered:** S-20261020-09, TASK-01 delegation. Both delegated agents (sphere-gameplay role, sphere-docs role) stopped at the brief's setup check.
+- **Observation (confirmed):** Claude Code's automatic agent worktrees (`isolation: worktree`) were at `bc4cfa7` (`gate-0`), not at the task commit `4a132cc` on `task01`. They contained `src/shared/Gate0Sim.luau` and no TASK-01 contracts.
+- **Cause (confirmed):** the automatic worktree is based on the remote default branch (`refs/remotes/origin/HEAD`). Locally that still pointed to `origin/gate-0`, set when the remote was added in S-20261020-08, before the GitHub default became `alpha`. It is never based on the lead's current branch.
+- **Impact:** none. The setup check (`git log --oneline -1` must show the task commit) stopped both agents before any change. The empty worktrees and their branches were removed automatically.
+- **Fix:** `git remote set-head origin -a` (local `origin/HEAD` now points to `origin/alpha`). The lead now creates agent worktrees explicitly from the task commit (`git worktree add -b <branch> <path> <commit>`) and gives the agents the path.
+- **Prevention:** for task work, never rely on automatic worktree isolation; create the worktree from the frozen task commit. Every delegation brief keeps the commit setup check.
+- **Status:** FIXED-VERIFIED (both new worktrees at `4a132cc`, checked with `git worktree list`)

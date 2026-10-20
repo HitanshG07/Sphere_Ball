@@ -332,3 +332,57 @@ Append-only chronological history for every AI and human working on the project.
 - **Commit and push:** `5743137` on `alpha`; `git push origin alpha` → `d68f644..5743137  alpha -> alpha` (fast-forward). `git ls-remote origin`: `alpha` `5743137`, `HEAD` `5743137` (default branch now `alpha`), `main` `f726ddd`, `gate-0` `bc4cfa7` (both unchanged).
 - **Part A verification:** `gh repo view` → `alpha`, `PUBLIC`. `git grep` on `alpha` for the owner's Roblox username and UserId: only the 10 evidence files from before this session. `git ls-files place/` → `place/Gate0.rbxl`.
 - **Part A result:** done. This record is committed and pushed next; its hash is in the following line of this log once known.
+- **Part A record commit:** `c2d1038` pushed (`5743137..c2d1038  alpha -> alpha`; `git ls-remote` shows `alpha` at `c2d1038`).
+
+### S-20261020-09 Part B — TASK-01
+- **Branch:** `task01` created from `alpha` at `c2d1038`.
+- **Models and agents:** the `sphere-*` project agents are not loaded (the session started in the parent folder). The roles run as `general-purpose` agents given their role files, as during Gate 0. The lead is Opus 5.5.
+- **Studio:** one instance (`Gate0.rbxl`), Edit mode. Rojo 7.4.4 `serve` is running in the repo root. The MCP tools work.
+- **Contracts (lead):**
+  - `src/shared/Types.luau`: the §10.4 unions and payloads, plus `PulsePhase`, `GameMode`, `QueueAction`, `QueueStatus`, `LoadoutCategory`, `CellState`, `EndReason`, `PlayerResult`. `PatternMeta` is a tagged union by `Pattern`.
+  - `src/shared/Config/GameConfig.luau`: Arena, Round, Pulse, Hazards, Movement, Combat, Boost (D-019), Cosmetics (D-020, D-021), Colors, CollisionGroups (§6.2), Lobby (§2.4, D-015, D-023 pods, D-026 flag). Base values only; derived values are asserted by tests.
+  - `ChassisConfig` (D-008, all 1.0), `CoreConfig` (§8.3), `AssetManifest` (keys = `assets/asset-manifest.json` ids, all `ASSET_PENDING`).
+  - `src/server/Tests/TestRunner.luau` plus `Config.spec` and `Remotes.spec`.
+  - Not invented: there is no default loadout in the spec. LoadoutService (TASK-07) needs one; that is an owner decision.
+- **Checks:** T-T01-001 to T-T01-006 (two failed attempts, fixed and retested; the negative probes show the analyzer enforces the contracts). Contracts committed and frozen as `4a132cc`. Studio run: 2 specs, 18 passed, 0 failed.
+- **Delegation:**
+  - `sphere-gameplay` role (Sonnet 5.5): CoordinateUtils and its spec.
+  - `sphere-docs` role (Haiku 4.5): constants audit plus the README "Setup and checks" section.
+  - Both stopped at the setup check: the automatic worktrees were at `bc4cfa7` (FAIL-013).
+  - Fixed with `git remote set-head origin -a` and lead-created worktrees `task01-coord` and `task01-docs` at `4a132cc` (scratchpad). Both agents resumed.
+- **sphere-gameplay report** (Sonnet 5.5, worktree `task01-coord` at `4a132cc`):
+  - Wrote `CoordinateUtils.luau` (`isOnBoard`, `ring`, `gridToWorld`, `worldToGrid`) and `CoordinateUtils.spec.luau` (6 tests). The five static checks were clean in its worktree; Studio was NOT RUN by the agent.
+  - Added beyond the brief: negative-zero normalization in `worldToGrid` (`+ 0`, so a cell key is never "-0"), with a test.
+  - The lead reviewed both files (API as briefed, no literal 12/4/50, center applied only through the CFrame), kept the addition, committed `ef0dbd9` on the agent branch and fast-forwarded `task01`.
+- **sphere-docs report** (Haiku 4.5, worktree `task01-docs` at `4a132cc`):
+  - Constants audit: 0 mismatches reported. Gaps the lead found in it are recorded in T-T01-009; the lead verified the skipped keys in T-T01-010.
+  - README "Setup and checks" section added. The lead fixed one phrase copied from the brief, committed `ccc24e6` on the agent branch and cherry-picked it as `f623871`.
+  - The agent's suggestion to proceed to TASK-02 was not followed; TASK-02 needs owner approval.
+- **Lead correction (own error):** the GameConfig collision-group comment said that pairs not listed "do not collide". §6.2 does not say that, so the comment now states the matrix exactly and calls unlisted pairs undecided (`f8178df`).
+- **Studio:** full suite 3 specs, 24 passed, 0 failed; a negative control showed the runner reports failures (T-T01-007, evidence file).
+- **Worktree cleanup:** `git worktree remove` for both agent worktrees. Branches `task01-coord` (merged) and `task01-docs` (content cherry-picked; `git diff` showed only the two CoordinateUtils files differ) deleted. Both were created by the lead in this session.
+- **Independent review RV-T01-01:** `sphere-reviewer` role (Opus 5.5, read-only) on `c2d1038..f8178df`. Result recorded when received.
+- **RV-T01-01 report received** (`sphere-reviewer` role via `general-purpose`, Opus 5.5, read-only; files changed: none; its static checks were clean; type probes ran on a scratchpad copy). Verdict: no HIGH finding. Disposition by the lead:
+
+  | Finding | Sev | Disposition |
+  |---|---|---|
+  | RV-T01-01 request/reply payloads missing | MEDIUM | Partly fixed in `5050441`: `QueueRequestPayload`, `LoadoutRequestPayload`, `LoadoutStatePayload`; `AbilityRequest` documented as carrying no payload. **Not decided by the lead:** how the D-019 Burst boost request travels (`AbilityRequest` with a kind field, or a simulation input action) is a remote-schema decision, raised to the owner as Q-2. The `CombatFXEvent` payload is deferred to TASK-06 (cosmetic, additive). Rate limits: the spec gives none except Path B, so they are deferred to TASK-06/07 |
+  | RV-T01-02 eligibility; queueing during a match | MEDIUM | Fixed: `QueueStatePayload.Eligible`, `QueueStatus` `MatchInProgress` |
+  | RV-T01-03 non-colliding pairs only in a comment | MEDIUM | Fixed: `NonColliding`, `CollidesWithNothing`; pairs the matrix does not list stay undecided |
+  | RV-T01-04 camera and presentation constants absent | MEDIUM | Deferred by design: the approved plan scoped GameConfig without them. The GameConfig header now says TASK-04/09 add them through the lead (additive) |
+  | RV-T01-05 weak asserts (angles, ratio) | MEDIUM | Fixed: exact angle lists, `ratio == 0.35` |
+  | RV-T01-06 casts hide a missing phase | LOW | Fixed: typed per-phase locals |
+  | RV-T01-07 `Boost` name clash | LOW | Fixed: `BurstBoost`, `Hazards.BoostRunway` |
+  | RV-T01-08 repeated group literal; always-true flag | LOW | Fixed: pods reference `CollisionGroups.LobbyAvatar`; the D-026 flag is now a comment (mandatory rule, not a setting) |
+  | RV-T01-09 empty run reads as a pass; `...any` unjustified | LOW | Fixed and verified (empty run fails, T-T01-014) |
+  | RV-T01-10 scan scope | LOW | Scope stated in the test name and comment |
+  | RV-T01-11 centered CFrame hides a CFrame bug | LOW | Not a defect: the API reads the locked config CFrame; no change |
+  | RV-T01-12 no end reason for zero survivors | LOW | Fixed: `EndReason` `NoSurvivor` |
+  | RV-T01-13 `CycleId` dedupe key | LOW | Fixed: comment says deduplicate by `(RoundId, CycleId)` |
+  | RV-T01-14 plan status still PROPOSED | LOW | Fixed: `docs/TASK-01_PLAN.md` status APPROVED |
+
+  A re-review was not requested: no HIGH finding, every fix is small, and each is covered by the static checks and the Studio suite (T-T01-013, T-T01-014).
+- **Lead slip during the fixes:** an incomplete `sed` rename left one call to the global `pairs`. luau-lsp caught it (T-T01-012); it was fixed with an exact edit (T-T01-013).
+- **Spec gaps the reviewer found** (not TASK-01 defects; for the owner before TASK-04/06/07): the §8.5 "contact tolerance" and the "near zero" direction thresholds (§8.3, D-019) are undefined; there is no named channel for ability feedback (NO TARGET, cooldowns); it is unclear who chooses the spectate target that D-023's ReplicationFocus follows; there is no default loadout.
+- **Checklist:** `ALPHA_ACCEPTANCE_CHECKLIST.md` grid round-trip item marked PASS (T-T01-007, T-T01-014). The ring and collapse items need GridService (TASK-02) and stay open.
+- **TASK-01 gate: PASSED** (table in `TEST_RESULTS.md`).

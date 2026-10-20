@@ -25,7 +25,7 @@ Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is
 ## Grid and collision surface
 - [ ] Grid generation creates exactly 81 unique cells.
 - [ ] Each cell has exactly one collidable `CollisionTile` and non-colliding visuals.
-- [ ] Grid coordinate round-trip passes for every coordinate in [-4,4].
+- [x] Grid coordinate round-trip passes for every coordinate in [-4,4]. **PASS** (TASK-01 `CoordinateUtils.spec` in Studio: T-T01-007, T-T01-014)
 - [ ] Ring D=4 contains 32 cells; first collapse leaves 49.
 - [ ] Ring D=3 contains 24 cells; second collapse leaves 25.
 - [ ] Tiles are edge-to-edge with no collision gaps; no stacked colliders.

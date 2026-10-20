@@ -1,0 +1,16 @@
+TASK-01 Studio TestRunner run (session S-20261020-09)
+Studio: Gate0.rbxl, solo Play started through the Studio MCP (start_stop_play); code run in the Server datamodel (execute_luau).
+Source: branch task01 at f623871 plus the GameConfig collision-group comment edit (comment only), synced by rojo serve 7.4.4.
+
+--- Run 1: module list, negative-zero probe, full suite ---
+ServerScriptService.Server.Tests.TestRunner
+ServerScriptService.Server.Tests.Unit.Config.spec
+ServerScriptService.Server.Tests.Unit.CoordinateUtils.spec
+ServerScriptService.Server.Tests.Unit.Remotes.spec
+negzero check: 0,0
+[TestRunner] 3 specs, 24 passed, 0 failed
+
+--- Run 2: negative control (temporary ModuleScript "ZzNegativeControl.spec" created in the Play server only, destroyed after the run) ---
+true
+[TestRunner] 4 specs, 25 passed, 1 failed
+ZzNegativeControl.spec > deliberately fails: ServerScriptService.Server.Tests.Unit.ZzNegativeControl.spec:2: negative control

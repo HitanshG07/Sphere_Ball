@@ -1,0 +1,12 @@
+TASK-01 Studio TestRunner run after the RV-T01-01 review fixes (session S-20261020-09)
+Studio: Gate0.rbxl, solo Play started through the Studio MCP; code run in the Server datamodel (execute_luau).
+Source: branch task01 working tree with the review fixes (committed right after this run; the only later edit is a
+comment in Types.luau), synced by rojo serve 7.4.4.
+
+--- Full suite ---
+[TestRunner] 3 specs, 25 passed, 0 failed
+
+--- Empty-run guard (RV-T01-09): a clone of TestRunner in an empty folder ZzEmptyRunnerCheck, destroyed after the run ---
+true
+[TestRunner] 0 specs, 0 passed, 1 failed
+no tests found
