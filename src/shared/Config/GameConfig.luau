@@ -148,7 +148,9 @@ GameConfig.Colors = {
 	TextSecondary = Color3.fromRGB(170, 190, 215),
 }
 
--- §6.2 collision groups. Pairs not listed here do not collide; SphereVisual collides with nothing.
+-- §6.2 collision-group matrix. Colliding: the pairs below. Not colliding: ArenaSphere with LobbyAvatar and with
+-- LobbyWorld, LobbyAvatar with ArenaTile, SphereVisual with every group. Pairs the matrix does not list (for example
+-- LobbyAvatar with LobbyAvatar) are undecided: raise them in TASK-02/03, do not guess.
 GameConfig.CollisionGroups = {
 	ArenaSphere = "ArenaSphere",
 	ArenaTile = "ArenaTile",
