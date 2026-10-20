@@ -255,3 +255,8 @@ Append-only chronological history for every AI and human working on the project.
 - **Owner saved the place** with `AuthorityMode = Server` (12:06:15) and added five Properties-panel screenshots, renamed to `20261020-*_A1_owner-screenshot_*.png`. The decoded saved file confirms Server plus the dependent settings (T-G0-042 PASS; FAIL-006 FIXED-VERIFIED). Setting Server also persisted NextGenerationReplication and UseFixedSimulation as Enabled (previously Default).
 - **Solo regression of `2612832` under Server Authority:** T-G0-043 PASS (all results in the register).
 - **Remaining for Gate 0:** the owner's 2-client sessions (C2, C3 two-client part, A3 at 150 ms, A4, A5, C5 disconnect), owner decisions D-026 and Q-1, then close-out.
+- **Owner decision:** D-026 approved ("Approve all", 2026-10-20 ~12:15) through a structured question.
+  - Decision log status set to APPROVED.
+  - Synced by insertion into `MASTER_IMPLEMENTATION_PLAN.md` (§5.4 parked-avatar streaming paragraph; §9.2 D-025 rationale note and the polling rule), `specs/DESIGN_CONSTANTS.md`, `ALPHA_ACCEPTANCE_CHECKLIST.md` (restore-matrix item), and Tasks 04 and 07.
+  - These docs-only edits are committed on `gate0-spike` and will be copied to `alpha` in the Gate 0 close-out commit with the records.
+  - Q-1 deferred until the 2-client data exists, as agreed.

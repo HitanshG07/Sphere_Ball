@@ -33,7 +33,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 ## Failed, blocked or open
 - **FAIL-004:** resolved. The native Studio MCP tools work in the current session (T-G0-040, FIXED-VERIFIED).
 - **FAIL-006:** fixed. Place saved with `AuthorityMode = Server`; A1 fully evidenced (T-G0-042); solo regression passes (T-G0-043).
-- **FAIL-009:** parked-avatar streaming. Spike fix works; **owner decision D-026 needed** to adopt it.
+- **FAIL-009:** parked-avatar streaming. Spike fix works; adoption approved as **D-026** (2026-10-20). Product implementation comes in TASK-04/07.
 - **A1:** complete (T-G0-042).
 - **FAIL-010:** C2 instrumentation fixed (`0c02823`); unverified until the 2-client run. Related owner question Q-1.
 
@@ -71,7 +71,7 @@ C2, C3 (two-client part), A3 at 150 ms, A4, A5, C5 disconnect: all need the owne
 13. Set Incoming Replication Lag back to **0** afterwards.
 
 **D. Decisions for the owner**
-14. Approve or reject **D-026** in `DECISION_LOG.md` (extra replication focus for the parked avatar; D-025 wording corrections).
+14. ~~D-026~~ **Approved** by the owner on 2026-10-20 (all three parts).
 15. **Q-1 (knockback feel; no change made yet).** The locked §8.5 knockback fully separates two colliding spheres only when they close at about 32.9–40 studs/s. In a full-speed head-on (about 84 studs/s) they are still closing at about 44 studs/s after the knockback, so Roblox's own contact physics also shapes the outcome (FAIL-010).
 
     The 2-client run will log both parts. Options to decide after seeing it:

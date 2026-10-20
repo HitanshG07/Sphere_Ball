@@ -342,6 +342,8 @@ If the player disconnects at any phase, destroy their sphere, remove queue/roste
 
 Cleanup ends with an invariant check: no SphereRoot remains, no saved-property records remain, every player's ReplicationFocus is nil, and connection counts are back to baseline.
 
+**Parked-avatar streaming (D-026):** after parking the avatar, the server also calls `player:AddReplicationFocus(<avatar HumanoidRootPart>)` so the avatar stays streamed on its owner's client, and removes that focus (pcall-guarded) at restore, cleanup and disconnect. The cleanup invariant also requires that no extra replication focus remains.
+
 ---
 
 # 6. Arena geometry and collision-safe construction
@@ -607,8 +609,8 @@ Gate 0 has two **pre-approved** paths. Try Path A first. If the current Studio b
 - Use Input Action System inputs for simulation inputs; use synchronized simulation time (`time()`) inside rollback/resimulation callbacks. Keep VFX, sounds, and other presentation outside simulation callbacks.
 - Keep gameplay outcomes, knockback, elimination, queue state, and results server-authoritative.
 - Prediction (D-025): the server creates the SphereRoot; each client calls `RunService:SetPredictionMode(ownRoot, Enum.PredictionMode.On)` after the root replicates and verifies `GetPredictionStatus(ownRoot) == Enum.PredictionStatus.Predicted`. Server code never calls `SetPredictionMode`.
-- Input bridge (D-025): the simulation `Move` action is a world-space Direction2D (`Vector2(x, y)` maps to world `(x, 0, y)`) with one `Scriptable` binding. The client converts camera-relative hardware input to world space and fires `InputBinding:Fire` each frame outside the simulation; the simulation clamps the magnitude to <= 1. Never use the deprecated `InputAction:Fire`. Test automation feeds the same bridge, is gated by `RunService:IsStudio()`, and never ships in production controllers.
-- Rollback safety (D-025): simulation callbacks write only synchronized state (velocities, attributes on predicted instances). Server-only outcomes are written as attributes with monotonically increasing sequence IDs; presentation and logging observe them outside the simulation and deduplicate by sequence ID.
+- Input bridge (D-025): the simulation `Move` action is a world-space Direction2D (`Vector2(x, y)` maps to world `(x, 0, y)`) with one `Scriptable` binding. The client converts camera-relative hardware input to world space and fires `InputBinding:Fire` each frame outside the simulation; the simulation clamps the magnitude to <= 1. Never use the deprecated `InputAction:Fire`. Test automation feeds the same bridge, is gated by `RunService:IsStudio()`, and never ships in production controllers. (D-026: the original rationale "the server has no camera" is outdated because `Player:GetCameraState()` exists under Server Authority; the world-space bridge remains the chosen, verified design.)
+- Rollback safety (D-025): simulation callbacks write only synchronized state (velocities, attributes on predicted instances). Server-only outcomes are written as attributes with monotonically increasing sequence IDs; presentation and logging observe them outside the simulation and deduplicate by sequence ID. Presentation polls that state every rendered frame and must not rely on attribute or property change signals of predicted instances, which do not fire for these updates (D-026).
 
 **Path B - Server-owned physics fallback (pre-approved only when Path A is unavailable in the target environment):**
 - Set every live `SphereRoot` assembly to server network ownership with `SphereRoot:SetNetworkOwner(nil)` on the server. This is not the Roblox Server Authority/rollback model; document it as server-owned simulation with server-authoritative outcomes.

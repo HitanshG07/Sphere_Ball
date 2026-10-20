@@ -93,7 +93,7 @@ Every item must be marked `PASS`, `FAIL`, or `NOT RUN` with evidence. Release is
 - [ ] Results panel lasts 8 seconds and has working Return to Hub.
 - [ ] Three sequential rounds complete with no stale tile/hazard/connection state.
 - [ ] Hard-timeout placements follow D-022.
-- [ ] D-023 restore matrix passes for elimination, disconnect and match end: ReplicationFocus, camera, input bindings, connections, spheres and avatar properties are restored as specified, and the cleanup invariant check passes.
+- [ ] D-023 restore matrix passes for elimination, disconnect and match end: ReplicationFocus, camera, input bindings, connections, spheres and avatar properties are restored as specified, and the cleanup invariant check passes, including removal of the D-026 extra replication focus.
 
 ## UI / visuals / audio / accessibility
 - [ ] All active lobby buttons work; unimplemented features are disabled/Coming Soon.
