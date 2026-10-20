@@ -245,3 +245,10 @@ Append-only chronological history for every AI and human working on the project.
 - **Sync check:** Studio script sources match the repository byte for byte (Gate0Sim 7395, Gate0Server 15569, Gate0Client 14620; all contain the RV-01 markers). The Edit workspace has no stray attributes.
 - **FAIL-006 still open:** `place/Gate0.rbxl` is unchanged (mtime 01:57:23) and the decoded `AuthorityMode` is still 1 (Automatic).
 - **RV-02 attempt 2:** launching `sphere-reviewer` by name failed again (`Agent type 'sphere-reviewer' not found`). This is the same Claude process; project agents load at process start. Fallback: `general-purpose` with the role file, Opus 5.5, read-only. Result recorded when received.
+- **RV-02 report received** (`sphere-reviewer` role via `general-purpose`, Opus 5.5, read-only; checks clean). All RV-01 fixes VERIFIED. New issues, all accepted and fixed in `2612832`:
+  - NEW-1: engine contribution read too early. Now the pair is followed for up to 10 Heartbeats.
+  - NEW-2: A4 skew under latency. Now judged once settled and again 1 s later; ping and speed logged; the +1 s sample is informational.
+  - NEW-3: `pcall` around `RemoveReplicationFocus`.
+  - NEW-4: the driver header and owner steps say to wait for both clients' A2 lines and to use the Command Bar if the MCP call times out.
+  - Minor: horizontal cap flag fixed. Late reporting of drop counts and the `lastValue` growth per respawn are accepted for the spike.
+- **Solo regression of `2612832` (T-G0-041) is BLOCKED:** Studio had reopened the saved place, which still has `AuthorityMode = Automatic`, so Server Authority was off (`SetNetworkOwner` succeeded). Authority-independent paths passed. FAIL-006 is now blocking. Gate 0 Studio tests are paused until the owner sets `AuthorityMode = Server` in the Properties panel and saves.

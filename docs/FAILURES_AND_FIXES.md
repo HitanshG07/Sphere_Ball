@@ -108,3 +108,8 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Retest:** T-G0-040. The native `Roblox_Studio` MCP tools are available in the current Claude session (28 tools) and work against the Studio instance `Gate0.rbxl`. The direct stdio workaround is no longer needed.
 - **Remaining uncertainty:** the path-case hypothesis was not tested directly; the user-scope registration made it irrelevant.
 - **Status:** FIXED-VERIFIED
+
+### FAIL-006 update (S-20261020-06) — now blocking
+- **Observation (confirmed):** after the owner reconnected Studio (place lock file 11:48:15), Studio was running `place/Gate0.rbxl` from disk, still saved with `AuthorityMode = Automatic` (re-decoded: value 1). The live session lost Server Authority: `SetNetworkOwner(player)` succeeded, client roots were `Authoritative`, and server velocity writes had no effect (T-G0-041).
+- **Impact:** all Path A Studio tests are blocked until `AuthorityMode = Server` is set in the Properties panel **and saved**. A script cannot set it (`lacking capability RobloxScript`, T-G0-005).
+- **Status:** OPEN — blocking (owner action)

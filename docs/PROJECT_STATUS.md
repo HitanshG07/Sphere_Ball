@@ -5,7 +5,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 **Updated:** 2026-10-20, session S-20261020-06 (lead: Claude Code 2.1.303, Opus 5.5)
 **Milestone:** Gate 0 (TASK-00), environment and physics-authority feasibility
 **Overall status:** IN PROGRESS. **Gate 0 has not passed.** TASK-01 has not started and is not authorized.
-**Waiting on:** the owner's two-client Studio session (see Owner actions).
+**Waiting on:** **BLOCKER FAIL-006.** Studio reopened the saved place and is no longer running Server Authority. The owner must set `AuthorityMode = Server` and save (Owner actions A1–A2) before any further test. After that: the two-client session.
 **Branches:**
 - `main` = `f726ddd` (untouched spec baseline).
 - `alpha` = `cff1063` (rules and records as of S-20261020-03).
@@ -32,7 +32,7 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 
 ## Failed, blocked or open
 - **FAIL-004:** resolved. The native Studio MCP tools work in the current session (T-G0-040, FIXED-VERIFIED).
-- **FAIL-006:** saved `place/Gate0.rbxl` still has `AuthorityMode = Automatic`. **Owner must save.**
+- **FAIL-006 (BLOCKING):** saved `place/Gate0.rbxl` still has `AuthorityMode = Automatic`. Studio reopened it at 11:48, so the live session lost Server Authority (T-G0-041). **Owner must set it in the Properties panel and press Ctrl+S.**
 - **FAIL-009:** parked-avatar streaming. Spike fix works; **owner decision D-026 needed** to adopt it.
 - **A1:** dependent settings not yet captured in a screenshot.
 - **FAIL-010:** C2 instrumentation fixed (`0c02823`); unverified until the 2-client run. Related owner question Q-1.
@@ -60,7 +60,7 @@ C2, C3 (two-client part), A3 at 150 ms, A4, A5, C5 disconnect: all need the owne
 **B. Session 1: 0 ms latency**
 5. Studio: **File ▸ Studio Settings ▸ Network ▸ Incoming Replication Lag = 0** (it reads 0 now). Alternatively, tell Claude to set it through the MCP.
 6. **Test ▸ Clients and Servers**, Players = **2**, then **Start**. A Server window and 2 client windows open. Do not touch the client windows; AutoDrive moves the spheres.
-7. Claude runs the driver through the MCP if it can reach the Server window. Otherwise, in the **Server** window open **View ▸ Command Bar**, paste the whole file `tests/gate0/G0_two_client_driver.luau` and press Enter. Wait about 70 seconds for `[G0D] driver done`.
+7. Wait until the Server window's Output shows **both** clients' `[G0C<-...] A2 ... status=Predicted` lines. Then Claude runs the driver through the MCP if it can reach the Server window. Otherwise, in the **Server** window open **View ▸ Command Bar**, paste the whole file `tests/gate0/G0_two_client_driver.luau` and press Enter. Wait about 1.5–2 minutes for `[G0D] driver done`.
 8. Close **one** client window (disconnect test) and wait 3 seconds.
 9. In the Server window's **Output**, select all, copy, and save it as `docs/evidence/gate0/YYYYMMDD-HHMMSS_T-G0-036_2client_0ms_server-output.txt` (or let Claude read it through the MCP).
 10. Stop the test session.
