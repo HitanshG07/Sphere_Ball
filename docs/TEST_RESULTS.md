@@ -111,3 +111,9 @@ Placeholders T-G0-009 to T-G0-015 above stay as written; the rows below are the 
 | T-G0-046h | **C4** camera with 2 clients (retest of T-G0-044j) | final-camera probe at RenderPriority Last+200; screen capture | camera follows the own sphere, no roll | `final cam type=Scriptable distToSphere=20.12 rollY=0.00000`; capture shows both spheres on the arena | PASS | `*_T-G0-046_client-view-150ms.jpg`; FAIL-011 verified |
 | T-G0-046i | C5 disconnect at 150 ms | server kick of -2 | cleanup | `C5 disconnect cleanup uid=-2 remainingRoots=1 savedRecords=1 roundConns=1` | PASS | |
 | T-G0-046j | Remote spheres' prediction | client reports | observe | both clients report both roots `Predicted` | INFORMATIONAL | |
+
+## Publishing setup (S-20261020-09)
+
+| ID | Requirement | Procedure | Expected | Actual | Status | Evidence / notes |
+|---|---|---|---|---|---|---|
+| T-PUB-001 | Place-file stop condition before committing `place/Gate0.rbxl` (owner re-saved 13:36:18 while Rojo served `alpha`) | `grep -a -c` for `Gate0Server`, `Gate0Client`, `Gate0Sim`; full decode of all chunks (LZ4 and ZSTD) searching for `Gate0`, script classes and owner identifiers; Workspace property decode | 0 / 0 / 0; no scripts; `AuthorityMode` 0 | grep 0 / 0 / 0; 1,399 chunks decoded, 0 size mismatches; 0 `Gate0` strings; no `Script`/`LocalScript`/`ModuleScript` instances; `AuthorityMode` 0, NextGenerationReplication 2, PlayerScriptsUseInputActionSystem 2, SignalBehavior2 2, StreamingEnabled true, UseFixedSimulation 2; owner username, UserId (text and 32/64-bit integer), email, `C:\` paths and `ROBLOSECURITY`: 0 | PASS | raw `grep` alone is not conclusive (most chunks are ZSTD-compressed). Integer search does not cover Roblox's interleaved array encoding; the text checks and the absence of Player instances cover that. Decoder: scratchpad parser from S-20261020-02 plus `zstandard` 0.25.0 installed in the scratchpad only |

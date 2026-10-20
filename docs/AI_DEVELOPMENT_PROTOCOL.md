@@ -14,6 +14,8 @@ Chat history and provider-specific memory are never a source of truth. Anything 
 ## 2. Session start protocol (every AI, every session)
 1. Read `AGENTS.md`, this protocol, `docs/PROJECT_STATUS.md`, the active task card, `DECISION_LOG.md` and the most recent `docs/WORK_LOG.md` entries.
 2. Verify the actual state: current branch, `git status`, `git log -5`, stashes, open failures in `docs/FAILURES_AND_FIXES.md`. If the records and the repository disagree, the repository wins; append a correction to the work log.
+   - Run `git fetch origin`, then compare each local branch with its remote (`git status -sb`, or `git rev-parse <branch> origin/<branch>`).
+   - If they diverged or the remote moved ahead, do not pull or merge over uncommitted or unpushed work. Record the divergence in the work log, then fast-forward only when the local branch has no unique commits; otherwise ask the owner.
 3. Confirm the authorized milestone and its restrictions (section 10). Do not start unauthorized work.
 4. Identify the available models and agents (section 4) and decide whether delegation is justified.
 5. Append a work-log entry with a new session ID, the lead tool and model, the objective, dependencies and acceptance criteria before substantial work.
@@ -79,13 +81,39 @@ Research and review agents label their output as research or review, not impleme
 
 **Evidence.** Store under `docs/evidence/<milestone>/` with names `YYYYMMDD-HHMMSS_<test-id>_<description>.<ext>`. Keep useful excerpts in the reports and link full logs. Redact credentials, tokens and private keys. Do not commit secrets, caches or enormous raw logs.
 
+**Owner identity redaction (the repository is public).** When capturing new evidence (console output, screenshots, decoded files), replace the owner's Roblox username with `<owner-roblox-user>` and the owner's Roblox UserId with `<owner-uid>` before the file is written to the repository. Studio test players (negative UserIds such as `-1`, `Player1`) need no redaction. Evidence committed before 2026-10-20 S-20261020-09 and the existing commit metadata stay unchanged: removing them would need a history rewrite, which requires explicit owner approval.
+
 **Checkpoints.** Before a substantial task: record the objective, dependencies and acceptance criteria. After each significant task or failed attempt: append to the work log and update the test, failure and status records. After each milestone: list passed, failed, blocked, inconclusive and unrun criteria separately and state whether the gate passed.
 
-## 7. Git and branching
-- `main`: untouched specification baseline (`f726ddd`). Never commit to it without owner approval.
-- `alpha`: integration branch for approved work and records.
-- Spike or experiment branches (for example `gate0-spike`): never merged into `alpha`. Only verified documentation moves to `alpha` in a separate docs-only commit.
-- Feature or worktree branches for parallel agents are merged by the lead after review and validation.
+## 7. Git, branching and GitHub
+**Remote.** `origin` = `https://github.com/HitanshG07/Sphere_Ball.git` is the shared hub for every AI tool (owner instruction, 2026-10-20). Authentication stays in the tool's credential store (for example the OS keyring used by `gh`), never in the repository.
+
+**Branch map.**
+| Branch | Role | Rules |
+|---|---|---|
+| `main` | untouched specification baseline (`f726ddd`) | never commit or push to it without owner approval |
+| `alpha` | GitHub default branch; integration branch for approved work and records | receives only validated work, by fast-forward or a lead merge |
+| `gate-0` | Gate 0 prototype (`bc4cfa7`) | never merged into `alpha`; only verified documentation moved to `alpha`, in a separate docs-only commit. Local alias `gate0-spike` tracks `origin/gate-0`. A duplicate local branch `gate-0` (same commit) also exists and is kept until the owner authorizes deleting it |
+| `task<NN>` (for example `task01`) | one task's work, branched from `alpha` | pushed after validation; merged into `alpha` by the lead once the task gate passes |
+| agent worktree branches | parallel writers | local only unless the lead decides otherwise; merged by the lead after review |
+
+**Push procedure.**
+1. `git fetch origin` and confirm the push is a fast-forward of the remote branch.
+2. Run the pre-push audit below.
+3. `git push origin <branch>` (never `--force` or `--force-with-lease` without explicit owner approval).
+4. Verify with `git ls-remote origin <branch>` and record the pushed hash and remote ref in the work log and `PROJECT_STATUS.md`. A backup or publication is claimed only after this check succeeds.
+
+**Pre-push audit.**
+- Secret scan of the new commits (`git log -p origin/<branch>..<branch>`): tokens (`gh[pousr]_`, `github_pat_`), API keys, private keys, `.ROBLOSECURITY` cookies, `.env` files, passwords.
+- Ignore review: no build output (`build/`), generated `sourcemap.json`, lock files or caches staged.
+- Large files: anything above about 50 MB goes through Git LFS (needs owner approval to enable). The largest tracked file today is the 2.7 MB concept PNG.
+- Scope: `git diff --stat origin/<branch>..<branch>` matches what the work log says was changed; no prototype `src`/`tests` files from `gate-0` reach `alpha`.
+
+**Visibility.** The repository is **public** by owner decision (2026-10-20). Owner identifiers in new evidence are redacted (section 6). Changing visibility is an owner decision.
+
+**Canonical Studio place.** `place/Gate0.rbxl` is version-controlled: Path A Workspace settings (`AuthorityMode = Server`, saved) and no game scripts. Code comes from Rojo (`rojo serve default.project.json`), never from scripts saved in the place. Before committing a re-saved place, check that the decoded file contains no scripts or owner identifiers and still decodes to `AuthorityMode` 0. `*.rbxl.lock` stays ignored; `*.rbxl` is binary in `.gitattributes`.
+
+**General.**
 - Commit coherent, scoped units with descriptive messages. Do not rewrite published history, force-push, skip hooks or amend another agent's commit.
 - Never discard uncommitted user work; use a stash or branch and record it.
 
@@ -110,8 +138,9 @@ If a record cannot be updated (permissions, tool limits, environment unavailable
 | GitHub Copilot, Cursor | none (owner instruction 2026-10-20: not needed) | both read `AGENTS.md` natively per their docs | not configured |
 
 ## 10. Milestone restrictions (current)
-- Gate 0 (TASK-00) has not passed. TASK-01 and gameplay implementation are not authorized.
-- `gate0-spike` is never merged into `alpha`.
-- Supporting agents: read-only research and auditing only until the Gate 0 procedure authorizes more.
+- Gate 0 (TASK-00) passed on 2026-10-20 with Path A (D-024).
+- TASK-01 is authorized (owner approval of `docs/TASK-01_PLAN.md`, 2026-10-20). TASK-02 and later tasks each need owner approval before they start.
+- The Gate 0 prototype (`gate-0` / `gate0-spike`) is never merged into `alpha`.
+- Supporting agents write only the files their brief assigns, in an isolated worktree or branch; the lead integrates.
 - Locked decisions (D-001 to D-018) and owner decisions (D-019 onward) change only through a recorded, owner-approved decision.
-- After Gate 0 passes, apply section 5 to TASK-01 onward using the task dependencies in `MASTER_IMPLEMENTATION_PLAN.md` section 15 and the frozen interfaces.
+- Apply section 5 to TASK-01 onward using the task dependencies in `MASTER_IMPLEMENTATION_PLAN.md` section 15 and the frozen interfaces.

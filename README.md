@@ -36,5 +36,9 @@ tasks/
 specs/
 ```
 
+## Repository and Studio place
+- GitHub: `https://github.com/HitanshG07/Sphere_Ball` (default branch `alpha`). Branch map and push rules: `docs/AI_DEVELOPMENT_PROTOCOL.md` section 7.
+- `place/Gate0.rbxl` is the canonical Studio place. It holds the saved Path A settings (`Workspace.AuthorityMode = Server`) and no game scripts. Open it in Studio, then connect the Rojo plugin to `rojo serve default.project.json` (repo root) to load the code from `src/`.
+
 ## What this pack does not do
 It is a specification and execution protocol, not a prebuilt Roblox game. The assigned agents must create the Luau source, procedural environment, UI, visualizers, tests, and assets. A plan cannot guarantee zero defects; the gate-and-evidence process is how defects are caught before moving forward.

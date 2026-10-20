@@ -302,3 +302,29 @@ Append-only chronological history for every AI and human working on the project.
   4. Pushed `alpha` (`001156d`, verified docs, Gate 0 report, evidence, TASK-01 plan) to `origin/alpha`.
   5. Pushed `main` (`f726ddd`, untouched spec baseline) to `origin/main`.
 - **Status:** All branches published to GitHub and tracking up to date.
+
+## S-20261020-09 — GitHub publishing rules and canonical place (Part A), then TASK-01 (Part B)
+- **When:** 2026-10-20 from ~13:45 IST.
+- **Lead:** Claude Code (VS Code extension), Opus 5.5 (`claude-opus-5-5`). The session started in the parent folder `C:\Sphere_ball_rblox`, so `CLAUDE.md` was not auto-loaded; the lead read `AGENTS.md`, the protocol, `PROJECT_STATUS.md`, `docs/TASK-01_PLAN.md`, the TASK-01 card, `DECISION_LOG.md` and this log manually.
+- **Owner instruction:** execute the approved plan (Part A: GitHub publishing setup including the place-file stop condition; Part B: TASK-01). Stop for owner approval before TASK-02.
+- **Session-start check** (repository state, verified):
+  - `git fetch origin`: nothing new.
+  - Local `main` `f726ddd`, `alpha` `d68f644`, `gate-0` `bc4cfa7` (each tracking its `origin/` branch); `gate0-spike` `bc4cfa7` with no upstream.
+  - `git ls-remote origin`: `main` `f726ddd`, `alpha` `d68f644`, `gate-0` `bc4cfa7`, `HEAD` → `gate-0`. Local and remote agree.
+  - Working tree clean on `alpha`; no stash. `gh` is logged in (token in the OS keyring). Repository PUBLIC, default branch `gate-0`.
+- **S-20261020-08 (Antigravity) verified against the remote:** all three pushed refs exist at the recorded commits. The `alpha` push recorded as `001156d` is now `d68f644`, which is S-20261020-08's own work-log commit on top of it (fast-forward; no rewrite).
+- **Stale rule found and fixed:** `AGENTS.md` ("Current milestone gate") and protocol §10 still said Gate 0 had not passed and TASK-01 was not authorized. That contradicts D-024 and `PROJECT_STATUS.md`. It is not a design conflict: the rule's own condition (Gate 0 passed) is met and the owner has now approved TASK-01. Both are updated in this session's rules commit.
+- **FAIL-012 logged:** the broken "Waiting on" line in `PROJECT_STATUS.md` (commit `001156d`). Only that line was damaged.
+- **Place-file stop condition** (T-PUB-001):
+  - The owner had already re-saved `place/Gate0.rbxl` at 13:36:18 while Rojo served `alpha` (91 KB → 76,122 bytes).
+  - `grep -a -c` for `Gate0Server`, `Gate0Client`, `Gate0Sim`: 0, 0, 0.
+  - `grep` on the raw file is not conclusive, because most chunks are ZSTD-compressed. A full decode (all 1,399 chunks, 0 size mismatches; scratchpad parser with the `zstandard` package installed into the scratchpad only) found 0 `Gate0` strings and no `Script`, `LocalScript` or `ModuleScript` instances.
+  - Workspace decode: `AuthorityMode` 0 (Server), NextGenerationReplication 2, PlayerScriptsUseInputActionSystem 2, SignalBehavior2 2, StreamingEnabled true, UseFixedSimulation 2.
+  - No owner identifiers in the decoded place: the Roblox username, the UserId (as text and as 32/64-bit integers), the email, `C:\` paths and `ROBLOSECURITY` all count 0.
+  - Result: all checks pass, so `place/` is removed from `.gitignore` and the place is committed.
+- **Permanent GitHub rules** written:
+  - `AGENTS.md`: new "GitHub: the shared hub" section; session start now includes `git fetch origin`; milestone section updated.
+  - Protocol §2 (fetch and divergence check), §6 (owner identity redaction), §7 (remote, branch map, push procedure, pre-push audit, visibility, canonical place), §10 (milestone restrictions).
+  - `README.md`: repository and canonical place section.
+- **GitHub settings:** `gh repo edit HitanshG07/Sphere_Ball --default-branch alpha`; `gh repo view --json defaultBranchRef,visibility` → `alpha`, `PUBLIC`.
+- **Branches:** `git branch --set-upstream-to=origin/gate-0 gate0-spike` (now tracks `origin/gate-0`). The duplicate local `gate-0` branch is left as is.

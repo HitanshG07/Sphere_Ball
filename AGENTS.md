@@ -13,15 +13,22 @@ The detailed process is in [docs/AI_DEVELOPMENT_PROTOCOL.md](docs/AI_DEVELOPMENT
 If anything conflicts, stop, record the conflict in the work log, and ask the owner. Never resolve a conflict silently. DOCX/PDF copies are reading references only.
 
 ## Current milestone gate (check docs/PROJECT_STATUS.md for the live state)
-- The project is in **Gate 0 (TASK-00)**. Gate 0 has **not** passed.
-- Do **not** start TASK-01 or implement gameplay until Gate 0 passes with evidence.
-- Do **not** merge `gate0-spike` into `alpha`. `main` holds the untouched spec baseline and is never modified.
-- Supporting agents are limited to read-only research and auditing until the Gate 0 procedure authorizes more.
+- Gate 0 **passed** on 2026-10-20 with Path A (D-024). TASK-01 is authorized (owner approval, 2026-10-20). Every later task needs its own owner approval before it starts.
+- Do **not** merge the Gate 0 prototype (`gate-0` on GitHub, local alias `gate0-spike`) into `alpha`. `main` holds the untouched spec baseline and is never modified.
+- Supporting agents write only the files their brief assigns, in their own worktree or branch; the lead integrates.
 - Switching tools, starting a new session or delegating to another agent never bypasses a gate.
+
+## GitHub: the shared hub
+- `origin` = `https://github.com/HitanshG07/Sphere_Ball` (public by owner decision; default branch `alpha`) is the shared version-control hub for every AI tool. Branch map, push procedure and pre-push audit: protocol §7.
+- At session start, `git fetch origin` and compare local and remote branches. Never auto-pull or merge remote changes over uncommitted or unpushed local work; record the divergence and ask.
+- Concurrent writers use task branches or worktrees. Push only validated branches that the owner or lead has authorized.
+- No force-push or history rewrite without explicit owner approval. Never commit credentials, tokens, cookies or keys.
+- Record every push (commit hash and remote ref from `git ls-remote`) in the work log. Never claim a backup or publication until the push has succeeded.
+- New evidence redacts the owner's Roblox identity as `<owner-roblox-user>` and `<owner-uid>` (protocol §6).
 
 ## Start of every session
 1. Read this file, [docs/AI_DEVELOPMENT_PROTOCOL.md](docs/AI_DEVELOPMENT_PROTOCOL.md), [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md), the active task card, [DECISION_LOG.md](DECISION_LOG.md) and the latest entries of [docs/WORK_LOG.md](docs/WORK_LOG.md).
-2. Verify the real repository state yourself (`git branch --show-current`, `git status`, `git log -5`). Do not trust a previous chat's claims.
+2. Verify the real repository state yourself (`git branch --show-current`, `git status`, `git log -5`, `git fetch origin` and a local-versus-remote comparison). Do not trust a previous chat's claims.
 3. Confirm the authorized milestone, open acceptance criteria and blockers.
 4. Identify which models and agents are actually available; choose only what the task justifies.
 5. Append a work-log entry with a new session ID, the objective and the validation plan before substantial work.

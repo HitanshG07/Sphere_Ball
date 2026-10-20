@@ -133,3 +133,12 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 ### FAIL-011 update (S-20261020-06) — verified
 - **Retest:** T-G0-046h, two clients at 150 ms. Final rendered camera Scriptable at the intended 20.12-stud offset with roll 0; screen capture shows both spheres on the arena.
 - **Status:** FIXED-VERIFIED
+
+## FAIL-012 — Shell command substitution erased text from a record line
+- **Session / discovered:** introduced in S-20261020-07 (commit `001156d`, pushed to `origin/alpha` in S-20261020-08); found by the read-only audit before S-20261020-09.
+- **Observation (confirmed):** `docs/PROJECT_STATUS.md` read "**Waiting on:** owner approval of . Q-1 was decided as D-027 ...". The backtick-quoted file name (`docs/TASK-01_PLAN.md`) is missing.
+- **Cause (confirmed by the symptom):** the Markdown was passed to the shell inside a double-quoted string. The shell treated the backticks as command substitution, ran the file name as a command, and replaced it with the (empty) output.
+- **Impact:** only that line. The other lines added in `001156d` were checked and are intact. No other damage.
+- **Fix:** S-20261020-09 rewrote the line in `PROJECT_STATUS.md`.
+- **Prevention:** never put Markdown containing backticks or `$` in double-quoted shell strings. Write records with the editor's file tools, or with a single-quoted heredoc file that is then appended. Related: FAIL-003 (heredoc parse failure on record text).
+- **Status:** FIXED-VERIFIED (line rewritten; `git diff` inspected)
