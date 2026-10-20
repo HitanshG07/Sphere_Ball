@@ -220,6 +220,11 @@ end
 
 -- Round binding (re-entrant: every own root that appears gets one fresh set of connections) ------------
 local roundConns: { RBXScriptConnection } = {}
+local CAMERA_STEP = "Gate0Camera"
+local CAMERA_PROBE_STEP = "Gate0CameraProbe"
+local cameraBound = false
+local cameraOverrides = 0 -- times the default camera script reset CameraType away from Scriptable (FAIL-011)
+local maxFinalCamDistError = 0 -- final rendered camera distance error vs the intended follow offset (FAIL-011)
 local bindGeneration = 0 -- bumped on every unbind; a bind that yielded across an unbind abandons itself (RV-01 L3)
 local ignoreCorrectionUntil = 0 -- reset teleports are not corrections (RV-01 M2)
 local function unbindRound(reason: string)
@@ -228,6 +233,11 @@ local function unbindRound(reason: string)
 		c:Disconnect()
 	end
 	table.clear(roundConns)
+	if cameraBound then
+		RunService:UnbindFromRenderStep(CAMERA_STEP)
+		RunService:UnbindFromRenderStep(CAMERA_PROBE_STEP)
+		cameraBound = false
+	end
 	autoRun = 0 -- an AutoDrive run never carries over to a new root
 	log("unbind reason=%s roundConns=%d", reason, #roundConns)
 end
@@ -258,11 +268,59 @@ local function bindRound(root: BasePart)
 	camera.CameraType = Enum.CameraType.Scriptable
 	local camPos = root.Position + Vector3.new(0, 9, -18)
 	local lastPos, lastVel = root.Position, root.AssemblyLinearVelocity
+	local CAM_OFFSET = Vector3.new(0, 7, -18)
+
+	-- FAIL-008 applies to Eliminated too: the change signal does not fire on a predicted root, so elimination is
+	-- detected by polling (or by the root disappearing) in the per-frame loop below.
+	local function onEliminated()
+		eliminated = true
+		bridge:Fire(Vector2.zero)
+		hardware.Enabled = false
+		local others = liveOthers(root)
+		spectating = others[1]
+		local world = workspace:FindFirstChild("Gate0World")
+		local focusPart = world and world:FindFirstChild("Gate0ArenaFocus")
+		if not spectating and focusPart and focusPart:IsA("BasePart") then
+			spectating = focusPart
+		end
+		log(
+			"C5 eliminated: input unbound hardwareEnabled=%s spectating=%s",
+			tostring(hardware.Enabled),
+			tostring(spectating)
+		)
+	end
+
+	-- FAIL-011: the default camera script resets CameraType to Custom when the avatar spawns and then drives the
+	-- camera to the parked avatar. Drive the sphere camera after the default camera update every frame, and measure
+	-- C4 from the final rendered camera in a later binding.
+	RunService:BindToRenderStep(CAMERA_STEP, Enum.RenderPriority.Camera.Value + 1, function(dt: number)
+		if camera.CameraType ~= Enum.CameraType.Scriptable then
+			cameraOverrides += 1
+			camera.CameraType = Enum.CameraType.Scriptable
+		end
+		local target: BasePart = if spectating and spectating.Parent then spectating else root
+		local focus = target.Position + Vector3.new(0, 2, 0)
+		camPos = camPos:Lerp(focus + CAM_OFFSET, 1 - math.exp(-8 * dt))
+		camera.CFrame = CFrame.lookAt(camPos, focus)
+	end)
+	RunService:BindToRenderStep(CAMERA_PROBE_STEP, Enum.RenderPriority.Last.Value + 1, function()
+		local final = camera.CFrame
+		maxRoll = math.max(maxRoll, math.abs(final.RightVector.Y))
+		local target: BasePart = if spectating and spectating.Parent then spectating else root
+		local intended = target.Position + Vector3.new(0, 2, 0) + CAM_OFFSET
+		if not eliminated and target.Parent then
+			maxFinalCamDistError = math.max(maxFinalCamDistError, (final.Position - intended).Magnitude)
+		end
+	end)
+	cameraBound = true
 
 	table.insert(
 		roundConns,
 		RunService.PreRender:Connect(function(dt: number)
 			frame += 1
+			if not eliminated and (root.Parent == nil or root:GetAttribute("Eliminated") == true) then
+				onEliminated()
+			end
 			-- Input bridge (outside the simulation).
 			if not eliminated then
 				local auto = autoDriveVector(root)
@@ -285,34 +343,6 @@ local function bindRound(root: BasePart)
 					maxCorrection = math.max(maxCorrection, (root.Position - expected).Magnitude)
 				end
 				lastPos, lastVel = root.Position, root.AssemblyLinearVelocity
-			end
-			-- Camera: position-only follow, no roll.
-			local target: BasePart = if spectating and spectating.Parent then spectating else root
-			local focus = target.Position + Vector3.new(0, 2, 0)
-			camPos = camPos:Lerp(focus + Vector3.new(0, 7, -18), 1 - math.exp(-8 * dt))
-			camera.CFrame = CFrame.lookAt(camPos, focus)
-			maxRoll = math.max(maxRoll, math.abs(camera.CFrame.RightVector.Y))
-		end)
-	)
-	table.insert(
-		roundConns,
-		root:GetAttributeChangedSignal("Eliminated"):Connect(function()
-			if root:GetAttribute("Eliminated") == true and not eliminated then
-				eliminated = true
-				bridge:Fire(Vector2.zero)
-				hardware.Enabled = false
-				local others = liveOthers(root)
-				spectating = others[1]
-				local focus = workspace:FindFirstChild("Gate0World")
-				focus = focus and focus:FindFirstChild("Gate0ArenaFocus")
-				if not spectating and focus and focus:IsA("BasePart") then
-					spectating = focus
-				end
-				log(
-					"C5 eliminated: input unbound hardwareEnabled=%s spectating=%s",
-					tostring(hardware.Enabled),
-					tostring(spectating)
-				)
 			end
 		end)
 	)
@@ -360,7 +390,7 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 			table.insert(statuses, r.Name .. ":" .. RunService:GetPredictionStatus(r).Name)
 		end
 		log(
-			"report %s uid=%d rollbacks=%d mispredictions=%d simSteps=%d resimSteps=%d maxCorrectionSinceLastReport=%.3f rawFx=%d uniqueFx=%d signalFx=%d regressions=%d maxCameraRollY=%.5f predictionStatus=[%s]",
+			"report %s uid=%d rollbacks=%d mispredictions=%d simSteps=%d resimSteps=%d maxCorrectionSinceLastReport=%.3f rawFx=%d uniqueFx=%d signalFx=%d regressions=%d maxCameraRollY=%.5f cameraOverrides=%d maxFinalCamDistError=%.2f predictionStatus=[%s]",
 			value,
 			player.UserId,
 			rollbacks,
@@ -373,9 +403,12 @@ workspace:GetAttributeChangedSignal("Gate0Cmd"):Connect(function()
 			signalFx,
 			regressions,
 			maxRoll,
+			cameraOverrides,
+			maxFinalCamDistError,
 			table.concat(statuses, ", ")
 		)
 		maxCorrection = 0 -- per-interval metric (RV-01 M2)
+		maxFinalCamDistError = 0
 	elseif verb == "reset" then
 		ignoreCorrectionUntil = os.clock() + 0.75
 	elseif verb == "tamper" then
