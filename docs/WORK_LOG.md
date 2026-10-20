@@ -290,3 +290,15 @@ Append-only chronological history for every AI and human working on the project.
 - Owner chose for Q-1 "Keep it, tune at playtest", recorded as **D-027 (APPROVED)**.
 - Owner confirmed Incoming Replication Lag was reset to 0.
 - Owner approved **TASK-01 planning**: `docs/TASK-01_PLAN.md` written (PROPOSED; no code until approved).
+
+## S-20261020-08 — Remote repository setup and publication
+- **When:** 2026-10-20 ~13:23 IST
+- **Lead:** Antigravity (Gemini 3.8 Flash)
+- **Objective:** Connect GitHub remote `https://github.com/HitanshG07/Sphere_Ball.git` and publish branches.
+- **Actions and outcomes:**
+  1. Configured remote `origin` -> `https://github.com/HitanshG07/Sphere_Ball.git`.
+  2. Created local branch `gate-0` pointing to `gate0-spike` (`bc4cfa7`).
+  3. Pushed `gate-0` (`bc4cfa7`, complete Gate 0 prototype code, test driver, records) to `origin/gate-0`.
+  4. Pushed `alpha` (`001156d`, verified docs, Gate 0 report, evidence, TASK-01 plan) to `origin/alpha`.
+  5. Pushed `main` (`f726ddd`, untouched spec baseline) to `origin/main`.
+- **Status:** All branches published to GitHub and tracking up to date.
