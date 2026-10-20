@@ -195,3 +195,19 @@ D-001 through D-018 are unchanged. The entries below fill specification gaps fou
 - **Decision:** Keep the locked §8.5 knockback and the locked sphere–sphere physical collision (§6.2). Gate 0 measured that in full-speed head-ons (closing about 84 studs/s) §8.5 applies exactly (+32 victim / −8 attacker), and the engine contact then adds about ±22 studs/s until closing reaches 0 (T-G0-044c, T-G0-046c). No change now; judge the feel in TASK-06/TASK-10 playtests, and change constants only through a TUNING decision backed by playtest evidence.
 - **Files/contracts affected:** none now; TASK-06 must log both contributions (as the Gate 0 driver did) in its combat tests.
 - **Status:** APPROVED
+
+## TASK-02 decisions (2026-10-21)
+
+### D-028: Arena tile physics values and greybox collapse visual (APPROVED)
+- **Date:** 2026-10-21
+- **Requested by:** Lead agent (TASK-02 planning: §6.2/§6.3 give zero elasticity but no friction or weight values; §11.4 gives a 0.5–0.8 s sink window but no greybox depth or end state)
+- **Approved by:** Project owner (TASK-02 planning Q&A, 2026-10-20/21, Claude Code planning session; both choices approved, then the corrected plan approved)
+- **Decision:**
+  1. **Tile physics:** each collision tile uses `CustomPhysicalProperties` with friction 0, elasticity 0 and both weights (`FrictionWeight`, `ElasticityWeight`) 100, the Gate 0 floor values (`PhysicalProperties.new(0.7, 0, 0, 100, 100)`). Density is the Plastic default and has no effect on anchored tiles.
+  2. **Greybox collapse visual:** at the collapse timestamp the collider is removed first. The ring's cells are `PendingCollapse` while each visual tile sinks 4 studs and fades to transparent over 0.65 s (inside §11.4's 0.5–0.8 s); then they become `Destroyed` and the visuals are removed. Shake and polish stay in TASK-09.
+- **Reason:** §6.2/§6.3 say traction, braking and ice slip come from the movement code, so the surface must add none; weight 100 makes the tile's values dominate the contact. Removing the collider before any visual motion satisfies the TASK-02 card item 6.
+- **Alternatives considered:** Roblox default friction (rejected: adds uncontrolled traction); a sink without fade or an instant removal (rejected: §11.4 asks for a 0.5–0.8 s sink after collision removal).
+- **Files/contracts affected:** `src/shared/Config/GameConfig.luau` (additive `Arena.TileFriction`, `Arena.TilePropertyWeight`, `Arena.CollapseSinkTime`, `Arena.CollapseSinkDepth`); `src/server/Core/GridService.luau`; `Config.spec`, `GridService.spec`.
+- **Migration/backward compatibility:** additive config fields only; no existing value changes. TASK-04 may retune the physics values through a TUNING decision; TASK-09 replaces the greybox visual.
+- **Tests required:** Config asserts the four values; GridService asserts the collider properties, the collider-first ordering (49 colliders immediately after `CollapseRing(4)`), and `Destroyed` only after the sink time.
+- **Status:** APPROVED

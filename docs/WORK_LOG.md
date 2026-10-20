@@ -396,3 +396,20 @@ Append-only chronological history for every AI and human working on the project.
   - Working tree clean apart from ignored outputs; no stash; `place/Gate0.rbxl` unchanged.
   - Studio is in Edit mode with Rojo serving the repo.
 - **Stopped for owner approval before TASK-02**, as instructed. Next actions are in `PROJECT_STATUS.md`.
+
+## S-20261021-01 — TASK-02 (GridService, arena collision geometry, ring collapse)
+- **When:** 2026-10-21 from ~00:15 IST.
+- **Lead:** Claude Code (VS Code extension, v2.1.303), Opus 5.5 (`claude-opus-5-5`). The session started in `C:\Sphere_ball_rblox` and moved to the repo root; the lead read `AGENTS.md`, the protocol, `PROJECT_STATUS.md`, the TASK-02 card, `DECISION_LOG.md`, the latest work-log entries and the approved plan manually.
+- **Owner instruction:** execute the approved TASK-02 plan (with its three corrections) and D-028. TASK-02 only; no TASK-03; no external 3D assets; the owner's mesh branch is not touched. Never save the place; build the arena only on a Play server. Push only `task02`; do not merge into `alpha`. Stop for Antigravity's independent review and owner approval.
+- **Session-start check** (verified):
+  - `git fetch origin`: nothing new. Local `alpha` = `origin/alpha` = `cb8c5ce`; working tree clean; no stash.
+  - `main` `f726ddd`, `gate-0` `bc4cfa7`, `task01` `c843af4`, each equal to its `origin/` branch.
+  - Studio: one instance (`Gate0.rbxl`), Edit mode; `rojo serve` (7.4.4) running; the Edit datamodel holds the TASK-01 tree and no `Workspace.Arena`.
+  - Tools: rojo 7.4.4, luau-lsp 1.70.1, StyLua 2.6.0, selene 0.32.0 (`rokit.toml`).
+- **Branch:** `task02` created from `alpha` at `cb8c5ce` (`git switch -c task02 alpha`).
+- **Objective:** GridService as the only owner of tile state and ring collapse (§10.5); 81 cells with one 12×2×12 collider and one separate 11.8×2×11.8 visual each; rings 4 and 3 collapse in order (81 → 49 → 25); `ResetArena()` restores the board.
+- **Acceptance criteria (plan gate):** GridService tests 1–12 pass in Studio; TASK-01 regressions pass; the five static checks are clean; the manifest validates; top-down captures saved; §15: exactly 81 live cells, unique IDs, one collidable part per cell, no collider gaps, correct ring counts, regeneration twice.
+- **Validation plan:** five static checks plus a manifest schema check; Studio TestRunner in an MCP solo Play session (Server context); evidence under `docs/evidence/task02/`; results as `T-T02-NNN`.
+- **Agents:** none spawned. The owner allowed agents "if needed"; the approved plan assigns all writing to the lead (tightly coupled files, lead-owned shared config, no parallel writers) and the independent review to Antigravity, so delegation is not justified.
+- **Plan committed first:** `docs/TASK-02_PLAN.md` as `f94d610`.
+- **D-028 recorded** in `DECISION_LOG.md` (owner-approved in the TASK-02 planning Q&A).
