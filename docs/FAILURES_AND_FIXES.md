@@ -129,3 +129,7 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Retest:** T-G0-045 (solo): final camera at the intended 20.12-stud offset, roll 0, sphere visible in a screen capture. Two-client confirmation is due in the 150 ms session.
 - **Prevention for TASK-04:** the production CameraController must own the camera after the default camera update (or disable the default camera module) and be tested on the rendered result, not its own writes.
 - **Status:** FIXED-UNVERIFIED (solo verified; two-client confirmation pending)
+
+### FAIL-011 update (S-20261020-06) — verified
+- **Retest:** T-G0-046h, two clients at 150 ms. Final rendered camera Scriptable at the intended 20.12-stud offset with roll 0; screen capture shows both spheres on the arena.
+- **Status:** FIXED-VERIFIED

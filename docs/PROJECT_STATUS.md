@@ -4,8 +4,8 @@ Current-state snapshot. History: [WORK_LOG.md](WORK_LOG.md). Earlier versions of
 
 **Updated:** 2026-10-20, session S-20261020-06 (lead: Claude Code 2.1.303, Opus 5.5)
 **Milestone:** Gate 0 (TASK-00), environment and physics-authority feasibility
-**Overall status:** IN PROGRESS. **Gate 0 has not passed.** TASK-01 has not started and is not authorized.
-**Waiting on:** two-client **session 2 at 150 ms** (Owner actions C). Session 1 at 0 ms is done (C2, C3, A4 and C5 disconnect PASS; A5 preliminary PASS; FAIL-011 camera found, fixed and verified in solo).
+**Overall status:** **Gate 0 PASSED (2026-10-20), Path A selected (D-024).** TASK-01 has not started; it needs a TASK-01 plan approved by the owner first.
+**Waiting on:** owner approval to plan TASK-01, and the owner's Q-1 decision (needed before TASK-06).
 **Branches:**
 - `main` = `f726ddd` (untouched spec baseline).
 - `alpha` = `cff1063` (rules and records as of S-20261020-03).
@@ -86,3 +86,11 @@ C2, C3 (two-client part), A3 at 150 ms, A4, A5, C5 disconnect: all need the owne
 1. Lead: analyze the two Server Outputs, record C2/C3/A3/A4/A5/C5 results and decide PASS/FAIL/INCONCLUSIVE per plan rev 4.
 2. Lead: Gate 0 close-out: D-024 path selection, report, checklist boxes, docs-only commit to `alpha`.
 3. If Gate 0 passes: plan TASK-01 with the multi-agent protocol (owner approval of the plan first).
+
+## Gate 0 close-out (2026-10-20)
+- Gate 0 PASSED; see `GATE_0_REPORT.md` §10 and D-024.
+- Owner to-dos now:
+  1. Set **Incoming Replication Lag back to 0** (File ▸ Studio Settings ▸ Network).
+  2. Decide **Q-1** (options in Owner actions item 15; data: §8.5 applies +32/−8 exactly, then the engine contact adds about ±22 studs/s in full-speed head-ons).
+  3. Approve starting **TASK-01 planning**.
+- Older owner-action steps A–C above are complete.

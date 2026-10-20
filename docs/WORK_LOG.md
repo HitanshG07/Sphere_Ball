@@ -277,3 +277,11 @@ Append-only chronological history for every AI and human working on the project.
   - Fix `554bcdf`, verified in solo (T-G0-045).
   - The same heredoc parse failure as FAIL-003 happened once while appending these records; nothing was written, and the records were appended from Write-tool files instead.
 - **Next:** two-client session 2 at 150 ms (A3, A5, plus camera confirmation), then the Q-1 decision and the Gate 0 close-out.
+- **Two-client session 2 at 150 ms** (owner started it ~12:55; MCP: server `b982ab14…`, clients `923a3bf8…` and `f7e35258…`).
+  - Driver confirmed lag 0.15. All criteria passed: C2, C3, A3 (1 frame), A4 (≤ 0.037 stud settled), A5 (rollbacks about 90 per client, unique FX 15 = 15), C4 (rendered camera, both spheres visible; FAIL-011 FIXED-VERIFIED), C5 disconnect.
+  - Remote spheres are `Predicted` on both clients.
+  - Session stopped through MCP. Owner to reset Incoming Replication Lag to 0.
+- **Gate 0 verdict: PASS, Path A.**
+  - D-024 written (the reserved stub replaced as planned).
+  - Report §10 and checklist Gate 0 boxes updated: 4-client NOT RUN (deferred); abilities, queue and timer authority PARTIAL (later tasks); Path B N/A.
+  - Docs-only close-out commit to `alpha` follows.

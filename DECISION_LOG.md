@@ -151,8 +151,14 @@ D-001 through D-018 are unchanged. The entries below fill specification gaps fou
 - **Tests required:** Gate 0 C5 (miniature); TASK-04 and TASK-07 full matrix tests for elimination, disconnect, match end and three consecutive rounds.
 - **Status:** APPROVED
 
-### D-024: Gate 0 physics-architecture selection (RESERVED)
-- Reserved. Written at Gate 0 close-out with the selected path (A or B) and links to evidence in `docs/GATE_0_REPORT.md`.
+### D-024: Gate 0 physics-architecture selection — Path A (APPROVED / LOCKED)
+- **Date:** 2026-10-20
+- **Requested by:** Lead agent at Gate 0 close-out (session S-20261020-06)
+- **Approved by:** Gate 0 decision rule D-011/D-018 (Path A available and passed its criteria); owner informed in session
+- **Decision:** Path A, Roblox Server Authority with client prediction and rollback, is the physics architecture for Sphere Brawl. Path B is not used. `Workspace.AuthorityMode = Server` must be saved in the place (FAIL-006 lesson). D-025 and D-026 API rules apply.
+- **Evidence:** `docs/GATE_0_REPORT.md` §10. A1 T-G0-042; A2 T-G0-019 and T-G0-044a; A3 1 frame at 0 and 150 ms (T-G0-044g, T-G0-046); A4 at most 0.037 stud settled at 150 ms (T-G0-046); A5 rollbacks observed with exact effect deduplication at 150 ms (T-G0-046); A6 and C1–C5 (T-G0-020 to T-G0-023, T-G0-044, T-G0-045, T-G0-046).
+- **Not covered by Gate 0:** the 4-client smoke test (deferred to TASK-10 per the task card); ability, queue, timer and result authority (TASK-06/07/10); owner question Q-1 on knockback feel.
+- **Status:** APPROVED / LOCKED
 
 ### D-025: Path A API usage rules (APPROVED; correction to §9.2 wording, no gameplay change)
 - **Date:** 2026-10-20
