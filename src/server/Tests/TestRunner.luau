@@ -3,6 +3,7 @@
 -- A spec returns { [testName] = function() ... end }; a test fails when it errors (use assert/error).
 -- Run in Studio (a Play session's Server is a fresh VM), for example through the Studio MCP execute_luau:
 --   return require(game:GetService("ServerScriptService").Server.Tests.TestRunner).run()
+-- `...any` only so pcall's result type has room for an error value; specs return nothing (§10.4 boundary).
 export type Spec = { [string]: () -> ...any }
 
 local TestRunner = {}
@@ -41,6 +42,10 @@ function TestRunner.run(): string
 		end
 	end
 
+	-- An empty run is a failure, so a broken spec search never reads as a pass (RV-T01-09).
+	if passed + #failures == 0 then
+		table.insert(failures, "no tests found")
+	end
 	local report = `[TestRunner] {#modules} specs, {passed} passed, {#failures} failed`
 	if #failures > 0 then
 		report ..= "\n" .. table.concat(failures, "\n")

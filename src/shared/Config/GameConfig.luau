@@ -2,7 +2,8 @@
 -- Canonical locked constants (Master Plan v1.2, specs/DESIGN_CONSTANTS.md, D-015 to D-027). Owner: lead agent.
 -- Services read values from here; never copy a literal timing or limit into service code.
 -- Derived values (81 cells, top surface Y 51, spawn Y 54.15, cycle totals) are asserted by tests, not stored twice.
--- Changing any value needs an approved DECISION_LOG.md entry.
+-- Changing any value needs an approved DECISION_LOG.md entry. Camera and presentation values (§8.1, §11.2, §11.4,
+-- §11.5) are not here yet: TASK-04 and TASK-09 add them to this file through the lead (RV-T01-04).
 local Types = require(script.Parent.Parent.Types)
 
 export type CycleTiming = {
@@ -23,6 +24,17 @@ local skins: { Types.SphereSkinId } = { "Default", "Neon", "Gold", "Void" }
 local unlockedSkins: { Types.SphereSkinId } = { "Default", "Neon" } -- D-020; Gold and Void are locked
 local trails: { Types.TrailId } = { "None", "CoreStreak", "CyanStreak" } -- D-021, all unlocked
 local effects: { Types.EffectId } = { "StandardSpark", "CoreBurst" } -- D-021, all unlocked
+
+-- Per-phase tables are typed locals too, so a missing phase or field fails analysis (RV-T01-06).
+local cycles: PerPhase<CycleTiming> = {
+	Opening = { SafeCombat = 14, Warning = 3.5, Active = 7, Reset = 3.5 },
+	MidGame = { SafeCombat = 10, Warning = 2.5, Active = 6, Reset = 2.5 },
+	SuddenDeath = { SafeCombat = 6, Warning = 2, Active = 5, Reset = 2 },
+}
+local iceCardinalHalfWidth: PerPhase<number> = { Opening = 1.0, MidGame = 0.5, SuddenDeath = 0.5 }
+-- Diagonal lane limit |along| <= value; nil = full length (§7.4).
+local iceDiagonalAlongLimit: PerPhase<number?> = { MidGame = 2.8, SuddenDeath = 1.42 }
+local magneticRadiusTiles: PerPhase<number> = { Opening = 2.8, MidGame = 2.0, SuddenDeath = 1.0 }
 
 local GameConfig = {}
 
@@ -68,11 +80,7 @@ GameConfig.Round = {
 }
 
 GameConfig.Pulse = {
-	Cycles = {
-		Opening = { SafeCombat = 14, Warning = 3.5, Active = 7, Reset = 3.5 },
-		MidGame = { SafeCombat = 10, Warning = 2.5, Active = 6, Reset = 2.5 },
-		SuddenDeath = { SafeCombat = 6, Warning = 2, Active = 5, Reset = 2 },
-	} :: PerPhase<CycleTiming>,
+	Cycles = cycles,
 	-- Complete cycles before the next collapse. SuddenDeath repeats until one survivor or the hard timeout.
 	CycleCount = { Opening = 2, MidGame = 2 },
 	ScheduleTolerance = 0.05, -- §13.2 test 9
@@ -81,19 +89,18 @@ GameConfig.Pulse = {
 GameConfig.Hazards = {
 	Ice = {
 		Angles = { 0, 45, 90, 135 },
-		CardinalHalfWidth = { Opening = 1.0, MidGame = 0.5, SuddenDeath = 0.5 } :: PerPhase<number>,
+		CardinalHalfWidth = iceCardinalHalfWidth,
 		DiagonalHalfWidth = 0.71,
-		-- Diagonal lane limit |along| <= value; nil = full length (§7.4).
-		DiagonalAlongLimit = { MidGame = 2.8, SuddenDeath = 1.42 } :: PerPhase<number?>,
+		DiagonalAlongLimit = iceDiagonalAlongLimit,
 		SteeringMultiplier = 0.45,
 		LateralDampingMultiplier = 0.25, -- 25% of Movement.LateralDamping = 1.625
 	},
 	Magnetic = {
-		RadiusTiles = { Opening = 2.8, MidGame = 2.0, SuddenDeath = 1.0 } :: PerPhase<number>,
+		RadiusTiles = magneticRadiusTiles,
 		MaxAcceleration = 22, -- a = Max * (1 - d / radiusStuds)^2, horizontal only
 		InwardSpeedCap = 12,
 	},
-	Boost = {
+	BoostRunway = {
 		Angles = { 0, 90, 180, 270 },
 		HalfWidth = 0.5,
 		DeltaV = 18, -- one-time per sphere per event
@@ -122,7 +129,7 @@ GameConfig.Combat = {
 }
 
 -- D-019 Burst boost (Shift / touch Boost). Direction: move input, else horizontal velocity, else facing.
-GameConfig.Boost = {
+GameConfig.BurstBoost = {
 	DeltaV = 12,
 	Cooldown = 4,
 	OutgoingFactor = 1.0,
@@ -148,9 +155,8 @@ GameConfig.Colors = {
 	TextSecondary = Color3.fromRGB(170, 190, 215),
 }
 
--- §6.2 collision-group matrix. Colliding: the pairs below. Not colliding: ArenaSphere with LobbyAvatar and with
--- LobbyWorld, LobbyAvatar with ArenaTile, SphereVisual with every group. Pairs the matrix does not list (for example
--- LobbyAvatar with LobbyAvatar) are undecided: raise them in TASK-02/03, do not guess.
+-- §6.2 collision-group matrix, exactly as specified. Pairs the matrix does not list (for example LobbyAvatar with
+-- LobbyAvatar, or any group with Default) are undecided: raise them in TASK-02/03, do not guess.
 GameConfig.CollisionGroups = {
 	ArenaSphere = "ArenaSphere",
 	ArenaTile = "ArenaTile",
@@ -162,6 +168,14 @@ GameConfig.CollisionGroups = {
 		{ "ArenaSphere", "ArenaSphere" },
 		{ "LobbyAvatar", "LobbyWorld" },
 	},
+	-- Roblox groups collide by default, so these must be set non-collidable explicitly (RV-T01-03).
+	NonColliding = {
+		{ "ArenaSphere", "LobbyAvatar" },
+		{ "ArenaSphere", "LobbyWorld" },
+		{ "LobbyAvatar", "ArenaTile" },
+	},
+	-- Groups that collide with no group at all, including Default and themselves.
+	CollidesWithNothing = { "SphereVisual" },
 }
 
 -- §2.4 layout (top walking surface at Y 150) and D-023 holding pods. LobbyConfig is this section (D-023).
@@ -184,10 +198,10 @@ GameConfig.Lobby = {
 		FirstX = 2000,
 		Spacing = 20,
 		Z = 2000,
-		CollisionGroup = "LobbyAvatar",
+		CollisionGroup = GameConfig.CollisionGroups.LobbyAvatar,
 	},
-	-- D-026: AddReplicationFocus(avatar HumanoidRootPart) after parking; removed at restore, cleanup, disconnect.
-	ParkedAvatarExtraFocus = true,
+	-- D-026 (mandatory, not a setting): after parking, AddReplicationFocus(avatar HumanoidRootPart); remove it
+	-- (pcall-guarded) at restore, cleanup and disconnect.
 }
 
 return GameConfig

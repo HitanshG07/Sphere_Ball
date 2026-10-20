@@ -22,7 +22,8 @@ export type QueueSource = "Portal" | "QuickQueue"
 -- Client queue intents (§5.2); the client never sends counts, rosters or timers.
 export type QueueAction = "JoinQuickQueue" | "LeaveQueue" | "SelectMode"
 -- Waiting: fewer than 4 queued. PartialWait: 4-5 queued, up to 25 s. Countdown: 8 s full or 10 s partial (§4.3).
-export type QueueStatus = "Waiting" | "PartialWait" | "Countdown"
+-- MatchInProgress: a match is running; lobby players stay queued for the next one (§3.1, D-002).
+export type QueueStatus = "Waiting" | "PartialWait" | "Countdown" | "MatchInProgress"
 
 export type ChassisId = "Rammer" | "Trickster" | "Magnetar" | "Bulwark"
 export type CoreId = "Kinetic" | "Cryo" | "Magnetic"
@@ -37,6 +38,26 @@ export type PlayerLoadout = {
 	Core: CoreId,
 	Trail: TrailId,
 	Effect: EffectId,
+}
+
+-- Client -> server request payloads (§5.2, §5.3, §10.3). The server validates shape, enums and rate on every call.
+-- AbilityRequest carries no payload: it asks to use the equipped core ability (§8.3).
+-- How the D-019 Burst boost request travels is an open owner question; it is not typed here yet.
+export type QueueRequestPayload = {
+	Action: QueueAction,
+	Mode: GameMode?, -- only with SelectMode
+}
+
+export type LoadoutRequestPayload = {
+	Category: LoadoutCategory,
+	Id: string, -- checked against the category's allowlist and unlocks on the server, never trusted
+}
+
+-- Server -> client reply: the canonical loadout and whether the last request was accepted (§5.3 step 5).
+export type LoadoutStatePayload = {
+	Loadout: PlayerLoadout,
+	Accepted: boolean,
+	Reason: string?, -- rejection reason, e.g. locked item or loadout lock
 }
 
 export type CellState = "Live" | "PendingCollapse" | "Destroyed"
@@ -70,7 +91,7 @@ export type PatternMeta =
 -- Pulse state at time t: SafeCombat in [StartAt, WarningAt), Warning, Active, Reset in [ResetAt, EndAt).
 export type BoardPulsePayload = {
 	RoundId: number,
-	CycleId: number, -- increases every cycle of a round; doubles as the Boost Runway event stamp
+	CycleId: number, -- increases every cycle; Boost Runway event stamp; deduplicate by (RoundId, CycleId)
 	Phase: PulsePhase,
 	Meta: PatternMeta,
 	StartAt: number,
@@ -88,6 +109,7 @@ export type QueueStatePayload = {
 	TimerEndsAt: number?, -- end of the partial wait or the countdown; nil while Waiting
 	LoadoutLocked: boolean,
 	IsQueued: boolean,
+	Eligible: boolean, -- false while queued but not counted (QueueEntry.Eligible, §5.1); Reason explains why
 	Source: QueueSource?,
 	Roster: { number }?, -- UserIds once the roster is locked
 	Reason: string?, -- why a countdown was cancelled or a launch failed
@@ -103,7 +125,8 @@ export type MatchStatePayload = {
 	Alive: { number },
 }
 
-export type EndReason = "LastSurvivor" | "HardTimeout"
+-- NoSurvivor: the last players were eliminated in the same step, or everyone left (D-022 shared placement).
+export type EndReason = "LastSurvivor" | "HardTimeout" | "NoSurvivor"
 
 export type PlayerResult = {
 	UserId: number,

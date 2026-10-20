@@ -1,6 +1,6 @@
 # TASK-01 Plan — Project Scaffolding, Types, Configuration and Remotes
 
-**Status:** PROPOSED — waiting for owner approval. No code is written until it is approved.
+**Status:** APPROVED by the owner on 2026-10-20 (executed in session S-20261020-09).
 **Branch:** `task01` from `alpha`, merged into `alpha` by the lead after the gate passes.
 **Source:** `tasks/TASK-01-PROJECT-SCAFFOLDING.md`, Master Plan §10, `specs/DESIGN_CONSTANTS.md`, decisions D-001 to D-027.
 

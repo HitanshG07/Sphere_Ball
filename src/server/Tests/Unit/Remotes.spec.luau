@@ -15,7 +15,7 @@ local EXPECTED: { [string]: string } = {
 	ResultEvent = "RemoteEvent",
 }
 
--- Containers where game code can place remotes.
+-- Scope: the containers where game code places instances. Engine-managed services are not scanned.
 local CONTAINERS = {
 	"ReplicatedStorage",
 	"ReplicatedFirst",
@@ -43,7 +43,7 @@ return {
 		end
 	end,
 
-	["no remotes outside the Remotes folder and no KnockbackEvent"] = function()
+	["no remotes outside the Remotes folder and no KnockbackEvent (game containers)"] = function()
 		local remotes = ReplicatedStorage:FindFirstChild("Remotes")
 		for _, service in CONTAINERS do
 			for _, d in game:GetService(service):GetDescendants() do

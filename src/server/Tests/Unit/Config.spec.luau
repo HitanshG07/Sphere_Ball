@@ -60,7 +60,7 @@ return {
 	end,
 
 	["Burst boost matches D-019"] = function()
-		local b = GameConfig.Boost
+		local b = GameConfig.BurstBoost
 		assert(b.DeltaV == 12 and b.Cooldown == 4 and b.OutgoingFactor == 1.0, "boost 12 / 4 s / 1.0")
 	end,
 
@@ -75,15 +75,14 @@ return {
 		local r = h.Magnetic.RadiusTiles
 		assert(r.Opening == 2.8 and r.MidGame == 2.0 and r.SuddenDeath == 1.0, "magnetic radius")
 		assert(h.Magnetic.MaxAcceleration == 22 and h.Magnetic.InwardSpeedCap == 12, "magnetic pull")
-		assert(h.Boost.DeltaV == 18 and h.Boost.HalfWidth == 0.5, "boost runway")
-		for _, a in h.Boost.Angles do
-			assert(a % 90 == 0, `boost angle {a} is not cardinal`)
-		end
-		assert(#h.Ice.Angles == 4 and #h.Boost.Angles == 4, "four orientations each")
+		assert(h.BoostRunway.DeltaV == 18 and h.BoostRunway.HalfWidth == 0.5, "boost runway")
+		sameList(h.Ice.Angles, { 0, 45, 90, 135 }, "ice angles")
+		sameList(h.BoostRunway.Angles, { 0, 90, 180, 270 }, "boost runway angles (cardinal only)")
 	end,
 
 	["hazard cap is floor(live * 0.35)"] = function()
 		local ratio = GameConfig.Arena.HazardCapRatio
+		assert(ratio == 0.35, `hazard cap ratio {ratio}`)
 		assert(math.floor(81 * ratio) == 28, "81 cells -> 28")
 		assert(math.floor(49 * ratio) == 17, "49 cells -> 17")
 		assert(math.floor(25 * ratio) == 8, "25 cells -> 8")
@@ -165,6 +164,26 @@ return {
 		assert(actual == count, `palette has {actual} colors, expected {count}`)
 	end,
 
+	["collision groups match the §6.2 matrix"] = function()
+		local g = GameConfig.CollisionGroups
+		local function joinPairs(list: { { string } }): string
+			local out = {}
+			for _, pair in list do
+				table.insert(out, pair[1] .. "-" .. pair[2])
+			end
+			return table.concat(out, ",")
+		end
+		assert(
+			joinPairs(g.Colliding) == "ArenaSphere-ArenaTile,ArenaSphere-ArenaSphere,LobbyAvatar-LobbyWorld",
+			"Yes rows"
+		)
+		assert(
+			joinPairs(g.NonColliding) == "ArenaSphere-LobbyAvatar,ArenaSphere-LobbyWorld,LobbyAvatar-ArenaTile",
+			"No rows"
+		)
+		sameList(g.CollidesWithNothing, { "SphereVisual" }, "SphereVisual collides with no group")
+	end,
+
 	["lobby spawn faces the queue portal (D-015) and pods match D-023"] = function()
 		local l = GameConfig.Lobby
 		local spawn = l.SpawnCFrame
@@ -174,7 +193,6 @@ return {
 		local p = l.Pods
 		assert(p.Count == 6 and p.FloorSize == Vector3.new(10, 1, 10) and p.TopY == 200, "pods")
 		assert(p.FirstX == 2000 and p.Spacing == 20 and p.Z == 2000 and p.CollisionGroup == "LobbyAvatar", "pods")
-		assert(l.ParkedAvatarExtraFocus == true, "D-026 extra focus")
 	end,
 
 	["asset manifest holds no unverified ids (D-010)"] = function()
