@@ -455,3 +455,22 @@ Append-only chronological history for every AI and human working on the project.
 - **Verdict:** ACCEPT WITH DOCUMENTED FOLLOW-UPS (no open HIGH findings; all TASK-02 criteria satisfied). Branch `task02` is safe to merge into `alpha` once approved by the repository owner.
 - **Next Actions:** Owner confirmation to fast-forward `alpha` to `task02`; owner decision on unlisted collision pairs and Q-2/Q-3 before TASK-03/04 kickoff.
 
+
+## S-20261021-03 — TASK-02 integration into `alpha` after review RV-T02
+- **When:** 2026-10-21 from ~21:50 IST.
+- **Lead:** Claude Code (VS Code extension, v2.1.303), Opus 5.5 (`claude-opus-5-5`).
+- **Owner instruction:** verify the remote heads; read the complete independent review; confirm that the four findings are recorded with dispositions and that the review and the project status agree; if the protocol permits and nothing new blocks, merge `task02` into `alpha` normally (no force-push, no history rewrite); re-run the required checks after integration; record the merge and the remote head; keep the two LOW and two INFORMATIONAL findings as tracked follow-ups. TASK-03 needs a separate explicit approval.
+- **Session-start check** (verified): `git fetch origin`: nothing new. `origin/task02` `4adfb2c`, `origin/alpha` `cb8c5ce`, `main` `f726ddd`, `gate-0` `bc4cfa7`, `task01` `c843af4`; each local branch equals its remote. No stash. Studio (`Gate0.rbxl`) and `rojo serve` (7.4.4) running.
+- **Finding:** Antigravity's review (S-20261021-02) existed only as **uncommitted** edits to `docs/WORK_LOG.md` (+28 lines) and `docs/TEST_RESULTS.md` (+15 lines) on `task02`; nothing was pushed. Pure additions, no deletions. The lead committed them unchanged as `8f1b2ce`.
+- **Review read in full:** verdict ACCEPT WITH DOCUMENTED FOLLOW-UPS; 0 HIGH, 2 LOW, 2 INFORMATIONAL; T-T02-013 PASS; verdict table in `TEST_RESULTS.md`. The reviewer reproduced the five static checks and the manifest check and inspected the code, specs, logs and captures.
+- **Gaps in the review record (not blockers):** the reviewer's model is not recorded (protocol §5 asks for it, or "unknown"); the reviewer did not re-run the Studio suite (it inspected T-T02-005/007/008/009). The lead re-runs the Studio suite after integration.
+- **Lead dispositions of RV-T02** (all accepted as documented follow-ups; TASK-02 code stays at the accepted `3c624c7`):
+
+  | Finding | Sev | Disposition | Owner / task |
+  |---|---|---|---|
+  | RV-T02-01 `ResetArena` destroys any `Workspace` child named `Arena` | LOW | DEFERRED: narrow the deletion to the service's own folder (for example a Folder with a `Collision` child) or keep `Workspace.Arena` formally reserved, when RoundManager first calls `ResetArena` | lead, TASK-07 |
+  | RV-T02-02 unlisted collision pairs (`ArenaTile` with `Default`) | LOW | OPEN owner decision, required before the §6.2 matrix is applied | owner, before TASK-03/04 |
+  | RV-T02-03 server-side greybox sink tween | INFO | DEFERRED: approved by D-028; move to a client visualizer with the collapse polish (`ponytail:` note in `GridService.luau`) | TASK-09 |
+  | RV-T02-04 rolling seam test | INFO | DEFERRED: checklist item "No seam snag" stays PARTIAL until rolling tests | TASK-04 |
+- **Review versus status:** `PROJECT_STATUS.md` still read "awaiting Antigravity acceptance review", which disagreed with the verdict; updated after the merge validation in this session.
+- **Merge authority:** protocol §7 (`task<NN>` merged into `alpha` by the lead once the task gate passes; fast-forward or lead merge) and the plan (review accepts with no open HIGH finding, and the owner confirms). Both hold: RV-T02 has 0 HIGH and the owner instructed the merge. Method: `git merge --ff-only task02` on `alpha`, as for TASK-01. Validation runs on the merged `alpha` before `alpha` is pushed.
