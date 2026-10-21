@@ -427,3 +427,31 @@ Append-only chronological history for every AI and human working on the project.
 - **Push record:** this entry, `TEST_RESULTS.md` T-T02-011/012, `PROJECT_STATUS.md` and the review-package commit table are committed and pushed to `origin/task02` next; the resulting head is in `git log` and in the lead's final report.
 - **Session end state:** on `task02`; working tree clean apart from ignored outputs; no stash; Studio in Edit mode with Rojo connected; `place/Gate0.rbxl` not saved. Agents spawned: none.
 - **Stopped for Antigravity's independent acceptance review and the owner's approval.** TASK-03 not started; `alpha` not merged.
+
+## S-20261021-02 — TASK-02 Independent Acceptance Review
+- **When:** 2026-10-21 ~18:50 IST.
+- **Reviewer:** Antigravity (independent review assignment).
+- **Objective:** Independent technical acceptance review of TASK-02 (GridService, arena collision geometry, ring collapse) on branch `task02` per `docs/TASK-02_REVIEW_PACKAGE.md` and repository protocol.
+- **Git and Branch Verification:**
+  - `origin/alpha` = `cb8c5cea2594abbabc4c7f3302b9b94c5b4eb2fa` (verified).
+  - `origin/task02` = `4adfb2c2479351b5ef489e77f64f41d4774be082` (verified).
+  - Implementation commit under review: `3c624c7`.
+  - Commits after `3c624c7` (`6b1c8d8`, `96dde1c`, `4adfb2c`) confirmed to modify documentation, test records, and evidence captures only (`src/` and `assets/` diff is empty).
+  - Branches `main` (`f726ddd`), `gate-0` (`bc4cfa7`), and `3d_mesh` (`4a4bed9`) confirmed untouched. Neither `3d_mesh` nor `3d-argon` was integrated. `place/Gate0.rbxl` is unmodified.
+- **Reproduced Checks:**
+  - Static checks: `rojo build default.project.json -o build/Gate0.rbxlx` (OK), `rojo sourcemap default.project.json --include-non-scripts -o sourcemap.json` (OK), `luau-lsp analyze --definitions=globalTypes.d.luau --sourcemap=sourcemap.json src` (0 errors), `stylua --check src` (clean), `selene src` (0 errors, 0 warnings, 0 parse errors).
+  - Manifest validation: `specs/ASSET_MANIFEST.schema.json` validated against `assets/asset-manifest.json` using Python `jsonschema.Draft202012Validator`: all 5 entries valid, unique IDs; negative control with invalid collision enum rejected as expected.
+- **Inspection of Code and Existing Evidence:**
+  - `src/server/Core/GridService.luau`: exactly 81 cells (-4..4), key format `x..","..z` with `-0` normalized to `0`. Anchored invisible colliders (12, 2, 12) top surface Y=51, group `ArenaTile`, D-028 physics (friction 0, elasticity 0, weights 100). Visual parts (11.8, 2, 11.8) non-colliding/non-touching with 0.2-stud grooves and checkerboard colors.
+  - Ring collapse: D4=32, D3=24. Collapse sequence strictly 81 → 49 → 25. Collider destroyed synchronously before visual sink starts. Pending cells excluded immediately from live queries. Generation guard and task cancellation ensure safe resets mid-sink.
+  - `src/server/Tests/Unit/GridService.spec.luau`: comprehensive 12 unit tests covering counts, collider/visual geometry, edge-to-edge spacing with `GetPartBoundsInBox` (including 82/81 hit negative controls with guaranteed `pcall` cleanup), ring collapse ordering, safe failure of out-of-order/invalid calls, reset idempotency, generation guard under mid-sink resets, returned table copy immutability, spawn slot footprint/bounds, and ball drops.
+  - Evidence logs: `docs/evidence/task02/20261021-003337_T-T02-005_studio-testrunner.txt` (documented initial failure on pattern `^-?%d,-?%d$` FAIL-015) and `20261021-003505_T-T02-007_studio-testrunner.txt` (38 passed, 0 failed across 4 specs). Studio Output confirmed 14 expected warnings and 0 errors.
+  - Visual evidence: 4 top-down JPEG captures inspected. Shows 81-cell board, 49-cell board, 25-cell board, and groove close-up. No owner identity, usernames, or avatars exposed.
+- **Findings:**
+  - RV-T02-01 (LOW): `ResetArena()` Workspace deletion scope destroys any child named `Arena`. Recommend refining in TASK-07 to check `child:IsA("Folder") and child:FindFirstChild("Collision")`.
+  - RV-T02-02 (LOW): Unlisted collision group pairs (`ArenaTile` with `Default`). Acceptable for TASK-02; requires owner decision before TASK-03/04 matrix initialization.
+  - RV-T02-03 (INFORMATIONAL): Server-side tween for greybox collapse is approved by D-028 and acceptable for TASK-02; client visualizer migration deferred to TASK-09.
+  - RV-T02-04 (INFORMATIONAL): Dynamic rolling seam verification deferred to TASK-04; static resting drops in TASK-02 are sufficient for grid gate.
+- **Verdict:** ACCEPT WITH DOCUMENTED FOLLOW-UPS (no open HIGH findings; all TASK-02 criteria satisfied). Branch `task02` is safe to merge into `alpha` once approved by the repository owner.
+- **Next Actions:** Owner confirmation to fast-forward `alpha` to `task02`; owner decision on unlisted collision pairs and Q-2/Q-3 before TASK-03/04 kickoff.
+
