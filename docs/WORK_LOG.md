@@ -474,3 +474,13 @@ Append-only chronological history for every AI and human working on the project.
   | RV-T02-04 rolling seam test | INFO | DEFERRED: checklist item "No seam snag" stays PARTIAL until rolling tests | TASK-04 |
 - **Review versus status:** `PROJECT_STATUS.md` still read "awaiting Antigravity acceptance review", which disagreed with the verdict; updated after the merge validation in this session.
 - **Merge authority:** protocol §7 (`task<NN>` merged into `alpha` by the lead once the task gate passes; fast-forward or lead merge) and the plan (review accepts with no open HIGH finding, and the owner confirms). Both hold: RV-T02 has 0 HIGH and the owner instructed the merge. Method: `git merge --ff-only task02` on `alpha`, as for TASK-01. Validation runs on the merged `alpha` before `alpha` is pushed.
+- **Review records pushed (T-T02-014):** `4adfb2c..067379f  task02 -> task02`; `refs/heads/task02` `067379f`.
+- **Merge (Git-confirmed):** on `alpha` (`cb8c5ce` = `origin/alpha`), `git merge --ff-only task02` → "Updating cb8c5ce..067379f / Fast-forward", 19 files. A fast-forward creates no separate merge commit: the merged `alpha` head is `067379f`.
+- **Post-merge validation on the local merged `alpha`, before pushing it:**
+  - T-T02-015: the five static checks clean; manifest 5 valid entries and the negative control rejected.
+  - T-T02-016: sync check (all 12 modules equal by size, no `Arena` in Edit); solo Play; `[TestRunner] 4 specs, 38 passed, 0 failed`; per-test listing 38 PASS; Output: expected warnings only, no errors. After Stop: no `Arena` in Edit, place not saved. Evidence: `docs/evidence/task02/20261021-215552_T-T02-016_post-merge-studio-testrunner.txt`.
+- **Push of `alpha` (T-T02-017, T-T02-018):** `cb8c5ce..067379f  alpha -> alpha`. `git ls-remote origin`: `alpha` and `HEAD` `067379f`, `task02` `067379f`, `main` `f726ddd`, `gate-0` `bc4cfa7`, `task01` `c843af4`. No force-push, no history rewrite.
+- **Lead slip (FAIL-016):** the audit and the push ran in one command, so `alpha` was pushed before the 2 scan hits were read. Both are false positives (the audit records' own text). Recorded; the record-commit push below is audited in a separate step first.
+- **Status updated:** `PROJECT_STATUS.md` now says TASK-02 is accepted (RV-T02) and merged into `alpha`, with the four follow-ups tracked. Review verdict and status now agree.
+- **Session end state:** records committed on `alpha` and pushed (head in `git log`, verified with `git ls-remote` in the lead's final report); `task02` stays at `067379f`. Studio in Edit mode; place not saved. Agents spawned: none.
+- **Stopped.** TASK-03 not started; it needs the owner's explicit approval.

@@ -170,3 +170,11 @@ Backfill note: FAIL-001 to FAIL-006 were recorded on 2026-10-20 in session S-202
 - **Retest:** T-T02-007 (`4 specs, 38 passed, 0 failed`).
 - **Prevention:** in Lua patterns, escape `-` `+` `*` `?` `.` `%` `(` `)` `[` `]` `^` `$` with `%` when they are meant literally.
 - **Status:** FIXED-VERIFIED
+
+## FAIL-016 — `alpha` was pushed before the pre-push scan hits were inspected
+- **Session / discovered:** S-20261021-03, TASK-02 integration (T-T02-017).
+- **Observation (confirmed):** the pre-push audit and `git push origin alpha` ran in one shell command. The scan printed 2 hits, but the push had already completed (`cb8c5ce..067379f`) when the lead read the output.
+- **Cause (confirmed):** the lead chained the audit and the push in one command instead of stopping between them. Protocol §7 requires the audit to pass before the push.
+- **Impact:** none on content. Both hits were inspected immediately after: they are the audit records' own descriptions of the scan (`` `password` `` in the T-T02-011 row, "passwords" in the S-20261021-01 work log). The same content had already been scanned before the `task02` pushes (T-T02-011, T-T02-014) without the `password` pattern, and no secret or owner identifier is present. No history rewrite is needed.
+- **Fix / prevention:** run the audit as its own command, read every hit, and only then run `git push` in a separate command. Never chain a push after a scan.
+- **Status:** FIXED-VERIFIED (hits inspected; procedure corrected for the record-commit push of this session)

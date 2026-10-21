@@ -1,0 +1,71 @@
+T-T02-016 — Post-merge Studio validation on alpha (session S-20261021-03)
+Source: alpha at 067379f (fast-forward of cb8c5ce to task02; code identical to the accepted 3c624c7), delivered by
+Rojo 7.4.4 (`rojo serve`, repo root). Environment: Roblox Studio, Gate0.rbxl, solo Play started through the Studio MCP
+(start_stop_play); code run in the Server datamodel through MCP execute_luau. The place was not saved.
+
+--- Sync check before Play (Edit datamodel #Source vs repo `wc -c`): all 12 modules equal ---
+ReplicatedStorage.Shared.Config.AssetManifest = 516          src/shared/Config/AssetManifest.luau 516
+ReplicatedStorage.Shared.Config.ChassisConfig = 872          src/shared/Config/ChassisConfig.luau 872
+ReplicatedStorage.Shared.Config.CoreConfig = 1218            src/shared/Config/CoreConfig.luau 1218
+ReplicatedStorage.Shared.Config.GameConfig = 7879            src/shared/Config/GameConfig.luau 7879
+ReplicatedStorage.Shared.Modules.CoordinateUtils = 2346      src/shared/Modules/CoordinateUtils.luau 2346
+ReplicatedStorage.Shared.Types = 5085                        src/shared/Types.luau 5085
+ServerScriptService.Server.Core.GridService = 7297           src/server/Core/GridService.luau 7297
+ServerScriptService.Server.Tests.TestRunner = 1817           src/server/Tests/TestRunner.luau 1817
+ServerScriptService.Server.Tests.Unit.Config.spec = 10283    src/server/Tests/Unit/Config.spec.luau 10283
+ServerScriptService.Server.Tests.Unit.CoordinateUtils.spec = 6191   src/server/Tests/Unit/CoordinateUtils.spec.luau 6191
+ServerScriptService.Server.Tests.Unit.GridService.spec = 17549      src/server/Tests/Unit/GridService.spec.luau 17549
+ServerScriptService.Server.Tests.Unit.Remotes.spec = 2047    src/server/Tests/Unit/Remotes.spec.luau 2047
+Edit Workspace: Camera, Baseplate, Terrain, SpawnLocation (no Arena)
+
+--- TestRunner (Server, UTC 2026-10-21T16:25:52Z, elapsed 6.92 s) ---
+Arena before run: nil
+[TestRunner] 4 specs, 38 passed, 0 failed
+
+--- Per-test listing, same Play session: 38 PASS, 0 FAIL ---
+PASS | Config.spec | Burst boost matches D-019
+PASS | Config.spec | Opening lasts 56 s and MidGame 42 s
+PASS | Config.spec | arena geometry matches §3.3 and §6
+PASS | Config.spec | asset manifest holds no unverified ids (D-010)
+PASS | Config.spec | chassis are cosmetic with all multipliers 1.0 (D-008)
+PASS | Config.spec | collision groups match the §6.2 matrix
+PASS | Config.spec | core abilities match §8.3
+PASS | Config.spec | cosmetic ids and unlocks match D-020 and D-021
+PASS | Config.spec | cycle totals are 28, 21 and 15 s (D-017)
+PASS | Config.spec | hazard cap is floor(live * 0.35)
+PASS | Config.spec | hazard values match §7.4-7.6
+PASS | Config.spec | lobby spawn faces the queue portal (D-015) and pods match D-023
+PASS | Config.spec | movement and combat values match §8.4-8.5
+PASS | Config.spec | named cycle values match §7.2
+PASS | Config.spec | palette matches §2.2
+PASS | Config.spec | round and queue values match §3.3 and §4.3
+PASS | Config.spec | speed caps are 42 and 55
+PASS | Config.spec | tile physics and collapse visual match D-028
+PASS | CoordinateUtils.spec | off-board input returns nil
+PASS | CoordinateUtils.spec | ring counts are 81, 32, 24, then 49 and 25 after the collapses
+PASS | CoordinateUtils.spec | round trip returns the same cell for all 81 cells
+PASS | CoordinateUtils.spec | rounding is deterministic at interior edges and Y is ignored
+PASS | CoordinateUtils.spec | spawn slots match §6.5
+PASS | CoordinateUtils.spec | the arena center is applied once
+PASS | GridService.spec | 01 counts and IDs: 81 unique cells, one collider and one visual each, no scripts
+PASS | GridService.spec | 02 collider geometry and D-028 physics
+PASS | GridService.spec | 03 visual geometry: inset, non-colliding, checkerboard
+PASS | GridService.spec | 04 edge to edge with no stacked colliders (query and negative controls)
+PASS | GridService.spec | 05 ring 4 has 32 cells and ring 3 has 24
+PASS | GridService.spec | 06 collapse sequence 81 -> 49 -> 25, collider removed first
+PASS | GridService.spec | 07 invalid inputs are rejected without change
+PASS | GridService.spec | 08 reset twice after both collapses restores 81 cells with the same order
+PASS | GridService.spec | 09 reset during a collapse cancels the pending sink
+PASS | GridService.spec | 10 returned cells are copies
+PASS | GridService.spec | 11 the six spawn slots are live and each sphere fits inside its tile (D-016)
+PASS | GridService.spec | 12 physics: balls rest on a center, a seam and a corner, and fall through a collapsed cell
+PASS | Remotes.spec | Remotes folder holds exactly the 10 contract remotes
+PASS | Remotes.spec | no remotes outside the Remotes folder and no KnockbackEvent (game containers)
+
+--- Studio Output during this Play session ---
+Only Studio's own CorePackages UIBlox "FoundationProvider not found" warnings and "rbxassetid://203785492 ... Asset type
+does not match" lines; the 14 expected "[GridService] CollapseRing(...) rejected" warnings, printed twice (TestRunner
+run and per-test listing); "[TestRunner] 4 specs, 38 passed, 0 failed". No errors.
+
+After Stop: Edit datamodel has no Workspace.Arena; ArenaTile not registered in Edit; place/Gate0.rbxl mtime still
+2026-10-20 13:36:18 (not saved).

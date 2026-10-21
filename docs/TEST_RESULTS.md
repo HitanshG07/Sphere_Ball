@@ -199,3 +199,16 @@ Evidence: `docs/evidence/task02/`. Studio runs used solo Play started through th
 | Test evidence integrity | PASS | Studio run logs (T-T02-007/008/009) and 4 captures verified; no owner identity exposed; negative controls in spec 04 properly verified |
 | Findings resolution | PASS | 0 HIGH, 2 LOW, 2 INFORMATIONAL findings; non-blocking; safe to merge into `alpha` upon owner approval |
 
+
+## TASK-02 integration into `alpha` (S-20261021-03)
+
+| ID | Requirement | Procedure | Expected | Actual | Status | Evidence / notes |
+|---|---|---|---|---|---|---|
+| T-T02-014 | Pre-push audit and push of the review records on `task02` | `git fetch origin`; fast-forward check; added lines of `4adfb2c..067379f` (2 commits: Antigravity's review committed unchanged as `8f1b2ce`, lead dispositions `067379f`) scanned for tokens, keys, `ROBLOSECURITY`, `AKIA…`, owner username, UserId, email, `password`; `git push origin task02`; `git ls-remote` | nothing found; `task02` at the local head | 0 hits; `4adfb2c..067379f  task02 -> task02`; `refs/heads/task02` `067379f` | PASS | 2 files, 62 added lines, records only |
+| T-T02-015 | Post-merge static checks and manifest on the merged `alpha` | `git merge --ff-only task02` on `alpha` (`cb8c5ce` → `067379f`, local); the five static commands; `jsonschema` manifest check with a negative control | all clean; 5 valid entries | build OK; sourcemap OK; luau-lsp 0 errors; StyLua clean; Selene 0/0/0; manifest 5 entries, unique, 0 errors; control rejected | PASS | run before `alpha` was pushed |
+| T-T02-016 | Post-merge Studio suite on the merged `alpha` | sync check (12 modules: Edit `#Source` = repo `wc -c`); solo Play via MCP; Server `TestRunner.run()` and a per-test listing | 4 specs, 0 failed | `[TestRunner] 4 specs, 38 passed, 0 failed` (6.92 s, UTC 2026-10-21T16:25:52Z); listing 38 PASS, 0 FAIL; Output: expected warnings only, no errors | PASS | `docs/evidence/task02/20261021-215552_T-T02-016_post-merge-studio-testrunner.txt`. Place not saved |
+| T-T02-017 | Pre-push audit of `origin/alpha..alpha` (9 commits, 19 files) | fast-forward check; added-line scan (same patterns plus `password`); forbidden paths | nothing found | fast-forward yes; forbidden paths 0; **2 pattern hits**, both false positives: the audit records' own text (`` `password` `` in the T-T02-011 row; "passwords" in the S-20261021-01 work log). **The push ran in the same command before the hits were inspected** (FAIL-016) | PASS (with procedural deviation) | no secret or owner identifier in the pushed content |
+| T-T02-018 | Push `alpha` and verify the remote | `git push origin alpha`; `git ls-remote origin` | `alpha` at `067379f`; other branches unchanged | `cb8c5ce..067379f  alpha -> alpha`; `refs/heads/alpha` `067379f`, `HEAD` `067379f`, `task02` `067379f`, `main` `f726ddd`, `gate-0` `bc4cfa7`, `task01` `c843af4` | PASS | fast-forward; no force-push, no history rewrite |
+
+### TASK-02 integration verdict (S-20261021-03): MERGED into `alpha` by fast-forward (`cb8c5ce` → `067379f`), post-merge validation PASS
+Follow-ups RV-T02-01 to RV-T02-04 stay open as documented (dispositions in `WORK_LOG.md`, S-20261021-03; tracked in `PROJECT_STATUS.md`).
