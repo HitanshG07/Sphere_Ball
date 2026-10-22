@@ -1,0 +1,1296 @@
+{
+  "manifest_version": "3.0.0-material-correction-final",
+  "project": "Sphere Brawl: Rolling Rampage",
+  "asset_collection": "Arena Tile Collection (6 Visual States + Shared Base \u2014 Multi-Node & Vertex-Color Corrected)",
+  "package_root_prefix": "Sphere_Brawl_Arena_Tiles_Package",
+  "pale_grey_root_cause_and_fix_summary": {
+    "source_file_inspection": "Previous .mtl (Kd/Ke) and .glb (baseColorFactor/emissiveFactor) contained the exact RGB numbers, but all 4 material slots were packed as primitives inside a single Mesh node without COLOR_0 vertex colors or a bound texture.",
+    "roblox_studio_import_behavior": "Roblox Studio ignores .mtl Kd/Ke when no texture is bound, collapses multi-primitive single-node meshes into a single grey MeshPart (Medium stone grey 163,162,165), and allows only one Color3 and one Enum.Material per MeshPart.",
+    "fix_applied": "Each .glb and .obj now splits geometry by material slot into 4 named child MeshParts (Part_MAT_DarkNeutral, Part_MAT_AltNeutral, Part_MAT_LightTrim, Part_EMI_*), embeds COLOR_0 vertex colors, and binds a 96x96 PNG palette texture atlas (SphereBrawl_ArenaTile_PaletteAtlas.png)."
+  },
+  "spatial_and_technical_contract": {
+    "unit_scale": "1.0 mesh unit = 1.0 Roblox stud",
+    "coordinate_system": {
+      "up_axis": "+Y",
+      "forward_axis": "+Z",
+      "right_axis": "+X",
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "visual_tile_envelope_studs": {
+      "width_x": 11.8,
+      "height_y": 2.0,
+      "depth_z": 11.8
+    },
+    "authoritative_gameplay_collider_studs": {
+      "width_x": 12.0,
+      "height_y": 2.0,
+      "depth_z": 12.0,
+      "owned_by": "gameplay_code_only"
+    },
+    "grid_pitch_studs": 12.0,
+    "inter_tile_visual_gap_studs": 0.2,
+    "standard_tile_center_world_y": 50.0,
+    "standard_tile_top_surface_world_y": 51.0,
+    "max_triangles_per_complete_state": 250
+  },
+  "approved_rgb_palette": {
+    "MAT_DarkNeutral": {
+      "rgb_255": [
+        32,
+        38,
+        54
+      ],
+      "hex": "#202636",
+      "normalized_rgb": [
+        0.12549,
+        0.14902,
+        0.211765
+      ],
+      "emissive": false,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(32, 38, 54)",
+      "surface_role": "Lower structural hull, corner bolsters, primary top armor pads"
+    },
+    "MAT_AltNeutral": {
+      "rgb_255": [
+        42,
+        50,
+        70
+      ],
+      "hex": "#2A3246",
+      "normalized_rgb": [
+        0.164706,
+        0.196078,
+        0.27451
+      ],
+      "emissive": false,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(42, 50, 70)",
+      "surface_role": "Recessed interior deck floor (Y = +0.86 studs)"
+    },
+    "MAT_LightTrim": {
+      "rgb_255": [
+        170,
+        190,
+        215
+      ],
+      "hex": "#AABED7",
+      "normalized_rgb": [
+        0.666667,
+        0.745098,
+        0.843137
+      ],
+      "emissive": false,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(170, 190, 215)",
+      "surface_role": "Chamfered upper perimeter frame (Y = +1.00 studs), inductor poles, and lock cleats"
+    },
+    "EMI_Cyan": {
+      "rgb_255": [
+        0,
+        195,
+        255
+      ],
+      "hex": "#00C3FF",
+      "normalized_rgb": [
+        0.0,
+        0.764706,
+        1.0
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(0, 195, 255)",
+      "surface_role": "State 1 (Safe / Normal) restrained cyan seam inlays"
+    },
+    "EMI_Amber": {
+      "rgb_255": [
+        255,
+        170,
+        0
+      ],
+      "hex": "#FFAA00",
+      "normalized_rgb": [
+        1.0,
+        0.666667,
+        0.0
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(255, 170, 0)",
+      "surface_role": "State 2 (Warning) amber caution perimeter and radial hazard stripes"
+    },
+    "EMI_Ice": {
+      "rgb_255": [
+        0,
+        235,
+        255
+      ],
+      "hex": "#00EBFF",
+      "normalized_rgb": [
+        0.0,
+        0.921569,
+        1.0
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(0, 235, 255)",
+      "surface_role": "State 3 (Ice Corridor \u2014 active) longitudinal ice-blue cryo channels and frost bridges"
+    },
+    "EMI_Magnetic": {
+      "rgb_255": [
+        165,
+        55,
+        255
+      ],
+      "hex": "#A537FF",
+      "normalized_rgb": [
+        0.647059,
+        0.215686,
+        1.0
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(165, 55, 255)",
+      "surface_role": "State 4 (Magnetic Storm \u2014 active) concentric octagonal purple electromagnetic field rings"
+    },
+    "EMI_Kinetic": {
+      "rgb_255": [
+        255,
+        125,
+        0
+      ],
+      "hex": "#FF7D00",
+      "normalized_rgb": [
+        1.0,
+        0.490196,
+        0.0
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(255, 125, 0)",
+      "surface_role": "State 5 (Boost Runway \u2014 active) forward (+Z) orange kinetic acceleration chevrons"
+    },
+    "EMI_DangerRed": {
+      "rgb_255": [
+        255,
+        40,
+        40
+      ],
+      "hex": "#FF2828",
+      "normalized_rgb": [
+        1.0,
+        0.156863,
+        0.156863
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(255, 40, 40)",
+      "surface_role": "State 6 (Ring Collapse \u2014 warning) danger-red perimeter bars and diagonal X-collapse motif"
+    }
+  },
+  "shared_base_mesh": {
+    "asset_name": "SM_ArenaTile_SharedBase",
+    "files": {
+      "obj": "meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.obj",
+      "mtl": "meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.mtl",
+      "glb": "meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.glb",
+      "palette_atlas_png": "meshes/modular_base_and_overlays/SphereBrawl_ArenaTile_PaletteAtlas.png"
+    },
+    "material_names": [
+      "MAT_AltNeutral",
+      "MAT_DarkNeutral",
+      "MAT_LightTrim"
+    ],
+    "glb_child_part_nodes": [
+      "Part_MAT_AltNeutral",
+      "Part_MAT_DarkNeutral",
+      "Part_MAT_LightTrim"
+    ],
+    "obj_sub_objects": [
+      "SM_ArenaTile_SharedBase__MAT_AltNeutral",
+      "SM_ArenaTile_SharedBase__MAT_DarkNeutral",
+      "SM_ArenaTile_SharedBase__MAT_LightTrim"
+    ],
+    "dimensions_studs": {
+      "width_x": 11.8,
+      "height_y": 2.0,
+      "depth_z": 11.8,
+      "bbox_min": [
+        -5.9,
+        -1.0,
+        -5.9
+      ],
+      "bbox_max": [
+        5.9,
+        1.0,
+        5.9
+      ],
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "vertex_count": 252,
+    "triangle_count": 84,
+    "degenerate_triangles": 0,
+    "winding_normal_mismatches": 0,
+    "validation_status": "PASS"
+  },
+  "states": [
+    {
+      "state_id": 1,
+      "state_key": "SafeNormal",
+      "state_name": "Safe / Normal",
+      "numbered_state_label": "1. Safe / Normal",
+      "complete_mesh": {
+        "asset_name": "SM_ArenaTile_01_SafeNormal",
+        "obj": "meshes/complete_states/SM_ArenaTile_01_SafeNormal.obj",
+        "mtl": "meshes/complete_states/SM_ArenaTile_01_SafeNormal.mtl",
+        "glb": "meshes/complete_states/SM_ArenaTile_01_SafeNormal.glb",
+        "palette_atlas_png": "meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+        "glb_child_part_nodes": [
+          "Part_EMI_Cyan",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_01_SafeNormal__EMI_Cyan",
+          "SM_ArenaTile_01_SafeNormal__MAT_AltNeutral",
+          "SM_ArenaTile_01_SafeNormal__MAT_DarkNeutral",
+          "SM_ArenaTile_01_SafeNormal__MAT_LightTrim"
+        ],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "dimensions_studs": {
+          "width_x": 11.8,
+          "height_y": 2.0,
+          "depth_z": 11.8,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 642,
+        "triangle_count": 214,
+        "under_250_triangle_budget": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "overlay_mesh": {
+        "applicable": true,
+        "asset_name": "SM_ArenaTile_Overlay_01_SafeNormal",
+        "shared_base_asset": "SM_ArenaTile_SharedBase",
+        "obj": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.obj",
+        "mtl": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.mtl",
+        "glb": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.glb",
+        "glb_child_part_nodes": [
+          "Part_EMI_Cyan",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_Overlay_01_SafeNormal__EMI_Cyan",
+          "SM_ArenaTile_Overlay_01_SafeNormal__MAT_DarkNeutral",
+          "SM_ArenaTile_Overlay_01_SafeNormal__MAT_LightTrim"
+        ],
+        "dimensions_studs": {
+          "width_x": 9.1,
+          "height_y": 0.13,
+          "depth_z": 9.1,
+          "bbox_min": [
+            -4.55,
+            0.86,
+            -4.55
+          ],
+          "bbox_max": [
+            4.55,
+            0.99,
+            4.55
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 390,
+        "triangle_count": 130,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "primary_emissive_material": "EMI_Cyan",
+      "material_names": [
+        "EMI_Cyan",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "overlay_material_names": [
+        "EMI_Cyan",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "preview_sheet": "previews/Preview_SM_ArenaTile_01_SafeNormal.png",
+      "visual_description": "Dark metallic quadrant armor plates with restrained recessed cyan energy channels (EMI_Cyan) and central lock hub.",
+      "validation_status": "PASS"
+    },
+    {
+      "state_id": 2,
+      "state_key": "Warning",
+      "state_name": "Warning",
+      "numbered_state_label": "2. Warning",
+      "complete_mesh": {
+        "asset_name": "SM_ArenaTile_02_Warning",
+        "obj": "meshes/complete_states/SM_ArenaTile_02_Warning.obj",
+        "mtl": "meshes/complete_states/SM_ArenaTile_02_Warning.mtl",
+        "glb": "meshes/complete_states/SM_ArenaTile_02_Warning.glb",
+        "palette_atlas_png": "meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+        "glb_child_part_nodes": [
+          "Part_EMI_Amber",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_02_Warning__EMI_Amber",
+          "SM_ArenaTile_02_Warning__MAT_AltNeutral",
+          "SM_ArenaTile_02_Warning__MAT_DarkNeutral",
+          "SM_ArenaTile_02_Warning__MAT_LightTrim"
+        ],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "dimensions_studs": {
+          "width_x": 11.8,
+          "height_y": 2.0,
+          "depth_z": 11.8,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 672,
+        "triangle_count": 224,
+        "under_250_triangle_budget": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "overlay_mesh": {
+        "applicable": true,
+        "asset_name": "SM_ArenaTile_Overlay_02_Warning",
+        "shared_base_asset": "SM_ArenaTile_SharedBase",
+        "obj": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.obj",
+        "mtl": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.mtl",
+        "glb": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.glb",
+        "glb_child_part_nodes": [
+          "Part_EMI_Amber",
+          "Part_MAT_DarkNeutral"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_Overlay_02_Warning__EMI_Amber",
+          "SM_ArenaTile_Overlay_02_Warning__MAT_DarkNeutral"
+        ],
+        "dimensions_studs": {
+          "width_x": 9.3,
+          "height_y": 0.135,
+          "depth_z": 9.3,
+          "bbox_min": [
+            -4.65,
+            0.86,
+            -4.65
+          ],
+          "bbox_max": [
+            4.65,
+            0.995,
+            4.65
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 420,
+        "triangle_count": 140,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "primary_emissive_material": "EMI_Amber",
+      "material_names": [
+        "EMI_Amber",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "overlay_material_names": [
+        "EMI_Amber",
+        "MAT_DarkNeutral"
+      ],
+      "preview_sheet": "previews/Preview_SM_ArenaTile_02_Warning.png",
+      "visual_description": "Segmented amber perimeter caution bars (EMI_Amber), radial warning stripes, and central amber beacon framing dark armor blocks.",
+      "validation_status": "PASS"
+    },
+    {
+      "state_id": 3,
+      "state_key": "IceCorridor",
+      "state_name": "Ice Corridor \u2014 active",
+      "numbered_state_label": "3. Ice Corridor \u2014 active",
+      "complete_mesh": {
+        "asset_name": "SM_ArenaTile_03_IceCorridor",
+        "obj": "meshes/complete_states/SM_ArenaTile_03_IceCorridor.obj",
+        "mtl": "meshes/complete_states/SM_ArenaTile_03_IceCorridor.mtl",
+        "glb": "meshes/complete_states/SM_ArenaTile_03_IceCorridor.glb",
+        "palette_atlas_png": "meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+        "glb_child_part_nodes": [
+          "Part_EMI_Ice",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_03_IceCorridor__EMI_Ice",
+          "SM_ArenaTile_03_IceCorridor__MAT_AltNeutral",
+          "SM_ArenaTile_03_IceCorridor__MAT_DarkNeutral",
+          "SM_ArenaTile_03_IceCorridor__MAT_LightTrim"
+        ],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "dimensions_studs": {
+          "width_x": 11.8,
+          "height_y": 2.0,
+          "depth_z": 11.8,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 642,
+        "triangle_count": 214,
+        "under_250_triangle_budget": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "overlay_mesh": {
+        "applicable": true,
+        "asset_name": "SM_ArenaTile_Overlay_03_IceCorridor",
+        "shared_base_asset": "SM_ArenaTile_SharedBase",
+        "obj": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.obj",
+        "mtl": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.mtl",
+        "glb": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.glb",
+        "glb_child_part_nodes": [
+          "Part_EMI_Ice",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_Overlay_03_IceCorridor__EMI_Ice",
+          "SM_ArenaTile_Overlay_03_IceCorridor__MAT_DarkNeutral",
+          "SM_ArenaTile_Overlay_03_IceCorridor__MAT_LightTrim"
+        ],
+        "dimensions_studs": {
+          "width_x": 7.24,
+          "height_y": 0.13,
+          "depth_z": 9.6,
+          "bbox_min": [
+            -3.62,
+            0.86,
+            -4.8
+          ],
+          "bbox_max": [
+            3.62,
+            0.99,
+            4.8
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 390,
+        "triangle_count": 130,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "primary_emissive_material": "EMI_Ice",
+      "material_names": [
+        "EMI_Ice",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "overlay_material_names": [
+        "EMI_Ice",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "preview_sheet": "previews/Preview_SM_ArenaTile_03_IceCorridor.png",
+      "visual_description": "Four longitudinal ice-blue cryo channels (EMI_Ice) with transverse frost lattice bridges and dark metallic sled guide decks.",
+      "validation_status": "PASS"
+    },
+    {
+      "state_id": 4,
+      "state_key": "MagneticStorm",
+      "state_name": "Magnetic Storm \u2014 active",
+      "numbered_state_label": "4. Magnetic Storm \u2014 active",
+      "complete_mesh": {
+        "asset_name": "SM_ArenaTile_04_MagneticStorm",
+        "obj": "meshes/complete_states/SM_ArenaTile_04_MagneticStorm.obj",
+        "mtl": "meshes/complete_states/SM_ArenaTile_04_MagneticStorm.mtl",
+        "glb": "meshes/complete_states/SM_ArenaTile_04_MagneticStorm.glb",
+        "palette_atlas_png": "meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+        "glb_child_part_nodes": [
+          "Part_EMI_Magnetic",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_04_MagneticStorm__EMI_Magnetic",
+          "SM_ArenaTile_04_MagneticStorm__MAT_AltNeutral",
+          "SM_ArenaTile_04_MagneticStorm__MAT_DarkNeutral",
+          "SM_ArenaTile_04_MagneticStorm__MAT_LightTrim"
+        ],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "dimensions_studs": {
+          "width_x": 11.8,
+          "height_y": 2.0,
+          "depth_z": 11.8,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 690,
+        "triangle_count": 230,
+        "under_250_triangle_budget": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "overlay_mesh": {
+        "applicable": true,
+        "asset_name": "SM_ArenaTile_Overlay_04_MagneticStorm",
+        "shared_base_asset": "SM_ArenaTile_SharedBase",
+        "obj": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.obj",
+        "mtl": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.mtl",
+        "glb": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.glb",
+        "glb_child_part_nodes": [
+          "Part_EMI_Magnetic",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_Overlay_04_MagneticStorm__EMI_Magnetic",
+          "SM_ArenaTile_Overlay_04_MagneticStorm__MAT_DarkNeutral",
+          "SM_ArenaTile_Overlay_04_MagneticStorm__MAT_LightTrim"
+        ],
+        "dimensions_studs": {
+          "width_x": 9.1,
+          "height_y": 0.13,
+          "depth_z": 9.1,
+          "bbox_min": [
+            -4.55,
+            0.86,
+            -4.55
+          ],
+          "bbox_max": [
+            4.55,
+            0.99,
+            4.55
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 438,
+        "triangle_count": 146,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "primary_emissive_material": "EMI_Magnetic",
+      "material_names": [
+        "EMI_Magnetic",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "overlay_material_names": [
+        "EMI_Magnetic",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "preview_sheet": "previews/Preview_SM_ArenaTile_04_MagneticStorm.png",
+      "visual_description": "Symmetric concentric octagonal purple electromagnetic field rings (EMI_Magnetic) bridged by four cardinal metallic inductor pole shoes.",
+      "validation_status": "PASS"
+    },
+    {
+      "state_id": 5,
+      "state_key": "BoostRunway",
+      "state_name": "Boost Runway \u2014 active",
+      "numbered_state_label": "5. Boost Runway \u2014 active",
+      "complete_mesh": {
+        "asset_name": "SM_ArenaTile_05_BoostRunway",
+        "obj": "meshes/complete_states/SM_ArenaTile_05_BoostRunway.obj",
+        "mtl": "meshes/complete_states/SM_ArenaTile_05_BoostRunway.mtl",
+        "glb": "meshes/complete_states/SM_ArenaTile_05_BoostRunway.glb",
+        "palette_atlas_png": "meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+        "glb_child_part_nodes": [
+          "Part_EMI_Kinetic",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_05_BoostRunway__EMI_Kinetic",
+          "SM_ArenaTile_05_BoostRunway__MAT_AltNeutral",
+          "SM_ArenaTile_05_BoostRunway__MAT_DarkNeutral",
+          "SM_ArenaTile_05_BoostRunway__MAT_LightTrim"
+        ],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "dimensions_studs": {
+          "width_x": 11.8,
+          "height_y": 2.0,
+          "depth_z": 11.8,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 636,
+        "triangle_count": 212,
+        "under_250_triangle_budget": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "overlay_mesh": {
+        "applicable": true,
+        "asset_name": "SM_ArenaTile_Overlay_05_BoostRunway",
+        "shared_base_asset": "SM_ArenaTile_SharedBase",
+        "obj": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.obj",
+        "mtl": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.mtl",
+        "glb": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.glb",
+        "glb_child_part_nodes": [
+          "Part_EMI_Kinetic",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_Overlay_05_BoostRunway__EMI_Kinetic",
+          "SM_ArenaTile_Overlay_05_BoostRunway__MAT_DarkNeutral",
+          "SM_ArenaTile_Overlay_05_BoostRunway__MAT_LightTrim"
+        ],
+        "dimensions_studs": {
+          "width_x": 8.9,
+          "height_y": 0.14,
+          "depth_z": 8.9,
+          "bbox_min": [
+            -4.45,
+            0.86,
+            -4.45
+          ],
+          "bbox_max": [
+            4.45,
+            1.0,
+            4.45
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 384,
+        "triangle_count": 128,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "primary_emissive_material": "EMI_Kinetic",
+      "material_names": [
+        "EMI_Kinetic",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "overlay_material_names": [
+        "EMI_Kinetic",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "preview_sheet": "previews/Preview_SM_ArenaTile_05_BoostRunway.png",
+      "visual_description": "Three sequential forward-pointing (+Z) orange kinetic chevrons (EMI_Kinetic) flanked by dark runway guide rails and trim cleats.",
+      "validation_status": "PASS"
+    },
+    {
+      "state_id": 6,
+      "state_key": "RingCollapse",
+      "state_name": "Ring Collapse \u2014 warning",
+      "numbered_state_label": "6. Ring Collapse \u2014 warning",
+      "complete_mesh": {
+        "asset_name": "SM_ArenaTile_06_RingCollapse",
+        "obj": "meshes/complete_states/SM_ArenaTile_06_RingCollapse.obj",
+        "mtl": "meshes/complete_states/SM_ArenaTile_06_RingCollapse.mtl",
+        "glb": "meshes/complete_states/SM_ArenaTile_06_RingCollapse.glb",
+        "palette_atlas_png": "meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+        "glb_child_part_nodes": [
+          "Part_EMI_DangerRed",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_06_RingCollapse__EMI_DangerRed",
+          "SM_ArenaTile_06_RingCollapse__MAT_AltNeutral",
+          "SM_ArenaTile_06_RingCollapse__MAT_DarkNeutral",
+          "SM_ArenaTile_06_RingCollapse__MAT_LightTrim"
+        ],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "dimensions_studs": {
+          "width_x": 11.8,
+          "height_y": 2.0,
+          "depth_z": 11.8,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 702,
+        "triangle_count": 234,
+        "under_250_triangle_budget": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "overlay_mesh": {
+        "applicable": true,
+        "asset_name": "SM_ArenaTile_Overlay_06_RingCollapse",
+        "shared_base_asset": "SM_ArenaTile_SharedBase",
+        "obj": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.obj",
+        "mtl": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.mtl",
+        "glb": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.glb",
+        "glb_child_part_nodes": [
+          "Part_EMI_DangerRed",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "obj_sub_objects": [
+          "SM_ArenaTile_Overlay_06_RingCollapse__EMI_DangerRed",
+          "SM_ArenaTile_Overlay_06_RingCollapse__MAT_DarkNeutral",
+          "SM_ArenaTile_Overlay_06_RingCollapse__MAT_LightTrim"
+        ],
+        "dimensions_studs": {
+          "width_x": 11.2,
+          "height_y": 0.14,
+          "depth_z": 11.2,
+          "bbox_min": [
+            -5.6,
+            0.86,
+            -5.6
+          ],
+          "bbox_max": [
+            5.6,
+            1.0,
+            5.6
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "vertex_count": 450,
+        "triangle_count": 150,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0
+      },
+      "primary_emissive_material": "EMI_DangerRed",
+      "material_names": [
+        "EMI_DangerRed",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "overlay_material_names": [
+        "EMI_DangerRed",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "preview_sheet": "previews/Preview_SM_ArenaTile_06_RingCollapse.png",
+      "visual_description": "Continuous danger-red perimeter lighting (EMI_DangerRed), diagonal X-collapse hazard motif, central drop-warning beacon, and dark blast shutters.",
+      "validation_status": "PASS"
+    }
+  ],
+  "comparison_preview_sheets": {
+    "top_material_comparison": "previews/ArenaTiles_All6States_TopComparison.png",
+    "perspective_material_comparison": "previews/ArenaTiles_All6States_PerspectiveComparison.png",
+    "neutral_clay_geometry_comparison": "previews/ArenaTiles_All6States_NeutralClay_GeometryComparison.png",
+    "side_elevation_comparison": "previews/ArenaTiles_All6States_SideComparison.png",
+    "wireframe_comparison": "previews/ArenaTiles_All6States_WireframeComparison.png",
+    "neighbor_grid_spacing_2x3": "previews/ArenaTiles_2x3_GridSpacing_Verification.png"
+  },
+  "textures": {
+    "palette_atlas_master": "textures/SphereBrawl_ArenaTile_PaletteAtlas.png",
+    "complete_states_atlas_copy": "meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+    "modular_overlays_atlas_copy": "meshes/modular_base_and_overlays/SphereBrawl_ArenaTile_PaletteAtlas.png"
+  },
+  "scripts_and_tools": {
+    "deterministic_python_generator": "scripts/generate_arena_tiles_pipeline.py",
+    "deterministic_blender_generator": "scripts/generate_arena_tiles_blender.py",
+    "independent_package_validator": "scripts/validate_arena_tiles_package.py",
+    "optional_luau_material_and_bounds_helper": "scripts/Roblox_ArenaTile_Integration.lua"
+  },
+  "documentation": {
+    "studio_material_and_import_guide": "docs/README_Arena_Tile_Collection.md",
+    "technical_validation_report_pdf": "docs/Sphere_Brawl_Arena_Tiles_Spec_and_Report.pdf",
+    "validation_report_json": "docs/final_validation_report.json"
+  },
+  "file_inventory": [
+    {
+      "relative_path": "MANIFEST.json",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/MANIFEST.json",
+      "size_bytes": 49850,
+      "sha256": "SELF_MANIFEST"
+    },
+    {
+      "relative_path": "docs/README_Arena_Tile_Collection.md",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/docs/README_Arena_Tile_Collection.md",
+      "size_bytes": 7915,
+      "sha256": "c2bfb38cd1a1bc2174428472d19ca53d0ce44834ee9933edb0288a0d02d1e7a6"
+    },
+    {
+      "relative_path": "docs/Sphere_Brawl_Arena_Tiles_Spec_and_Report.pdf",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/docs/Sphere_Brawl_Arena_Tiles_Spec_and_Report.pdf",
+      "size_bytes": 8871921,
+      "sha256": "a741bab4ef3228191030bdfb715d6c4e7d3a3708eb01a2f5c1277c35725f1c89"
+    },
+    {
+      "relative_path": "docs/final_validation_report.json",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/docs/final_validation_report.json",
+      "size_bytes": 86619,
+      "sha256": "3ad269c4951cd21903bafe650ac936fdae14d3d505fc11ac30583ee611b8b960"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_01_SafeNormal.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_01_SafeNormal.glb",
+      "size_bytes": 39244,
+      "sha256": "e333f28e91e7919b3f8c8781489a5b8eccfc366c40bda6d73c991cf56639418e"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_01_SafeNormal.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_01_SafeNormal.mtl",
+      "size_bytes": 846,
+      "sha256": "196c4a99b8b8711ff993dd074569dbe0a4335a6dc46076e460107407c6b07a75"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_01_SafeNormal.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_01_SafeNormal.obj",
+      "size_bytes": 44189,
+      "sha256": "c80aae3ea277af28d32bfe9c4dee704cf1c2b9d43d8a8793ceafa09b1c8c671f"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_02_Warning.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_02_Warning.glb",
+      "size_bytes": 40796,
+      "sha256": "4df535e554049522f3148fad84578576b8452a075ebbea214a70c469d1c9d70f"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_02_Warning.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_02_Warning.mtl",
+      "size_bytes": 844,
+      "sha256": "01131ff3d38e5076ab006a64c151c953a2040d66f8d05797be02c100a88969fe"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_02_Warning.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_02_Warning.obj",
+      "size_bytes": 46247,
+      "sha256": "1bfc10ee6ec27a72095f0258757378871c192ed7828cf294fa4f8d7b6c9498fb"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_03_IceCorridor.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_03_IceCorridor.glb",
+      "size_bytes": 39236,
+      "sha256": "9571a72a5f81de568b5d02fe26eea5892fd8e5dbc87ad767daba55c077eda0b1"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_03_IceCorridor.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_03_IceCorridor.mtl",
+      "size_bytes": 846,
+      "sha256": "875da0178fc2ecf38ae7baef6a6c917e63b803446852abbb19d0e2daf26d2b73"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_03_IceCorridor.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_03_IceCorridor.obj",
+      "size_bytes": 44185,
+      "sha256": "a811122de7df55ea8cc7579f52dfb38b32dee093c74a4f880007a19f42ecf37c"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_04_MagneticStorm.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_04_MagneticStorm.glb",
+      "size_bytes": 41764,
+      "sha256": "ac0597de4b7f1afc0e2313670fd72a0c11a568149b4520ce39a594134835f6dd"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_04_MagneticStorm.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_04_MagneticStorm.mtl",
+      "size_bytes": 853,
+      "sha256": "81bd6fa8829937db8688a264f0276e5849097cf5f40c4472be724448c0b726dd"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_04_MagneticStorm.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_04_MagneticStorm.obj",
+      "size_bytes": 47360,
+      "sha256": "bc521ce434e93db3910cd24dd3e73beafcad2b1228f5d7b423ea873ebfd0032d"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_05_BoostRunway.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_05_BoostRunway.glb",
+      "size_bytes": 38916,
+      "sha256": "33b003815042b79dcf6d5dbf6605152eaab15bba356d51987a76c151e3b38ebb"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_05_BoostRunway.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_05_BoostRunway.mtl",
+      "size_bytes": 850,
+      "sha256": "54661a4074b1b59e05fe40865f6006cd14690cb5225662f955a93084a46b81a2"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_05_BoostRunway.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_05_BoostRunway.obj",
+      "size_bytes": 43740,
+      "sha256": "1702ec522f77d62b0533c8b33acbc1ff4f06199a170b32cec7fede05a36361ba"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_06_RingCollapse.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_06_RingCollapse.glb",
+      "size_bytes": 42388,
+      "sha256": "0f4627b3b77054f85b4bc0f608e6d1e85d23905bee4ec93ed8b80d603521156d"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_06_RingCollapse.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_06_RingCollapse.mtl",
+      "size_bytes": 853,
+      "sha256": "a87849acf8560a7877299542ff764324b676c912082fa92a9ca357701f1ba188"
+    },
+    {
+      "relative_path": "meshes/complete_states/SM_ArenaTile_06_RingCollapse.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SM_ArenaTile_06_RingCollapse.obj",
+      "size_bytes": 48385,
+      "sha256": "79887cc8d0454b060c2f289c735a7d0c9486e961b68f2fc15478070bd34e70de"
+    },
+    {
+      "relative_path": "meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/complete_states/SphereBrawl_ArenaTile_PaletteAtlas.png",
+      "size_bytes": 259,
+      "sha256": "3a7b1e499ef22fc0f9b0014c83be8a8b4e8fefdaf3d318fd18d79b4595d9f059"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.glb",
+      "size_bytes": 24944,
+      "sha256": "41c21b54ef1d3d9f8173d76a8da5f20543092cd5579de8c6c3279e03016c5864"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.mtl",
+      "size_bytes": 667,
+      "sha256": "7283fe13606337cbbe57c566253577c59cbd3459aa999393cad73f366097b8f0"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_01_SafeNormal.obj",
+      "size_bytes": 26819,
+      "sha256": "5192d97eae62c11260b6ff927293da761f679472e3af81eaca10d03fbf640915"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.glb",
+      "size_bytes": 25204,
+      "sha256": "12cc0c2855d791ac1ce6d98ff455703a7fa83a4786c3687948a7ded34c7fe9e7"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.mtl",
+      "size_bytes": 479,
+      "sha256": "21c1a46a1c0d7cde8de5756bf595c1655b4ae6c6b1f7c3cbad27ac25352ae775"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_02_Warning.obj",
+      "size_bytes": 28791,
+      "sha256": "02e38818e1feb6befafeebf3a4c0f14c6fd9836dffc58eeb74b02cf7576d769d"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.glb",
+      "size_bytes": 24912,
+      "sha256": "18bf0dd22b66c24dd6aae1578c2921c037b64018e7a8860d1f1af782dd8c4b7e"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.mtl",
+      "size_bytes": 667,
+      "sha256": "816825844f427b7dface7889ff830b1e2ac22c214f6d38303163ca245a3614d7"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_03_IceCorridor.obj",
+      "size_bytes": 26814,
+      "sha256": "b9bbc5c2737fde89f4319ad572d3813fd60a77f2732d4b4df61aecc13081215a"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.glb",
+      "size_bytes": 27464,
+      "sha256": "8404a89ec5c43e6e6d976cdcad7920dee600b76783549e40601cf1ec7f44a749"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.mtl",
+      "size_bytes": 674,
+      "sha256": "1ae9e3e70190bc224eb27049b879e72b54e310bfe0bda66719c5d5a11085a0fe"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_04_MagneticStorm.obj",
+      "size_bytes": 29987,
+      "sha256": "d6c8dca1715fc9898cc5abc690c1f5877e7e504b6900c073f74c208d9b0259d9"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.glb",
+      "size_bytes": 24600,
+      "sha256": "016698ed6ae0f19b5be0d1cadb4a2c7d80cf45eb03d0b29f70af90d70942b6d2"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.mtl",
+      "size_bytes": 671,
+      "sha256": "3e4d4fba9c7735541dc96e6c0389476791eaebde13dcba7c043fd9b3ae617f51"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_05_BoostRunway.obj",
+      "size_bytes": 26369,
+      "sha256": "c0db1889ea3825a8e66514dbbb01dbad5a1d9866f68b91dd6ce9c419f7c1e405"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.glb",
+      "size_bytes": 28080,
+      "sha256": "b8b11ccc4eb93028b74dc4d0feb66608c34f6bf135ce8ef38a243c92ca22e036"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.mtl",
+      "size_bytes": 674,
+      "sha256": "39409b9e9fc6005021f590a81d9e6ee45fb6084ba6d232c79153d1a29cfc72c9"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_Overlay_06_RingCollapse.obj",
+      "size_bytes": 31013,
+      "sha256": "ae0e3c8ecba08684798fd92135a32a26ce6bb75a039b714cbb922632338857c1"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.glb",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.glb",
+      "size_bytes": 17676,
+      "sha256": "c60f2f20cd47efcfe3b9e60bbcc2b0b68d70bcdc39aa48dc5a7a73467d89aa50"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.mtl",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.mtl",
+      "size_bytes": 662,
+      "sha256": "18237216e1c9cbca16879885633ead4574c4bc4bba04ec669b4fe801700c7f06"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.obj",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SM_ArenaTile_SharedBase.obj",
+      "size_bytes": 17417,
+      "sha256": "9eaafe279deeff40acaac360c9960b16bdc52fa86b85b63e020c8cbc724bc9bd"
+    },
+    {
+      "relative_path": "meshes/modular_base_and_overlays/SphereBrawl_ArenaTile_PaletteAtlas.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/meshes/modular_base_and_overlays/SphereBrawl_ArenaTile_PaletteAtlas.png",
+      "size_bytes": 259,
+      "sha256": "3a7b1e499ef22fc0f9b0014c83be8a8b4e8fefdaf3d318fd18d79b4595d9f059"
+    },
+    {
+      "relative_path": "previews/ArenaTiles_2x3_GridSpacing_Verification.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/ArenaTiles_2x3_GridSpacing_Verification.png",
+      "size_bytes": 1334085,
+      "sha256": "e5cc4fc1ec0d0544ba44185f3e5825615181e802ec0526d5c6495a19201ca6c9"
+    },
+    {
+      "relative_path": "previews/ArenaTiles_All6States_NeutralClay_GeometryComparison.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/ArenaTiles_All6States_NeutralClay_GeometryComparison.png",
+      "size_bytes": 1462480,
+      "sha256": "ae133709a4de4891fca734eacf4db871ef303633513d43c37720a276c79b8072"
+    },
+    {
+      "relative_path": "previews/ArenaTiles_All6States_PerspectiveComparison.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/ArenaTiles_All6States_PerspectiveComparison.png",
+      "size_bytes": 1741084,
+      "sha256": "8b9e694fd808f76e2e56ebfc1e1c336a0e6d3f117d22934b87bfbfaf7226ae1d"
+    },
+    {
+      "relative_path": "previews/ArenaTiles_All6States_SideComparison.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/ArenaTiles_All6States_SideComparison.png",
+      "size_bytes": 327392,
+      "sha256": "a0e32b2924b86731380fe6c11dc8ae3f7fbcb87dfb787295803ce63b5ae0da36"
+    },
+    {
+      "relative_path": "previews/ArenaTiles_All6States_TopComparison.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/ArenaTiles_All6States_TopComparison.png",
+      "size_bytes": 792925,
+      "sha256": "0fccda8bd80c17f2cda5154936e5ad4ddc0e3474edbb48ca327e60fb18477ab9"
+    },
+    {
+      "relative_path": "previews/ArenaTiles_All6States_WireframeComparison.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/ArenaTiles_All6States_WireframeComparison.png",
+      "size_bytes": 2148647,
+      "sha256": "28a25a0a0f2a5ff436d11d30f11568e47a8ece4858fde151f8492255f28ecd4c"
+    },
+    {
+      "relative_path": "previews/Preview_SM_ArenaTile_01_SafeNormal.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/Preview_SM_ArenaTile_01_SafeNormal.png",
+      "size_bytes": 812366,
+      "sha256": "039b91bb33b570d775a349fbbe8da59c8b9752edbcd774f00bcda4901a2657a4"
+    },
+    {
+      "relative_path": "previews/Preview_SM_ArenaTile_02_Warning.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/Preview_SM_ArenaTile_02_Warning.png",
+      "size_bytes": 902895,
+      "sha256": "bf3dabecfee4e49c43aaad096224546f746e5d774cd73223a71472994660d6fb"
+    },
+    {
+      "relative_path": "previews/Preview_SM_ArenaTile_03_IceCorridor.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/Preview_SM_ArenaTile_03_IceCorridor.png",
+      "size_bytes": 894460,
+      "sha256": "1d49496bf1979253c98ce033f502dda2c20df60452ada7d9bb14b0a63b44d0d1"
+    },
+    {
+      "relative_path": "previews/Preview_SM_ArenaTile_04_MagneticStorm.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/Preview_SM_ArenaTile_04_MagneticStorm.png",
+      "size_bytes": 861571,
+      "sha256": "4ab150509350b8c4c174a12a6f8a6b5bcbe2313e9f6f8bf2966c45d339a775c5"
+    },
+    {
+      "relative_path": "previews/Preview_SM_ArenaTile_05_BoostRunway.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/Preview_SM_ArenaTile_05_BoostRunway.png",
+      "size_bytes": 885173,
+      "sha256": "9311acc35eb9c7f51e1950a26d9e2ffd3a7674c0c4bf499618415730e1589867"
+    },
+    {
+      "relative_path": "previews/Preview_SM_ArenaTile_06_RingCollapse.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/previews/Preview_SM_ArenaTile_06_RingCollapse.png",
+      "size_bytes": 931990,
+      "sha256": "b18d30d3a99ee7df7a3b481489889395e4201bd5dd6b94dd2c8a9420e5e774cc"
+    },
+    {
+      "relative_path": "scripts/Roblox_ArenaTile_Integration.lua",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/scripts/Roblox_ArenaTile_Integration.lua",
+      "size_bytes": 8749,
+      "sha256": "b4d39d8e46a3e830895e2f8367830503dddc014e112f9e2a8bc6c70070c1f62e"
+    },
+    {
+      "relative_path": "scripts/generate_arena_tiles_blender.py",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/scripts/generate_arena_tiles_blender.py",
+      "size_bytes": 20550,
+      "sha256": "3c45a4a9206be1a5067044bec8ae5b470ef5524a3027340d2c36d0a5f51f95f9"
+    },
+    {
+      "relative_path": "scripts/generate_arena_tiles_pipeline.py",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/scripts/generate_arena_tiles_pipeline.py",
+      "size_bytes": 81291,
+      "sha256": "a270615132bb9f74d33cfe3711400ac60c39e83657009088d10caae93239f44d"
+    },
+    {
+      "relative_path": "scripts/validate_arena_tiles_package.py",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/scripts/validate_arena_tiles_package.py",
+      "size_bytes": 41096,
+      "sha256": "82d6f964b35c5004117ec7959b36a148dc5c6e7be37c95a6e839ccd182c771a3"
+    },
+    {
+      "relative_path": "textures/SphereBrawl_ArenaTile_PaletteAtlas.png",
+      "zip_entry_path": "Sphere_Brawl_Arena_Tiles_Package/textures/SphereBrawl_ArenaTile_PaletteAtlas.png",
+      "size_bytes": 259,
+      "sha256": "3a7b1e499ef22fc0f9b0014c83be8a8b4e8fefdaf3d318fd18d79b4595d9f059"
+    }
+  ],
+  "file_inventory_count": 62
+}

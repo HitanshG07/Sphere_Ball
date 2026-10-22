@@ -1,0 +1,205 @@
+I've completed a read-only compatibility review of the uploaded `Sphere_Ball` (`alpha` branch) archive against the repository's governance rules, specifications, decision log, task cards, shared contracts, and unit tests. No repository files, Studio assets, or branches were modified.
+
+### 1. Verified Repository Revision and Task Status
+
+| Attribute | Verified Repository Value | Source Citation |
+| --- | --- | --- |
+| **Branch & Archive Revision** | `Sphere_Ball-alpha` archive comment commit SHA: `cb8c5cea2594abbabc4c7f3302b9b94c5b4eb2fa` (`cb8c5ce`, final session `S-20261020-09` record commit following TASK-01 merge commit `c843af4` on `alpha`) | ZIP archive comment (`unzip -z`); `docs/PROJECT_STATUS.md` lines 5–15; `docs/WORK_LOG.md` session `S-20261020-09 Part B` |
+| **Gate 0 Status** | **PASSED** (`2026-10-20`) with **Path A** (Roblox Server Authority: `Workspace.AuthorityMode = Server`, client prediction via `RunService:SetPredictionMode`, `RunService:BindToSimulation()`, world-space `Scriptable` input bridge). The Gate 0 spike (`gate-0` / `bc4cfa7`) is isolated and never merged into `alpha`. | `DECISION_LOG.md` `D-024`, `D-025`, `D-026`, `D-027`; `AGENTS.md` lines 15–17; `ALPHA_ACCEPTANCE_CHECKLIST.md` lines 6–16 |
+| **TASK-01 Status** | **PASSED & MERGED into `alpha**` (`c843af4`). Implemented files: `default.project.json`, `src/shared/Types.luau`, `src/shared/Config/{GameConfig,ChassisConfig,CoreConfig,AssetManifest}.luau`, `src/shared/Modules/CoordinateUtils.luau`, `src/server/Tests/TestRunner.luau`, and 3 unit specs (`Config.spec.luau`, `CoordinateUtils.spec.luau`, `Remotes.spec.luau` — 25 tests verified in Studio during `S-20261020-09`). | `docs/PROJECT_STATUS.md` lines 6–25; `docs/WORK_LOG.md` `S-20261020-09 Part B` |
+| **TASK-02 through TASK-10 Status** | **NOT STARTED & NOT YET AUTHORIZED.** `src/server/` contains only `.gitkeep` and `Tests/`; `src/client/` contains only `.gitkeep`; `src/shared/Modules/` contains only `CoordinateUtils.luau`. Neither `GridService` (`TASK-02`), `SphereService`/`SimulationMath` (`TASK-04`), `PatternDefinitions`/`PulseService`/`PulseClientVisualizer` (`TASK-05`), nor `PhysicsValidator`/`AbilityService`/`EliminationService` (`TASK-06`) exists yet. | `docs/PROJECT_STATUS.md` lines 7–8; `AGENTS.md` line 16; `docs/AI_DEVELOPMENT_PROTOCOL.md` §10 lines 141–142 |
+
+### 2. Proposal-by-Proposal Compatibility Audit
+
+Every component of the previously proposed Board Pulse architecture is audited below using the required labels (**`DOCUMENTED REQUIREMENT`**, **`APPROVED DECISION`**, **`EXISTING IMPLEMENTATION`**, **`RECOMMENDATION ONLY`**, **`CONFLICT`**, **`UNKNOWN`**):
+
+| # | Previous Proposal Element | Audit Label(s) | Compatibility Findings & Exact Repository Citations |
+| --- | --- | --- | --- |
+| **1** | **Dynamic 28s, 21s, and 15s Cycles** (`Opening` = 2×28s = 56s; `MidGame` = 2×21s = 42s; `SuddenDeath` = repeating 15s cycles until 150s hard timeout) | **`DOCUMENTED REQUIREMENT`** + **`APPROVED DECISION`** + **`EXISTING IMPLEMENTATION`** *(config/tests)* | **Aligned.** Phase-locked cycle totals (`Opening` = `28.0s` × 2 cycles, `MidGame` = `21.0s` × 2 cycles, `SuddenDeath` = `15.0s` repeating up to `150s` hard timeout) are locked in `MASTER_IMPLEMENTATION_PLAN.md` §4.2 (line 266) & §7.2 (lines 432–436), `specs/DESIGN_CONSTANTS.md` lines 31–41, `DECISION_LOG.md` `D-017`, and `tasks/TASK-05-BOARD-PULSE.md` Req 1. Constants are already committed in `src/shared/Config/GameConfig.luau` (`GameConfig.Pulse.Cycles`, `GameConfig.Pulse.CycleCount`, `GameConfig.Round.HardTimeout`, lines 29–33, 79, 82–87) and enforced by `src/server/Tests/Unit/Config.spec.luau` lines 25–43.<br>
+
+<br>**Caveat (`CONFLICT` if dynamic inside a phase):** Cycle lengths are fixed per `PulsePhase` (`Opening` | `MidGame` | `SuddenDeath`), **not** dynamically scaled per pulse within the same phase. |
+| **2a** | **Ice Corridor Pattern Definition** (`0°, 45°, 90°, 135°`; cardinal half-width `1.0` in Opening, `0.5` in MidGame/SuddenDeath; diagonal half-width `0.71` with phase length caps `nil`, `2.8`, `1.42`) | **`DOCUMENTED REQUIREMENT`** + **`APPROVED DECISION`** + **`EXISTING IMPLEMENTATION`** *(types/config/tests)* | **Aligned** when using the exact equations `lateral = -x*sin(theta) + z*cos(theta)` and `along = x*cos(theta) + z*sin(theta)` in `MASTER_IMPLEMENTATION_PLAN.md` §7.4 (lines 451–456), `specs/DESIGN_CONSTANTS.md` line 44, `DECISION_LOG.md` `D-004`, and `tasks/TASK-05-BOARD-PULSE.md` Req 4–5. Tagged union `PatternMeta` (`{ Pattern: "IceCorridor", AngleDegrees: number }`) is committed in `src/shared/Types.luau` lines 74–78, and parameters are in `GameConfig.Hazards.Ice` (`src/shared/Config/GameConfig.luau` lines 34–36, 90–97) and checked in `Config.spec.luau` lines 59–66. |
+| **2b** | **Magnetic Storm Pattern Definition** (Radial pull toward anchor `(anchorX, anchorZ)` with `(x-anchorX)^2 + (z-anchorZ)^2 <= radiusTiles^2`; radius `2.8` / `2.0` / `1.0` tiles; whole radius inside live square) | **`DOCUMENTED REQUIREMENT`** + **`APPROVED DECISION`** + **`EXISTING IMPLEMENTATION`** *(types/config/tests)* | **Aligned.** Defined in `MASTER_IMPLEMENTATION_PLAN.md` §7.5 (lines 468–473), `specs/DESIGN_CONSTANTS.md` lines 42, 56, `DECISION_LOG.md` `D-004`, and `tasks/TASK-05-BOARD-PULSE.md` Req 4–5. Committed in `src/shared/Types.luau` lines 80–84 (`{ Pattern: "MagneticStorm", AnchorX: number, AnchorZ: number, RadiusTiles: number }`) and `GameConfig.Hazards.Magnetic` (`src/shared/Config/GameConfig.luau` lines 37, 98–102). |
+| **2c** | **Boost Runway Pattern Definition** (Cardinal angles `0°, 90°, 180°, 270°` only; 1 row wide `abs(lateral) <= 0.5`; uniform one-way direction) | **`DOCUMENTED REQUIREMENT`** + **`APPROVED DECISION`** + **`EXISTING IMPLEMENTATION`** *(types/config/tests)* | **Aligned.** Defined in `MASTER_IMPLEMENTATION_PLAN.md` §7.6 (lines 482–485), `specs/DESIGN_CONSTANTS.md` lines 43, 57, `DECISION_LOG.md` `D-004`, and `tasks/TASK-05-BOARD-PULSE.md` Req 4. Committed in `src/shared/Types.luau` lines 85–88 (`{ Pattern: "BoostRunway", AngleDegrees: number }`) and `GameConfig.Hazards.BoostRunway` (`src/shared/Config/GameConfig.luau` lines 103–107). |
+| **3** | **Server Timestamps (`Workspace:GetServerTimeNow()`) & Client-Side Telegraphing** (1 payload per cycle + late-join snapshot; clients compute `remaining = timestamp - Workspace:GetServerTimeNow()`) | **`DOCUMENTED REQUIREMENT`** + **`EXISTING IMPLEMENTATION`** *(type contract)* + **`CONFLICT`** *(minor field-name drift between TASK-05 card and frozen `Types.luau`)* | **Core mechanism is a `DOCUMENTED REQUIREMENT**` (`MASTER_IMPLEMENTATION_PLAN.md` §7.1–7.2 lines 428, 438; `specs/DESIGN_CONSTANTS.md` line 45; `tasks/TASK-05-BOARD-PULSE.md` Req 2–3).<br>
+
+<br>**Schema Note (`EXISTING IMPLEMENTATION` vs. task card wording):** `tasks/TASK-05-BOARD-PULSE.md` Req 2 lists field names `Pattern, Phase, EventId, WarningAt, ActivationAt, EndAt, ResetEndAt, Meta`, whereas the **already-accepted and frozen TASK-01 contract** in `src/shared/Types.luau` (`BoardPulsePayload`, lines 92–102) defines: `{ RoundId: number, CycleId: number, Phase: PulsePhase, Meta: PatternMeta, StartAt: number, WarningAt: number, ActiveAt: number, ResetAt: number, EndAt: number }`. Under `MASTER_IMPLEMENTATION_PLAN.md` §0.2 item 3 (typed contracts committed and accepted in the repo take precedence over task card prose), `PulseService` and `PulseClientVisualizer` **must** use the frozen `Types.BoardPulsePayload` field names (`RoundId`, `CycleId`, `StartAt`, `WarningAt`, `ActiveAt`, `ResetAt`, `EndAt`, `Meta`). |
+| **4** | **`UnreliableRemoteEvent` Usage for Board Pulse** (Using `UnreliableRemoteEvent` for Board Pulse cycle/state broadcasts or per-tick hazard updates) | **`CONFLICT`** | **Direct conflict with locked specifications and `Remotes.spec.luau`.**<br>
+
+<br>1. `BoardPulseEvent` is explicitly declared as a reliable **`RemoteEvent`** in `default.project.json` lines 10–12, `MASTER_IMPLEMENTATION_PLAN.md` §10.3 line 728, and `tasks/TASK-05-BOARD-PULSE.md` Req 2 (*"Use one cycle payload... sent reliably"*).<br>
+
+<br>2. `src/server/Tests/Unit/Remotes.spec.luau` (lines 6, 15, 29–42) strictly asserts `BoardPulseEvent == "RemoteEvent"` and fails if any extra remote exists anywhere in the DataModel.<br>
+
+<br>3. The **only** `UnreliableRemoteEvent` allowed in the entire repository is `CombatFXEvent` (`MASTER_IMPLEMENTATION_PLAN.md` §9.3 line 632 & §10.3 line 736), which is strictly for optional cosmetic collision sparks. Furthermore, §9.3 line 631 & §12.3 line 901 forbid firing per-frame or per-tile state remotes. |
+| **5** | **Physics and Friction Changes** (Dynamically mutating `BasePart.CustomPhysicalProperties` friction on `CollisionTile` parts during Ice Corridor, or applying hazard forces outside `BindToSimulation`) | **`CONFLICT`** | **Direct conflict with collision/movement rules and Path A (`D-024`/`D-025`) deterministic simulation.**<br>
+
+<br>1. **No runtime part-friction mutation for Ice:** `MASTER_IMPLEMENTATION_PLAN.md` §6.2 line 366 & §6.3 line 393 specify that `CollisionTile` has fixed `CustomPhysicalProperties` (`TileElasticity = 0`, friction controlled through movement code) and *"The core movement model supplies traction, braking, and ice slip mathematically."*<br>
+
+<br>2. **Exact mathematical modifiers (`DOCUMENTED REQUIREMENT`):** Ice Corridor applies `SteeringMultiplier = 0.45` and `LateralDampingMultiplier = 0.25` (`1.625` vs normal `6.5`, `GameConfig.Hazards.Ice`, `MASTER_IMPLEMENTATION_PLAN.md` §7.4 lines 458–460). Magnetic Storm applies horizontal radial acceleration `a = 22 * (1 - d / radiusStuds)^2` capped at `12 studs/s` inward velocity contribution (§7.5 line 476). Boost Runway applies a one-time `+18 studs/s` horizontal velocity delta (§7.6 line 486), clamped to `HorizontalCap = 55 studs/s`.<br>
+
+<br>3. **Path A Simulation & Rollback Contract (`D-024`, `D-025`, `D-026`):** All movement/hazard velocity modifiers must run inside the shared `RunService:BindToSimulation()` callback using synchronized simulation `time()`, writing only synchronized state (velocities and sequence-ID attributes on predicted roots, such as the Boost Runway `(RoundId, CycleId)` stamp per `Types.luau` line 94 and `D-025` item 3). |
+| **6a** | **Hazard-Based Knockback Multipliers** (Scaling collision knockback when a sphere is on Ice, in Magnetic Storm, or on Boost Runway) | **`CONFLICT`** | **Direct conflict with `MASTER_IMPLEMENTATION_PLAN.md` §7.1, §8.5, `DECISION_LOG.md` `D-008`/`D-019`, and `TASK-06`.**<br>
+
+<br>1. `MASTER_IMPLEMENTATION_PLAN.md` §7.1 line 426 explicitly states: ***"avoid undocumented per-hazard damage multipliers."***<br>
+
+<br>2. `MASTER_IMPLEMENTATION_PLAN.md` §8.5 line 577 & `tasks/TASK-06-COMBAT-CORES-ELIMINATION.md` line 17 lock the exact knockback formula:<br>
+
+<br>`rawDeltaV = clamp((closingSpeed - 10) * 1.15 * attackerOutgoingFactor * victimResistanceFactor, 0, 32)`.<br>
+
+<br>3. The **only** non-1.0 multipliers permitted in Alpha are:<br>
+
+<br>  - `attackerOutgoingFactor = 1.25` for `1.0s` during **Kinetic Overdrive Dash** (`CoreConfig.Kinetic`, §8.3 line 533; note `BurstBoost` has `OutgoingFactor = 1.0` per `D-019`).<br>
+
+<br>  - `victimResistanceFactor = 1 / 1.5` for `2.0s` during **Cryo Anchor Brake** (`CoreConfig.Cryo`, §8.3 line 540).<br>
+
+<br>  - All chassis multipliers are `1.0` (`ChassisConfig.luau`, `D-008`).<br>
+
+<br>Hazards affect **velocity/momentum only** (which naturally alters `closingSpeed`), never `attackerOutgoingFactor` or `victimResistanceFactor`. |
+| **6b** | **Environmental Elimination Attribution** (5.0s last-attacker window; `Environment KO` if `> 5.0s` or no hitter; `HazardKnockouts` tracking / `HAZARD KO` label) | **`DOCUMENTED REQUIREMENT`** + **`EXISTING IMPLEMENTATION`** *(types/config)* + **`UNKNOWN`** *(exact definition of when a valid KO increments `HazardKnockouts`)* | **5.0s window & Environment KO are `DOCUMENTED REQUIREMENT`s:** `MASTER_IMPLEMENTATION_PLAN.md` §3.3 line 225, §8.6 lines 589–592, `tasks/TASK-06-COMBAT-CORES-ELIMINATION.md` lines 29–32, and `GameConfig.Combat.KoAttributionWindow = 5` (`GameConfig.luau` line 127). If a sphere falls below `Y < 15` (`VoidY = 15`) within `<= 5.0s` of a server-validated hit from a still-valid attacker, credit that attacker; if `> 5.0s` (or invalidated by disconnect/reset), record an **Environment KO** (no player credited).<br>
+
+<br>**`HazardKnockouts` exists in `Types.luau` (`EXISTING IMPLEMENTATION`):** `PlayerResult.HazardKnockouts: number` is already typed in `src/shared/Types.luau` line 135 (matching §8.6 line 592: *"A player can be credited for a hazard-assisted KO; UI may label it `HAZARD KO` while retaining valid attacker credit"* and §11.7 line 868).<br>
+
+<br>**`UNKNOWN` (Spec Gap):** Neither `MASTER_IMPLEMENTATION_PLAN.md` §8.6 nor `tasks/TASK-06-COMBAT-CORES-ELIMINATION.md` defines the exact predicate that distinguishes a `HazardKnockout` from a normal `Knockout` (e.g., whether the last hit occurred while the attacker or victim was on an active hazard tile, or whether the victim touched an active hazard tile between the last hit and falling below `Y < 15`). This requires owner clarification before `TASK-06`/`TASK-07`. |
+| **7** | **Warning, Active, and Reset Timing** (`Opening`: `14 / 3.5 / 7 / 3.5`; `MidGame`: `10 / 2.5 / 6 / 2.5`; `SuddenDeath`: `6 / 2 / 5 / 2`; plus client visual fade timings) | **`DOCUMENTED REQUIREMENT`** + **`APPROVED DECISION`** + **`EXISTING IMPLEMENTATION`** *(config/tests)* | **Aligned.** Exact phase sub-intervals are locked in `MASTER_IMPLEMENTATION_PLAN.md` §7.2 (lines 432–436), `specs/DESIGN_CONSTANTS.md` lines 38–41, `DECISION_LOG.md` `D-017`, `src/shared/Config/GameConfig.luau` lines 29–33, and verified by `Config.spec.luau` lines 31–36. Client visual animation timings (`0.35s` sine warning pulse, activation fade-in `<= 0.2s`, reset fade `<= 0.25s`, ring collapse warning `3.0s` before collision disable, then `0.5–0.8s` sink) are documented in `MASTER_IMPLEMENTATION_PLAN.md` §6.4 & §11.4 (lines 397–399, 811–813). |
+| **8** | **Hazard Audio and Visual Cues** (Color + icon + directional motif + spatial audio cues; strict particle/beam budgets; `ASSET_PENDING` rule) | **`DOCUMENTED REQUIREMENT`** + **`APPROVED DECISION`** + **`EXISTING IMPLEMENTATION`** *(config/manifest)* | **Aligned with strict constraints:**<br>
+
+<br>- **Colors (`EXISTING IMPLEMENTATION`):** Locked in `GameConfig.Colors` (`GameConfig.luau` lines 145–156) and `Config.spec.luau` lines 118–139.<br>
+
+<br>- **VFX Budgets (`DOCUMENTED REQUIREMENT`):** `MASTER_IMPLEMENTATION_PLAN.md` §11.5 (lines 819–831) locks specific motifs and budgets (e.g., Ice warning = amber border + frost cyan preview + snowflake icon, no world-wide particles; Magnetic warning/active = concentric rings + max 1–2 visible force lines per sphere, **not** one beam per player-tile pair; Boost warning/active = directional chevrons, one overlay per affected tile).<br>
+
+<br>- **Audio (`DOCUMENTED REQUIREMENT` + `APPROVED DECISION` `D-010`):** `MASTER_IMPLEMENTATION_PLAN.md` §11.6 (lines 836–842) and `src/shared/Config/AssetManifest.luau` (`["audio.hazard_warning"] = "ASSET_PENDING"`) require that **no unverified `rbxassetid://` sound IDs may be used** (`Config.spec.luau` lines 168–178 fails if any `AssetManifest` entry is changed from `ASSET_PENDING` before Studio permission verification). |
+
+### 3. Critical Conflicts and Risks (Ranked by Severity)
+
+1. **`CRITICAL` — `UnreliableRemoteEvent` vs. Frozen Remote Contract (`default.project.json`, `Remotes.spec.luau`, `MASTER_IMPLEMENTATION_PLAN.md` §10.3)**:
+* Using an `UnreliableRemoteEvent` for Board Pulse cycle broadcasts or adding any new remote breaks `src/server/Tests/Unit/Remotes.spec.luau` (lines 6, 29–55), which enforces the exact 10 remotes in `ReplicatedStorage.Remotes` and verifies `BoardPulseEvent.ClassName == "RemoteEvent"`. Furthermore, dropped unreliable packets would leave clients without hazard warnings on a competitive board.
+
+
+2. **`CRITICAL` — Path A (`D-024` / `D-025` / `D-026`) Deterministic Simulation & Rollback Violation**:
+* Gate 0 selected **Path A (Roblox Server Authority)** (`DECISION_LOG.md` `D-024`). Under `D-025` item 3 and `MASTER_IMPLEMENTATION_PLAN.md` §9.3:
+* All physics-affecting hazard math (Ice steering/damping multipliers, Magnetic Storm radial pull, Boost Runway `+18 studs/s` kick) **must** execute inside the shared `RunService:BindToSimulation()` callback using synchronized simulation `time()`, never `os.clock()`/`tick()` or a server-only `Heartbeat` loop that bypasses client prediction.
+* One-shot simulation events (such as the Boost Runway per-sphere trigger stamp for `(RoundId, CycleId)`) must be stored as synchronized state/attributes with monotonically increasing sequence IDs so client resimulation does not re-trigger the `+18 studs/s` impulse or duplicate VFX (`D-025` item 3).
+* Per `D-026` item 3 (`FAIL-008`), client visualizers/FX controllers **must poll** attributes on predicted instances in `PreRender`/`RenderStepped` rather than connecting `GetAttributeChangedSignal`, which does not fire on predicted instances during rollback in Studio `0.743`.
+
+
+
+
+3. **`HIGH` — Undocumented Hazard Knockback Multipliers (`MASTER_IMPLEMENTATION_PLAN.md` §7.1 & §8.5)**:
+* Adding a knockback multiplier for spheres colliding on Ice, Magnetic Storm, or Boost Runway violates `MASTER_IMPLEMENTATION_PLAN.md` §7.1 (*"avoid undocumented per-hazard damage multipliers"*) and §8.5 (`rawDeltaV` uses only `attackerOutgoingFactor` from Kinetic Dash and `victimResistanceFactor` from Cryo Brake).
+
+
+4. **`HIGH` — Mutating `CollisionTile` Physical Friction vs. Mathematical Slip (`MASTER_IMPLEMENTATION_PLAN.md` §6.2, §6.3, §7.4)**:
+* Mutating `CustomPhysicalProperties` on `CollisionTile` instances during Ice Corridor instead of applying `GameConfig.Hazards.Ice.SteeringMultiplier = 0.45` and `LateralDampingMultiplier = 0.25` in `SimulationMath.luau` conflicts with §6.2/§6.3, desynchronizes Path A rollback prediction, and violates the rule that `CollisionTile` properties remain static after grid creation.
+
+
+5. **`MEDIUM` — `BoardPulsePayload` Field Name Mismatch Between `TASK-05` Card Prose and Frozen `src/shared/Types.luau**`:
+* `tasks/TASK-05-BOARD-PULSE.md` Req 2 mentions `Pattern, Phase, EventId, WarningAt, ActivationAt, EndAt, ResetEndAt`, whereas the frozen `src/shared/Types.luau` (`BoardPulsePayload`, lines 92–102) uses `RoundId, CycleId, Phase, Meta, StartAt, WarningAt, ActiveAt, ResetAt, EndAt`. Because `--!strict` and `luau-lsp` enforce `Types.luau` (`MASTER_IMPLEMENTATION_PLAN.md` §0.2 item 3), writing `ActivationAt`, `ResetEndAt`, or top-level `Pattern` will fail static type analysis.
+
+
+6. **`MEDIUM` — Pending Arena-Tile 3D Asset Architecture vs. `TASK-02` / `MASTER_IMPLEMENTATION_PLAN.md` §6.2**:
+* `MASTER_IMPLEMENTATION_PLAN.md` §6.2 (lines 366–368) and `GameConfig.Arena` (`GameConfig.luau` lines 47–49) define three logical tile layers per cell:
+1. `CollisionTile`: `(12, 2, 12)` invisible, anchored, `CanCollide = true`, collision group `ArenaTile`.
+2. `VisualTile`: `(11.8, 2, 11.8)` non-colliding (`CanCollide = false`, `CanTouch = false`), alternating `TileDark (32, 38, 54)` and `TileLight (42, 50, 70)` by checkerboard parity `(x + z) % 2`.
+3. `HazardOverlay`: non-colliding (`CanCollide = false`, `CanTouch = false`), size around `(11.4, 0.05, 11.4)` in greybox (`TASK-02`), or modular overlay meshes (`SM_ArenaTile_Overlay_01..06`) in `TASK-09`.
+
+
+* Furthermore, `tasks/TASK-02-GRID-AND-COLLAPSE.md` line 34 explicitly instructs: ***"Do not add final decorative meshes until grid/collision tests pass."*** And if the multi-node 3D tile meshes are used later in `TASK-09`, `PulseClientVisualizer` must preserve the checkerboard parity (`TileDark` vs `TileLight` on the recessed deck) and must **never** swap or tween the `12 × 2 × 12` `CollisionTile`.
+
+
+
+### 4. Recommendations & Spec Gaps That Require Owner Approval
+
+None of the items below may be assumed or coded without an owner decision recorded in `DECISION_LOG.md` / `docs/PROJECT_STATUS.md`:
+
+1. **Authorization to Start `TASK-02` (`AGENTS.md` line 16, `docs/PROJECT_STATUS.md` line 52)**:
+* Only `TASK-01` has been authorized and merged. `TASK-02` (and subsequently `TASK-03` through `TASK-09`) requires explicit owner approval before any code or branch is created.
+
+
+2. **Definition of `PlayerResult.HazardKnockouts` (`src/shared/Types.luau` line 135, `MASTER_IMPLEMENTATION_PLAN.md` §8.6 line 592)**:
+* Confirm the exact rule for when a valid player-attributed knockout also increments `HazardKnockouts` (for example: whether the victim was affected by an active Board Pulse hazard—Ice Corridor, Magnetic Storm, or Boost Runway—at the time of the last hit or during the `<= 5.0s` fall window before crossing `Y < 15`).
+
+
+3. **Existing Open Owner Questions Tracked in `docs/PROJECT_STATUS.md` (lines 27–35)**:
+* **Q-2 (`TASK-04`/`06`)**: Whether the `D-019` Shift/touch `BurstBoost` (`+12 studs/s`, `4s` cooldown) travels via `AbilityRequest` (adding a payload/kind union) or via a simulation `InputAction` under Path A.
+* **Q-3 (`TASK-07`)**: The canonical default `PlayerLoadout` for a newly joined player (e.g., `Chassis = "Rammer"`, `Skin = "Default"`, `Core = "Kinetic"`, `Trail = "None"`, `Effect = "StandardSpark"`).
+* **RV-T01-01 Spec Gaps (`TASK-04`/`06`)**: Exact numerical values for §8.5 `contact tolerance` distance and §8.3 / `D-019` `"near zero"` velocity/input fallback thresholds, plus the remote/attribute channel for `NO TARGET` ability feedback.
+* **Unlisted Collision Group Pairs (`TASK-02`/`03`)**: Whether `LobbyAvatar` collides with `LobbyAvatar`, and how custom groups interact with `Default`.
+
+
+
+### 5. Work That Can Safely Proceed Now vs. Work That Must Wait
+
+| Category | Scope & Preconditions | Status |
+| --- | --- | --- |
+| **Can Proceed Now (External / Visual-Only Review Outside Repository)** | **Review & Studio Import Test of the Delivered 3D Arena Tile Package (`Sphere_Brawl_Arena_Tiles_Package.zip`)**:<br>
+
+<br>- You can inspect the corrected multi-node `.glb` and multi-object `.obj`/`.mtl` meshes (`SM_ArenaTile_SharedBase` + `SM_ArenaTile_Overlay_01..06` + `SM_ArenaTile_01..06`) in a separate scratch place in Roblox Studio (not saved into `place/Gate0.rbxl`!) to verify the 4 child `MeshPart`s (`Part_MAT_DarkNeutral`, `Part_MAT_AltNeutral`, `Part_MAT_LightTrim`, `Part_EMI_*`) and `Metal`/`Neon` material appearance.<br>
+
+<br>- **Modular Base + Overlay Fit for Checkerboard Parity**: Because the package includes the separate `SM_ArenaTile_SharedBase` (`11.8 × 2.0 × 11.8` studs) and the 6 standalone overlays (`SM_ArenaTile_Overlay_01..06`), in `TASK-09` the base tile's `Part_MAT_AltNeutral` deck can easily alternate between `GameConfig.Colors.TileDark (32, 38, 54)` and `GameConfig.Colors.TileLight (42, 50, 70)` for checkerboard parity while toggling the non-colliding hazard overlays on top. | **READY FOR OWNER VISUAL REVIEW** |
+| **Must Wait for Owner Approval of `TASK-02**` | **`GridService.luau` & `GridService.spec.luau` (`TASK-02`)**:<br>
+
+<br>- Procedural generation of the 81 cells (`x, z in -4..4`), one `(12, 2, 12)` `CollisionTile` per cell, separate `(11.8, 2, 11.8)` greybox `VisualTile` with checkerboard parity, `(11.4, 0.05, 11.4)` non-colliding `HazardOverlay`, `CollapseRing(4)` (81 -> 49), `CollapseRing(3)` (49 -> 25), and `ResetArena()`.<br>
+
+<br>- Per `tasks/TASK-02-GRID-AND-COLLAPSE.md` line 34, **do not** attach decorative 3D meshes during `TASK-02`; pass all greybox grid/collision tests first. | **BLOCKED ON OWNER APPROVAL OF TASK-02** |
+| **Must Wait for `TASK-02` & `TASK-04` Acceptance** | **`PatternDefinitions.luau`, `PulseService.luau`, & `PulseClientVisualizer.luau` (`TASK-05`)**:<br>
+
+<br>- Depends on `TASK-02` (`GridService` live/pending/destroyed cell queries) and `TASK-04` (`SphereService` + `SimulationMath` under Path A `BindToSimulation()`). | **WAITING ON TASK-02 & TASK-04** |
+| **Must Wait for `TASK-04` & `TASK-05` Acceptance** | **`PhysicsValidator.luau`, `AbilityService.luau`, & `EliminationService.luau` (`TASK-06`)**:<br>
+
+<br>- Depends on `TASK-04` (Path A sphere simulation) and `TASK-05` (active hazard queries and Cryo `Anchor Brake` 2.5s immunity integration). | **WAITING ON TASK-04 & TASK-05** |
+| **Must Wait for `TASK-01`–`08` Mechanics & UI Completion** | **Repository Integration of 3D Tile Meshes, Chassis Shells, VFX & Audio (`TASK-09`)**:<br>
+
+<br>- Per `tasks/TASK-09-ASSETS-VFX-ANIMATION-AUDIO.md` Preconditions (*"Mechanics and UI work end-to-end. Functional greybox assets are already in place"*), importing the final 3D meshes into the game DataModel and updating `assets/asset-manifest.json` / `src/shared/Config/AssetManifest.luau` happens in `TASK-09`. | **WAITING ON TASK-09** |
+
+### 6. Corrected, Source-Grounded Board Pulse Architecture Recommendation
+
+To align 100% with `MASTER_IMPLEMENTATION_PLAN.md`, `specs/DESIGN_CONSTANTS.md`, `DECISION_LOG.md` (`D-001`–`D-027`), and the frozen `TASK-01` contracts (`src/shared/Types.luau`, `src/shared/Config/GameConfig.luau`, `default.project.json`), the Board Pulse architecture for `TASK-05` (and its touchpoints in `TASK-02`, `TASK-04`, `TASK-06`, and `TASK-09`) should follow these exact rules:
+
+1. **Single Authoritative Payload via Reliable `BoardPulseEvent` (`Types.BoardPulsePayload`)**:
+* `PulseService` (`src/server/Core/PulseService.luau`) is the sole owner of hazard scheduling (`MASTER_IMPLEMENTATION_PLAN.md` §7.1, §10.5).
+* At the start of each cycle (and on late-client join/rejoin snapshot), `PulseService` fires the reliable `ReplicatedStorage.Remotes.BoardPulseEvent` (`RemoteEvent`, `default.project.json` line 10) with a strictly typed `Types.BoardPulsePayload` (`src/shared/Types.luau` lines 92–102):
+* `RoundId: number`, `CycleId: number`, `Phase: Types.PulsePhase` (`"Opening" | "MidGame" | "SuddenDeath"`), `Meta: Types.PatternMeta`, and absolute `Workspace:GetServerTimeNow()` timestamps `StartAt`, `WarningAt`, `ActiveAt`, `ResetAt`, `EndAt`.
+
+
+* Sub-intervals read strictly from `GameConfig.Pulse.Cycles[phase]` (`GameConfig.luau` lines 29–33):
+* `Opening`: `SafeCombat = 14.0s`, `Warning = 3.5s`, `Active = 7.0s`, `Reset = 3.5s` (`28.0s` total; 2 cycles = `56.0s` before `Collapse1`).
+* `MidGame`: `SafeCombat = 10.0s`, `Warning = 2.5s`, `Active = 6.0s`, `Reset = 2.5s` (`21.0s` total; 2 cycles = `42.0s` before `Collapse2`).
+* `SuddenDeath`: `SafeCombat = 6.0s`, `Warning = 2.0s`, `Active = 5.0s`, `Reset = 2.0s` (`15.0s` total; repeats until 1 survivor or `150.0s` `HardTimeout`).
+
+
+
+
+2. **Pure Deterministic Pattern Selection (`src/shared/Modules/PatternDefinitions.luau`)**:
+* Shared pure function `PatternDefinitions.getAffectedCells(meta: Types.PatternMeta, phase: Types.PulsePhase, liveCells: { Types.GridCell }): { Types.GridPoint }` filters out any cell where `State ~= "Live"` (`"PendingCollapse"` or `"Destroyed"` excluded) and computes membership from `GameConfig.Hazards`:
+* **`IceCorridor`**: `AngleDegrees` in `{ 0, 45, 90, 135 }`. For cardinal (`0, 90`), `abs(lateral) <= GameConfig.Hazards.Ice.CardinalHalfWidth[phase]` (`1.0` in Opening = 3 rows, `0.5` in MidGame/SuddenDeath = 1 row). For diagonal (`45, 135`), `abs(lateral) <= 0.71` and `abs(along) <= DiagonalAlongLimit[phase]` (`nil` in Opening, `2.8` in MidGame, `1.42` in SuddenDeath).
+* **`MagneticStorm`**: `(x - AnchorX)^2 + (z - AnchorZ)^2 <= RadiusTiles^2` with `RadiusTiles = GameConfig.Hazards.Magnetic.RadiusTiles[phase]` (`2.8`, `2.0`, `1.0`), choosing `(AnchorX, AnchorZ)` so the entire disk lies within the currently live square.
+* **`BoostRunway`**: Cardinal `AngleDegrees` in `{ 0, 90, 180, 270 }` only, `abs(lateral) <= 0.5` (1 row wide), all tiles accelerating in the same one-way direction.
+
+
+* Asserts `#affectedCells <= math.floor(#liveCells * GameConfig.Arena.HazardCapRatio)` (`0.35`, never truncating an oversized pattern arbitrarily).
+* `PulseService` selects among legal `(Pattern, Angle/Anchor)` candidates using a server-seeded `Random` instance, avoiding consecutive repeats when an alternative exists (§7.7).
+
+
+3. **Path A (`D-024` / `D-025` / `D-026`) Deterministic Hazard Physics in `SimulationMath.luau**`:
+* Do **not** mutate `CollisionTile.CustomPhysicalProperties` at runtime.
+* Inside the shared `RunService:BindToSimulation()` step (`TASK-04`/`TASK-05`), determine which cell `(gx, gz)` a sphere's center is over via `CoordinateUtils.worldToGrid(root.Position)`.
+* When the current synchronized server time falls within `[ActiveAt, ResetAt)` for the active cycle and the player does **not** have active Cryo `Anchor Brake` hazard immunity (`CoreConfig.Cryo.HazardImmunityDuration = 2.5s`, tracked in simulation time):
+* **`IceCorridor`**: Multiply steering authority by `0.45` (`GameConfig.Hazards.Ice.SteeringMultiplier`) and lateral damping by `0.25` (`1.625` vs `6.5`).
+* **`MagneticStorm`**: Apply horizontal radial pull `a = 22 * (1 - d / radiusStuds)^2` toward the anchor center for `d < radiusStuds`, only when current inward velocity component toward the anchor is `< 12 studs/s` (`GameConfig.Hazards.Magnetic.InwardSpeedCap`).
+* **`BoostRunway`**: If the sphere's synchronized last-triggered Boost stamp attribute does not equal the current `(RoundId, CycleId)` (`Types.luau` line 94, `D-025` item 3), apply a one-time `+18 studs/s` horizontal velocity delta along the runway direction, clamp horizontal speed to `<= 55 studs/s` (`GameConfig.Movement.HorizontalCap`), and record the `(RoundId, CycleId)` stamp + increment a sequence-ID attribute for client FX polling (`D-026`).
+
+
+
+
+4. **Combat & Attribution Separation (`TASK-06`)**:
+* Collision knockback in `PhysicsValidator.luau` uses the locked §8.5 formula (`rawDeltaV = clamp((closing - 10) * 1.15 * outgoingFactor * resistanceFactor, 0, 32)`) with **zero per-hazard damage/knockback multipliers**.
+* `EliminationService.luau` checks `root.Position.Y < GameConfig.Arena.VoidY` (`15`), credits `LastAttackerUserId` if `now - LastHitAt <= 5.0s` (`GameConfig.Combat.KoAttributionWindow`), and otherwise records an Environment KO.
+
+
+5. **Client Presentation & Cleanup (`PulseClientVisualizer.luau` in `TASK-05` / `TASK-09`)**:
+* Listens to `BoardPulseEvent` (and reads initial snapshot on join), computes `remaining = timestamp - Workspace:GetServerTimeNow()`, and drives non-colliding `HazardOverlay` / tile visuals through `SafeCombat -> Warning -> Active -> Reset` using a per-client tween registry (canceling any prior tween on a target before starting a new one, never storing `Tween` objects in Attributes per `TASK-05` Req 8, and polling predicted-root sequence attributes in `PreRender` per `D-026`).
+* Cancels and resets all active hazard states and visuals before `Collapse1`, before `Collapse2`, and during `Cleanup`.
+
+
+
+I have stopped here as instructed and will wait for your review and approval before any implementation or task planning begins.

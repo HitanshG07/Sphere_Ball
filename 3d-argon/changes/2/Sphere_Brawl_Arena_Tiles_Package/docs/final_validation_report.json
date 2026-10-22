@@ -1,0 +1,3270 @@
+{
+  "report_title": "Sphere Brawl: Rolling Rampage \u2014 Arena Tile Material Correction & Final Validation Report",
+  "overall_status": "PASS",
+  "zip_archive_audit": {
+    "file_count": 62,
+    "total_uncompressed_bytes": 23149688,
+    "zip_size_bytes": 20162724
+  },
+  "categories": {
+    "executed_on_files": [
+      {
+        "test_id": "EXEC-01",
+        "test_name": "OBJ Syntax, Face Indices, Object Subparts & Material References",
+        "category": "1. Executed in Sandbox",
+        "method": "Independent Python line-by-line parser (`parse_and_validate_obj`) across all 13 `.obj` files (1 shared base + 6 overlays + 6 complete states)",
+        "actual_result": "0 syntax errors; 0 out-of-range `v`/`vt`/`vn` indices; 100% of faces have valid `v/vt/vn` triples, extended `v x y z r g b` vertex colors, and `o <Asset>__<Material>` object grouping.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-02",
+        "test_name": "MTL References, RGB Definitions (`Kd`/`Ke`) & Atlas `map_Kd` Links",
+        "category": "1. Executed in Sandbox",
+        "method": "Cross-checked every `.obj` `mtllib` and `usemtl` slot against its `.mtl` file and verified `Kd`/`Ke` RGB against the 9 approved palette entries (`parse_and_validate_mtl`)",
+        "actual_result": "13/13 `.obj` files resolve their local `.mtl`; max `Kd`/`Ke` deviation from approved RGB is < 0.0001; all 9 materials include `map_Kd SphereBrawl_ArenaTile_PaletteAtlas.png`.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-03",
+        "test_name": "GLB Structural Validity, Multi-Node Split, `COLOR_0` & Base-Colour Values",
+        "category": "1. Executed in Sandbox",
+        "method": "Parsed 12-byte GLB header + JSON + BIN chunks across all 13 `.glb` files (`parse_and_validate_glb`), checking child `Part_*` nodes, `baseColorFactor`, `emissiveFactor`, `COLOR_0`, `TEXCOORD_0`, and embedded PNG",
+        "actual_result": "13/13 `.glb` files valid; each complete state exports 4 child nodes (`Part_MAT_DarkNeutral`, `Part_MAT_AltNeutral`, `Part_MAT_LightTrim`, `Part_EMI_*`), exact `baseColorFactor`/`emissiveFactor`, `COLOR_0` vertex colors, and embedded 96x96 PNG atlas.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-04",
+        "test_name": "Dimensions, Centered Origins, +Y Up Orientation & 0.2-Stud Grid Gap",
+        "category": "1. Executed in Sandbox",
+        "method": "Measured bounding boxes, centers, top surface elevation (`Y = +1.00`), and 12.0-stud grid spacing across all 13 `.obj` and 13 `.glb` files",
+        "actual_result": "All 6 complete tiles & shared base measure exactly 11.8000 x 2.0000 x 11.8000 studs centered at `(0,0,0)` (`[-5.90,+5.90]` X/Z, `[-1.00,+1.00]` Y -> `World Y=51.0` when centered at `Y=50.0`), leaving an exact 0.2000-stud gap on a 12.0000-stud pitch.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-05",
+        "test_name": "Triangle Counts Below 250 Budget Across All 6 Complete States",
+        "category": "1. Executed in Sandbox",
+        "method": "Counted triangles in both `.obj` and `.glb` for SharedBase (84 tris), 6 Overlays (128\u2013150 tris), and 6 Complete States",
+        "actual_result": "State 1 = 214, State 2 = 224, State 3 = 214, State 4 = 230, State 5 = 212, State 6 = 234 tris. All 6 complete states are strictly < 250 triangles (100% match between `.obj` and `.glb`).",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-06",
+        "test_name": "Degenerate Faces, Face Winding & Outward Normals",
+        "category": "1. Executed in Sandbox",
+        "method": "Computed cross-product triangle area `0.5 * ||(p1-p0) x (p2-p0)||` and `dot(n_geom, vn)` across all 2,248 triangles in all 13 meshes",
+        "actual_result": "0 degenerate triangles (min triangle area = 0.006897 sq. studs > 1e-7); 0 face-winding / normal mismatches (`dot(n_geom, vn) == 1.0` on all faces).",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-07",
+        "test_name": "Deterministic Generator Reproducibility (Python & Blender Collector Parity)",
+        "category": "1. Executed in Sandbox",
+        "method": "Re-ran `generate_arena_tiles_pipeline.py` to `/tmp/det_test_dir` and compared SHA-256 hashes of `.obj`, `.mtl`, and `.glb`; also compared triangle & material groups against `generate_arena_tiles_blender.py`'s `DeterministicGeometryCollector`",
+        "actual_result": "100% identical SHA-256 hashes across repeated runs; `generate_arena_tiles_blender.py`'s standalone procedural collector produces the exact same 84 base tris and 128\u2013150 overlay tris per state.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-08",
+        "test_name": "Preview Image Readability (Material-Colour, Neutral Clay, Side, Wireframe, Top)",
+        "category": "1. Executed in Sandbox",
+        "method": "PIL `Image.verify()` + resolution/contrast audit (`validate_preview_png`) + visual inspection of all 12 PNG sheets (6 per-state 4-panel sheets + 6 master comparison sheets)",
+        "actual_result": "12/12 PNGs decoded cleanly (2400x1440 to 3000x1725 px, pixel std 28.4\u201347.2); neutral clay geometry sheet and material-colour sheets are crisp and distinguishable at small gameplay scale.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-09",
+        "test_name": "Manifest-to-File Consistency & ZIP Integrity",
+        "category": "1. Executed in Sandbox",
+        "method": "Verified `zipfile.ZipFile.testzip()` CRC-32 check and bidirectional path, byte-size, and SHA-256 parity between `MANIFEST.json` and the final ZIP archive",
+        "actual_result": "0 corrupted ZIP entries; 100% match across all 62 files (23,149,688 bytes uncompressed, 20,162,724 bytes compressed).",
+        "status": "PASS"
+      }
+    ],
+    "requires_blender_or_roblox_studio": [
+      {
+        "test_id": "EXT-01",
+        "test_name": "Blender (`bpy`) Execution of `generate_arena_tiles_blender.py`",
+        "category": "2. Requires External App",
+        "method": "Checked Linux container for `blender` executable and `bpy` module; verified standalone `DeterministicGeometryCollector` in Python",
+        "actual_result": "Blender / `bpy` is not installed in this container. `generate_arena_tiles_blender.py` is self-contained and syntax/collector-verified in Python, but running its `bpy` FBX/GLB export requires a workstation with Blender 3.x/4.x.",
+        "status": "NOT RUN (Requires Blender)"
+      },
+      {
+        "test_id": "EXT-02",
+        "test_name": "Roblox Studio 3D Importer Live Verification of Multi-Node GLB/OBJ & Material Setup",
+        "category": "2. Requires External App",
+        "method": "Requires interactive Roblox Studio 3D Importer (`Import As Model = true`, `Merge Meshes = false`) and viewport inspection",
+        "actual_result": "Not executed in this headless sandbox. After importing in Roblox Studio, verify that the 4 child `MeshPart`s (`Part_MAT_*`, `Part_EMI_*`) appear under the root `Model` and apply `Enum.Material.Metal` / `Enum.Material.Neon` + `Color3` per `docs/README_Arena_Tile_Collection.md`.",
+        "status": "NOT RUN (Requires Roblox Studio)"
+      },
+      {
+        "test_id": "EXT-03",
+        "test_name": "Optional Luau Helper (`Roblox_ArenaTile_Integration.lua`) Live Studio Execution",
+        "category": "2. Requires External App",
+        "method": "Static audit of `ApplyApprovedMaterialsToImportedModel` and `MeasureVisualBounds` (no Roblox Studio runtime in sandbox)",
+        "actual_result": "Reviewed statically: assigns `Color3` and `Metal`/`Neon` to `Part_*` children without resizing meshes or mutating the authoritative `12x2x12` collider. Live execution requires Roblox Studio.",
+        "status": "NOT RUN (Requires Roblox Studio)"
+      }
+    ]
+  },
+  "detailed_audits": {
+    "shared_base": {
+      "obj": {
+        "vertex_count": 252,
+        "vertex_color_count": 252,
+        "uv_count": 3,
+        "normal_count": 84,
+        "triangle_count": 84,
+        "object_Subparts": [
+          "SM_ArenaTile_SharedBase__MAT_AltNeutral",
+          "SM_ArenaTile_SharedBase__MAT_DarkNeutral",
+          "SM_ArenaTile_SharedBase__MAT_LightTrim"
+        ],
+        "mtllibs": [
+          "SM_ArenaTile_SharedBase.mtl"
+        ],
+        "materials_used": [
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "bbox_min": [
+          -5.9,
+          -1.0,
+          -5.9
+        ],
+        "bbox_max": [
+          5.9,
+          1.0,
+          5.9
+        ],
+        "dimensions": [
+          11.8,
+          2.0,
+          11.8
+        ],
+        "bbox_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "finite_coords": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0,
+        "min_triangle_area": 0.074453,
+        "syntax_errors": [],
+        "index_errors": [],
+        "valid": true
+      },
+      "mtl": {
+        "materials_defined": [
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "material_details": {
+          "MAT_AltNeutral": {
+            "Ka": [
+              0.0329,
+              0.0392,
+              0.0549
+            ],
+            "Kd": [
+              0.1647,
+              0.1961,
+              0.2745
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+          },
+          "MAT_DarkNeutral": {
+            "Ka": [
+              0.0251,
+              0.0298,
+              0.0424
+            ],
+            "Kd": [
+              0.1255,
+              0.149,
+              0.2118
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+          },
+          "MAT_LightTrim": {
+            "Ka": [
+              0.1333,
+              0.149,
+              0.1686
+            ],
+            "Kd": [
+              0.6667,
+              0.7451,
+              0.8431
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+          }
+        },
+        "palette_errors": [],
+        "valid": true
+      },
+      "glb": {
+        "magic": "glTF",
+        "version": 2,
+        "byte_length": 17676,
+        "header_matches_length": true,
+        "has_valid_bin_chunk": true,
+        "root_node": "SM_ArenaTile_SharedBase",
+        "child_part_nodes": [
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "mesh_count": 3,
+        "materials": [
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "material_definitions": {
+          "MAT_AltNeutral": {
+            "baseColorFactor": [
+              0.1647,
+              0.1961,
+              0.2745,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true,
+            "metallicFactor": 0.58,
+            "roughnessFactor": 0.34
+          },
+          "MAT_DarkNeutral": {
+            "baseColorFactor": [
+              0.1255,
+              0.149,
+              0.2118,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true,
+            "metallicFactor": 0.58,
+            "roughnessFactor": 0.34
+          },
+          "MAT_LightTrim": {
+            "baseColorFactor": [
+              0.6667,
+              0.7451,
+              0.8431,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true,
+            "metallicFactor": 0.78,
+            "roughnessFactor": 0.34
+          }
+        },
+        "material_errors": [],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "embedded_textures_count": 1,
+        "embedded_images_count": 1,
+        "vertex_count": 252,
+        "triangle_count": 84,
+        "bbox_min": [
+          -5.9,
+          -1.0,
+          -5.9
+        ],
+        "bbox_max": [
+          5.9,
+          1.0,
+          5.9
+        ],
+        "dimensions": [
+          11.8,
+          2.0,
+          11.8
+        ],
+        "valid": true
+      }
+    },
+    "states": {
+      "SafeNormal": {
+        "complete_obj": {
+          "vertex_count": 642,
+          "vertex_color_count": 642,
+          "uv_count": 4,
+          "normal_count": 214,
+          "triangle_count": 214,
+          "object_Subparts": [
+            "SM_ArenaTile_01_SafeNormal__EMI_Cyan",
+            "SM_ArenaTile_01_SafeNormal__MAT_AltNeutral",
+            "SM_ArenaTile_01_SafeNormal__MAT_DarkNeutral",
+            "SM_ArenaTile_01_SafeNormal__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_01_SafeNormal.mtl"
+          ],
+          "materials_used": [
+            "EMI_Cyan",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "bbox_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.013606,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "complete_mtl": {
+          "materials_defined": [
+            "EMI_Cyan",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Cyan": {
+              "Ka": [
+                0.0,
+                0.1529,
+                0.2
+              ],
+              "Kd": [
+                0.0,
+                0.7647,
+                1.0
+              ],
+              "Ke": [
+                0.0,
+                0.7647,
+                1.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_AltNeutral": {
+              "Ka": [
+                0.0329,
+                0.0392,
+                0.0549
+              ],
+              "Kd": [
+                0.1647,
+                0.1961,
+                0.2745
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "complete_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 39244,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_01_SafeNormal",
+          "child_part_nodes": [
+            "Part_EMI_Cyan",
+            "Part_MAT_AltNeutral",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 4,
+          "materials": [
+            "EMI_Cyan",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Cyan": {
+              "baseColorFactor": [
+                0.0,
+                0.7647,
+                1.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.7647,
+                1.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_AltNeutral": {
+              "baseColorFactor": [
+                0.1647,
+                0.1961,
+                0.2745,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 642,
+          "triangle_count": 214,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "valid": true
+        },
+        "overlay_obj": {
+          "vertex_count": 390,
+          "vertex_color_count": 390,
+          "uv_count": 3,
+          "normal_count": 130,
+          "triangle_count": 130,
+          "object_Subparts": [
+            "SM_ArenaTile_Overlay_01_SafeNormal__EMI_Cyan",
+            "SM_ArenaTile_Overlay_01_SafeNormal__MAT_DarkNeutral",
+            "SM_ArenaTile_Overlay_01_SafeNormal__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_Overlay_01_SafeNormal.mtl"
+          ],
+          "materials_used": [
+            "EMI_Cyan",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -4.55,
+            0.86,
+            -4.55
+          ],
+          "bbox_max": [
+            4.55,
+            0.99,
+            4.55
+          ],
+          "dimensions": [
+            9.1,
+            0.13,
+            9.1
+          ],
+          "bbox_center": [
+            0.0,
+            0.925,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.013606,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "overlay_mtl": {
+          "materials_defined": [
+            "EMI_Cyan",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Cyan": {
+              "Ka": [
+                0.0,
+                0.1529,
+                0.2
+              ],
+              "Kd": [
+                0.0,
+                0.7647,
+                1.0
+              ],
+              "Ke": [
+                0.0,
+                0.7647,
+                1.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "overlay_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 24944,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_Overlay_01_SafeNormal",
+          "child_part_nodes": [
+            "Part_EMI_Cyan",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 3,
+          "materials": [
+            "EMI_Cyan",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Cyan": {
+              "baseColorFactor": [
+                0.0,
+                0.7647,
+                1.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.7647,
+                1.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 390,
+          "triangle_count": 130,
+          "bbox_min": [
+            -4.55,
+            0.86,
+            -4.55
+          ],
+          "bbox_max": [
+            4.55,
+            0.99,
+            4.55
+          ],
+          "dimensions": [
+            9.1,
+            0.13,
+            9.1
+          ],
+          "valid": true
+        },
+        "preview_png": {
+          "width": 2400,
+          "height": 1440,
+          "pixel_std": 43.31,
+          "valid": true
+        }
+      },
+      "Warning": {
+        "complete_obj": {
+          "vertex_count": 672,
+          "vertex_color_count": 672,
+          "uv_count": 4,
+          "normal_count": 224,
+          "triangle_count": 224,
+          "object_Subparts": [
+            "SM_ArenaTile_02_Warning__EMI_Amber",
+            "SM_ArenaTile_02_Warning__MAT_AltNeutral",
+            "SM_ArenaTile_02_Warning__MAT_DarkNeutral",
+            "SM_ArenaTile_02_Warning__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_02_Warning.mtl"
+          ],
+          "materials_used": [
+            "EMI_Amber",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "bbox_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.020307,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "complete_mtl": {
+          "materials_defined": [
+            "EMI_Amber",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Amber": {
+              "Ka": [
+                0.2,
+                0.1333,
+                0.0
+              ],
+              "Kd": [
+                1.0,
+                0.6667,
+                0.0
+              ],
+              "Ke": [
+                1.0,
+                0.6667,
+                0.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_AltNeutral": {
+              "Ka": [
+                0.0329,
+                0.0392,
+                0.0549
+              ],
+              "Kd": [
+                0.1647,
+                0.1961,
+                0.2745
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "complete_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 40796,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_02_Warning",
+          "child_part_nodes": [
+            "Part_EMI_Amber",
+            "Part_MAT_AltNeutral",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 4,
+          "materials": [
+            "EMI_Amber",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Amber": {
+              "baseColorFactor": [
+                1.0,
+                0.6667,
+                0.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                1.0,
+                0.6667,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_AltNeutral": {
+              "baseColorFactor": [
+                0.1647,
+                0.1961,
+                0.2745,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 672,
+          "triangle_count": 224,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "valid": true
+        },
+        "overlay_obj": {
+          "vertex_count": 420,
+          "vertex_color_count": 420,
+          "uv_count": 2,
+          "normal_count": 140,
+          "triangle_count": 140,
+          "object_Subparts": [
+            "SM_ArenaTile_Overlay_02_Warning__EMI_Amber",
+            "SM_ArenaTile_Overlay_02_Warning__MAT_DarkNeutral"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_Overlay_02_Warning.mtl"
+          ],
+          "materials_used": [
+            "EMI_Amber",
+            "MAT_DarkNeutral"
+          ],
+          "bbox_min": [
+            -4.65,
+            0.86,
+            -4.65
+          ],
+          "bbox_max": [
+            4.65,
+            0.995,
+            4.65
+          ],
+          "dimensions": [
+            9.3,
+            0.135,
+            9.3
+          ],
+          "bbox_center": [
+            0.0,
+            0.9275,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.020307,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "overlay_mtl": {
+          "materials_defined": [
+            "EMI_Amber",
+            "MAT_DarkNeutral"
+          ],
+          "material_details": {
+            "EMI_Amber": {
+              "Ka": [
+                0.2,
+                0.1333,
+                0.0
+              ],
+              "Kd": [
+                1.0,
+                0.6667,
+                0.0
+              ],
+              "Ke": [
+                1.0,
+                0.6667,
+                0.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "overlay_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 25204,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_Overlay_02_Warning",
+          "child_part_nodes": [
+            "Part_EMI_Amber",
+            "Part_MAT_DarkNeutral"
+          ],
+          "mesh_count": 2,
+          "materials": [
+            "EMI_Amber",
+            "MAT_DarkNeutral"
+          ],
+          "material_definitions": {
+            "EMI_Amber": {
+              "baseColorFactor": [
+                1.0,
+                0.6667,
+                0.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                1.0,
+                0.6667,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 420,
+          "triangle_count": 140,
+          "bbox_min": [
+            -4.65,
+            0.86,
+            -4.65
+          ],
+          "bbox_max": [
+            4.65,
+            0.995,
+            4.65
+          ],
+          "dimensions": [
+            9.3,
+            0.135,
+            9.3
+          ],
+          "valid": true
+        },
+        "preview_png": {
+          "width": 2400,
+          "height": 1440,
+          "pixel_std": 47.61,
+          "valid": true
+        }
+      },
+      "IceCorridor": {
+        "complete_obj": {
+          "vertex_count": 642,
+          "vertex_color_count": 642,
+          "uv_count": 4,
+          "normal_count": 214,
+          "triangle_count": 214,
+          "object_Subparts": [
+            "SM_ArenaTile_03_IceCorridor__EMI_Ice",
+            "SM_ArenaTile_03_IceCorridor__MAT_AltNeutral",
+            "SM_ArenaTile_03_IceCorridor__MAT_DarkNeutral",
+            "SM_ArenaTile_03_IceCorridor__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_03_IceCorridor.mtl"
+          ],
+          "materials_used": [
+            "EMI_Ice",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "bbox_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.018142,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "complete_mtl": {
+          "materials_defined": [
+            "EMI_Ice",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Ice": {
+              "Ka": [
+                0.0,
+                0.1843,
+                0.2
+              ],
+              "Kd": [
+                0.0,
+                0.9216,
+                1.0
+              ],
+              "Ke": [
+                0.0,
+                0.9216,
+                1.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_AltNeutral": {
+              "Ka": [
+                0.0329,
+                0.0392,
+                0.0549
+              ],
+              "Kd": [
+                0.1647,
+                0.1961,
+                0.2745
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "complete_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 39236,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_03_IceCorridor",
+          "child_part_nodes": [
+            "Part_EMI_Ice",
+            "Part_MAT_AltNeutral",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 4,
+          "materials": [
+            "EMI_Ice",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Ice": {
+              "baseColorFactor": [
+                0.0,
+                0.9216,
+                1.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.9216,
+                1.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_AltNeutral": {
+              "baseColorFactor": [
+                0.1647,
+                0.1961,
+                0.2745,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 642,
+          "triangle_count": 214,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "valid": true
+        },
+        "overlay_obj": {
+          "vertex_count": 390,
+          "vertex_color_count": 390,
+          "uv_count": 3,
+          "normal_count": 130,
+          "triangle_count": 130,
+          "object_Subparts": [
+            "SM_ArenaTile_Overlay_03_IceCorridor__EMI_Ice",
+            "SM_ArenaTile_Overlay_03_IceCorridor__MAT_DarkNeutral",
+            "SM_ArenaTile_Overlay_03_IceCorridor__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_Overlay_03_IceCorridor.mtl"
+          ],
+          "materials_used": [
+            "EMI_Ice",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -3.62,
+            0.86,
+            -4.8
+          ],
+          "bbox_max": [
+            3.62,
+            0.99,
+            4.8
+          ],
+          "dimensions": [
+            7.24,
+            0.13,
+            9.6
+          ],
+          "bbox_center": [
+            0.0,
+            0.925,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.018142,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "overlay_mtl": {
+          "materials_defined": [
+            "EMI_Ice",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Ice": {
+              "Ka": [
+                0.0,
+                0.1843,
+                0.2
+              ],
+              "Kd": [
+                0.0,
+                0.9216,
+                1.0
+              ],
+              "Ke": [
+                0.0,
+                0.9216,
+                1.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "overlay_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 24912,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_Overlay_03_IceCorridor",
+          "child_part_nodes": [
+            "Part_EMI_Ice",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 3,
+          "materials": [
+            "EMI_Ice",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Ice": {
+              "baseColorFactor": [
+                0.0,
+                0.9216,
+                1.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.9216,
+                1.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 390,
+          "triangle_count": 130,
+          "bbox_min": [
+            -3.62,
+            0.86,
+            -4.8
+          ],
+          "bbox_max": [
+            3.62,
+            0.99,
+            4.8
+          ],
+          "dimensions": [
+            7.24,
+            0.13,
+            9.6
+          ],
+          "valid": true
+        },
+        "preview_png": {
+          "width": 2400,
+          "height": 1440,
+          "pixel_std": 48.99,
+          "valid": true
+        }
+      },
+      "MagneticStorm": {
+        "complete_obj": {
+          "vertex_count": 690,
+          "vertex_color_count": 690,
+          "uv_count": 4,
+          "normal_count": 230,
+          "triangle_count": 230,
+          "object_Subparts": [
+            "SM_ArenaTile_04_MagneticStorm__EMI_Magnetic",
+            "SM_ArenaTile_04_MagneticStorm__MAT_AltNeutral",
+            "SM_ArenaTile_04_MagneticStorm__MAT_DarkNeutral",
+            "SM_ArenaTile_04_MagneticStorm__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_04_MagneticStorm.mtl"
+          ],
+          "materials_used": [
+            "EMI_Magnetic",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "bbox_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.051662,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "complete_mtl": {
+          "materials_defined": [
+            "EMI_Magnetic",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Magnetic": {
+              "Ka": [
+                0.1294,
+                0.0431,
+                0.2
+              ],
+              "Kd": [
+                0.6471,
+                0.2157,
+                1.0
+              ],
+              "Ke": [
+                0.6471,
+                0.2157,
+                1.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_AltNeutral": {
+              "Ka": [
+                0.0329,
+                0.0392,
+                0.0549
+              ],
+              "Kd": [
+                0.1647,
+                0.1961,
+                0.2745
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "complete_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 41764,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_04_MagneticStorm",
+          "child_part_nodes": [
+            "Part_EMI_Magnetic",
+            "Part_MAT_AltNeutral",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 4,
+          "materials": [
+            "EMI_Magnetic",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Magnetic": {
+              "baseColorFactor": [
+                0.6471,
+                0.2157,
+                1.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.6471,
+                0.2157,
+                1.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_AltNeutral": {
+              "baseColorFactor": [
+                0.1647,
+                0.1961,
+                0.2745,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 690,
+          "triangle_count": 230,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "valid": true
+        },
+        "overlay_obj": {
+          "vertex_count": 438,
+          "vertex_color_count": 438,
+          "uv_count": 3,
+          "normal_count": 146,
+          "triangle_count": 146,
+          "object_Subparts": [
+            "SM_ArenaTile_Overlay_04_MagneticStorm__EMI_Magnetic",
+            "SM_ArenaTile_Overlay_04_MagneticStorm__MAT_DarkNeutral",
+            "SM_ArenaTile_Overlay_04_MagneticStorm__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_Overlay_04_MagneticStorm.mtl"
+          ],
+          "materials_used": [
+            "EMI_Magnetic",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -4.55,
+            0.86,
+            -4.55
+          ],
+          "bbox_max": [
+            4.55,
+            0.99,
+            4.55
+          ],
+          "dimensions": [
+            9.1,
+            0.13,
+            9.1
+          ],
+          "bbox_center": [
+            0.0,
+            0.925,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.051662,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "overlay_mtl": {
+          "materials_defined": [
+            "EMI_Magnetic",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Magnetic": {
+              "Ka": [
+                0.1294,
+                0.0431,
+                0.2
+              ],
+              "Kd": [
+                0.6471,
+                0.2157,
+                1.0
+              ],
+              "Ke": [
+                0.6471,
+                0.2157,
+                1.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "overlay_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 27464,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_Overlay_04_MagneticStorm",
+          "child_part_nodes": [
+            "Part_EMI_Magnetic",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 3,
+          "materials": [
+            "EMI_Magnetic",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Magnetic": {
+              "baseColorFactor": [
+                0.6471,
+                0.2157,
+                1.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.6471,
+                0.2157,
+                1.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 438,
+          "triangle_count": 146,
+          "bbox_min": [
+            -4.55,
+            0.86,
+            -4.55
+          ],
+          "bbox_max": [
+            4.55,
+            0.99,
+            4.55
+          ],
+          "dimensions": [
+            9.1,
+            0.13,
+            9.1
+          ],
+          "valid": true
+        },
+        "preview_png": {
+          "width": 2400,
+          "height": 1440,
+          "pixel_std": 46.48,
+          "valid": true
+        }
+      },
+      "BoostRunway": {
+        "complete_obj": {
+          "vertex_count": 636,
+          "vertex_color_count": 636,
+          "uv_count": 4,
+          "normal_count": 212,
+          "triangle_count": 212,
+          "object_Subparts": [
+            "SM_ArenaTile_05_BoostRunway__EMI_Kinetic",
+            "SM_ArenaTile_05_BoostRunway__MAT_AltNeutral",
+            "SM_ArenaTile_05_BoostRunway__MAT_DarkNeutral",
+            "SM_ArenaTile_05_BoostRunway__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_05_BoostRunway.mtl"
+          ],
+          "materials_used": [
+            "EMI_Kinetic",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "bbox_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.011739,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "complete_mtl": {
+          "materials_defined": [
+            "EMI_Kinetic",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Kinetic": {
+              "Ka": [
+                0.2,
+                0.098,
+                0.0
+              ],
+              "Kd": [
+                1.0,
+                0.4902,
+                0.0
+              ],
+              "Ke": [
+                1.0,
+                0.4902,
+                0.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_AltNeutral": {
+              "Ka": [
+                0.0329,
+                0.0392,
+                0.0549
+              ],
+              "Kd": [
+                0.1647,
+                0.1961,
+                0.2745
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "complete_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 38916,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_05_BoostRunway",
+          "child_part_nodes": [
+            "Part_EMI_Kinetic",
+            "Part_MAT_AltNeutral",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 4,
+          "materials": [
+            "EMI_Kinetic",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Kinetic": {
+              "baseColorFactor": [
+                1.0,
+                0.4902,
+                0.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                1.0,
+                0.4902,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_AltNeutral": {
+              "baseColorFactor": [
+                0.1647,
+                0.1961,
+                0.2745,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 636,
+          "triangle_count": 212,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "valid": true
+        },
+        "overlay_obj": {
+          "vertex_count": 384,
+          "vertex_color_count": 384,
+          "uv_count": 3,
+          "normal_count": 128,
+          "triangle_count": 128,
+          "object_Subparts": [
+            "SM_ArenaTile_Overlay_05_BoostRunway__EMI_Kinetic",
+            "SM_ArenaTile_Overlay_05_BoostRunway__MAT_DarkNeutral",
+            "SM_ArenaTile_Overlay_05_BoostRunway__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_Overlay_05_BoostRunway.mtl"
+          ],
+          "materials_used": [
+            "EMI_Kinetic",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -4.45,
+            0.86,
+            -4.45
+          ],
+          "bbox_max": [
+            4.45,
+            1.0,
+            4.45
+          ],
+          "dimensions": [
+            8.9,
+            0.14,
+            8.9
+          ],
+          "bbox_center": [
+            0.0,
+            0.93,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.011739,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "overlay_mtl": {
+          "materials_defined": [
+            "EMI_Kinetic",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_Kinetic": {
+              "Ka": [
+                0.2,
+                0.098,
+                0.0
+              ],
+              "Kd": [
+                1.0,
+                0.4902,
+                0.0
+              ],
+              "Ke": [
+                1.0,
+                0.4902,
+                0.0
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "overlay_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 24600,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_Overlay_05_BoostRunway",
+          "child_part_nodes": [
+            "Part_EMI_Kinetic",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 3,
+          "materials": [
+            "EMI_Kinetic",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_Kinetic": {
+              "baseColorFactor": [
+                1.0,
+                0.4902,
+                0.0,
+                1.0
+              ],
+              "emissiveFactor": [
+                1.0,
+                0.4902,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 384,
+          "triangle_count": 128,
+          "bbox_min": [
+            -4.45,
+            0.86,
+            -4.45
+          ],
+          "bbox_max": [
+            4.45,
+            1.0,
+            4.45
+          ],
+          "dimensions": [
+            8.9,
+            0.14,
+            8.9
+          ],
+          "valid": true
+        },
+        "preview_png": {
+          "width": 2400,
+          "height": 1440,
+          "pixel_std": 46.62,
+          "valid": true
+        }
+      },
+      "RingCollapse": {
+        "complete_obj": {
+          "vertex_count": 702,
+          "vertex_color_count": 702,
+          "uv_count": 4,
+          "normal_count": 234,
+          "triangle_count": 234,
+          "object_Subparts": [
+            "SM_ArenaTile_06_RingCollapse__EMI_DangerRed",
+            "SM_ArenaTile_06_RingCollapse__MAT_AltNeutral",
+            "SM_ArenaTile_06_RingCollapse__MAT_DarkNeutral",
+            "SM_ArenaTile_06_RingCollapse__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_06_RingCollapse.mtl"
+          ],
+          "materials_used": [
+            "EMI_DangerRed",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "bbox_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.005091,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "complete_mtl": {
+          "materials_defined": [
+            "EMI_DangerRed",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_DangerRed": {
+              "Ka": [
+                0.2,
+                0.0314,
+                0.0314
+              ],
+              "Kd": [
+                1.0,
+                0.1569,
+                0.1569
+              ],
+              "Ke": [
+                1.0,
+                0.1569,
+                0.1569
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_AltNeutral": {
+              "Ka": [
+                0.0329,
+                0.0392,
+                0.0549
+              ],
+              "Kd": [
+                0.1647,
+                0.1961,
+                0.2745
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "complete_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 42388,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_06_RingCollapse",
+          "child_part_nodes": [
+            "Part_EMI_DangerRed",
+            "Part_MAT_AltNeutral",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 4,
+          "materials": [
+            "EMI_DangerRed",
+            "MAT_AltNeutral",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_DangerRed": {
+              "baseColorFactor": [
+                1.0,
+                0.1569,
+                0.1569,
+                1.0
+              ],
+              "emissiveFactor": [
+                1.0,
+                0.1569,
+                0.1569
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_AltNeutral": {
+              "baseColorFactor": [
+                0.1647,
+                0.1961,
+                0.2745,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 702,
+          "triangle_count": 234,
+          "bbox_min": [
+            -5.9,
+            -1.0,
+            -5.9
+          ],
+          "bbox_max": [
+            5.9,
+            1.0,
+            5.9
+          ],
+          "dimensions": [
+            11.8,
+            2.0,
+            11.8
+          ],
+          "valid": true
+        },
+        "overlay_obj": {
+          "vertex_count": 450,
+          "vertex_color_count": 450,
+          "uv_count": 3,
+          "normal_count": 150,
+          "triangle_count": 150,
+          "object_Subparts": [
+            "SM_ArenaTile_Overlay_06_RingCollapse__EMI_DangerRed",
+            "SM_ArenaTile_Overlay_06_RingCollapse__MAT_DarkNeutral",
+            "SM_ArenaTile_Overlay_06_RingCollapse__MAT_LightTrim"
+          ],
+          "mtllibs": [
+            "SM_ArenaTile_Overlay_06_RingCollapse.mtl"
+          ],
+          "materials_used": [
+            "EMI_DangerRed",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "bbox_min": [
+            -5.6,
+            0.86,
+            -5.6
+          ],
+          "bbox_max": [
+            5.6,
+            1.0,
+            5.6
+          ],
+          "dimensions": [
+            11.2,
+            0.14,
+            11.2
+          ],
+          "bbox_center": [
+            0.0,
+            0.93,
+            0.0
+          ],
+          "finite_coords": true,
+          "degenerate_triangles": 0,
+          "winding_normal_mismatches": 0,
+          "min_triangle_area": 0.005091,
+          "syntax_errors": [],
+          "index_errors": [],
+          "valid": true
+        },
+        "overlay_mtl": {
+          "materials_defined": [
+            "EMI_DangerRed",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_details": {
+            "EMI_DangerRed": {
+              "Ka": [
+                0.2,
+                0.0314,
+                0.0314
+              ],
+              "Kd": [
+                1.0,
+                0.1569,
+                0.1569
+              ],
+              "Ke": [
+                1.0,
+                0.1569,
+                0.1569
+              ],
+              "Ks": [
+                0.9,
+                0.9,
+                0.9
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_DarkNeutral": {
+              "Ka": [
+                0.0251,
+                0.0298,
+                0.0424
+              ],
+              "Kd": [
+                0.1255,
+                0.149,
+                0.2118
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            },
+            "MAT_LightTrim": {
+              "Ka": [
+                0.1333,
+                0.149,
+                0.1686
+              ],
+              "Kd": [
+                0.6667,
+                0.7451,
+                0.8431
+              ],
+              "Ke": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Ks": [
+                0.55,
+                0.6,
+                0.68
+              ],
+              "map_Kd": "SphereBrawl_ArenaTile_PaletteAtlas.png"
+            }
+          },
+          "palette_errors": [],
+          "valid": true
+        },
+        "overlay_glb": {
+          "magic": "glTF",
+          "version": 2,
+          "byte_length": 28080,
+          "header_matches_length": true,
+          "has_valid_bin_chunk": true,
+          "root_node": "SM_ArenaTile_Overlay_06_RingCollapse",
+          "child_part_nodes": [
+            "Part_EMI_DangerRed",
+            "Part_MAT_DarkNeutral",
+            "Part_MAT_LightTrim"
+          ],
+          "mesh_count": 3,
+          "materials": [
+            "EMI_DangerRed",
+            "MAT_DarkNeutral",
+            "MAT_LightTrim"
+          ],
+          "material_definitions": {
+            "EMI_DangerRed": {
+              "baseColorFactor": [
+                1.0,
+                0.1569,
+                0.1569,
+                1.0
+              ],
+              "emissiveFactor": [
+                1.0,
+                0.1569,
+                0.1569
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.1,
+              "roughnessFactor": 0.15
+            },
+            "MAT_DarkNeutral": {
+              "baseColorFactor": [
+                0.1255,
+                0.149,
+                0.2118,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.58,
+              "roughnessFactor": 0.34
+            },
+            "MAT_LightTrim": {
+              "baseColorFactor": [
+                0.6667,
+                0.7451,
+                0.8431,
+                1.0
+              ],
+              "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "has_baseColorTexture": true,
+              "metallicFactor": 0.78,
+              "roughnessFactor": 0.34
+            }
+          },
+          "material_errors": [],
+          "has_color0_vertex_colors": true,
+          "has_texcoord0_uvs": true,
+          "embedded_textures_count": 1,
+          "embedded_images_count": 1,
+          "vertex_count": 450,
+          "triangle_count": 150,
+          "bbox_min": [
+            -5.6,
+            0.86,
+            -5.6
+          ],
+          "bbox_max": [
+            5.6,
+            1.0,
+            5.6
+          ],
+          "dimensions": [
+            11.2,
+            0.14,
+            11.2
+          ],
+          "valid": true
+        },
+        "preview_png": {
+          "width": 2400,
+          "height": 1440,
+          "pixel_std": 46.58,
+          "valid": true
+        }
+      }
+    }
+  },
+  "comparison_preview_audits": {
+    "top_material_comparison": {
+      "width": 3000,
+      "height": 1725,
+      "pixel_std": 63.44,
+      "valid": true
+    },
+    "perspective_material_comparison": {
+      "width": 3000,
+      "height": 1725,
+      "pixel_std": 52.25,
+      "valid": true
+    },
+    "neutral_clay_geometry_comparison": {
+      "width": 3000,
+      "height": 1725,
+      "pixel_std": 55.4,
+      "valid": true
+    },
+    "side_elevation_comparison": {
+      "width": 3000,
+      "height": 1725,
+      "pixel_std": 30.78,
+      "valid": true
+    },
+    "wireframe_comparison": {
+      "width": 3000,
+      "height": 1725,
+      "pixel_std": 42.13,
+      "valid": true
+    },
+    "neighbor_grid_spacing_2x3": {
+      "width": 2700,
+      "height": 1425,
+      "pixel_std": 58.42,
+      "valid": true
+    }
+  }
+}
