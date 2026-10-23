@@ -1,0 +1,143 @@
+{
+  "asset_identity": {
+    "asset_name": "SM_Hub_PlazaPlatform_01",
+    "outer_diameter_studs": 140.0,
+    "outer_radius_studs": 70.0,
+    "max_xz_footprint_studs": [
+      140.0,
+      140.0
+    ],
+    "top_walking_surface_local_y": 0.0,
+    "top_walking_surface_world_y": 150.0,
+    "world_pivot_position": [
+      0.0,
+      150.0,
+      -300.0
+    ],
+    "total_thickness_studs": 12.0,
+    "local_y_bounds": [
+      -12.0,
+      0.0
+    ],
+    "radial_segments": 32,
+    "buttress_count": 8,
+    "underside_rib_count": 8,
+    "queue_pad_clear_radius_studs": 14.0,
+    "portal_arch_clearance_radius_studs": 21.2
+  },
+  "approved_palette": {
+    "MAT_DarkNeutral": {
+      "rgb_255": [
+        32,
+        38,
+        54
+      ],
+      "hex": "#202636",
+      "normalized_rgb": [
+        0.12549,
+        0.14902,
+        0.211765
+      ],
+      "emissive": false,
+      "metallic": 0.55,
+      "roughness": 0.42,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(32, 38, 54)",
+      "surface_role": "Main walking deck, outer load-bearing rim hull, and tapered lower keel shell"
+    },
+    "MAT_AltNeutral": {
+      "rgb_255": [
+        42,
+        50,
+        70
+      ],
+      "hex": "#2A3246",
+      "normalized_rgb": [
+        0.164706,
+        0.196078,
+        0.27451
+      ],
+      "emissive": false,
+      "metallic": 0.6,
+      "roughness": 0.35,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(42, 50, 70)",
+      "surface_role": "Secondary deck panel inlays, stepped mid-hull structural bays, and radial underside box-girders"
+    },
+    "MAT_LightTrim": {
+      "rgb_255": [
+        170,
+        190,
+        215
+      ],
+      "hex": "#AABED7",
+      "normalized_rgb": [
+        0.666667,
+        0.745098,
+        0.843137
+      ],
+      "emissive": false,
+      "metallic": 0.78,
+      "roughness": 0.28,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(170, 190, 215)",
+      "surface_role": "Precision-machined rim bevels, perimeter mounting brackets, tie cleats, and truss gussets"
+    },
+    "EMI_Cyan": {
+      "rgb_255": [
+        0,
+        195,
+        255
+      ],
+      "hex": "#00C3FF",
+      "normalized_rgb": [
+        0.0,
+        0.764706,
+        1.0
+      ],
+      "emissive": true,
+      "metallic": 0.1,
+      "roughness": 0.15,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(0, 195, 255)",
+      "surface_role": "Recessed top-deck framing conduits, outer rim status channels, and underside bay diagnostic strips"
+    }
+  },
+  "components": [
+    {
+      "name": "GEO_PlazaPlatform_Deck",
+      "material": "MAT_DarkNeutral",
+      "triangles": 408
+    },
+    {
+      "name": "GEO_PlazaPlatform_DeckInlays",
+      "material": "MAT_AltNeutral",
+      "triangles": 360
+    },
+    {
+      "name": "GEO_PlazaPlatform_Rim",
+      "material": "MAT_DarkNeutral",
+      "triangles": 224
+    },
+    {
+      "name": "GEO_PlazaPlatform_Structure",
+      "material": "MAT_AltNeutral",
+      "triangles": 448
+    },
+    {
+      "name": "GEO_PlazaPlatform_Underside",
+      "material": "MAT_DarkNeutral",
+      "triangles": 224
+    },
+    {
+      "name": "GEO_PlazaPlatform_Trim",
+      "material": "MAT_LightTrim",
+      "triangles": 840
+    },
+    {
+      "name": "GEO_PlazaPlatform_CyanAccents",
+      "material": "EMI_Cyan",
+      "triangles": 184
+    }
+  ]
+}

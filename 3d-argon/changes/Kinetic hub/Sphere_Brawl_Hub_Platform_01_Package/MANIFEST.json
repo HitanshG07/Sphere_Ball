@@ -1,0 +1,239 @@
+{
+  "package_name": "Sphere_Brawl_Hub_Platform_01_Package",
+  "asset_id": "SM_Hub_PlazaPlatform_01",
+  "canonical_manifest_entry": {
+    "id": "hub.plaza_platform.01",
+    "name": "SM_Hub_PlazaPlatform_01",
+    "kind": "model",
+    "status": "EXPORTED",
+    "destination": "Workspace.KineticHub.SM_Hub_PlazaPlatform_01",
+    "source": "3d-argon/changes/3/Sphere_Brawl_Hub_Platform_01_Package/scripts/generate_hub_plaza_platform_blender.py",
+    "rightsStatus": "ORIGINAL_GENERATED",
+    "robloxAssetId": null,
+    "triangles": 2688,
+    "textureResolution": "64x64",
+    "collision": "VISUAL_ONLY",
+    "platformBudget": "DESKTOP_AND_MOBILE",
+    "notes": "140-stud outer diameter floating Kinetic Hub plaza platform (140x12x140 studs, Local Y in [-12, 0]). Pivot at (0,0,0) center of top walking surface -> place at World (0, 150, -300) for World Y = 150 top deck. Includes 7 material-separated GEO_PlazaPlatform_* child meshes + optional 128-tri COL_PlazaPlatform_Deck collision proxy."
+  },
+  "geometry_validation": {
+    "outer_diameter_studs": 140.0,
+    "dimensions_studs": [
+      140.0,
+      12.0,
+      140.0
+    ],
+    "bbox_min_studs": [
+      -70.0,
+      -12.0,
+      -70.0
+    ],
+    "bbox_max_studs": [
+      70.0,
+      0.0,
+      70.0
+    ],
+    "local_top_surface_y": 0.0,
+    "world_pivot_target": [
+      0.0,
+      150.0,
+      -300.0
+    ],
+    "world_top_surface_y": 150.0,
+    "triangle_count": 2688,
+    "vertex_count": 8064,
+    "degenerate_triangles": 0,
+    "winding_normal_mismatches": 0,
+    "child_components": [
+      "GEO_PlazaPlatform_Deck",
+      "GEO_PlazaPlatform_DeckInlays",
+      "GEO_PlazaPlatform_Rim",
+      "GEO_PlazaPlatform_Structure",
+      "GEO_PlazaPlatform_Underside",
+      "GEO_PlazaPlatform_Trim",
+      "GEO_PlazaPlatform_CyanAccents"
+    ],
+    "triangles_by_component": {
+      "GEO_PlazaPlatform_Deck": 408,
+      "GEO_PlazaPlatform_DeckInlays": 360,
+      "GEO_PlazaPlatform_Rim": 224,
+      "GEO_PlazaPlatform_Structure": 448,
+      "GEO_PlazaPlatform_Underside": 224,
+      "GEO_PlazaPlatform_Trim": 840,
+      "GEO_PlazaPlatform_CyanAccents": 184
+    },
+    "materials_used": [
+      "EMI_Cyan",
+      "MAT_AltNeutral",
+      "MAT_DarkNeutral",
+      "MAT_LightTrim"
+    ],
+    "surface_area_pct_by_material": {
+      "MAT_DarkNeutral": 63.31,
+      "MAT_AltNeutral": 27.92,
+      "MAT_LightTrim": 5.85,
+      "EMI_Cyan": 2.92
+    },
+    "top_projected_area_pct_by_material": {
+      "MAT_DarkNeutral": 67.13,
+      "MAT_AltNeutral": 24.04,
+      "MAT_LightTrim": 5.78,
+      "EMI_Cyan": 3.04
+    },
+    "queue_portal_clearance": {
+      "reference_file_inspected": "3d-argon/changes/1/argon/Sphere_Brawl_Stage4_Validated_Prototypes/QueuePortalArch_Prototype.obj",
+      "portal_bbox_min_studs": [
+        -20.4,
+        0.0,
+        -13.9151
+      ],
+      "portal_bbox_max_studs": [
+        20.4,
+        26.65,
+        13.9151
+      ],
+      "portal_floor_radial_band_studs": [
+        15.2,
+        20.4658
+      ],
+      "queue_pad_radius_studs": 14.0,
+      "platform_inner_recessed_conduit_radius_studs": [
+        21.2,
+        22.8
+      ],
+      "radial_clearance_outside_portal_buttress_studs": 0.7342,
+      "platform_protrusions_above_y0": 0,
+      "portal_zone_r21_completely_flat_y0": true,
+      "duplicated_portal_or_pad_ring": false,
+      "status": "PASS"
+    },
+    "reproducibility_sha256_verified": true
+  },
+  "files": [
+    {
+      "relative_path": "README.md",
+      "size_bytes": 6126,
+      "sha256": "a53ff499a0450dae2deaf1ba52b654e5959cdbee5d7130800c00d4ada2a91497"
+    },
+    {
+      "relative_path": "MODEL_SPECIFICATION.md",
+      "size_bytes": 9130,
+      "sha256": "29d4a3846d0321d36f4e30b43dc36a71c3b0ef3269e58d8c4a68db2f65f69e58"
+    },
+    {
+      "relative_path": "ROBLOX_STUDIO_IMPORT_GUIDE.md",
+      "size_bytes": 6155,
+      "sha256": "6cd15d71d3dd13f8636dea849cec60ba30861dfc58133b415ba8c42d506d4842"
+    },
+    {
+      "relative_path": "VALIDATION_REPORT.md",
+      "size_bytes": 5956,
+      "sha256": "0d06c6fbf78d87659f9b5092fa2b1bfdfc436d367d84c4cb3d7d3e9436ee833b"
+    },
+    {
+      "relative_path": "docs/README.md",
+      "size_bytes": 6126,
+      "sha256": "a53ff499a0450dae2deaf1ba52b654e5959cdbee5d7130800c00d4ada2a91497"
+    },
+    {
+      "relative_path": "docs/MODEL_SPECIFICATION.md",
+      "size_bytes": 9130,
+      "sha256": "29d4a3846d0321d36f4e30b43dc36a71c3b0ef3269e58d8c4a68db2f65f69e58"
+    },
+    {
+      "relative_path": "docs/ROBLOX_STUDIO_IMPORT_GUIDE.md",
+      "size_bytes": 6155,
+      "sha256": "6cd15d71d3dd13f8636dea849cec60ba30861dfc58133b415ba8c42d506d4842"
+    },
+    {
+      "relative_path": "docs/VALIDATION_REPORT.md",
+      "size_bytes": 5956,
+      "sha256": "0d06c6fbf78d87659f9b5092fa2b1bfdfc436d367d84c4cb3d7d3e9436ee833b"
+    },
+    {
+      "relative_path": "meshes/SM_Hub_PlazaPlatform_01.obj",
+      "size_bytes": 579209,
+      "sha256": "4749d8ceb7e64b7c9ba032dfaaf24f9f91199b552fdfc68fa87eb4769e42d5ff"
+    },
+    {
+      "relative_path": "meshes/SM_Hub_PlazaPlatform_01.mtl",
+      "size_bytes": 836,
+      "sha256": "92add12a544f1d60ba06dc25506b50e2f9d38b6cabb16ac20bda8b54294ebcf8"
+    },
+    {
+      "relative_path": "meshes/SM_Hub_PlazaPlatform_01.glb",
+      "size_bytes": 428180,
+      "sha256": "534f9c9b897e7713535b78685b9afffeee1b43437d23520e5067633a1659ec29"
+    },
+    {
+      "relative_path": "meshes/SphereBrawl_HubPlatform_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    },
+    {
+      "relative_path": "meshes/collision_proxy/COL_PlazaPlatform_Deck.obj",
+      "size_bytes": 26775,
+      "sha256": "30478e040212a750b5a91ed2d6e0405ca66ad24122f4fc6bae8a132c3e3ca6da"
+    },
+    {
+      "relative_path": "meshes/collision_proxy/COL_PlazaPlatform_Deck.mtl",
+      "size_bytes": 275,
+      "sha256": "16d9dee98a5df2d356bd112eb7cd97347ce029fff46f23ceaec71e5460e45e04"
+    },
+    {
+      "relative_path": "meshes/collision_proxy/COL_PlazaPlatform_Deck.glb",
+      "size_bytes": 21972,
+      "sha256": "5d325705166201ce0528be760a49fd3ef986d78c33716d4371b8e04d5f6ee80c"
+    },
+    {
+      "relative_path": "meshes/collision_proxy/SphereBrawl_HubPlatform_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    },
+    {
+      "relative_path": "textures/SphereBrawl_HubPlatform_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    },
+    {
+      "relative_path": "scripts/generate_hub_plaza_platform_blender.py",
+      "size_bytes": 36819,
+      "sha256": "af73026fcfa2f52661233977c1821ee0a528c848ee37b352e57e33bfbf5f53fd"
+    },
+    {
+      "relative_path": "config/hub_plaza_platform_parameters.json",
+      "size_bytes": 3440,
+      "sha256": "4fe853411b35d4df899bc1309b905d919fb72ca119c32c9cb035474ba94df29d"
+    },
+    {
+      "relative_path": "manifest/SM_Hub_PlazaPlatform_01.manifest.json",
+      "size_bytes": 833,
+      "sha256": "e2c13de8e27fd7e061e1f283219726f2c7f317d391c6020824743038a75a77ca"
+    },
+    {
+      "relative_path": "previews/01_Preview_ThreeQuarter_Perspective.png",
+      "size_bytes": 1469630,
+      "sha256": "cb6bf48553be5298f926ead7c3b0d1e48e55db916441c5558ef853044014e858"
+    },
+    {
+      "relative_path": "previews/02_Preview_Top_140Stud_Layout.png",
+      "size_bytes": 1080033,
+      "sha256": "71a94cb3b4b7317c5df6b995df532bbecad47272357dca0d55af4803f3992a57"
+    },
+    {
+      "relative_path": "previews/03_Preview_Side_and_Underside_Structure.png",
+      "size_bytes": 1143598,
+      "sha256": "aa2b6035d97dbb72d0bf7f46c25d794f41e5c6a88c4236de82a97a1ce983a358"
+    },
+    {
+      "relative_path": "previews/04_Preview_Material_and_Rim_CloseUp.png",
+      "size_bytes": 957345,
+      "sha256": "d6fd88dc40509bdb9cc96a5fa557cf3d3282b193de77d7f8f386212149f27b02"
+    },
+    {
+      "relative_path": "previews/05_Preview_NeutralClay_and_Wireframe.png",
+      "size_bytes": 1940634,
+      "sha256": "e0d98b39ebf1d4d048f96ca8989fd91997aaf56a86967d6f0c9781c880217bba"
+    }
+  ]
+}

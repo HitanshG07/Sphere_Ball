@@ -1,0 +1,15 @@
+{
+  "id": "hub.queue_pad_ring.01",
+  "name": "SM_Hub_QueuePadRing_01",
+  "kind": "model",
+  "status": "EXPORTED",
+  "destination": "Workspace.KineticHub.SM_Hub_QueuePadRing_01",
+  "source": "3d-argon/changes/4/Sphere_Brawl_Hub_QueuePadRing_01_Package/scripts/generate_hub_queue_pad_ring_blender.py",
+  "rightsStatus": "ORIGINAL_GENERATED",
+  "robloxAssetId": null,
+  "triangles": 960,
+  "textureResolution": "64x64",
+  "collision": "VISUAL_ONLY",
+  "platformBudget": "DESKTOP_AND_MOBILE",
+  "notes": "Decorative 14-stud-radius queue boundary ring for the Kinetic Hub at World (0, 150, -300). Measured R_outer = 14.0000 studs (D = 28.0000), R_inner = 12.8000 studs (D = 25.6000), band width = 1.2000 studs, Local Y in [0.0040, 0.0800] studs (0.0760-stud structural thickness, 4 mm non-coplanar clearance above Plaza Platform top surface Y = 0.0000). Central standing area (R < 12.80 studs) is 100% unobstructed (0 vertices). Purely visual (Anchored=true, CanCollide=false, CanTouch=false, CanQuery=false)."
+}

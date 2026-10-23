@@ -1,0 +1,15 @@
+{
+  "id": "hub.plaza_platform.01",
+  "name": "SM_Hub_PlazaPlatform_01",
+  "kind": "model",
+  "status": "EXPORTED",
+  "destination": "Workspace.KineticHub.SM_Hub_PlazaPlatform_01",
+  "source": "3d-argon/changes/3/Sphere_Brawl_Hub_Platform_01_Package/scripts/generate_hub_plaza_platform_blender.py",
+  "rightsStatus": "ORIGINAL_GENERATED",
+  "robloxAssetId": null,
+  "triangles": 2688,
+  "textureResolution": "64x64",
+  "collision": "VISUAL_ONLY",
+  "platformBudget": "DESKTOP_AND_MOBILE",
+  "notes": "140-stud outer diameter floating Kinetic Hub plaza platform (140x12x140 studs, Local Y in [-12, 0]). Pivot at (0,0,0) center of top walking surface -> place at World (0, 150, -300) for World Y = 150 top deck. Includes 7 material-separated GEO_PlazaPlatform_* child meshes + optional 128-tri COL_PlazaPlatform_Deck collision proxy."
+}

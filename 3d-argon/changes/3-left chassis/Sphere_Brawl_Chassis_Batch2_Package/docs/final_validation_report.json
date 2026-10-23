@@ -1,0 +1,976 @@
+{
+  "report_title": "Sphere Brawl: Rolling Rampage \u2014 TASK-09 Asset Batch 2: Chassis Models Validation Report",
+  "overall_file_validation_status": "PASS",
+  "roblox_studio_import_verified": false,
+  "zip_archive_audit": {
+    "file_count": 23,
+    "total_uncompressed_bytes": 12412539,
+    "zip_size_bytes": 10672610
+  },
+  "categories": {
+    "passed_tests": [
+      {
+        "test_id": "EXEC-01",
+        "test_name": "Sphere Collider Envelope (`Max Radius <= 2.970` Studs & Centered Origin)",
+        "category": "1. Passed (Programmatic File Check)",
+        "method": "Computed Euclidean distance `sqrt(x^2 + y^2 + z^2)` across all vertices in `.obj` and `.glb` for Trickster, Magnetar, and Bulwark",
+        "actual_result": "Trickster max R = 2.94500 studs; Magnetar max R = 2.95500 studs; Bulwark max R = 2.96201 studs. 0 vertices exceed 2.97000 studs (0 exceed 3.00000-stud collider); all centered at (0,0,0) with +Y Up and +Z Forward.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-02",
+        "test_name": "Triangle Count Budget (`<= 250` Triangles Per Complete Chassis)",
+        "category": "1. Passed (Programmatic File Check)",
+        "method": "Counted triangles in both `.obj` and `.glb` across all 3 complete chassis models",
+        "actual_result": "SM_Chassis_Trickster_01 = 236 tris; SM_Chassis_Magnetar_01 = 232 tris; SM_Chassis_Bulwark_01 = 232 tris. All 3 are strictly <= 250 triangles with 100% parity between `.obj` and `.glb`.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-03",
+        "test_name": "OBJ Syntax, Sub-Objects, Normals, Winding & Contiguous Geometry",
+        "category": "1. Passed (Programmatic File Check)",
+        "method": "Line-by-line parser (`parse_and_validate_obj`) checking face indices, cross-product areas, and outward radial normals",
+        "actual_result": "0 syntax/index errors; 0 degenerate triangles (min area >= 0.0089 sq. studs); 0 normal/winding mismatches; all raised armor/fins are rooted at R = 2.60\u20132.64 studs inside the closed inner sphere hull (0 floating parts).",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-04",
+        "test_name": "MTL Definitions, Approved RGB Palette & Atlas `map_Kd` Links",
+        "category": "1. Passed (Programmatic File Check)",
+        "method": "Cross-checked every `.obj` `mtllib` and `usemtl` against its `.mtl` and the approved Sphere Brawl RGB palette (`parse_and_validate_mtl`)",
+        "actual_result": "3/3 `.mtl` files resolve; max `Kd`/`Ke` deviation from approved RGB is < 0.0001; every material links `map_Kd SphereBrawl_Chassis_PaletteAtlas.png`.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-05",
+        "test_name": "GLB Binary Validity, Multi-Node Child Parts, `COLOR_0` & Embedded PNG",
+        "category": "1. Passed (Programmatic File Check)",
+        "method": "Parsed 12-byte GLB header + JSON + BIN chunks (`parse_and_validate_glb`) across all 3 `.glb` files",
+        "actual_result": "3/3 `.glb` files valid; each exports 1 root node + named `Part_*` child nodes per material slot, `COLOR_0` vertex colors, `TEXCOORD_0` UVs, and embedded 96x96 PNG palette atlas.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-06",
+        "test_name": "Deterministic Generator Reproducibility (Python & Blender Collector Parity)",
+        "category": "1. Passed (Programmatic File Check)",
+        "method": "Re-ran `generate_chassis_batch2_pipeline.py` to `/tmp/det_chassis_test` and compared SHA-256 hashes; verified `DeterministicChassisCollector` in `generate_chassis_batch2_blender.py`",
+        "actual_result": "100% identical SHA-256 hashes across repeated runs; standalone Blender collector produces the exact same 236, 232, and 232 triangles.",
+        "status": "PASS"
+      },
+      {
+        "test_id": "EXEC-07",
+        "test_name": "Preview Image Readability & ZIP / Manifest Integrity",
+        "category": "1. Passed (Programmatic File Check)",
+        "method": "PIL `Image.verify()` on all 5 PNG preview sheets + `zipfile.ZipFile.testzip()` CRC-32 check + SHA-256 verification against `MANIFEST.json`",
+        "actual_result": "5/5 PNG sheets verified; 0 corrupted ZIP entries; 100% match across all 23 files (12,412,539 B uncompressed, 10,672,610 B compressed).",
+        "status": "PASS"
+      }
+    ],
+    "failed_tests": [],
+    "not_run_tests": [
+      {
+        "test_id": "EXT-01",
+        "test_name": "Headless Blender (`bpy`) Execution of `generate_chassis_batch2_blender.py`",
+        "category": "2. Not Run (External Tool Unavailable)",
+        "method": "Checked Linux sandbox for `blender` binary and `bpy` module; verified standalone `DeterministicChassisCollector` in Python",
+        "actual_result": "Blender / `bpy` is not installed in this container. `generate_chassis_batch2_blender.py` is syntax- and collector-verified in Python, but executing `bpy` FBX/GLB export requires a workstation with Blender 3.x/4.x.",
+        "status": "NOT RUN (Requires Blender)"
+      },
+      {
+        "test_id": "EXT-02",
+        "test_name": "Roblox Studio 3D Importer Live Verification (`ASSET_PENDING` in Studio)",
+        "category": "2. Not Run (External Tool Unavailable)",
+        "method": "Requires interactive Roblox Studio 3D Importer (`Import As Model = true`, `Merge Meshes = false`) in a separate test place",
+        "actual_result": "Not executed in this headless sandbox. Per TASK-09 & D-010, all three chassis remain `status = CANDIDATE_READY_FOR_STUDIO_IMPORT` (`robloxStudioVerified = false`) until imported and inspected by the owner in Roblox Studio.",
+        "status": "NOT RUN (Requires Roblox Studio)"
+      }
+    ]
+  },
+  "detailed_audits": {
+    "SM_Chassis_Trickster_01": {
+      "obj": {
+        "vertex_count": 708,
+        "vertex_color_count": 708,
+        "uv_count": 5,
+        "normal_count": 236,
+        "triangle_count": 236,
+        "under_250_triangles": true,
+        "max_radius_studs": 2.945,
+        "min_radius_studs": 2.64,
+        "vertices_exceeding_2_97_studs": 0,
+        "vertices_exceeding_3_00_studs": 0,
+        "object_subparts": [
+          "SM_Chassis_Trickster_01__EMI_Cyan",
+          "SM_Chassis_Trickster_01__EMI_Kinetic",
+          "SM_Chassis_Trickster_01__MAT_AltNeutral",
+          "SM_Chassis_Trickster_01__MAT_DarkNeutral",
+          "SM_Chassis_Trickster_01__MAT_LightTrim"
+        ],
+        "mtllibs": [
+          "SM_Chassis_Trickster_01.mtl"
+        ],
+        "materials_used": [
+          "EMI_Cyan",
+          "EMI_Kinetic",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "bbox_min": [
+          -2.863,
+          -2.66,
+          -2.8174
+        ],
+        "bbox_max": [
+          2.863,
+          2.66,
+          2.8326
+        ],
+        "dimensions": [
+          5.7261,
+          5.32,
+          5.6501
+        ],
+        "bbox_center": [
+          0.0,
+          0.0,
+          0.0076
+        ],
+        "finite_coords": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0,
+        "min_triangle_area": 0.070467,
+        "syntax_errors": [],
+        "index_errors": [],
+        "valid": true
+      },
+      "mtl": {
+        "materials_defined": [
+          "EMI_Cyan",
+          "EMI_Kinetic",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "material_details": {
+          "EMI_Cyan": {
+            "Ka": [
+              0.0,
+              0.1529,
+              0.2
+            ],
+            "Kd": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "Ke": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "Ks": [
+              0.9,
+              0.9,
+              0.9
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "EMI_Kinetic": {
+            "Ka": [
+              0.2,
+              0.098,
+              0.0
+            ],
+            "Kd": [
+              1.0,
+              0.4902,
+              0.0
+            ],
+            "Ke": [
+              1.0,
+              0.4902,
+              0.0
+            ],
+            "Ks": [
+              0.9,
+              0.9,
+              0.9
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_AltNeutral": {
+            "Ka": [
+              0.0329,
+              0.0392,
+              0.0549
+            ],
+            "Kd": [
+              0.1647,
+              0.1961,
+              0.2745
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_DarkNeutral": {
+            "Ka": [
+              0.0251,
+              0.0298,
+              0.0424
+            ],
+            "Kd": [
+              0.1255,
+              0.149,
+              0.2118
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_LightTrim": {
+            "Ka": [
+              0.1333,
+              0.149,
+              0.1686
+            ],
+            "Kd": [
+              0.6667,
+              0.7451,
+              0.8431
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          }
+        },
+        "palette_errors": [],
+        "valid": true
+      },
+      "glb": {
+        "magic": "glTF",
+        "version": 2,
+        "byte_length": 43996,
+        "header_matches_length": true,
+        "has_valid_bin_chunk": true,
+        "root_node": "SM_Chassis_Trickster_01",
+        "child_part_nodes": [
+          "Part_EMI_Cyan",
+          "Part_EMI_Kinetic",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "mesh_count": 5,
+        "materials": [
+          "EMI_Cyan",
+          "EMI_Kinetic",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "material_definitions": {
+          "EMI_Cyan": {
+            "baseColorFactor": [
+              0.0,
+              0.7647,
+              1.0,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "EMI_Kinetic": {
+            "baseColorFactor": [
+              1.0,
+              0.4902,
+              0.0,
+              1.0
+            ],
+            "emissiveFactor": [
+              1.0,
+              0.4902,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_AltNeutral": {
+            "baseColorFactor": [
+              0.1647,
+              0.1961,
+              0.2745,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_DarkNeutral": {
+            "baseColorFactor": [
+              0.1255,
+              0.149,
+              0.2118,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_LightTrim": {
+            "baseColorFactor": [
+              0.6667,
+              0.7451,
+              0.8431,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          }
+        },
+        "material_errors": [],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "embedded_textures_count": 1,
+        "embedded_images_count": 1,
+        "vertex_count": 708,
+        "triangle_count": 236,
+        "bbox_min": [
+          -2.863,
+          -2.66,
+          -2.8175
+        ],
+        "bbox_max": [
+          2.863,
+          2.66,
+          2.8326
+        ],
+        "dimensions": [
+          5.7261,
+          5.32,
+          5.6501
+        ],
+        "valid": true
+      },
+      "preview": {
+        "width": 2400,
+        "height": 1440,
+        "valid": true
+      }
+    },
+    "SM_Chassis_Magnetar_01": {
+      "obj": {
+        "vertex_count": 696,
+        "vertex_color_count": 696,
+        "uv_count": 5,
+        "normal_count": 232,
+        "triangle_count": 232,
+        "under_250_triangles": true,
+        "max_radius_studs": 2.955,
+        "min_radius_studs": 2.62,
+        "vertices_exceeding_2_97_studs": 0,
+        "vertices_exceeding_3_00_studs": 0,
+        "object_subparts": [
+          "SM_Chassis_Magnetar_01__EMI_Cyan",
+          "SM_Chassis_Magnetar_01__EMI_Magnetic",
+          "SM_Chassis_Magnetar_01__MAT_AltNeutral",
+          "SM_Chassis_Magnetar_01__MAT_DarkNeutral",
+          "SM_Chassis_Magnetar_01__MAT_LightTrim"
+        ],
+        "mtllibs": [
+          "SM_Chassis_Magnetar_01.mtl"
+        ],
+        "materials_used": [
+          "EMI_Cyan",
+          "EMI_Magnetic",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "bbox_min": [
+          -2.9191,
+          -2.64,
+          -2.9063
+        ],
+        "bbox_max": [
+          2.9191,
+          2.64,
+          2.9191
+        ],
+        "dimensions": [
+          5.8382,
+          5.28,
+          5.8254
+        ],
+        "bbox_center": [
+          0.0,
+          0.0,
+          0.0064
+        ],
+        "finite_coords": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0,
+        "min_triangle_area": 0.100632,
+        "syntax_errors": [],
+        "index_errors": [],
+        "valid": true
+      },
+      "mtl": {
+        "materials_defined": [
+          "EMI_Cyan",
+          "EMI_Magnetic",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "material_details": {
+          "EMI_Cyan": {
+            "Ka": [
+              0.0,
+              0.1529,
+              0.2
+            ],
+            "Kd": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "Ke": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "Ks": [
+              0.9,
+              0.9,
+              0.9
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "EMI_Magnetic": {
+            "Ka": [
+              0.1294,
+              0.0431,
+              0.2
+            ],
+            "Kd": [
+              0.6471,
+              0.2157,
+              1.0
+            ],
+            "Ke": [
+              0.6471,
+              0.2157,
+              1.0
+            ],
+            "Ks": [
+              0.9,
+              0.9,
+              0.9
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_AltNeutral": {
+            "Ka": [
+              0.0329,
+              0.0392,
+              0.0549
+            ],
+            "Kd": [
+              0.1647,
+              0.1961,
+              0.2745
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_DarkNeutral": {
+            "Ka": [
+              0.0251,
+              0.0298,
+              0.0424
+            ],
+            "Kd": [
+              0.1255,
+              0.149,
+              0.2118
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_LightTrim": {
+            "Ka": [
+              0.1333,
+              0.149,
+              0.1686
+            ],
+            "Kd": [
+              0.6667,
+              0.7451,
+              0.8431
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          }
+        },
+        "palette_errors": [],
+        "valid": true
+      },
+      "glb": {
+        "magic": "glTF",
+        "version": 2,
+        "byte_length": 43380,
+        "header_matches_length": true,
+        "has_valid_bin_chunk": true,
+        "root_node": "SM_Chassis_Magnetar_01",
+        "child_part_nodes": [
+          "Part_EMI_Cyan",
+          "Part_EMI_Magnetic",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "mesh_count": 5,
+        "materials": [
+          "EMI_Cyan",
+          "EMI_Magnetic",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "material_definitions": {
+          "EMI_Cyan": {
+            "baseColorFactor": [
+              0.0,
+              0.7647,
+              1.0,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "EMI_Magnetic": {
+            "baseColorFactor": [
+              0.6471,
+              0.2157,
+              1.0,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.6471,
+              0.2157,
+              1.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_AltNeutral": {
+            "baseColorFactor": [
+              0.1647,
+              0.1961,
+              0.2745,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_DarkNeutral": {
+            "baseColorFactor": [
+              0.1255,
+              0.149,
+              0.2118,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_LightTrim": {
+            "baseColorFactor": [
+              0.6667,
+              0.7451,
+              0.8431,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          }
+        },
+        "material_errors": [],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "embedded_textures_count": 1,
+        "embedded_images_count": 1,
+        "vertex_count": 696,
+        "triangle_count": 232,
+        "bbox_min": [
+          -2.9191,
+          -2.64,
+          -2.9063
+        ],
+        "bbox_max": [
+          2.9191,
+          2.64,
+          2.9191
+        ],
+        "dimensions": [
+          5.8382,
+          5.28,
+          5.8254
+        ],
+        "valid": true
+      },
+      "preview": {
+        "width": 2400,
+        "height": 1440,
+        "valid": true
+      }
+    },
+    "SM_Chassis_Bulwark_01": {
+      "obj": {
+        "vertex_count": 696,
+        "vertex_color_count": 696,
+        "uv_count": 4,
+        "normal_count": 232,
+        "triangle_count": 232,
+        "under_250_triangles": true,
+        "max_radius_studs": 2.96201,
+        "min_radius_studs": 2.59999,
+        "vertices_exceeding_2_97_studs": 0,
+        "vertices_exceeding_3_00_studs": 0,
+        "object_subparts": [
+          "SM_Chassis_Bulwark_01__EMI_Cyan",
+          "SM_Chassis_Bulwark_01__MAT_AltNeutral",
+          "SM_Chassis_Bulwark_01__MAT_DarkNeutral",
+          "SM_Chassis_Bulwark_01__MAT_LightTrim"
+        ],
+        "mtllibs": [
+          "SM_Chassis_Bulwark_01.mtl"
+        ],
+        "materials_used": [
+          "EMI_Cyan",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "bbox_min": [
+          -2.7207,
+          -2.62,
+          -2.7207
+        ],
+        "bbox_max": [
+          2.7207,
+          2.62,
+          2.869
+        ],
+        "dimensions": [
+          5.4415,
+          5.24,
+          5.5898
+        ],
+        "bbox_center": [
+          0.0,
+          0.0,
+          0.0741
+        ],
+        "finite_coords": true,
+        "degenerate_triangles": 0,
+        "winding_normal_mismatches": 0,
+        "min_triangle_area": 0.21787,
+        "syntax_errors": [],
+        "index_errors": [],
+        "valid": true
+      },
+      "mtl": {
+        "materials_defined": [
+          "EMI_Cyan",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "material_details": {
+          "EMI_Cyan": {
+            "Ka": [
+              0.0,
+              0.1529,
+              0.2
+            ],
+            "Kd": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "Ke": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "Ks": [
+              0.9,
+              0.9,
+              0.9
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_AltNeutral": {
+            "Ka": [
+              0.0329,
+              0.0392,
+              0.0549
+            ],
+            "Kd": [
+              0.1647,
+              0.1961,
+              0.2745
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_DarkNeutral": {
+            "Ka": [
+              0.0251,
+              0.0298,
+              0.0424
+            ],
+            "Kd": [
+              0.1255,
+              0.149,
+              0.2118
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          },
+          "MAT_LightTrim": {
+            "Ka": [
+              0.1333,
+              0.149,
+              0.1686
+            ],
+            "Kd": [
+              0.6667,
+              0.7451,
+              0.8431
+            ],
+            "Ke": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Ks": [
+              0.55,
+              0.6,
+              0.68
+            ],
+            "map_Kd": "SphereBrawl_Chassis_PaletteAtlas.png"
+          }
+        },
+        "palette_errors": [],
+        "valid": true
+      },
+      "glb": {
+        "magic": "glTF",
+        "version": 2,
+        "byte_length": 42084,
+        "header_matches_length": true,
+        "has_valid_bin_chunk": true,
+        "root_node": "SM_Chassis_Bulwark_01",
+        "child_part_nodes": [
+          "Part_EMI_Cyan",
+          "Part_MAT_AltNeutral",
+          "Part_MAT_DarkNeutral",
+          "Part_MAT_LightTrim"
+        ],
+        "mesh_count": 4,
+        "materials": [
+          "EMI_Cyan",
+          "MAT_AltNeutral",
+          "MAT_DarkNeutral",
+          "MAT_LightTrim"
+        ],
+        "material_definitions": {
+          "EMI_Cyan": {
+            "baseColorFactor": [
+              0.0,
+              0.7647,
+              1.0,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.7647,
+              1.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_AltNeutral": {
+            "baseColorFactor": [
+              0.1647,
+              0.1961,
+              0.2745,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_DarkNeutral": {
+            "baseColorFactor": [
+              0.1255,
+              0.149,
+              0.2118,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          },
+          "MAT_LightTrim": {
+            "baseColorFactor": [
+              0.6667,
+              0.7451,
+              0.8431,
+              1.0
+            ],
+            "emissiveFactor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "has_baseColorTexture": true
+          }
+        },
+        "material_errors": [],
+        "has_color0_vertex_colors": true,
+        "has_texcoord0_uvs": true,
+        "embedded_textures_count": 1,
+        "embedded_images_count": 1,
+        "vertex_count": 696,
+        "triangle_count": 232,
+        "bbox_min": [
+          -2.7207,
+          -2.62,
+          -2.7207
+        ],
+        "bbox_max": [
+          2.7207,
+          2.62,
+          2.869
+        ],
+        "dimensions": [
+          5.4415,
+          5.24,
+          5.5898
+        ],
+        "valid": true
+      },
+      "preview": {
+        "width": 2400,
+        "height": 1440,
+        "valid": true
+      }
+    }
+  }
+}

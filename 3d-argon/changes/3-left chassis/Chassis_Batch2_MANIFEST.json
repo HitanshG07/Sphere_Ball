@@ -1,0 +1,515 @@
+{
+  "manifest_version": "1.0.0-task09-chassis-batch2",
+  "project": "Sphere Brawl: Rolling Rampage",
+  "task_id": "TASK-09 (Asset Batch 2: Player Sphere Chassis Models)",
+  "package_root_prefix": "Sphere_Brawl_Chassis_Batch2_Package",
+  "preserved_prior_batches": {
+    "batch_0_prototypes": "Sphere_Brawl_Stage4_Validated_Prototypes_Package.zip (SM_Chassis_Rammer_01, SM_Hub_QueuePortalArch_01)",
+    "batch_1_arena_tiles": "Sphere_Brawl_Arena_Tiles_Package.zip (SM_ArenaTile_SharedBase + 6 States, Studio-imported with visible colors)"
+  },
+  "technical_constraints": {
+    "cosmetic_only_parity_d008": true,
+    "outgoing_factor": 1.0,
+    "resistance_factor": 1.0,
+    "unit_scale": "1.0 mesh unit = 1.0 Roblox stud",
+    "coordinate_system": {
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "up_axis": "+Y",
+      "forward_axis": "+Z",
+      "right_axis": "+X"
+    },
+    "max_visual_radius_studs": 2.97,
+    "sphere_root_collider_diameter_studs": 6.0,
+    "max_triangles_per_chassis": 250,
+    "collision_rule": "Visual-only (`CanCollide=false`, `CanTouch=false`, `CanQuery=false`, `Massless=true`); never welded as an anchored part inside the physics assembly."
+  },
+  "approved_rgb_palette": {
+    "MAT_DarkNeutral": {
+      "rgb_255": [
+        32,
+        38,
+        54
+      ],
+      "hex": "#202636",
+      "normalized_rgb": [
+        0.12549,
+        0.14902,
+        0.211765
+      ],
+      "emissive": false,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(32, 38, 54)",
+      "surface_role": "Primary dark metallic chassis hull, heavy armor plates, and polar caps"
+    },
+    "MAT_AltNeutral": {
+      "rgb_255": [
+        42,
+        50,
+        70
+      ],
+      "hex": "#2A3246",
+      "normalized_rgb": [
+        0.164706,
+        0.196078,
+        0.27451
+      ],
+      "emissive": false,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(42, 50, 70)",
+      "surface_role": "Secondary recessed sphere segments, angled cheek plates, and coil housings"
+    },
+    "MAT_LightTrim": {
+      "rgb_255": [
+        170,
+        190,
+        215
+      ],
+      "hex": "#AABED7",
+      "normalized_rgb": [
+        0.666667,
+        0.745098,
+        0.843137
+      ],
+      "emissive": false,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(170, 190, 215)",
+      "surface_role": "Sleek aerodynamic stabilizer fins, inductor pole shoes, and reinforced rim collars"
+    },
+    "EMI_Cyan": {
+      "rgb_255": [
+        0,
+        195,
+        255
+      ],
+      "hex": "#00C3FF",
+      "normalized_rgb": [
+        0.0,
+        0.764706,
+        1.0
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(0, 195, 255)",
+      "surface_role": "Frontal core apertures, Trickster slash inlays, Magnetar pole tips, and Bulwark slit visors"
+    },
+    "EMI_Magnetic": {
+      "rgb_255": [
+        165,
+        55,
+        255
+      ],
+      "hex": "#A537FF",
+      "normalized_rgb": [
+        0.647059,
+        0.215686,
+        1.0
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(165, 55, 255)",
+      "surface_role": "Magnetar equatorial/meridian flux rings and polar electromagnetic inductor cores"
+    },
+    "EMI_Kinetic": {
+      "rgb_255": [
+        255,
+        125,
+        0
+      ],
+      "hex": "#FF7D00",
+      "normalized_rgb": [
+        1.0,
+        0.490196,
+        0.0
+      ],
+      "emissive": true,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(255, 125, 0)",
+      "surface_role": "Trickster asymmetric kinetic speed vents and rear thruster exhaust ports"
+    }
+  },
+  "chassis_models": [
+    {
+      "chassis_id": "Trickster",
+      "asset_name": "SM_Chassis_Trickster_01",
+      "asset_manifest_id": "sphere.shell.trickster",
+      "cosmetic_only_combat_multipliers": {
+        "OutgoingFactor": 1.0,
+        "ResistanceFactor": 1.0
+      },
+      "roblox_studio_verified": false,
+      "status": "CANDIDATE_READY_FOR_STUDIO_IMPORT",
+      "files": {
+        "obj": "meshes/SM_Chassis_Trickster_01.obj",
+        "mtl": "meshes/SM_Chassis_Trickster_01.mtl",
+        "glb": "meshes/SM_Chassis_Trickster_01.glb",
+        "palette_atlas_png": "meshes/SphereBrawl_Chassis_PaletteAtlas.png",
+        "preview_png": "previews/Preview_SM_Chassis_Trickster_01.png"
+      },
+      "material_names": [
+        "EMI_Cyan",
+        "EMI_Kinetic",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "glb_child_part_nodes": [
+        "Part_EMI_Cyan",
+        "Part_EMI_Kinetic",
+        "Part_MAT_AltNeutral",
+        "Part_MAT_DarkNeutral",
+        "Part_MAT_LightTrim"
+      ],
+      "obj_sub_objects": [
+        "SM_Chassis_Trickster_01__EMI_Cyan",
+        "SM_Chassis_Trickster_01__EMI_Kinetic",
+        "SM_Chassis_Trickster_01__MAT_AltNeutral",
+        "SM_Chassis_Trickster_01__MAT_DarkNeutral",
+        "SM_Chassis_Trickster_01__MAT_LightTrim"
+      ],
+      "has_color0_vertex_colors": true,
+      "has_texcoord0_uvs": true,
+      "max_radius_studs": 2.945,
+      "max_allowed_radius_studs": 2.97,
+      "root_sphere_collider_radius_studs": 3.0,
+      "dimensions_studs": {
+        "width_x": 5.7261,
+        "height_y": 5.32,
+        "depth_z": 5.6501,
+        "bbox_min": [
+          -2.863,
+          -2.66,
+          -2.8174
+        ],
+        "bbox_max": [
+          2.863,
+          2.66,
+          2.8326
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "up_axis": "+Y",
+        "forward_axis": "+Z"
+      },
+      "vertex_count": 708,
+      "triangle_count": 236,
+      "max_allowed_triangles": 250,
+      "under_250_triangle_budget": true,
+      "degenerate_triangles": 0,
+      "winding_normal_mismatches": 0,
+      "visual_description": "Agile, sleek spherical shell with a helical-twisted inner core, asymmetric diagonal slash vanes, canted swept-back lateral stabilizer fins, cyan sensor visor, and kinetic orange speed vents.",
+      "file_validation_status": "PASS"
+    },
+    {
+      "chassis_id": "Magnetar",
+      "asset_name": "SM_Chassis_Magnetar_01",
+      "asset_manifest_id": "sphere.shell.magnetar",
+      "cosmetic_only_combat_multipliers": {
+        "OutgoingFactor": 1.0,
+        "ResistanceFactor": 1.0
+      },
+      "roblox_studio_verified": false,
+      "status": "CANDIDATE_READY_FOR_STUDIO_IMPORT",
+      "files": {
+        "obj": "meshes/SM_Chassis_Magnetar_01.obj",
+        "mtl": "meshes/SM_Chassis_Magnetar_01.mtl",
+        "glb": "meshes/SM_Chassis_Magnetar_01.glb",
+        "palette_atlas_png": "meshes/SphereBrawl_Chassis_PaletteAtlas.png",
+        "preview_png": "previews/Preview_SM_Chassis_Magnetar_01.png"
+      },
+      "material_names": [
+        "EMI_Cyan",
+        "EMI_Magnetic",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "glb_child_part_nodes": [
+        "Part_EMI_Cyan",
+        "Part_EMI_Magnetic",
+        "Part_MAT_AltNeutral",
+        "Part_MAT_DarkNeutral",
+        "Part_MAT_LightTrim"
+      ],
+      "obj_sub_objects": [
+        "SM_Chassis_Magnetar_01__EMI_Cyan",
+        "SM_Chassis_Magnetar_01__EMI_Magnetic",
+        "SM_Chassis_Magnetar_01__MAT_AltNeutral",
+        "SM_Chassis_Magnetar_01__MAT_DarkNeutral",
+        "SM_Chassis_Magnetar_01__MAT_LightTrim"
+      ],
+      "has_color0_vertex_colors": true,
+      "has_texcoord0_uvs": true,
+      "max_radius_studs": 2.955,
+      "max_allowed_radius_studs": 2.97,
+      "root_sphere_collider_radius_studs": 3.0,
+      "dimensions_studs": {
+        "width_x": 5.8382,
+        "height_y": 5.28,
+        "depth_z": 5.8254,
+        "bbox_min": [
+          -2.9191,
+          -2.64,
+          -2.9063
+        ],
+        "bbox_max": [
+          2.9191,
+          2.64,
+          2.9191
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "up_axis": "+Y",
+        "forward_axis": "+Z"
+      },
+      "vertex_count": 696,
+      "triangle_count": 232,
+      "max_allowed_triangles": 250,
+      "under_250_triangle_budget": true,
+      "degenerate_triangles": 0,
+      "winding_normal_mismatches": 0,
+      "visual_description": "Magnetic/energy-themed sphere featuring a raised 8-segment purple electromagnetic equatorial flux ring, north/south polar inductor cores, four metallic horseshoe pole shoes, and cyan resonance nodes.",
+      "file_validation_status": "PASS"
+    },
+    {
+      "chassis_id": "Bulwark",
+      "asset_name": "SM_Chassis_Bulwark_01",
+      "asset_manifest_id": "sphere.shell.bulwark",
+      "cosmetic_only_combat_multipliers": {
+        "OutgoingFactor": 1.0,
+        "ResistanceFactor": 1.0
+      },
+      "roblox_studio_verified": false,
+      "status": "CANDIDATE_READY_FOR_STUDIO_IMPORT",
+      "files": {
+        "obj": "meshes/SM_Chassis_Bulwark_01.obj",
+        "mtl": "meshes/SM_Chassis_Bulwark_01.mtl",
+        "glb": "meshes/SM_Chassis_Bulwark_01.glb",
+        "palette_atlas_png": "meshes/SphereBrawl_Chassis_PaletteAtlas.png",
+        "preview_png": "previews/Preview_SM_Chassis_Bulwark_01.png"
+      },
+      "material_names": [
+        "EMI_Cyan",
+        "MAT_AltNeutral",
+        "MAT_DarkNeutral",
+        "MAT_LightTrim"
+      ],
+      "glb_child_part_nodes": [
+        "Part_EMI_Cyan",
+        "Part_MAT_AltNeutral",
+        "Part_MAT_DarkNeutral",
+        "Part_MAT_LightTrim"
+      ],
+      "obj_sub_objects": [
+        "SM_Chassis_Bulwark_01__EMI_Cyan",
+        "SM_Chassis_Bulwark_01__MAT_AltNeutral",
+        "SM_Chassis_Bulwark_01__MAT_DarkNeutral",
+        "SM_Chassis_Bulwark_01__MAT_LightTrim"
+      ],
+      "has_color0_vertex_colors": true,
+      "has_texcoord0_uvs": true,
+      "max_radius_studs": 2.96201,
+      "max_allowed_radius_studs": 2.97,
+      "root_sphere_collider_radius_studs": 3.0,
+      "dimensions_studs": {
+        "width_x": 5.4415,
+        "height_y": 5.24,
+        "depth_z": 5.5898,
+        "bbox_min": [
+          -2.7207,
+          -2.62,
+          -2.7207
+        ],
+        "bbox_max": [
+          2.7207,
+          2.62,
+          2.869
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "up_axis": "+Y",
+        "forward_axis": "+Z"
+      },
+      "vertex_count": 696,
+      "triangle_count": 232,
+      "max_allowed_triangles": 250,
+      "under_250_triangle_budget": true,
+      "degenerate_triangles": 0,
+      "winding_normal_mismatches": 0,
+      "visual_description": "Sturdy, heavy-looking defensive sphere armored with 16 interlocking octagonal/geodesic dark bastion plates, recessed metallic expansion channels, reinforced light-trim collars, and a narrow cyan slit visor.",
+      "file_validation_status": "PASS"
+    }
+  ],
+  "comparison_preview_sheets": {
+    "material_comparison": "previews/Chassis_Batch2_All3_MaterialComparison.png",
+    "neutral_clay_and_wireframe_comparison": "previews/Chassis_Batch2_All3_NeutralClay_and_Wireframe.png"
+  },
+  "scripts": {
+    "deterministic_python_generator": "scripts/generate_chassis_batch2_pipeline.py",
+    "deterministic_blender_generator": "scripts/generate_chassis_batch2_blender.py",
+    "independent_package_validator": "scripts/validate_chassis_batch2_package.py"
+  },
+  "documentation": {
+    "readme_and_studio_import_guide": "docs/README_Chassis_Batch2.md",
+    "validation_report_pdf": "docs/Sphere_Brawl_Chassis_Batch2_Report.pdf",
+    "validation_report_json": "docs/final_validation_report.json"
+  },
+  "next_remaining_asset_batches": [
+    "Batch 3: Starter Sphere Skins (Default, Neon, Gold [locked preview], Void [locked preview] per D-020)",
+    "Batch 4: Kinetic Hub Station Models (Customize Kiosk, Shop Stand, Mode Selection Board, Leaderboard Display, Queue Pad Ring, Reactor Core Rings per \u00a711.3)",
+    "Batch 5: Core Icons, Trails (None, CoreStreak, CyanStreak), Impact/Hazard VFX & Audio Placeholders per \u00a711.5-11.6 and D-021"
+  ],
+  "file_inventory": [
+    {
+      "relative_path": "MANIFEST.json",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/MANIFEST.json",
+      "size_bytes": 18731,
+      "sha256": "SELF_MANIFEST"
+    },
+    {
+      "relative_path": "docs/README_Chassis_Batch2.md",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/docs/README_Chassis_Batch2.md",
+      "size_bytes": 4822,
+      "sha256": "26ab7219f0eab83117a1bb5655898a11cc2264f065015bb8728c1d53687f1fa6"
+    },
+    {
+      "relative_path": "docs/Sphere_Brawl_Chassis_Batch2_Report.pdf",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/docs/Sphere_Brawl_Chassis_Batch2_Report.pdf",
+      "size_bytes": 6580137,
+      "sha256": "cf1a2f9988eb3fae56aa3fde43d682e8fd78372abea8ac7b045f90af4c8fc157"
+    },
+    {
+      "relative_path": "docs/final_validation_report.json",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/docs/final_validation_report.json",
+      "size_bytes": 25947,
+      "sha256": "50b74cc27094544e7d51b73f54a9e0a6166c3a5d2254d7437c2cadfa8d505f0f"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Bulwark_01.glb",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Bulwark_01.glb",
+      "size_bytes": 42084,
+      "sha256": "4d4059c34595d039f856ee577a4b94fc00464a2269f39f2b91a3c0e1e0211667"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Bulwark_01.mtl",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Bulwark_01.mtl",
+      "size_bytes": 841,
+      "sha256": "d4b197f2a3cfe17e2e1bf57830b6697d6267b8892e9f617a7b28ddbbdab12c42"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Bulwark_01.obj",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Bulwark_01.obj",
+      "size_bytes": 49240,
+      "sha256": "938b69be54bf7f8de1ece2454838c6a5435773cada2aab08ba2534cc0eec0dec"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Magnetar_01.glb",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Magnetar_01.glb",
+      "size_bytes": 43380,
+      "sha256": "b75cf5ebc3c7a7bb5aae9e972866680d0bf009f905f9f86219b6de69b39b86c3"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Magnetar_01.mtl",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Magnetar_01.mtl",
+      "size_bytes": 1025,
+      "sha256": "1efdead3406ec74a13095cb0041a84175a8e8487e3231766bed368dc59551bbc"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Magnetar_01.obj",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Magnetar_01.obj",
+      "size_bytes": 49306,
+      "sha256": "0347f21fba29a3296010e53ca4eb8e02edc9e30b7b72ef738e8384da17e1d3d2"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Trickster_01.glb",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Trickster_01.glb",
+      "size_bytes": 43996,
+      "sha256": "d38db581aba5d73a039f0159d07600636f57124582e3ba4d8f351c48ad04c113"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Trickster_01.mtl",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Trickster_01.mtl",
+      "size_bytes": 1025,
+      "sha256": "27c3cea1c28d26807fa4fe9c4b10f427cfc41af175d5a055872c8864b5571c59"
+    },
+    {
+      "relative_path": "meshes/SM_Chassis_Trickster_01.obj",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SM_Chassis_Trickster_01.obj",
+      "size_bytes": 50204,
+      "sha256": "bb6544d87b88a9f006e80a94666b26d595e90a37c3eadf21395e1f73f4a3e42e"
+    },
+    {
+      "relative_path": "meshes/SphereBrawl_Chassis_PaletteAtlas.png",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/meshes/SphereBrawl_Chassis_PaletteAtlas.png",
+      "size_bytes": 248,
+      "sha256": "24cb09baa9b6655cd5ed50bb429049f8fc6f73fa48aa70b8be41ab2d6aa6e138"
+    },
+    {
+      "relative_path": "previews/Chassis_Batch2_All3_MaterialComparison.png",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/previews/Chassis_Batch2_All3_MaterialComparison.png",
+      "size_bytes": 1268367,
+      "sha256": "30d37d090aa3b8f10aedb2cd27ee6d7359f6daf51472fd1c77513fb459796a61"
+    },
+    {
+      "relative_path": "previews/Chassis_Batch2_All3_NeutralClay_and_Wireframe.png",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/previews/Chassis_Batch2_All3_NeutralClay_and_Wireframe.png",
+      "size_bytes": 1431181,
+      "sha256": "8c8bc7cb2f39336055bebeccdeaa1883da1d604f1159d8da6e7e9d0ef8208b0c"
+    },
+    {
+      "relative_path": "previews/Preview_SM_Chassis_Bulwark_01.png",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/previews/Preview_SM_Chassis_Bulwark_01.png",
+      "size_bytes": 833829,
+      "sha256": "3d508acad8d0be1455365d9d293db59d3104a3e0dcf9ffb2245efbb5dc99d1f0"
+    },
+    {
+      "relative_path": "previews/Preview_SM_Chassis_Magnetar_01.png",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/previews/Preview_SM_Chassis_Magnetar_01.png",
+      "size_bytes": 903890,
+      "sha256": "7d82ee9caf626ea66ba066c60c1f7540a32b50b3913ced460ada43bcc99ec9b3"
+    },
+    {
+      "relative_path": "previews/Preview_SM_Chassis_Trickster_01.png",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/previews/Preview_SM_Chassis_Trickster_01.png",
+      "size_bytes": 945975,
+      "sha256": "fe810dbcca0bc73a26f01cacff908516bc6c860f6fdcdfae078178e6dd331004"
+    },
+    {
+      "relative_path": "scripts/generate_chassis_batch2_blender.py",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/scripts/generate_chassis_batch2_blender.py",
+      "size_bytes": 19858,
+      "sha256": "b303d7113ea832e858fda03a792e5e1cc9ed57519d814a32026bceb0daef8d32"
+    },
+    {
+      "relative_path": "scripts/generate_chassis_batch2_pipeline.py",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/scripts/generate_chassis_batch2_pipeline.py",
+      "size_bytes": 71501,
+      "sha256": "cd4601980b0590e9ecfbe33a21dbb378bf53b260810ad2ced6c54d8bdf4df362"
+    },
+    {
+      "relative_path": "scripts/validate_chassis_batch2_package.py",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/scripts/validate_chassis_batch2_package.py",
+      "size_bytes": 27038,
+      "sha256": "8f5998adb1abe18b97138b8fc94daca8d1ec7cfbe1af85c29efda653362bf7a5"
+    },
+    {
+      "relative_path": "textures/SphereBrawl_Chassis_PaletteAtlas.png",
+      "zip_entry_path": "Sphere_Brawl_Chassis_Batch2_Package/textures/SphereBrawl_Chassis_PaletteAtlas.png",
+      "size_bytes": 248,
+      "sha256": "24cb09baa9b6655cd5ed50bb429049f8fc6f73fa48aa70b8be41ab2d6aa6e138"
+    }
+  ],
+  "file_inventory_count": 23
+}

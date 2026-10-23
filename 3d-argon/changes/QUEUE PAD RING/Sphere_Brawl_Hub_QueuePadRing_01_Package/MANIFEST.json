@@ -1,0 +1,353 @@
+{
+  "package_name": "Sphere_Brawl_Hub_QueuePadRing_01_Package",
+  "package_version": "1.0.1",
+  "step": "Argon Step 2 \u2014 Queue Pad Ring Mesh Production (Final Package Correction)",
+  "asset_id": "SM_Hub_QueuePadRing_01",
+  "scope": [
+    "TASK-03",
+    "TASK-09"
+  ],
+  "total_package_files_including_manifest_and_checksums": 33,
+  "world_placement": {
+    "center": [
+      0.0,
+      150.0,
+      -300.0
+    ],
+    "reference_top_walking_surface_y": 150.0,
+    "local_pivot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale_convention": "1.0 Blender/Export Unit = 1.0 Roblox Stud (+Y Up, +Z Forward, +X Right)"
+  },
+  "geometry_summary": {
+    "asset_name": "SM_Hub_QueuePadRing_01",
+    "triangles": 960,
+    "glb_triangles": 960,
+    "vertices": 2880,
+    "normals": 960,
+    "uvs": 4,
+    "vertex_colors": 2880,
+    "bbox_min": [
+      -14.0,
+      0.004,
+      -14.0
+    ],
+    "bbox_max": [
+      14.0,
+      0.08,
+      14.0
+    ],
+    "dimensions": [
+      28.0,
+      0.076,
+      28.0
+    ],
+    "r_inner_measured": 12.8,
+    "r_outer_measured": 14.0,
+    "outer_diameter_measured": 28.0,
+    "inner_diameter_measured": 25.6,
+    "band_width_measured": 1.2,
+    "y_min_measured": 0.004,
+    "y_max_measured": 0.08,
+    "structural_thickness_measured": 0.076,
+    "verts_inside_r_12_8": 0,
+    "verts_outside_r_14_0": 0,
+    "verts_at_or_below_y_0": 0,
+    "degenerate_faces": 0,
+    "min_triangle_area_sq_studs": 0.002015,
+    "normal_mismatches": 0,
+    "total_area_3d_sq_studs": 210.07,
+    "total_area_top_sq_studs": 103.74,
+    "components": {
+      "GEO_QueuePadRing_BaseCollar": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 320,
+        "vertices": 960,
+        "area_3d_sq_studs": 146.584,
+        "area_top_sq_studs": 43.5002,
+        "area_3d_pct": 69.78,
+        "area_top_pct": 41.93
+      },
+      "GEO_QueuePadRing_ChannelInlay": {
+        "material": "MAT_AltNeutral",
+        "triangles": 320,
+        "vertices": 960,
+        "area_3d_sq_studs": 24.0824,
+        "area_top_sq_studs": 22.0189,
+        "area_3d_pct": 11.46,
+        "area_top_pct": 21.22
+      },
+      "GEO_QueuePadRing_TrimBezels": {
+        "material": "MAT_LightTrim",
+        "triangles": 256,
+        "vertices": 768,
+        "area_3d_sq_studs": 19.3226,
+        "area_top_sq_studs": 18.1458,
+        "area_3d_pct": 9.2,
+        "area_top_pct": 17.49
+      },
+      "GEO_QueuePadRing_CyanConduit": {
+        "material": "EMI_Cyan",
+        "triangles": 64,
+        "vertices": 192,
+        "area_3d_sq_studs": 20.0771,
+        "area_top_sq_studs": 20.0771,
+        "area_3d_pct": 9.56,
+        "area_top_pct": 19.35
+      }
+    },
+    "glb_valid": true,
+    "glb_nodes": [
+      "SM_Hub_QueuePadRing_01",
+      "GEO_QueuePadRing_BaseCollar",
+      "GEO_QueuePadRing_ChannelInlay",
+      "GEO_QueuePadRing_TrimBezels",
+      "GEO_QueuePadRing_CyanConduit"
+    ],
+    "glb_materials": [
+      "MAT_DarkNeutral",
+      "MAT_AltNeutral",
+      "MAT_LightTrim",
+      "EMI_Cyan"
+    ],
+    "reproducibility_verified": true
+  },
+  "palette": {
+    "MAT_DarkNeutral": {
+      "rgb_255": [
+        32,
+        38,
+        54
+      ],
+      "hex": "#202636",
+      "normalized_rgb": [
+        0.12549,
+        0.14902,
+        0.211765
+      ],
+      "emissive": false,
+      "metallic": 0.55,
+      "roughness": 0.42,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(32, 38, 54)",
+      "surface_role": "Outer and inner low-profile chamfer skirts, structural collar ring decks, and base closure"
+    },
+    "MAT_AltNeutral": {
+      "rgb_255": [
+        42,
+        50,
+        70
+      ],
+      "hex": "#2A3246",
+      "normalized_rgb": [
+        0.164706,
+        0.196078,
+        0.27451
+      ],
+      "emissive": false,
+      "metallic": 0.6,
+      "roughness": 0.35,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(42, 50, 70)",
+      "surface_role": "Sloped channel walls, intercardinal structural lock casings, and cardinal threshold ramps"
+    },
+    "MAT_LightTrim": {
+      "rgb_255": [
+        170,
+        190,
+        215
+      ],
+      "hex": "#AABED7",
+      "normalized_rgb": [
+        0.666667,
+        0.745098,
+        0.843137
+      ],
+      "emissive": false,
+      "metallic": 0.78,
+      "roughness": 0.28,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(170, 190, 215)",
+      "surface_role": "Precision inner/outer boundary bezels, cardinal threshold bridge plates, and radial divider ribs"
+    },
+    "EMI_Cyan": {
+      "rgb_255": [
+        0,
+        195,
+        255
+      ],
+      "hex": "#00C3FF",
+      "normalized_rgb": [
+        0.0,
+        0.764706,
+        1.0
+      ],
+      "emissive": true,
+      "metallic": 0.1,
+      "roughness": 0.15,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(0, 195, 255)",
+      "surface_role": "Recessed segmented cyan boundary energy arcs and cardinal threshold alignment diodes"
+    }
+  },
+  "files": [
+    {
+      "path": "MODEL_SPECIFICATION.md",
+      "size_bytes": 8178,
+      "sha256": "fb5c2eceda6fbe34287232bb19c1eb3edb9db5aa1c7fce3c8009497c265185ac"
+    },
+    {
+      "path": "PORTAL_AND_PLAZA_CLEARANCE_REPORT.md",
+      "size_bytes": 6576,
+      "sha256": "fde7c919e2f6ce2cff9e35f44e7471535e6c1800ba3c589d1249362f6e7e64b8"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 7032,
+      "sha256": "63c45b1a38bb914525880921bb9109a6d6d3cf4d24e5ca3abdd0d7f961f40be4"
+    },
+    {
+      "path": "ROBLOX_STUDIO_IMPORT_GUIDE.md",
+      "size_bytes": 10566,
+      "sha256": "66f879118b273a40df3d9be68154f1fbcce7858bb4f81d924fe17381e2ff07fe"
+    },
+    {
+      "path": "SM_Hub_QueuePadRing_01.glb",
+      "size_bytes": 155696,
+      "sha256": "926814118aeb029508857985116c2440ad9d187913b6ca449a0dfde8046a1125"
+    },
+    {
+      "path": "SM_Hub_QueuePadRing_01.mtl",
+      "size_bytes": 839,
+      "sha256": "ca590174f9e76bfa297b02eceed0e065fef16fe66a8471cddb3df411d191ec65"
+    },
+    {
+      "path": "SM_Hub_QueuePadRing_01.obj",
+      "size_bytes": 200432,
+      "sha256": "35fb2841f8acbb2732df1ad693ca790f6d9e37725e5cacc6051de2444f75ac8d"
+    },
+    {
+      "path": "SphereBrawl_QueuePadRing_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "size_bytes": 7933,
+      "sha256": "bc754bdbd7f02e5ef48dbf738124959f9875738b9b9462e0683dfddf6df16c51"
+    },
+    {
+      "path": "config/queue_pad_ring_parameters.json",
+      "size_bytes": 5533,
+      "sha256": "dea6add840aadbf93008cbcfc6f2059a583bc964b7f177c9bcdd73b425ef8ce7"
+    },
+    {
+      "path": "docs/MODEL_SPECIFICATION.md",
+      "size_bytes": 8178,
+      "sha256": "fb5c2eceda6fbe34287232bb19c1eb3edb9db5aa1c7fce3c8009497c265185ac"
+    },
+    {
+      "path": "docs/PORTAL_AND_PLAZA_CLEARANCE_REPORT.md",
+      "size_bytes": 6576,
+      "sha256": "fde7c919e2f6ce2cff9e35f44e7471535e6c1800ba3c589d1249362f6e7e64b8"
+    },
+    {
+      "path": "docs/README.md",
+      "size_bytes": 7032,
+      "sha256": "63c45b1a38bb914525880921bb9109a6d6d3cf4d24e5ca3abdd0d7f961f40be4"
+    },
+    {
+      "path": "docs/ROBLOX_STUDIO_IMPORT_GUIDE.md",
+      "size_bytes": 10566,
+      "sha256": "66f879118b273a40df3d9be68154f1fbcce7858bb4f81d924fe17381e2ff07fe"
+    },
+    {
+      "path": "docs/VALIDATION_REPORT.md",
+      "size_bytes": 7933,
+      "sha256": "bc754bdbd7f02e5ef48dbf738124959f9875738b9b9462e0683dfddf6df16c51"
+    },
+    {
+      "path": "generate_hub_queue_pad_ring_blender.py",
+      "size_bytes": 34703,
+      "sha256": "8899ebbacbc4da559609e47c4f7d65c0d776e3b17d07a627dc388e3795fcb8cc"
+    },
+    {
+      "path": "manifest/SM_Hub_QueuePadRing_01.manifest.json",
+      "size_bytes": 1007,
+      "sha256": "f4832b36ccd36d06b31ff44bf9ec9acc6c2c9ff2c4ae93129d3131f7dec70312"
+    },
+    {
+      "path": "meshes/SM_Hub_QueuePadRing_01.glb",
+      "size_bytes": 155696,
+      "sha256": "926814118aeb029508857985116c2440ad9d187913b6ca449a0dfde8046a1125"
+    },
+    {
+      "path": "meshes/SM_Hub_QueuePadRing_01.mtl",
+      "size_bytes": 839,
+      "sha256": "ca590174f9e76bfa297b02eceed0e065fef16fe66a8471cddb3df411d191ec65"
+    },
+    {
+      "path": "meshes/SM_Hub_QueuePadRing_01.obj",
+      "size_bytes": 200432,
+      "sha256": "35fb2841f8acbb2732df1ad693ca790f6d9e37725e5cacc6051de2444f75ac8d"
+    },
+    {
+      "path": "meshes/SphereBrawl_QueuePadRing_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    },
+    {
+      "path": "previews/01_Preview_ThreeQuarter_Perspective.png",
+      "size_bytes": 91172,
+      "sha256": "fc1f234f618183a206c3ef2ab9098ff2d881369e4be003bdb12d4e32d4bc81bd"
+    },
+    {
+      "path": "previews/02_Preview_Top_Orthographic_14Stud_Boundary.png",
+      "size_bytes": 98459,
+      "sha256": "9eb9d8455a1f1e54c029b15491d55b46223858aa313e299d3f2f1991fc61a78b"
+    },
+    {
+      "path": "previews/03_Preview_LowAngle_Player_Walkability.png",
+      "size_bytes": 59427,
+      "sha256": "e74b17f85dbe40753c69f3ad205658687d044663a1a876882cfe2e24481229be"
+    },
+    {
+      "path": "previews/04_Preview_NeutralClay_Geometry.png",
+      "size_bytes": 76756,
+      "sha256": "71ceea6b8ffc1b3269cf2b131b76f893c1bbdc6dff4b1a6b27fa3363be83a95e"
+    },
+    {
+      "path": "previews/05_Preview_Wireframe_Topology.png",
+      "size_bytes": 119526,
+      "sha256": "91fc46e8dde90be0a1e3f1fcde4d5b9bacc8348b75ac9abdc8bf143443d3e3ae"
+    },
+    {
+      "path": "previews/06_Preview_Integration_Portal_and_Plaza.png",
+      "size_bytes": 135857,
+      "sha256": "c6b0a3c08aae2bd5a40efa34c493f43a399534185595bb1cb792e35148562c6a"
+    },
+    {
+      "path": "previews/07_Preview_Clearance_Diagram.png",
+      "size_bytes": 434216,
+      "sha256": "3258025b0a8af998628af66bdef786dd69137b8e6eba5321741425623a2cdfb5"
+    },
+    {
+      "path": "previews/08_Preview_Material_and_Trim_CloseUp.png",
+      "size_bytes": 63399,
+      "sha256": "47c688d8d68d5e1f9ad31460688fa9fb9fed0427feb3c780f9e843381e83e843"
+    },
+    {
+      "path": "scripts/generate_hub_queue_pad_ring_blender.py",
+      "size_bytes": 34703,
+      "sha256": "8899ebbacbc4da559609e47c4f7d65c0d776e3b17d07a627dc388e3795fcb8cc"
+    },
+    {
+      "path": "textures/SphereBrawl_QueuePadRing_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    }
+  ]
+}

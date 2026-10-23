@@ -1,0 +1,209 @@
+{
+  "asset_id": "SM_Hub_QueuePadRing_01",
+  "asset_type": "Static decorative environment mesh (Hub Queue Pad boundary ring)",
+  "scope_tasks": [
+    "TASK-03",
+    "TASK-09"
+  ],
+  "geometry_parameters": {
+    "asset_name": "SM_Hub_QueuePadRing_01",
+    "outer_radius_studs": 14.0,
+    "outer_diameter_studs": 28.0,
+    "inner_radius_studs": 12.8,
+    "inner_diameter_studs": 25.6,
+    "band_width_studs": 1.2,
+    "max_xz_footprint_studs": [
+      28.0,
+      28.0
+    ],
+    "local_y_min_studs": 0.004,
+    "local_y_max_studs": 0.08,
+    "structural_thickness_studs": 0.076,
+    "max_height_above_deck_studs": 0.08,
+    "recessed_cyan_channel_y_studs": 0.036,
+    "cardinal_threshold_top_y_studs": 0.044,
+    "reference_walking_surface_local_y": 0.0,
+    "reference_walking_surface_world_y": 150.0,
+    "world_pivot_position": [
+      0.0,
+      150.0,
+      -300.0
+    ],
+    "radial_segments": 32,
+    "portal_arch_min_floor_radius_studs": 15.05,
+    "portal_arch_radial_clearance_studs": 1.05,
+    "plaza_inner_framing_ring_radius_studs": 21.2,
+    "plaza_framing_ring_clearance_studs": 7.2
+  },
+  "measured_validation_metrics": {
+    "asset_name": "SM_Hub_QueuePadRing_01",
+    "triangles": 960,
+    "glb_triangles": 960,
+    "vertices": 2880,
+    "normals": 960,
+    "uvs": 4,
+    "vertex_colors": 2880,
+    "bbox_min": [
+      -14.0,
+      0.004,
+      -14.0
+    ],
+    "bbox_max": [
+      14.0,
+      0.08,
+      14.0
+    ],
+    "dimensions": [
+      28.0,
+      0.076,
+      28.0
+    ],
+    "r_inner_measured": 12.8,
+    "r_outer_measured": 14.0,
+    "outer_diameter_measured": 28.0,
+    "inner_diameter_measured": 25.6,
+    "band_width_measured": 1.2,
+    "y_min_measured": 0.004,
+    "y_max_measured": 0.08,
+    "structural_thickness_measured": 0.076,
+    "verts_inside_r_12_8": 0,
+    "verts_outside_r_14_0": 0,
+    "verts_at_or_below_y_0": 0,
+    "degenerate_faces": 0,
+    "min_triangle_area_sq_studs": 0.002015,
+    "normal_mismatches": 0,
+    "total_area_3d_sq_studs": 210.07,
+    "total_area_top_sq_studs": 103.74,
+    "components": {
+      "GEO_QueuePadRing_BaseCollar": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 320,
+        "vertices": 960,
+        "area_3d_sq_studs": 146.584,
+        "area_top_sq_studs": 43.5002,
+        "area_3d_pct": 69.78,
+        "area_top_pct": 41.93
+      },
+      "GEO_QueuePadRing_ChannelInlay": {
+        "material": "MAT_AltNeutral",
+        "triangles": 320,
+        "vertices": 960,
+        "area_3d_sq_studs": 24.0824,
+        "area_top_sq_studs": 22.0189,
+        "area_3d_pct": 11.46,
+        "area_top_pct": 21.22
+      },
+      "GEO_QueuePadRing_TrimBezels": {
+        "material": "MAT_LightTrim",
+        "triangles": 256,
+        "vertices": 768,
+        "area_3d_sq_studs": 19.3226,
+        "area_top_sq_studs": 18.1458,
+        "area_3d_pct": 9.2,
+        "area_top_pct": 17.49
+      },
+      "GEO_QueuePadRing_CyanConduit": {
+        "material": "EMI_Cyan",
+        "triangles": 64,
+        "vertices": 192,
+        "area_3d_sq_studs": 20.0771,
+        "area_top_sq_studs": 20.0771,
+        "area_3d_pct": 9.56,
+        "area_top_pct": 19.35
+      }
+    },
+    "glb_valid": true,
+    "glb_nodes": [
+      "SM_Hub_QueuePadRing_01",
+      "GEO_QueuePadRing_BaseCollar",
+      "GEO_QueuePadRing_ChannelInlay",
+      "GEO_QueuePadRing_TrimBezels",
+      "GEO_QueuePadRing_CyanConduit"
+    ],
+    "glb_materials": [
+      "MAT_DarkNeutral",
+      "MAT_AltNeutral",
+      "MAT_LightTrim",
+      "EMI_Cyan"
+    ],
+    "reproducibility_verified": true
+  },
+  "palette_specification": {
+    "MAT_DarkNeutral": {
+      "rgb_255": [
+        32,
+        38,
+        54
+      ],
+      "hex": "#202636",
+      "normalized_rgb": [
+        0.12549,
+        0.14902,
+        0.211765
+      ],
+      "emissive": false,
+      "metallic": 0.55,
+      "roughness": 0.42,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(32, 38, 54)",
+      "surface_role": "Outer and inner low-profile chamfer skirts, structural collar ring decks, and base closure"
+    },
+    "MAT_AltNeutral": {
+      "rgb_255": [
+        42,
+        50,
+        70
+      ],
+      "hex": "#2A3246",
+      "normalized_rgb": [
+        0.164706,
+        0.196078,
+        0.27451
+      ],
+      "emissive": false,
+      "metallic": 0.6,
+      "roughness": 0.35,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(42, 50, 70)",
+      "surface_role": "Sloped channel walls, intercardinal structural lock casings, and cardinal threshold ramps"
+    },
+    "MAT_LightTrim": {
+      "rgb_255": [
+        170,
+        190,
+        215
+      ],
+      "hex": "#AABED7",
+      "normalized_rgb": [
+        0.666667,
+        0.745098,
+        0.843137
+      ],
+      "emissive": false,
+      "metallic": 0.78,
+      "roughness": 0.28,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(170, 190, 215)",
+      "surface_role": "Precision inner/outer boundary bezels, cardinal threshold bridge plates, and radial divider ribs"
+    },
+    "EMI_Cyan": {
+      "rgb_255": [
+        0,
+        195,
+        255
+      ],
+      "hex": "#00C3FF",
+      "normalized_rgb": [
+        0.0,
+        0.764706,
+        1.0
+      ],
+      "emissive": true,
+      "metallic": 0.1,
+      "roughness": 0.15,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(0, 195, 255)",
+      "surface_role": "Recessed segmented cyan boundary energy arcs and cardinal threshold alignment diodes"
+    }
+  }
+}

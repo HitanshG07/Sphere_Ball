@@ -1,0 +1,12 @@
+# Sphere Brawl: Rolling Rampage — Material Library
+# Asset: COL_PlazaPlatform_Deck
+
+newmtl MAT_DarkNeutral
+Ka 0.0251 0.0298 0.0424
+Kd 0.1255 0.1490 0.2118
+Ke 0.0000 0.0000 0.0000
+Ks 0.5500 0.6000 0.6800
+Ns 50.0
+d 1.0
+illum 2
+map_Kd SphereBrawl_HubPlatform_PaletteAtlas.png
