@@ -1,0 +1,15 @@
+{
+  "id": "hub.station.customize_kiosk",
+  "name": "SM_Hub_CustomizeKiosk_01",
+  "kind": "model",
+  "status": "EXPORTED",
+  "destination": "Workspace.KineticHub.Stations.SM_Hub_CustomizeKiosk_01",
+  "source": "3d-argon/changes/5/Sphere_Brawl_Hub_CustomizeKiosk_01_Package/scripts/generate_hub_customize_kiosk_blender.py",
+  "rightsStatus": "ORIGINAL_GENERATED",
+  "robloxAssetId": null,
+  "triangles": 2038,
+  "textureResolution": "64x64",
+  "collision": "VISUAL_ONLY",
+  "platformBudget": "DESKTOP_AND_MOBILE",
+  "notes": "Four-pedestal sphere customization showcase at (-43, 150, -300) facing +X toward (0, 150, -300). Local bounds 10.0x9.5x8.0 studs (world-aligned 8.0x9.5x10.0 studs). Contains 4 separate display pedestals (GEO_CustomizeKiosk_DisplayPedestal_01..04) and 4 neutral replaceable preview spheres (GEO_CustomizeKiosk_PreviewSphere_01..04). Optional structural collision proxy in meshes/collision_proxy/COL_CustomizeKiosk_Body.obj."
+}

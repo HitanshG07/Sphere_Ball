@@ -1,0 +1,757 @@
+{
+  "package_name": "Sphere_Brawl_Hub_CustomizeKiosk_01_Package",
+  "package_version": "1.0.1",
+  "step": "Argon Step 3 \u2014 Customization Kiosk Mesh Production (Final QA Correction)",
+  "asset_id": "SM_Hub_CustomizeKiosk_01",
+  "scope": [
+    "TASK-03",
+    "TASK-09"
+  ],
+  "source_ownership_status": "ORIGINAL_GENERATED",
+  "total_package_files_including_manifest_and_checksums": 29,
+  "manifest_described_payload_files_count": 27,
+  "checksum_entries_count": 28,
+  "world_placement": {
+    "locked_position": [
+      -43.0,
+      150.0,
+      -300.0
+    ],
+    "reference_top_walking_surface_y": 150.0,
+    "local_pivot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "primary_cframe": "CFrame.new(-43, 150, -300) * CFrame.Angles(0, math.rad(90), 0)",
+    "equivalent_from_matrix": "CFrame.fromMatrix(Vector3.new(-43, 150, -300), Vector3.new(0, 0, -1), Vector3.new(0, 1, 0), Vector3.new(1, 0, 0))",
+    "intended_facing": "Local +Z (model front) -> World +X inward toward Queue Portal at (0, 150, -300); Local +X -> World -Z",
+    "scale_convention": "1.0 Blender/Export Unit = 1.0 Roblox Stud (+Y Up, +Z Forward, +X Right)"
+  },
+  "geometry_summary": {
+    "asset_name": "SM_Hub_CustomizeKiosk_01",
+    "triangles": 2038,
+    "glb_triangles": 2038,
+    "vertices": 6114,
+    "normals": 2038,
+    "uvs": 4,
+    "vertex_colors": 6114,
+    "bbox_min": [
+      -5.0,
+      0.0,
+      -4.0
+    ],
+    "bbox_max": [
+      5.0,
+      9.5,
+      4.0
+    ],
+    "dimensions": [
+      10.0,
+      9.5,
+      8.0
+    ],
+    "world_aligned_bbox_min": [
+      -47.0,
+      150.0,
+      -305.0
+    ],
+    "world_aligned_bbox_max": [
+      -39.0,
+      159.5,
+      -295.0
+    ],
+    "world_aligned_dimensions": [
+      8.0,
+      9.5,
+      10.0
+    ],
+    "degenerate_faces": 0,
+    "min_triangle_area_sq_studs": 0.00315,
+    "normal_mismatches": 0,
+    "total_area_3d_sq_studs": 786.24,
+    "total_area_top_sq_studs": 259.38,
+    "components": {
+      "GEO_CustomizeKiosk_Base": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 120,
+        "vertices": 360,
+        "area_3d_sq_studs": 216.8726,
+        "area_top_sq_studs": 109.4222,
+        "area_3d_pct": 27.58,
+        "area_top_pct": 42.19,
+        "bbox_min": [
+          -5.0,
+          0.0,
+          -4.0
+        ],
+        "bbox_max": [
+          5.0,
+          1.3,
+          4.0
+        ]
+      },
+      "GEO_CustomizeKiosk_Frame": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 190,
+        "vertices": 570,
+        "area_3d_sq_studs": 315.2377,
+        "area_top_sq_studs": 68.1882,
+        "area_3d_pct": 40.09,
+        "area_top_pct": 26.29,
+        "bbox_min": [
+          -4.45,
+          0.36,
+          -3.96
+        ],
+        "bbox_max": [
+          4.45,
+          9.5,
+          1.25
+        ]
+      },
+      "GEO_CustomizeKiosk_SecondaryPanels": {
+        "material": "MAT_AltNeutral",
+        "triangles": 182,
+        "vertices": 546,
+        "area_3d_sq_studs": 77.3408,
+        "area_top_sq_studs": 26.7539,
+        "area_3d_pct": 9.84,
+        "area_top_pct": 10.31,
+        "bbox_min": [
+          -4.1261,
+          0.36,
+          -3.52
+        ],
+        "bbox_max": [
+          4.1261,
+          7.25,
+          3.45
+        ]
+      },
+      "GEO_CustomizeKiosk_DisplayPedestal_01": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 100,
+        "vertices": 300,
+        "area_3d_sq_studs": 10.846,
+        "area_top_sq_studs": 5.1264,
+        "area_3d_pct": 1.38,
+        "area_top_pct": 1.98,
+        "bbox_min": [
+          -4.2924,
+          0.36,
+          -0.3924
+        ],
+        "bbox_max": [
+          -2.4076,
+          2.24,
+          1.4924
+        ]
+      },
+      "GEO_CustomizeKiosk_DisplayPedestal_02": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 100,
+        "vertices": 300,
+        "area_3d_sq_studs": 11.345,
+        "area_top_sq_studs": 5.1264,
+        "area_3d_pct": 1.44,
+        "area_top_pct": 1.98,
+        "bbox_min": [
+          -2.0924,
+          0.68,
+          -1.3924
+        ],
+        "bbox_max": [
+          -0.2076,
+          2.69,
+          0.4924
+        ]
+      },
+      "GEO_CustomizeKiosk_DisplayPedestal_03": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 100,
+        "vertices": 300,
+        "area_3d_sq_studs": 11.345,
+        "area_top_sq_studs": 5.1264,
+        "area_3d_pct": 1.44,
+        "area_top_pct": 1.98,
+        "bbox_min": [
+          0.2076,
+          0.68,
+          -1.3924
+        ],
+        "bbox_max": [
+          2.0924,
+          2.69,
+          0.4924
+        ]
+      },
+      "GEO_CustomizeKiosk_DisplayPedestal_04": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 100,
+        "vertices": 300,
+        "area_3d_sq_studs": 10.846,
+        "area_top_sq_studs": 5.1264,
+        "area_3d_pct": 1.38,
+        "area_top_pct": 1.98,
+        "bbox_min": [
+          2.4076,
+          0.36,
+          -0.3924
+        ],
+        "bbox_max": [
+          4.2924,
+          2.24,
+          1.4924
+        ]
+      },
+      "GEO_CustomizeKiosk_PreviewSphere_01": {
+        "material": "MAT_AltNeutral",
+        "triangles": 120,
+        "vertices": 360,
+        "area_3d_sq_studs": 9.6076,
+        "area_top_sq_studs": 2.43,
+        "area_3d_pct": 1.22,
+        "area_top_pct": 0.94,
+        "bbox_min": [
+          -4.25,
+          2.15,
+          -0.35
+        ],
+        "bbox_max": [
+          -2.45,
+          3.95,
+          1.45
+        ]
+      },
+      "GEO_CustomizeKiosk_PreviewSphere_02": {
+        "material": "MAT_AltNeutral",
+        "triangles": 120,
+        "vertices": 360,
+        "area_3d_sq_studs": 9.6076,
+        "area_top_sq_studs": 2.43,
+        "area_3d_pct": 1.22,
+        "area_top_pct": 0.94,
+        "bbox_min": [
+          -2.05,
+          2.6,
+          -1.35
+        ],
+        "bbox_max": [
+          -0.25,
+          4.4,
+          0.45
+        ]
+      },
+      "GEO_CustomizeKiosk_PreviewSphere_03": {
+        "material": "MAT_AltNeutral",
+        "triangles": 120,
+        "vertices": 360,
+        "area_3d_sq_studs": 9.6076,
+        "area_top_sq_studs": 2.43,
+        "area_3d_pct": 1.22,
+        "area_top_pct": 0.94,
+        "bbox_min": [
+          0.25,
+          2.6,
+          -1.35
+        ],
+        "bbox_max": [
+          2.05,
+          4.4,
+          0.45
+        ]
+      },
+      "GEO_CustomizeKiosk_PreviewSphere_04": {
+        "material": "MAT_AltNeutral",
+        "triangles": 120,
+        "vertices": 360,
+        "area_3d_sq_studs": 9.6076,
+        "area_top_sq_studs": 2.43,
+        "area_3d_pct": 1.22,
+        "area_top_pct": 0.94,
+        "bbox_min": [
+          2.45,
+          2.15,
+          -0.35
+        ],
+        "bbox_max": [
+          4.25,
+          3.95,
+          1.45
+        ]
+      },
+      "GEO_CustomizeKiosk_DisplayHeader": {
+        "material": "MAT_AltNeutral",
+        "triangles": 84,
+        "vertices": 252,
+        "area_3d_sq_studs": 32.3841,
+        "area_top_sq_studs": 4.6512,
+        "area_3d_pct": 4.12,
+        "area_top_pct": 1.79,
+        "bbox_min": [
+          -3.45,
+          7.12,
+          0.55
+        ],
+        "bbox_max": [
+          3.45,
+          9.06,
+          1.22
+        ]
+      },
+      "GEO_CustomizeKiosk_Trim": {
+        "material": "MAT_LightTrim",
+        "triangles": 310,
+        "vertices": 930,
+        "area_3d_sq_studs": 42.3759,
+        "area_top_sq_studs": 14.6488,
+        "area_3d_pct": 5.39,
+        "area_top_pct": 5.65,
+        "bbox_min": [
+          -4.82,
+          0.04,
+          -3.65
+        ],
+        "bbox_max": [
+          4.82,
+          9.24,
+          3.96
+        ]
+      },
+      "GEO_CustomizeKiosk_CyanAccents": {
+        "material": "EMI_Cyan",
+        "triangles": 272,
+        "vertices": 816,
+        "area_3d_sq_studs": 19.2212,
+        "area_top_sq_studs": 5.4881,
+        "area_3d_pct": 2.44,
+        "area_top_pct": 2.12,
+        "bbox_min": [
+          -4.02,
+          0.36,
+          -3.6
+        ],
+        "bbox_max": [
+          4.02,
+          9.04,
+          3.64
+        ]
+      }
+    },
+    "material_summary": {
+      "MAT_DarkNeutral": {
+        "triangles": 710,
+        "area_3d_sq_studs": 576.4923,
+        "area_3d_pct": 73.32,
+        "area_top_sq_studs": 198.116,
+        "area_top_pct": 76.38
+      },
+      "MAT_AltNeutral": {
+        "triangles": 746,
+        "area_3d_sq_studs": 148.1553,
+        "area_3d_pct": 18.84,
+        "area_top_sq_studs": 41.1251,
+        "area_top_pct": 15.86
+      },
+      "MAT_LightTrim": {
+        "triangles": 310,
+        "area_3d_sq_studs": 42.3759,
+        "area_3d_pct": 5.39,
+        "area_top_sq_studs": 14.6488,
+        "area_top_pct": 5.65
+      },
+      "EMI_Cyan": {
+        "triangles": 272,
+        "area_3d_sq_studs": 19.2212,
+        "area_3d_pct": 2.44,
+        "area_top_sq_studs": 5.4881,
+        "area_top_pct": 2.12
+      }
+    },
+    "glb_valid": true,
+    "glb_nodes": [
+      "SM_Hub_CustomizeKiosk_01",
+      "GEO_CustomizeKiosk_Base",
+      "GEO_CustomizeKiosk_Frame",
+      "GEO_CustomizeKiosk_SecondaryPanels",
+      "GEO_CustomizeKiosk_DisplayPedestal_01",
+      "GEO_CustomizeKiosk_DisplayPedestal_02",
+      "GEO_CustomizeKiosk_DisplayPedestal_03",
+      "GEO_CustomizeKiosk_DisplayPedestal_04",
+      "GEO_CustomizeKiosk_PreviewSphere_01",
+      "GEO_CustomizeKiosk_PreviewSphere_02",
+      "GEO_CustomizeKiosk_PreviewSphere_03",
+      "GEO_CustomizeKiosk_PreviewSphere_04",
+      "GEO_CustomizeKiosk_DisplayHeader",
+      "GEO_CustomizeKiosk_Trim",
+      "GEO_CustomizeKiosk_CyanAccents"
+    ],
+    "glb_materials": [
+      "MAT_DarkNeutral",
+      "MAT_AltNeutral",
+      "MAT_LightTrim",
+      "EMI_Cyan"
+    ],
+    "mtl_materials": [
+      "EMI_Cyan",
+      "MAT_AltNeutral",
+      "MAT_DarkNeutral",
+      "MAT_LightTrim"
+    ],
+    "reproducibility_verified": true,
+    "integration_clearances": {
+      "kiosk_world_center": [
+        -43.0,
+        150.0,
+        -300.0
+      ],
+      "kiosk_world_x_range": [
+        -47.0,
+        -39.0
+      ],
+      "kiosk_world_y_range": [
+        150.0,
+        159.5
+      ],
+      "kiosk_world_z_range": [
+        -305.0,
+        -295.0
+      ],
+      "clearance_to_queue_pad_ring_outer_r14_studs": 25.0,
+      "clearance_to_portal_arch_pylons_x15_05_studs": 23.95,
+      "clearance_to_plaza_inner_framing_ring_r21_20_studs": 17.8,
+      "clearance_to_plaza_outer_curb_r63_20_studs": 15.9344,
+      "clearance_to_plaza_outer_rim_r70_00_studs": 22.7344,
+      "clearance_to_reward_display_station_studs": 21.48
+    },
+    "glb_byte_breakdown": {
+      "total_file_size_bytes": 334648,
+      "header_bytes": 12,
+      "json_chunk_header_bytes": 8,
+      "json_chunk_payload_bytes": 16524,
+      "bin_chunk_header_bytes": 8,
+      "bin_chunk_payload_bytes": 318096
+    }
+  },
+  "pedestals": [
+    {
+      "index": 1,
+      "pedestal_name": "GEO_CustomizeKiosk_DisplayPedestal_01",
+      "sphere_name": "GEO_CustomizeKiosk_PreviewSphere_01",
+      "slot_label": "Slot 01 (Outer Left \u2014 Front Wing)",
+      "cx": -3.35,
+      "cz": 0.55,
+      "tier": "front_outer",
+      "mount_top_y": 2.0,
+      "sphere_center_y": 3.05,
+      "sphere_radius": 0.9,
+      "world_sphere_center": [
+        -42.45,
+        153.05,
+        -296.65
+      ],
+      "world_mount_top_center": [
+        -42.45,
+        152.0,
+        -296.65
+      ]
+    },
+    {
+      "index": 2,
+      "pedestal_name": "GEO_CustomizeKiosk_DisplayPedestal_02",
+      "sphere_name": "GEO_CustomizeKiosk_PreviewSphere_02",
+      "slot_label": "Slot 02 (Inner Left \u2014 Elevated Center-Rear)",
+      "cx": -1.15,
+      "cz": -0.45,
+      "tier": "rear_inner",
+      "mount_top_y": 2.45,
+      "sphere_center_y": 3.5,
+      "sphere_radius": 0.9,
+      "world_sphere_center": [
+        -43.45,
+        153.5,
+        -298.85
+      ],
+      "world_mount_top_center": [
+        -43.45,
+        152.45,
+        -298.85
+      ]
+    },
+    {
+      "index": 3,
+      "pedestal_name": "GEO_CustomizeKiosk_DisplayPedestal_03",
+      "sphere_name": "GEO_CustomizeKiosk_PreviewSphere_03",
+      "slot_label": "Slot 03 (Inner Right \u2014 Elevated Center-Rear)",
+      "cx": 1.15,
+      "cz": -0.45,
+      "tier": "rear_inner",
+      "mount_top_y": 2.45,
+      "sphere_center_y": 3.5,
+      "sphere_radius": 0.9,
+      "world_sphere_center": [
+        -43.45,
+        153.5,
+        -301.15
+      ],
+      "world_mount_top_center": [
+        -43.45,
+        152.45,
+        -301.15
+      ]
+    },
+    {
+      "index": 4,
+      "pedestal_name": "GEO_CustomizeKiosk_DisplayPedestal_04",
+      "sphere_name": "GEO_CustomizeKiosk_PreviewSphere_04",
+      "slot_label": "Slot 04 (Outer Right \u2014 Front Wing)",
+      "cx": 3.35,
+      "cz": 0.55,
+      "tier": "front_outer",
+      "mount_top_y": 2.0,
+      "sphere_center_y": 3.05,
+      "sphere_radius": 0.9,
+      "world_sphere_center": [
+        -42.45,
+        153.05,
+        -303.35
+      ],
+      "world_mount_top_center": [
+        -42.45,
+        152.0,
+        -303.35
+      ]
+    }
+  ],
+  "palette": {
+    "MAT_DarkNeutral": {
+      "rgb_255": [
+        32,
+        38,
+        54
+      ],
+      "hex": "#202636",
+      "normalized_rgb": [
+        0.12549,
+        0.14902,
+        0.211765
+      ],
+      "emissive": false,
+      "metallic": 0.55,
+      "roughness": 0.42,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(32, 38, 54)",
+      "surface_role": "Main kiosk body, heavy base platform, structural gantry pillars, and principal pedestal shafts"
+    },
+    "MAT_AltNeutral": {
+      "rgb_255": [
+        42,
+        50,
+        70
+      ],
+      "hex": "#2A3246",
+      "normalized_rgb": [
+        0.164706,
+        0.196078,
+        0.27451
+      ],
+      "emissive": false,
+      "metallic": 0.6,
+      "roughness": 0.35,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(42, 50, 70)",
+      "surface_role": "Secondary armor panels, contrasting pedestal collars, blank display header board, and neutral placeholder preview spheres"
+    },
+    "MAT_LightTrim": {
+      "rgb_255": [
+        170,
+        190,
+        215
+      ],
+      "hex": "#AABED7",
+      "normalized_rgb": [
+        0.666667,
+        0.745098,
+        0.843137
+      ],
+      "emissive": false,
+      "metallic": 0.78,
+      "roughness": 0.28,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(170, 190, 215)",
+      "surface_role": "Selective edge bevels, corner mounting cleats, display header bezels, and pedestal label plaques"
+    },
+    "EMI_Cyan": {
+      "rgb_255": [
+        0,
+        195,
+        255
+      ],
+      "hex": "#00C3FF",
+      "normalized_rgb": [
+        0.0,
+        0.764706,
+        1.0
+      ],
+      "emissive": true,
+      "metallic": 0.1,
+      "roughness": 0.15,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(0, 195, 255)",
+      "surface_role": "Recessed illuminated floor channels, pedestal holo-emitter rings, pillar conduit strips, and header accent bars"
+    }
+  },
+  "proposed_project_asset_manifest_entry": {
+    "id": "hub.station.customize_kiosk",
+    "name": "SM_Hub_CustomizeKiosk_01",
+    "kind": "model",
+    "status": "EXPORTED",
+    "destination": "Workspace.KineticHub.Stations.SM_Hub_CustomizeKiosk_01",
+    "source": "3d-argon/changes/5/Sphere_Brawl_Hub_CustomizeKiosk_01_Package/scripts/generate_hub_customize_kiosk_blender.py",
+    "rightsStatus": "ORIGINAL_GENERATED",
+    "robloxAssetId": null,
+    "triangles": 2038,
+    "textureResolution": "64x64",
+    "collision": "VISUAL_ONLY",
+    "platformBudget": "DESKTOP_AND_MOBILE",
+    "notes": "Four-pedestal sphere customization showcase at (-43, 150, -300) facing +X toward (0, 150, -300) via CFrame.new(-43, 150, -300) * CFrame.Angles(0, math.rad(90), 0). Local bounds 10.0x9.5x8.0 studs (world-aligned 8.0x9.5x10.0 studs). Contains 4 separate display pedestals (GEO_CustomizeKiosk_DisplayPedestal_01..04) and 4 neutral replaceable preview spheres (GEO_CustomizeKiosk_PreviewSphere_01..04)."
+  },
+  "files": [
+    {
+      "path": "MODEL_SPECIFICATION.md",
+      "size_bytes": 11480,
+      "sha256": "811460e0cc515ab8bd7d3231b05addb2ca1996140ec54de16dc784e33420f093"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 9873,
+      "sha256": "13f755bbf23d7700c84c1087d47c5d862659b2c101c537272271dd4a22bfdaad"
+    },
+    {
+      "path": "ROBLOX_STUDIO_IMPORT_GUIDE.md",
+      "size_bytes": 14582,
+      "sha256": "1beaf3eedecf6479294c2740ccabbb6a28d1bb4d0e270c637f33de2f97d62c4e"
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "size_bytes": 8028,
+      "sha256": "6569a068137c1f7bf7325c4c837c8f3a0ef249b0bffefdf28f2fbfd1ce8c491b"
+    },
+    {
+      "path": "config/customize_kiosk_parameters.json",
+      "size_bytes": 15547,
+      "sha256": "fbe76a56c4fbbe4d127dbe5281dca2357e8c308cddae3438ac50053e4bb9c903"
+    },
+    {
+      "path": "docs/HUB_INTEGRATION_AND_CLEARANCE_REPORT.md",
+      "size_bytes": 4252,
+      "sha256": "d86c795798372c3980264ee4b3a68c3f03567ffb1021539db39626ab14a6e50c"
+    },
+    {
+      "path": "manifest/SM_Hub_CustomizeKiosk_01.manifest.json",
+      "size_bytes": 949,
+      "sha256": "c08b141b4dc02c6a4f74f045d3d548b9983299a8bce5bdcaebea3a18a31bdaef"
+    },
+    {
+      "path": "meshes/SM_Hub_CustomizeKiosk_01.glb",
+      "size_bytes": 334648,
+      "sha256": "80deb2b38cbda3fc778ff4c69cf160625653da13ad72ba35fdc0a13e4b01f503"
+    },
+    {
+      "path": "meshes/SM_Hub_CustomizeKiosk_01.mtl",
+      "size_bytes": 849,
+      "sha256": "c97ee2a25a60abca60a1f71f50921af3fc1e81a66affc79453feb2e66786099c"
+    },
+    {
+      "path": "meshes/SM_Hub_CustomizeKiosk_01.obj",
+      "size_bytes": 425200,
+      "sha256": "a3fb8fdf82e9b4000c8e116c8e9d24ee746acbec50240c68d14e1e7cf7dee61a"
+    },
+    {
+      "path": "meshes/SphereBrawl_CustomizeKiosk_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    },
+    {
+      "path": "meshes/collision_proxy/COL_CustomizeKiosk_Body.glb",
+      "size_bytes": 6820,
+      "sha256": "165ee21077dedf6f610d2ca02cb0093dd3a9f8df8e30fa94108d76dc9e77c2bb"
+    },
+    {
+      "path": "meshes/collision_proxy/COL_CustomizeKiosk_Body.mtl",
+      "size_bytes": 279,
+      "sha256": "4e421bbfe48d946c72d816f3233ed067aa85a487cc23fc203f3fce161fd08ffd"
+    },
+    {
+      "path": "meshes/collision_proxy/COL_CustomizeKiosk_Body.obj",
+      "size_bytes": 5252,
+      "sha256": "25ced7f8c2caef9f79cdeb3e3254b8e0c8e2b09f589b693c4b7a6733312693c1"
+    },
+    {
+      "path": "meshes/collision_proxy/SphereBrawl_CustomizeKiosk_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    },
+    {
+      "path": "previews/01_Preview_ThreeQuarter_Perspective.png",
+      "size_bytes": 122941,
+      "sha256": "479828d52098d1ea4874b5c2ff98ae3241d9d61da76a8c5db2e04fc892fba359"
+    },
+    {
+      "path": "previews/02_Preview_Front_Inward_Presentation.png",
+      "size_bytes": 90077,
+      "sha256": "899b45c9e03aefd6854c3bb466d35c6b00dcd0c4e8918ceb9b696e8e60d31ba6"
+    },
+    {
+      "path": "previews/03_Preview_Top_Orthographic_Arrangement.png",
+      "size_bytes": 215632,
+      "sha256": "10fac350f4615d50fd32e4146c4bcfdb304307c9876e268e3b1820ab7dcee620"
+    },
+    {
+      "path": "previews/04_Preview_Low_PlayerHeight_Approach.png",
+      "size_bytes": 105488,
+      "sha256": "ecd33cd253af657526612701d9746472be29ca9afe58b4facabb46760a97c166"
+    },
+    {
+      "path": "previews/05_Preview_Rear_Side_Underside_Construction.png",
+      "size_bytes": 83112,
+      "sha256": "dfb104b8ceb0a2b1bd5ed7469af9321fdf251dd793cf6d3c2bbd61c0e28798a9"
+    },
+    {
+      "path": "previews/06_Preview_NeutralClay_Geometry.png",
+      "size_bytes": 102191,
+      "sha256": "4bff29d185596fe91c91eb33bae1c320c7067c02c7f4244391521e7d664d3873"
+    },
+    {
+      "path": "previews/07_Preview_Wireframe_Topology.png",
+      "size_bytes": 173003,
+      "sha256": "b8a1c830b606575a1f971c99f28642386db0846f98b23846370f7bd95d192334"
+    },
+    {
+      "path": "previews/08_Preview_Material_CloseUp.png",
+      "size_bytes": 79076,
+      "sha256": "1094b9b03357fa87e386c0f178f3a7beef499f8d30e20c06e1dc67c58abecada"
+    },
+    {
+      "path": "previews/09_Preview_Integration_Hub_Overview.png",
+      "size_bytes": 177121,
+      "sha256": "232e38842e41c4ca3f490c42d56046a527d4be1075b540d36b7cda1fe5074662"
+    },
+    {
+      "path": "scripts/generate_hub_customize_kiosk_blender.py",
+      "size_bytes": 52879,
+      "sha256": "2b9870f2a9fa7fb16d7e37450d7c7bfd6ff55cfad2dd0e19fdea33336c7b39cd"
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "size_bytes": 15952,
+      "sha256": "8213995c5d973a2d584238ab8025a76df588e84725e787790358d1a9f8a654a5"
+    },
+    {
+      "path": "textures/SphereBrawl_CustomizeKiosk_PaletteAtlas.png",
+      "size_bytes": 166,
+      "sha256": "c7b9a4a265cb55bdc634ee3064a9d61beef80fba8d4ec01f5126e370fac7deab"
+    }
+  ]
+}
