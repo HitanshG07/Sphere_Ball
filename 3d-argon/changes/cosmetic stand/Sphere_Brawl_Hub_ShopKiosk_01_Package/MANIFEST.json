@@ -1,0 +1,616 @@
+{
+  "package_name": "Sphere_Brawl_Hub_ShopKiosk_01_Package",
+  "asset_id": "SM_Hub_ShopKiosk_01",
+  "descriptive_name": "Sphere Brawl Arena Shop Bar",
+  "stage": "Step 4 \u2014 Phase 2: Approved Arena Shop Bar Production",
+  "approved_concept_source": "Sphere_Brawl_Shop_Bar_Concept_Reset_01.zip",
+  "payload_file_count": 28,
+  "total_archive_entries": 30,
+  "geometry_metrics": {
+    "asset_name": "SM_Hub_ShopKiosk_01",
+    "descriptive_name": "Sphere Brawl Arena Shop Bar",
+    "triangles": 2424,
+    "glb_triangles": 2424,
+    "vertices": 7272,
+    "normals": 2424,
+    "uvs": 5,
+    "vertex_colors": 7272,
+    "bbox_min": [
+      -10.0,
+      0.0,
+      -4.0
+    ],
+    "bbox_max": [
+      10.0,
+      7.6,
+      4.0
+    ],
+    "dimensions": [
+      20.0,
+      7.6,
+      8.0
+    ],
+    "world_aligned_bbox_min": [
+      39.0,
+      150.0,
+      -310.0
+    ],
+    "world_aligned_bbox_max": [
+      47.0,
+      157.6,
+      -290.0
+    ],
+    "world_aligned_dimensions": [
+      8.0,
+      7.6,
+      20.0
+    ],
+    "vertex_radial_min_studs": 39.3026,
+    "vertex_radial_max_studs": 47.921,
+    "bbox_radial_min_studs": 39.0,
+    "bbox_radial_max_studs": 48.0521,
+    "degenerate_faces": 0,
+    "min_triangle_area_sq_studs": 0.000215,
+    "normal_mismatches": 0,
+    "total_area_3d_sq_studs": 1170.26,
+    "total_area_top_sq_studs": 454.42,
+    "glb_file_size_bytes": 399176,
+    "glb_header_declared_length": 399176,
+    "glb_json_chunk_bytes": 20828,
+    "glb_bin_chunk_bytes": 378320,
+    "glb_node_count": 19,
+    "glb_mesh_count": 18,
+    "glb_material_count": 5,
+    "components": {
+      "GEO_ShopKiosk_Base": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 90,
+        "vertices": 270,
+        "area_3d_sq_studs": 396.2142,
+        "area_top_sq_studs": 224.798,
+        "bbox_min": [
+          -10.0,
+          0.0,
+          -4.0
+        ],
+        "bbox_max": [
+          10.0,
+          0.48,
+          4.0
+        ],
+        "area_3d_pct": 33.86,
+        "area_top_pct": 49.47
+      },
+      "GEO_ShopKiosk_CounterBody": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 86,
+        "vertices": 258,
+        "area_3d_sq_studs": 99.123,
+        "area_top_sq_studs": 10.4363,
+        "bbox_min": [
+          -7.4,
+          0.48,
+          -2.14
+        ],
+        "bbox_max": [
+          7.4,
+          3.32,
+          2.56
+        ],
+        "area_3d_pct": 8.47,
+        "area_top_pct": 2.3
+      },
+      "GEO_ShopKiosk_Countertop": {
+        "material": "MAT_AltNeutral",
+        "triangles": 302,
+        "vertices": 906,
+        "area_3d_sq_studs": 228.8256,
+        "area_top_sq_studs": 93.4455,
+        "bbox_min": [
+          -7.55,
+          0.24,
+          -2.22
+        ],
+        "bbox_max": [
+          7.55,
+          2.92,
+          3.74
+        ],
+        "area_3d_pct": 19.55,
+        "area_top_pct": 20.56
+      },
+      "GEO_ShopKiosk_SideWings": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 56,
+        "vertices": 168,
+        "area_3d_sq_studs": 66.0383,
+        "area_top_sq_studs": 1.765,
+        "bbox_min": [
+          -9.92,
+          0.28,
+          -3.55
+        ],
+        "bbox_max": [
+          9.92,
+          3.85,
+          1.95
+        ],
+        "area_3d_pct": 5.64,
+        "area_top_pct": 0.39
+      },
+      "GEO_ShopKiosk_WingShelves": {
+        "material": "MAT_AltNeutral",
+        "triangles": 80,
+        "vertices": 240,
+        "area_3d_sq_studs": 101.4282,
+        "area_top_sq_studs": 43.705,
+        "bbox_min": [
+          -10.0,
+          2.38,
+          -3.58
+        ],
+        "bbox_max": [
+          10.0,
+          4.25,
+          2.02
+        ],
+        "area_3d_pct": 8.67,
+        "area_top_pct": 9.62
+      },
+      "GEO_ShopKiosk_DisplayPad_01": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 22,
+        "vertices": 66,
+        "area_3d_sq_studs": 3.9924,
+        "area_top_sq_studs": 3.2991,
+        "bbox_min": [
+          -6.18,
+          2.92,
+          -0.83
+        ],
+        "bbox_max": [
+          -4.02,
+          3.1,
+          1.33
+        ],
+        "area_3d_pct": 0.34,
+        "area_top_pct": 0.73
+      },
+      "GEO_ShopKiosk_DisplayPad_02": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 22,
+        "vertices": 66,
+        "area_3d_sq_studs": 3.9924,
+        "area_top_sq_studs": 3.2991,
+        "bbox_min": [
+          -2.78,
+          2.92,
+          -0.83
+        ],
+        "bbox_max": [
+          -0.62,
+          3.1,
+          1.33
+        ],
+        "area_3d_pct": 0.34,
+        "area_top_pct": 0.73
+      },
+      "GEO_ShopKiosk_DisplayPad_03": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 22,
+        "vertices": 66,
+        "area_3d_sq_studs": 3.9924,
+        "area_top_sq_studs": 3.2991,
+        "bbox_min": [
+          0.62,
+          2.92,
+          -0.83
+        ],
+        "bbox_max": [
+          2.78,
+          3.1,
+          1.33
+        ],
+        "area_3d_pct": 0.34,
+        "area_top_pct": 0.73
+      },
+      "GEO_ShopKiosk_DisplayPad_04": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 22,
+        "vertices": 66,
+        "area_3d_sq_studs": 3.9924,
+        "area_top_sq_studs": 3.2991,
+        "bbox_min": [
+          4.02,
+          2.92,
+          -0.83
+        ],
+        "bbox_max": [
+          6.18,
+          3.1,
+          1.33
+        ],
+        "area_3d_pct": 0.34,
+        "area_top_pct": 0.73
+      },
+      "GEO_ShopKiosk_DisplayItem_01": {
+        "material": "MAT_AltNeutral",
+        "triangles": 80,
+        "vertices": 240,
+        "area_3d_sq_studs": 6.7597,
+        "area_top_sq_studs": 0.5443,
+        "bbox_min": [
+          -5.8621,
+          3.3,
+          0.09
+        ],
+        "bbox_max": [
+          -4.3379,
+          4.96,
+          0.55
+        ],
+        "area_3d_pct": 0.58,
+        "area_top_pct": 0.12
+      },
+      "GEO_ShopKiosk_DisplayItem_02": {
+        "material": "MAT_AltNeutral",
+        "triangles": 96,
+        "vertices": 288,
+        "area_3d_sq_studs": 6.4597,
+        "area_top_sq_studs": 1.0076,
+        "bbox_min": [
+          -2.76,
+          3.3,
+          0.05
+        ],
+        "bbox_max": [
+          -0.64,
+          5.08,
+          0.45
+        ],
+        "area_3d_pct": 0.55,
+        "area_top_pct": 0.22
+      },
+      "GEO_ShopKiosk_DisplayItem_03": {
+        "material": "MAT_AltNeutral",
+        "triangles": 74,
+        "vertices": 222,
+        "area_3d_sq_studs": 6.5318,
+        "area_top_sq_studs": 0.9842,
+        "bbox_min": [
+          0.85,
+          3.3,
+          0.09
+        ],
+        "bbox_max": [
+          2.64,
+          5.16,
+          0.41
+        ],
+        "area_3d_pct": 0.56,
+        "area_top_pct": 0.22
+      },
+      "GEO_ShopKiosk_DisplayItem_04": {
+        "material": "MAT_AltNeutral",
+        "triangles": 44,
+        "vertices": 132,
+        "area_3d_sq_studs": 5.219,
+        "area_top_sq_studs": 0.7151,
+        "bbox_min": [
+          4.3379,
+          3.3,
+          0.09
+        ],
+        "bbox_max": [
+          5.8621,
+          5.05,
+          0.41
+        ],
+        "area_3d_pct": 0.45,
+        "area_top_pct": 0.16
+      },
+      "GEO_ShopKiosk_SignFrame": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 100,
+        "vertices": 300,
+        "area_3d_sq_studs": 60.0111,
+        "area_top_sq_studs": 16.9768,
+        "bbox_min": [
+          -6.85,
+          3.2,
+          -1.95
+        ],
+        "bbox_max": [
+          6.85,
+          7.6,
+          0.85
+        ],
+        "area_3d_pct": 5.13,
+        "area_top_pct": 3.74
+      },
+      "GEO_ShopKiosk_SignPanel": {
+        "material": "MAT_AltNeutral",
+        "triangles": 16,
+        "vertices": 48,
+        "area_3d_sq_studs": 33.2335,
+        "area_top_sq_studs": 0.0,
+        "bbox_min": [
+          -5.6,
+          5.68,
+          0.2
+        ],
+        "bbox_max": [
+          5.6,
+          7.12,
+          0.68
+        ],
+        "area_3d_pct": 2.84,
+        "area_top_pct": 0.0
+      },
+      "GEO_ShopKiosk_Trim": {
+        "material": "MAT_LightTrim",
+        "triangles": 1054,
+        "vertices": 3162,
+        "area_3d_sq_studs": 98.177,
+        "area_top_sq_studs": 28.3535,
+        "bbox_min": [
+          -9.98,
+          0.04,
+          -2.85
+        ],
+        "bbox_max": [
+          9.98,
+          7.26,
+          3.96
+        ],
+        "area_3d_pct": 8.39,
+        "area_top_pct": 6.24
+      },
+      "GEO_ShopKiosk_CyanAccents": {
+        "material": "EMI_Cyan",
+        "triangles": 170,
+        "vertices": 510,
+        "area_3d_sq_studs": 36.4336,
+        "area_top_sq_studs": 16.1292,
+        "bbox_min": [
+          -9.35,
+          0.24,
+          -2.16
+        ],
+        "bbox_max": [
+          9.35,
+          7.08,
+          3.88
+        ],
+        "area_3d_pct": 3.11,
+        "area_top_pct": 3.55
+      },
+      "GEO_ShopKiosk_AmberAccents": {
+        "material": "EMI_Amber",
+        "triangles": 88,
+        "vertices": 264,
+        "area_3d_sq_studs": 9.8348,
+        "area_top_sq_studs": 2.3642,
+        "bbox_min": [
+          -9.82,
+          2.92,
+          -2.65
+        ],
+        "bbox_max": [
+          9.82,
+          7.56,
+          1.96
+        ],
+        "area_3d_pct": 0.84,
+        "area_top_pct": 0.52
+      }
+    },
+    "material_summary": {
+      "MAT_DarkNeutral": {
+        "components": [
+          "GEO_ShopKiosk_Base",
+          "GEO_ShopKiosk_CounterBody",
+          "GEO_ShopKiosk_SideWings",
+          "GEO_ShopKiosk_DisplayPad_01",
+          "GEO_ShopKiosk_DisplayPad_02",
+          "GEO_ShopKiosk_DisplayPad_03",
+          "GEO_ShopKiosk_DisplayPad_04",
+          "GEO_ShopKiosk_SignFrame"
+        ],
+        "triangles": 420,
+        "area_3d_sq_studs": 637.3562,
+        "area_top_sq_studs": 267.1725,
+        "area_3d_pct": 54.46,
+        "area_top_pct": 58.79
+      },
+      "MAT_AltNeutral": {
+        "components": [
+          "GEO_ShopKiosk_Countertop",
+          "GEO_ShopKiosk_WingShelves",
+          "GEO_ShopKiosk_DisplayItem_01",
+          "GEO_ShopKiosk_DisplayItem_02",
+          "GEO_ShopKiosk_DisplayItem_03",
+          "GEO_ShopKiosk_DisplayItem_04",
+          "GEO_ShopKiosk_SignPanel"
+        ],
+        "triangles": 692,
+        "area_3d_sq_studs": 388.4575,
+        "area_top_sq_studs": 140.4017,
+        "area_3d_pct": 33.19,
+        "area_top_pct": 30.9
+      },
+      "MAT_LightTrim": {
+        "components": [
+          "GEO_ShopKiosk_Trim"
+        ],
+        "triangles": 1054,
+        "area_3d_sq_studs": 98.177,
+        "area_top_sq_studs": 28.3535,
+        "area_3d_pct": 8.39,
+        "area_top_pct": 6.24
+      },
+      "EMI_Cyan": {
+        "components": [
+          "GEO_ShopKiosk_CyanAccents"
+        ],
+        "triangles": 170,
+        "area_3d_sq_studs": 36.4336,
+        "area_top_sq_studs": 16.1292,
+        "area_3d_pct": 3.11,
+        "area_top_pct": 3.55
+      },
+      "EMI_Amber": {
+        "components": [
+          "GEO_ShopKiosk_AmberAccents"
+        ],
+        "triangles": 88,
+        "area_3d_sq_studs": 9.8348,
+        "area_top_sq_studs": 2.3642,
+        "area_3d_pct": 0.84,
+        "area_top_pct": 0.52
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "MODEL_SPECIFICATION.md",
+      "size_bytes": 11058,
+      "sha256": "3eaa8e91f1160db6755b23439355598761530257374419d005aac260b83d7df9"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 9393,
+      "sha256": "58c36fb845a3b554b9c5bd62a09f83d954ca3eccff76d8946d7fc3d069cc3888"
+    },
+    {
+      "path": "ROBLOX_STUDIO_IMPORT_GUIDE.md",
+      "size_bytes": 13292,
+      "sha256": "5b1c57a8b0a45a3165e04ded6572b8625c0bee4b8b7444da43d3a2a7dfac877b"
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "size_bytes": 8565,
+      "sha256": "d72b80e829658028599f6b4a3d2c7eb0e7ecf0968b14943dfd399f848257f45b"
+    },
+    {
+      "path": "config/shop_kiosk_parameters.json",
+      "size_bytes": 17383,
+      "sha256": "622a4bc02e2d5c3a7211118dda13cb9c986a638a605d995bfa08491607dcf332"
+    },
+    {
+      "path": "docs/HUB_INTEGRATION_AND_CLEARANCE_REPORT.md",
+      "size_bytes": 6761,
+      "sha256": "952f7c5353a3bf666abf4f74e796aa7b384434f71630bb775eed170361842785"
+    },
+    {
+      "path": "manifest/SM_Hub_ShopKiosk_01.manifest.json",
+      "size_bytes": 1133,
+      "sha256": "8923406d3643a609469c6311c35a346e61a96253f5dcd6ed0f9361a39ce676a5"
+    },
+    {
+      "path": "meshes/SM_Hub_ShopKiosk_01.glb",
+      "size_bytes": 399176,
+      "sha256": "8c1e399a6809a3a38856d9dc64957bca532ee1ff6fdbdba03049efa462fbe219"
+    },
+    {
+      "path": "meshes/SM_Hub_ShopKiosk_01.mtl",
+      "size_bytes": 1063,
+      "sha256": "a00bc8c5b5ace206dc30257c105a82ea3f1fb84a736e0026298e2e2b8b61dd93"
+    },
+    {
+      "path": "meshes/SM_Hub_ShopKiosk_01.obj",
+      "size_bytes": 504390,
+      "sha256": "aabb16f46bd8d03411b41f3d5606ea1ff22a9c61bfc2b4f5ecf588de86461d6b"
+    },
+    {
+      "path": "meshes/SphereBrawl_ShopKiosk_PaletteAtlas.png",
+      "size_bytes": 176,
+      "sha256": "0a03e72726052db05ee3aac0da6597a362f69e3a19ab319f72c3efd306acc3b5"
+    },
+    {
+      "path": "meshes/collision_proxy/COL_ShopKiosk_Body.glb",
+      "size_bytes": 9712,
+      "sha256": "18a42469b0f3439d884ebdaffddca15c76b6832adbfe0d4b08e9db8b489d68ea"
+    },
+    {
+      "path": "meshes/collision_proxy/COL_ShopKiosk_Body.mtl",
+      "size_bytes": 326,
+      "sha256": "5eb17d73ac7624ab515b2f7c82a4f87ee059a0fe6a187b1a3729cee85f87c9b6"
+    },
+    {
+      "path": "meshes/collision_proxy/COL_ShopKiosk_Body.obj",
+      "size_bytes": 7745,
+      "sha256": "f9d491debb22328d98d0f1dee4f804d184177f1d9b20f1029f84fdf1eada8fc3"
+    },
+    {
+      "path": "meshes/collision_proxy/SphereBrawl_ShopKiosk_PaletteAtlas.png",
+      "size_bytes": 176,
+      "sha256": "0a03e72726052db05ee3aac0da6597a362f69e3a19ab319f72c3efd306acc3b5"
+    },
+    {
+      "path": "previews/01_Preview_ThreeQuarter_Perspective.png",
+      "size_bytes": 560925,
+      "sha256": "7a8c0eee6bf0018344bf885d4dc03b65a556f8c9194176383e7b1b7fc05b09b6"
+    },
+    {
+      "path": "previews/02_Preview_Front_Inward_Presentation.png",
+      "size_bytes": 301007,
+      "sha256": "ebe468a8c44a6e6f0a1912b6c4bd01c6005b89aae9afd556e6c5d1a3168ba640"
+    },
+    {
+      "path": "previews/03_Preview_Top_Orthographic_Arrangement.png",
+      "size_bytes": 340251,
+      "sha256": "7faac40fd1adf43f0e2b11e4d4c1258a43f98dd83fa8de6621a9b9b33b74cf54"
+    },
+    {
+      "path": "previews/04_Preview_Low_PlayerHeight_Approach.png",
+      "size_bytes": 374222,
+      "sha256": "abdc8b7eeb2ef379d4bc0860ff8f9f4541fd353ca001eabc8544ea09f7df4ce7"
+    },
+    {
+      "path": "previews/05_Preview_Rear_Side_Underside_Construction.png",
+      "size_bytes": 344464,
+      "sha256": "7cf567f9e8d61cda31c236b781084c2e703ea5d0648c40e57a6f0c507ee6d269"
+    },
+    {
+      "path": "previews/06_Preview_NeutralClay_Geometry.png",
+      "size_bytes": 414402,
+      "sha256": "665844d378876bfd94d0ccbeeff097f2c917f703202b5aee0a7888d8d70a2520"
+    },
+    {
+      "path": "previews/07_Preview_Wireframe_Topology.png",
+      "size_bytes": 734962,
+      "sha256": "61e5e91910f510e653b5c4a87b8505c3ebf7b4ea9d8a01c0dab388835995831b"
+    },
+    {
+      "path": "previews/08_Preview_Material_CloseUp.png",
+      "size_bytes": 265342,
+      "sha256": "de850a3b9c826886dde5b8e54c219bcd61e86eb8609b323fbcd1dc97874129e1"
+    },
+    {
+      "path": "previews/09_Preview_Integration_Hub_Overview.png",
+      "size_bytes": 473742,
+      "sha256": "88528d51fb4ff26816aa7a57dcd75397d51c61a56855f315509d526efbd1cd2f"
+    },
+    {
+      "path": "previews/10_Preview_Visual_Comparison_Customize_vs_Shop.png",
+      "size_bytes": 425074,
+      "sha256": "8018bc875cac8a756c8788794e53e5745e99df58ee48caca7086a0dfdb48b2f3"
+    },
+    {
+      "path": "scripts/generate_hub_shop_kiosk_blender.py",
+      "size_bytes": 64178,
+      "sha256": "adfabf2f1e1bf489274356139e4154aebb8aa0da59718d02c44e14b70b6a8133"
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "size_bytes": 16347,
+      "sha256": "919e28769d508acf6b472c5e2611bba18120857219162a1ba0f71f75dabe9a46"
+    },
+    {
+      "path": "textures/SphereBrawl_ShopKiosk_PaletteAtlas.png",
+      "size_bytes": 176,
+      "sha256": "0a03e72726052db05ee3aac0da6597a362f69e3a19ab319f72c3efd306acc3b5"
+    }
+  ]
+}

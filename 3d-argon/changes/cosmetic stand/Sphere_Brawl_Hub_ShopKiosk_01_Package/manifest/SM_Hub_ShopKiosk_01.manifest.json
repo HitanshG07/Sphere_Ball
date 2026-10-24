@@ -1,0 +1,15 @@
+{
+  "id": "hub.station.shop_kiosk",
+  "name": "SM_Hub_ShopKiosk_01",
+  "kind": "model",
+  "status": "EXPORTED",
+  "destination": "Workspace.KineticHub.Stations.SM_Hub_ShopKiosk_01",
+  "source": "3d-argon/changes/6/Sphere_Brawl_Hub_ShopKiosk_01_Package/scripts/generate_hub_shop_kiosk_blender.py",
+  "rightsStatus": "ORIGINAL_GENERATED",
+  "robloxAssetId": null,
+  "triangles": 2424,
+  "textureResolution": "64x64",
+  "collision": "VISUAL_ONLY",
+  "platformBudget": "DESKTOP_AND_MOBILE",
+  "notes": "Approved 20.0 x 8.0 x 7.6 stud wide horizontal Arena Shop Bar at (43, 150, -300) facing -X toward central Queue Portal at (0, 150, -300). Features continuous 15.1-stud bar counter, 2 extended side wings, lightweight suspended blank UI-ready SignPanel (GEO_ShopKiosk_SignPanel), 4 octagonal display pads (GEO_ShopKiosk_DisplayPad_01..04), and 4 replaceable non-spherical display items (GEO_ShopKiosk_DisplayItem_01..04: Hexagonal Emblem Plate, Vertical Halo Ring, Segmented Chevron Trail Fins, Geometric Starburst Burst Prism). Display-only in Alpha; optional simple collision proxy in meshes/collision_proxy/COL_ShopKiosk_Body.obj."
+}
