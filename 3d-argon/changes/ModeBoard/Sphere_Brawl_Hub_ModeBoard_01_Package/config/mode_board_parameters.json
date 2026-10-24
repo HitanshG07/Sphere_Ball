@@ -1,0 +1,869 @@
+{
+  "asset_id": "SM_Hub_ModeBoard_01",
+  "descriptive_name": "Tactical Arena Mode Selection Command Gantry",
+  "approved_concept_archive": "Sphere_Brawl_Hub_ModeBoard_Concept_01.zip",
+  "approved_concept_sha256": "e76c211dd44fc5c36d71a546ef8e683de05923e8ee142e203173caabeeaddeb6",
+  "blender_executable_status": "NOT GENERATED \u2014 BLENDER UNAVAILABLE",
+  "live_roblox_studio_status": "NOT RUN",
+  "world_placement": {
+    "locked_position": [
+      35.0,
+      150.0,
+      -326.0
+    ],
+    "reference_floor_y": 150.0,
+    "local_pivot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "yaw_degrees": -53.39292061,
+    "yaw_radians": -0.93188189,
+    "target_cframe_luau": "CFrame.new(35, 150, -326) * CFrame.Angles(0, math.rad(-53.39292061), 0)",
+    "equivalent_lookat_luau": "CFrame.lookAt(Vector3.new(35, 150, -326), Vector3.new(0, 150, -300)) * CFrame.Angles(0, math.pi, 0)",
+    "equivalent_from_matrix_luau": "CFrame.fromMatrix(Vector3.new(35, 150, -326), Vector3.new(0.59632400, 0, 0.80274385), Vector3.new(0, 1, 0), Vector3.new(-0.80274385, 0, 0.59632400))",
+    "right_vector_world": [
+      0.596324,
+      0.0,
+      0.80274385
+    ],
+    "up_vector_world": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "front_vector_world": [
+      -0.80274385,
+      0.0,
+      0.596324
+    ],
+    "determinant": 1.0
+  },
+  "ui_ready_panels": [
+    {
+      "component_name": "GEO_ModeBoard_UIPanel_01_FFA",
+      "mode_id": "FreeForAll",
+      "display_title": "FREE-FOR-ALL",
+      "required_state": "ACTIVE",
+      "panel_plane_type": "inclined_14deg",
+      "tilt_deg_from_vertical": 14.0,
+      "local_x_span": [
+        -5.04,
+        -0.96
+      ],
+      "local_s_span": [
+        0.96,
+        4.74
+      ],
+      "local_d_span": [
+        0.22,
+        0.3
+      ],
+      "panel_width_studs": 4.08,
+      "panel_height_studs": 3.78,
+      "panel_thickness_studs": 0.08,
+      "front_face_local_center": [
+        -3.0,
+        4.48792,
+        0.48161
+      ],
+      "front_face_world_center": [
+        32.8244,
+        154.4879,
+        -328.121
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.241922,
+        0.970296
+      ],
+      "front_face_world_normal": [
+        -0.778899,
+        0.241922,
+        0.578611
+      ],
+      "clear_ui_text_zones_local_s": {
+        "top_status_pill_s": [
+          4.18,
+          4.58
+        ],
+        "center_reticle_emblem_s": [
+          2.05,
+          3.85
+        ],
+        "primary_title_band_s": [
+          1.62,
+          2.38
+        ],
+        "bottom_sublabel_band_s": [
+          1.1,
+          1.54
+        ]
+      }
+    },
+    {
+      "component_name": "GEO_ModeBoard_UIPanel_02_Duel",
+      "mode_id": "Duel",
+      "display_title": "DUEL",
+      "required_state": "COMING SOON",
+      "panel_plane_type": "inclined_14deg",
+      "tilt_deg_from_vertical": 14.0,
+      "local_x_span": [
+        0.36,
+        5.4
+      ],
+      "local_s_span": [
+        3.9,
+        5.1
+      ],
+      "local_d_span": [
+        0.05,
+        0.13
+      ],
+      "panel_width_studs": 5.04,
+      "panel_height_studs": 1.2,
+      "panel_thickness_studs": 0.08,
+      "front_face_local_center": [
+        2.88,
+        6.04778,
+        -0.08251
+      ],
+      "front_face_world_center": [
+        36.7836,
+        156.0478,
+        -323.7373
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.241922,
+        0.970296
+      ],
+      "front_face_world_normal": [
+        -0.778899,
+        0.241922,
+        0.578611
+      ],
+      "clear_ui_text_zone_local_x": [
+        1.8,
+        3.58
+      ],
+      "badge_text_zone_local_x": [
+        3.7,
+        4.82
+      ]
+    },
+    {
+      "component_name": "GEO_ModeBoard_UIPanel_03_TeamClash",
+      "mode_id": "TeamClash",
+      "display_title": "TEAM CLASH",
+      "required_state": "COMING SOON",
+      "panel_plane_type": "inclined_14deg",
+      "tilt_deg_from_vertical": 14.0,
+      "local_x_span": [
+        0.36,
+        5.4
+      ],
+      "local_s_span": [
+        2.24,
+        3.44
+      ],
+      "local_d_span": [
+        0.05,
+        0.13
+      ],
+      "panel_width_studs": 5.04,
+      "panel_height_studs": 1.2,
+      "panel_thickness_studs": 0.08,
+      "front_face_local_center": [
+        2.88,
+        4.43709,
+        0.31908
+      ],
+      "front_face_world_center": [
+        36.4613,
+        154.4371,
+        -323.4978
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.241922,
+        0.970296
+      ],
+      "front_face_world_normal": [
+        -0.778899,
+        0.241922,
+        0.578611
+      ],
+      "clear_ui_text_zone_local_x": [
+        1.8,
+        3.58
+      ],
+      "badge_text_zone_local_x": [
+        3.7,
+        4.82
+      ]
+    },
+    {
+      "component_name": "GEO_ModeBoard_UIPanel_04_KingTile",
+      "mode_id": "KingTile",
+      "display_title": "KING TILE",
+      "required_state": "COMING SOON",
+      "panel_plane_type": "inclined_14deg",
+      "tilt_deg_from_vertical": 14.0,
+      "local_x_span": [
+        0.36,
+        5.4
+      ],
+      "local_s_span": [
+        0.58,
+        1.78
+      ],
+      "local_d_span": [
+        0.05,
+        0.13
+      ],
+      "panel_width_studs": 5.04,
+      "panel_height_studs": 1.2,
+      "panel_thickness_studs": 0.08,
+      "front_face_local_center": [
+        2.88,
+        2.8264,
+        0.72067
+      ],
+      "front_face_world_center": [
+        36.1389,
+        152.8264,
+        -323.2583
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.241922,
+        0.970296
+      ],
+      "front_face_world_normal": [
+        -0.778899,
+        0.241922,
+        0.578611
+      ],
+      "clear_ui_text_zone_local_x": [
+        1.8,
+        3.58
+      ],
+      "badge_text_zone_local_x": [
+        3.7,
+        4.82
+      ]
+    },
+    {
+      "component_name": "GEO_ModeBoard_HeaderSign",
+      "mode_id": "HeaderSign",
+      "display_title": "ARENA MODE SELECT",
+      "required_state": "STATIC_HEADER",
+      "panel_plane_type": "vertical_upright",
+      "tilt_deg_from_vertical": 0.0,
+      "local_x_span": [
+        -5.74,
+        5.74
+      ],
+      "local_y_span": [
+        7.54,
+        8.36
+      ],
+      "local_z_span": [
+        0.48,
+        0.88
+      ],
+      "panel_width_studs": 11.48,
+      "panel_height_studs": 0.82,
+      "panel_thickness_studs": 0.4,
+      "front_face_local_center": [
+        0.0,
+        7.95,
+        0.88
+      ],
+      "front_face_world_center": [
+        34.2936,
+        157.95,
+        -325.4752
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        0.596324
+      ],
+      "clear_ui_text_zone_local_x": [
+        -5.4,
+        5.4
+      ]
+    }
+  ],
+  "palette": {
+    "MAT_DarkNeutral": {
+      "rgb_255": [
+        32,
+        38,
+        54
+      ],
+      "hex": "#202636",
+      "normalized_rgb": [
+        0.12549,
+        0.14902,
+        0.211765
+      ],
+      "emissive": false,
+      "metallic": 0.55,
+      "roughness": 0.42,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(32, 38, 54)",
+      "surface_role": "Dominant structural dark alloy: grounded lower anchor plinth, inclined main command matrix chassis, left/right A-frame buttress piers, overhead canopy hood, and 4 UI-ready mode panel surfaces"
+    },
+    "MAT_AltNeutral": {
+      "rgb_255": [
+        42,
+        50,
+        70
+      ],
+      "hex": "#2A3246",
+      "normalized_rgb": [
+        0.164706,
+        0.196078,
+        0.27451
+      ],
+      "emissive": false,
+      "metallic": 0.6,
+      "roughness": 0.35,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(42, 50, 70)",
+      "surface_role": "Secondary slate metallic: upper stepped plinth & walk-up threshold inlays, outer buttress cheek plates, rear diagonal spine struts, active hero surround, recessed locked bay frames, and separate UI-ready header sign panel"
+    },
+    "MAT_LightTrim": {
+      "rgb_255": [
+        170,
+        190,
+        215
+      ],
+      "hex": "#AABED7",
+      "normalized_rgb": [
+        0.666667,
+        0.745098,
+        0.843137
+      ],
+      "emissive": false,
+      "metallic": 0.78,
+      "roughness": 0.28,
+      "roblox_material": "Enum.Material.Metal",
+      "roblox_color3": "Color3.fromRGB(170, 190, 215)",
+      "surface_role": "Light metallic mechanical trim: base bumper rail & floor tie-down cleats, buttress collar clamps, central vertical divider, active bay corner chevrons, physical lockdown clamp bars, padlock reliefs, mode icon reliefs, and header sign bezel"
+    },
+    "EMI_Cyan": {
+      "rgb_255": [
+        0,
+        195,
+        255
+      ],
+      "hex": "#00C3FF",
+      "normalized_rgb": [
+        0.0,
+        0.764706,
+        1.0
+      ],
+      "emissive": true,
+      "metallic": 0.1,
+      "roughness": 0.15,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(0, 195, 255)",
+      "surface_role": "Primary active-mode accent: Free-for-All perimeter energy conduit frame, active status header pill, central sphere-clash reticle ring, left buttress conduit, left approach floor guide strip, and top visor illumination bar"
+    },
+    "EMI_Amber": {
+      "rgb_255": [
+        255,
+        170,
+        0
+      ],
+      "hex": "#FFAA00",
+      "normalized_rgb": [
+        1.0,
+        0.666667,
+        0.0
+      ],
+      "emissive": true,
+      "metallic": 0.15,
+      "roughness": 0.18,
+      "roblox_material": "Enum.Material.Neon",
+      "roblox_color3": "Color3.fromRGB(255, 170, 0)",
+      "surface_role": "Restrained Coming Soon indicators: 3 compact lock-status ticks on the right-hand disabled bays, right lower buttress tick, and right floor standby tick"
+    }
+  },
+  "measured_geometry_metrics": {
+    "triangles": 1612,
+    "vertices": 4836,
+    "normals": 1612,
+    "uvs": 5,
+    "local_bbox_min": [
+      -7.2,
+      0.0,
+      -1.9
+    ],
+    "local_bbox_max": [
+      7.2,
+      8.8,
+      1.9
+    ],
+    "local_dimensions": [
+      14.4,
+      8.8,
+      3.8
+    ],
+    "world_aabb_min": [
+      29.3702,
+      150.0,
+      -332.6738
+    ],
+    "world_aabb_max": [
+      40.6298,
+      158.8,
+      -319.332
+    ],
+    "world_aabb_dimensions": [
+      11.2595,
+      8.8,
+      13.3418
+    ],
+    "vertex_radial_min_studs": 41.761,
+    "vertex_radial_max_studs": 46.0024,
+    "degenerate_faces": 0,
+    "min_triangle_area_sq_studs": 0.00106,
+    "normal_mismatches": 0,
+    "coplanar_cross_component_overlaps": 0,
+    "total_area_3d_sq_studs": 1116.99,
+    "total_area_top_sq_studs": 298.51,
+    "glb_byte_breakdown": {
+      "total_file_size_bytes": 272664,
+      "header_bytes": 12,
+      "json_chunk_header_bytes": 8,
+      "json_chunk_payload_bytes": 20988,
+      "bin_chunk_header_bytes": 8,
+      "bin_chunk_payload_bytes": 251648
+    },
+    "col_glb_byte_breakdown": {
+      "total_file_size_bytes": 9772,
+      "header_bytes": 12,
+      "json_chunk_header_bytes": 8,
+      "json_chunk_payload_bytes": 3952,
+      "bin_chunk_header_bytes": 8,
+      "bin_chunk_payload_bytes": 5792
+    },
+    "clearances_studs": {
+      "shop_bar_z_gap_studs": 9.332,
+      "shop_bar_min_vertex_xz_distance_studs": 10.1829,
+      "queue_pad_ring_r14_radial_clearance_studs": 27.761,
+      "queue_portal_east_pylon_min_vertex_xz_distance_studs": 24.5615,
+      "main_spawn_portal_corridor_x0_lateral_clearance_studs": 29.3702,
+      "plaza_outer_curb_r63_2_radial_clearance_studs": 17.1976,
+      "plaza_outer_rim_r70_0_radial_clearance_studs": 23.9976,
+      "leaderboard_center_distance_studs": 52.0,
+      "leaderboard_estimated_envelope_clearance_studs": 42.302
+    },
+    "components": {
+      "GEO_ModeBoard_BasePlinth": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 50,
+        "vertices": 150,
+        "area_3d_sq_studs": 174.9029,
+        "area_top_sq_studs": 82.6726,
+        "bbox_min": [
+          -7.2,
+          0.0,
+          -1.9
+        ],
+        "bbox_max": [
+          7.2,
+          1.72,
+          1.9
+        ],
+        "area_3d_pct": 15.66,
+        "area_top_pct": 27.69
+      },
+      "GEO_ModeBoard_BaseUpperTier": {
+        "material": "MAT_AltNeutral",
+        "triangles": 90,
+        "vertices": 270,
+        "area_3d_sq_studs": 155.9826,
+        "area_top_sq_studs": 49.725,
+        "bbox_min": [
+          -6.85,
+          0.42,
+          -1.76
+        ],
+        "bbox_max": [
+          6.85,
+          7.45,
+          1.74
+        ],
+        "area_3d_pct": 13.96,
+        "area_top_pct": 16.66
+      },
+      "GEO_ModeBoard_MainChassis": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 28,
+        "vertices": 84,
+        "area_3d_sq_studs": 158.8646,
+        "area_top_sq_studs": 24.4604,
+        "bbox_min": [
+          -5.8,
+          1.4758,
+          -1.2097
+        ],
+        "bbox_max": [
+          5.8,
+          7.234,
+          0.8994
+        ],
+        "area_3d_pct": 14.22,
+        "area_top_pct": 8.19
+      },
+      "GEO_ModeBoard_LeftButtress": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 44,
+        "vertices": 132,
+        "area_3d_sq_studs": 62.1979,
+        "area_top_sq_studs": 6.5704,
+        "bbox_min": [
+          -7.08,
+          0.88,
+          -1.74
+        ],
+        "bbox_max": [
+          -5.82,
+          8.35,
+          1.36
+        ],
+        "area_3d_pct": 5.57,
+        "area_top_pct": 2.2
+      },
+      "GEO_ModeBoard_RightButtress": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 44,
+        "vertices": 132,
+        "area_3d_sq_studs": 62.1979,
+        "area_top_sq_studs": 6.5704,
+        "bbox_min": [
+          5.82,
+          0.88,
+          -1.74
+        ],
+        "bbox_max": [
+          7.08,
+          8.35,
+          1.36
+        ],
+        "area_3d_pct": 5.57,
+        "area_top_pct": 2.2
+      },
+      "GEO_ModeBoard_SideCollars": {
+        "material": "MAT_LightTrim",
+        "triangles": 212,
+        "vertices": 636,
+        "area_3d_sq_studs": 83.9326,
+        "area_top_sq_studs": 22.6572,
+        "bbox_min": [
+          -7.14,
+          0.02,
+          -1.88
+        ],
+        "bbox_max": [
+          7.14,
+          6.8893,
+          1.895
+        ],
+        "area_3d_pct": 7.51,
+        "area_top_pct": 7.59
+      },
+      "GEO_ModeBoard_CommandMatrixFrame": {
+        "material": "MAT_AltNeutral",
+        "triangles": 172,
+        "vertices": 516,
+        "area_3d_sq_studs": 133.8591,
+        "area_top_sq_studs": 18.6593,
+        "bbox_min": [
+          -7.2,
+          1.1,
+          -1.32
+        ],
+        "bbox_max": [
+          7.2,
+          7.2,
+          1.1226
+        ],
+        "area_3d_pct": 11.98,
+        "area_top_pct": 6.25
+      },
+      "GEO_ModeBoard_UIPanel_01_FFA": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 10,
+        "vertices": 30,
+        "area_3d_sq_studs": 16.68,
+        "area_top_sq_studs": 4.0477,
+        "bbox_min": [
+          -5.04,
+          2.6347,
+          -0.0532
+        ],
+        "bbox_max": [
+          -0.96,
+          6.3218,
+          0.9388
+        ],
+        "area_3d_pct": 1.49,
+        "area_top_pct": 1.36
+      },
+      "GEO_ModeBoard_UIPanel_02_Duel": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 10,
+        "vertices": 30,
+        "area_3d_sq_studs": 7.0464,
+        "area_top_sq_studs": 1.8544,
+        "bbox_min": [
+          0.36,
+          5.4462,
+          -0.3053
+        ],
+        "bbox_max": [
+          5.4,
+          6.63,
+          0.0626
+        ],
+        "area_3d_pct": 0.63,
+        "area_top_pct": 0.62
+      },
+      "GEO_ModeBoard_UIPanel_03_TeamClash": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 10,
+        "vertices": 30,
+        "area_3d_sq_studs": 7.0464,
+        "area_top_sq_studs": 1.8544,
+        "bbox_min": [
+          0.36,
+          3.8356,
+          0.0963
+        ],
+        "bbox_max": [
+          5.4,
+          5.0193,
+          0.4642
+        ],
+        "area_3d_pct": 0.63,
+        "area_top_pct": 0.62
+      },
+      "GEO_ModeBoard_UIPanel_04_KingTile": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 10,
+        "vertices": 30,
+        "area_3d_sq_studs": 7.0464,
+        "area_top_sq_studs": 1.8544,
+        "bbox_min": [
+          0.36,
+          2.2249,
+          0.4979
+        ],
+        "bbox_max": [
+          5.4,
+          3.4086,
+          0.8658
+        ],
+        "area_3d_pct": 0.63,
+        "area_top_pct": 0.62
+      },
+      "GEO_ModeBoard_HeaderCanopy": {
+        "material": "MAT_DarkNeutral",
+        "triangles": 50,
+        "vertices": 150,
+        "area_3d_sq_studs": 112.661,
+        "area_top_sq_studs": 45.2744,
+        "bbox_min": [
+          -6.8,
+          7.45,
+          -1.55
+        ],
+        "bbox_max": [
+          6.8,
+          8.8,
+          0.48
+        ],
+        "area_3d_pct": 10.09,
+        "area_top_pct": 15.17
+      },
+      "GEO_ModeBoard_HeaderSign": {
+        "material": "MAT_AltNeutral",
+        "triangles": 8,
+        "vertices": 24,
+        "area_3d_sq_studs": 19.4832,
+        "area_top_sq_studs": 0.0,
+        "bbox_min": [
+          -5.74,
+          7.54,
+          0.48
+        ],
+        "bbox_max": [
+          5.74,
+          8.36,
+          0.88
+        ],
+        "area_3d_pct": 1.74,
+        "area_top_pct": 0.0
+      },
+      "GEO_ModeBoard_ActiveModeReticle": {
+        "material": "MAT_LightTrim",
+        "triangles": 162,
+        "vertices": 486,
+        "area_3d_sq_studs": 19.495,
+        "area_top_sq_studs": 4.4797,
+        "bbox_min": [
+          -5.6,
+          2.1349,
+          -0.1742
+        ],
+        "bbox_max": [
+          -0.4,
+          6.9087,
+          1.249
+        ],
+        "area_3d_pct": 1.75,
+        "area_top_pct": 1.5
+      },
+      "GEO_ModeBoard_LockReliefs": {
+        "material": "MAT_LightTrim",
+        "triangles": 270,
+        "vertices": 810,
+        "area_3d_sq_studs": 15.6318,
+        "area_top_sq_studs": 3.0161,
+        "bbox_min": [
+          0.16,
+          2.186,
+          -0.2422
+        ],
+        "bbox_max": [
+          5.6,
+          6.7196,
+          1.0065
+        ],
+        "area_3d_pct": 1.4,
+        "area_top_pct": 1.01
+      },
+      "GEO_ModeBoard_ModeReliefs": {
+        "material": "MAT_LightTrim",
+        "triangles": 194,
+        "vertices": 582,
+        "area_3d_sq_studs": 55.6932,
+        "area_top_sq_studs": 18.6957,
+        "bbox_min": [
+          -6.04,
+          1.7034,
+          -0.4747
+        ],
+        "bbox_max": [
+          6.04,
+          8.52,
+          1.1008
+        ],
+        "area_3d_pct": 4.99,
+        "area_top_pct": 6.26
+      },
+      "GEO_ModeBoard_CyanAccents": {
+        "material": "EMI_Cyan",
+        "triangles": 198,
+        "vertices": 594,
+        "area_3d_sq_studs": 23.0323,
+        "area_top_sq_studs": 5.7933,
+        "bbox_min": [
+          -6.58,
+          0.42,
+          -0.0968
+        ],
+        "bbox_max": [
+          6.58,
+          8.74,
+          1.84
+        ],
+        "area_3d_pct": 2.06,
+        "area_top_pct": 1.94
+      },
+      "GEO_ModeBoard_AmberAccents": {
+        "material": "EMI_Amber",
+        "triangles": 50,
+        "vertices": 150,
+        "area_3d_sq_studs": 1.2396,
+        "area_top_sq_studs": 0.3266,
+        "bbox_min": [
+          1.8,
+          0.42,
+          -0.0339
+        ],
+        "bbox_max": [
+          6.58,
+          6.2369,
+          1.82
+        ],
+        "area_3d_pct": 0.11,
+        "area_top_pct": 0.11
+      }
+    },
+    "material_summary": {
+      "MAT_DarkNeutral": {
+        "triangles": 256,
+        "area_3d_sq_studs": 608.6436,
+        "area_top_sq_studs": 175.159,
+        "area_3d_pct": 54.49,
+        "area_top_pct": 58.68
+      },
+      "MAT_AltNeutral": {
+        "triangles": 270,
+        "area_3d_sq_studs": 309.3249,
+        "area_top_sq_studs": 68.3843,
+        "area_3d_pct": 27.69,
+        "area_top_pct": 22.91
+      },
+      "MAT_LightTrim": {
+        "triangles": 838,
+        "area_3d_sq_studs": 174.7526,
+        "area_top_sq_studs": 48.8486,
+        "area_3d_pct": 15.64,
+        "area_top_pct": 16.36
+      },
+      "EMI_Cyan": {
+        "triangles": 198,
+        "area_3d_sq_studs": 23.0323,
+        "area_top_sq_studs": 5.7933,
+        "area_3d_pct": 2.06,
+        "area_top_pct": 1.94
+      },
+      "EMI_Amber": {
+        "triangles": 50,
+        "area_3d_sq_studs": 1.2396,
+        "area_top_sq_studs": 0.3266,
+        "area_3d_pct": 0.11,
+        "area_top_pct": 0.11
+      }
+    }
+  },
+  "repository_manifest_entry": {
+    "id": "hub.station.mode_board",
+    "name": "SM_Hub_ModeBoard_01",
+    "kind": "model",
+    "status": "EXPORTED",
+    "destination": "Workspace.KineticHub.Stations.SM_Hub_ModeBoard_01",
+    "source": "3d-argon/changes/7/Sphere_Brawl_Hub_ModeBoard_01_Package/scripts/generate_mode_board_blender.py",
+    "rightsStatus": "ORIGINAL_GENERATED",
+    "robloxAssetId": null,
+    "triangles": 1612,
+    "textureResolution": "64x64",
+    "collision": "VISUAL_ONLY",
+    "platformBudget": "DESKTOP_AND_MOBILE",
+    "notes": "Physical four-mode selection command gantry at (35, 150, -326) oriented radially inward toward Hub center (0, 150, -300) via CFrame.new(35, 150, -326) * CFrame.Angles(0, math.rad(-53.39292061), 0). Local envelope 14.4000(W) x 3.8000(D) x 8.8000(H) studs with 14.0-degree inclined command matrix. Contains 18 named components including 5 separate flat UI-ready replaceable surfaces (GEO_ModeBoard_UIPanel_01_FFA, GEO_ModeBoard_UIPanel_02_Duel, GEO_ModeBoard_UIPanel_03_TeamClash, GEO_ModeBoard_UIPanel_04_KingTile, GEO_ModeBoard_HeaderSign) with zero baked text, plus optional 36-triangle collision proxy COL_ModeBoard_Body."
+  }
+}

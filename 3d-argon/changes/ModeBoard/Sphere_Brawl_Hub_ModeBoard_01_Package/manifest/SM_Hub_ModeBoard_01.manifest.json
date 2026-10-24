@@ -1,0 +1,15 @@
+{
+  "id": "hub.station.mode_board",
+  "name": "SM_Hub_ModeBoard_01",
+  "kind": "model",
+  "status": "EXPORTED",
+  "destination": "Workspace.KineticHub.Stations.SM_Hub_ModeBoard_01",
+  "source": "3d-argon/changes/7/Sphere_Brawl_Hub_ModeBoard_01_Package/scripts/generate_mode_board_blender.py",
+  "rightsStatus": "ORIGINAL_GENERATED",
+  "robloxAssetId": null,
+  "triangles": 1612,
+  "textureResolution": "64x64",
+  "collision": "VISUAL_ONLY",
+  "platformBudget": "DESKTOP_AND_MOBILE",
+  "notes": "Physical four-mode selection command gantry at (35, 150, -326) oriented radially inward toward Hub center (0, 150, -300) via CFrame.new(35, 150, -326) * CFrame.Angles(0, math.rad(-53.39292061), 0). Local envelope 14.4000(W) x 3.8000(D) x 8.8000(H) studs with 14.0-degree inclined command matrix. Contains 18 named components including 5 separate flat UI-ready replaceable surfaces (GEO_ModeBoard_UIPanel_01_FFA, GEO_ModeBoard_UIPanel_02_Duel, GEO_ModeBoard_UIPanel_03_TeamClash, GEO_ModeBoard_UIPanel_04_KingTile, GEO_ModeBoard_HeaderSign) with zero baked text, plus optional 36-triangle collision proxy COL_ModeBoard_Body."
+}
