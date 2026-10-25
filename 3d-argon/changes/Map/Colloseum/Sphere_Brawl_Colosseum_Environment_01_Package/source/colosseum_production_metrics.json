@@ -1,0 +1,879 @@
+{
+  "asset_id": "SM_ArenaEnvironment_Colosseum_01",
+  "phase": "Phase 2 \u2014 Final High-Detail Production Kit",
+  "approved_concept_02_zip_sha256": "78a010a3d194f4c2b4577265c4628d8266e7bc7323efa32a5082bae4934b85d4",
+  "blender_binary_status": "NOT GENERATED \u2014 BLENDER UNAVAILABLE",
+  "scale_convention": "1 Blender unit = 1 Roblox stud",
+  "world_origin": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "locked_arena_grid": {
+    "center": [
+      0.0,
+      50.0,
+      0.0
+    ],
+    "grid_cells": [
+      9,
+      9
+    ],
+    "tile_count": 81,
+    "tile_pitch_studs": 12.0,
+    "footprint_studs": [
+      108.0,
+      108.0
+    ],
+    "visual_tile_studs": [
+      11.8,
+      2.0,
+      11.8
+    ],
+    "collision_tile_studs": [
+      12.0,
+      2.0,
+      12.0
+    ],
+    "top_surface_world_y": 51.0,
+    "sphere_diameter_studs": 6.0,
+    "void_elimination_threshold_world_y": 15.0,
+    "grid_corner_radius_studs": 76.3675
+  },
+  "previous_concept_02_triangles": 186588,
+  "total_unique_archetype_triangles": 30888,
+  "total_instantiated_scene_triangles": 283768,
+  "total_instantiated_scene_vertices": 851304,
+  "additional_connector_or_trim_triangles": 0,
+  "archetypes": {
+    "UMOD_01_Standard_Window_Bay": {
+      "unique_triangles": 6018,
+      "unique_vertices": 18054,
+      "instances_in_full_colosseum": 12,
+      "instantiated_triangles_total": 72216,
+      "local_bbox_min": [
+        -9.6656,
+        -32.94,
+        -26.2325
+      ],
+      "local_bbox_max": [
+        8.773,
+        63.6,
+        3.728
+      ],
+      "under_20k_limit": true
+    },
+    "UMOD_02_Standard_Clipeus_Bay": {
+      "unique_triangles": 5982,
+      "unique_vertices": 17946,
+      "instances_in_full_colosseum": 20,
+      "instantiated_triangles_total": 119640,
+      "local_bbox_min": [
+        -9.6878,
+        -32.94,
+        -26.2243
+      ],
+      "local_bbox_max": [
+        8.78,
+        63.6,
+        3.7276
+      ],
+      "under_20k_limit": true
+    },
+    "UMOD_03_Vomitorium_Cavea_Bay": {
+      "unique_triangles": 6712,
+      "unique_vertices": 20136,
+      "instances_in_full_colosseum": 8,
+      "instantiated_triangles_total": 53696,
+      "local_bbox_min": [
+        -9.5903,
+        -32.94,
+        -26.2443
+      ],
+      "local_bbox_max": [
+        8.7193,
+        63.6,
+        3.7269
+      ],
+      "under_20k_limit": true
+    },
+    "UMOD_04_Cardinal_Triumphal_Gate_Pavilion": {
+      "unique_triangles": 8680,
+      "unique_vertices": 26040,
+      "instances_in_full_colosseum": 4,
+      "instantiated_triangles_total": 34720,
+      "local_bbox_min": [
+        -17.4905,
+        -32.94,
+        -16.8384
+      ],
+      "local_bbox_max": [
+        17.4905,
+        63.5,
+        16.0917
+      ],
+      "under_20k_limit": true
+    },
+    "UMOD_05_North_Imperial_Reactor_Crest": {
+      "unique_triangles": 3496,
+      "unique_vertices": 10488,
+      "instances_in_full_colosseum": 1,
+      "instantiated_triangles_total": 3496,
+      "local_bbox_min": [
+        -10.2,
+        0.0,
+        -8.56
+      ],
+      "local_bbox_max": [
+        10.2,
+        10.5,
+        8.5
+      ],
+      "under_20k_limit": true
+    }
+  },
+  "base_architecture_groups": {
+    "COL_ExteriorArcade": 34880,
+    "COL_ColumnOrders": 70880,
+    "COL_StoneMasonry": 67328,
+    "COL_CaveaSeating": 44240,
+    "COL_Vomitoria": 6672,
+    "COL_AtticCornice": 22320,
+    "COL_GateTowers": 33952,
+    "COL_NorthReactorCrest": 3496
+  },
+  "import_safe_section_meshparts_count": 33,
+  "max_section_meshpart_triangles": 16832,
+  "all_section_meshparts_under_20k": true,
+  "section_meshparts": {
+    "COL_StoneMasonry_Q1": {
+      "triangles": 16832,
+      "vertices": 50496,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        0.0,
+        18.06,
+        0.0
+      ],
+      "bbox_max": [
+        128.0,
+        109.2,
+        134.0
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ExteriorArcade_Q1": {
+      "triangles": 8720,
+      "vertices": 26160,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        15.6134,
+        59.25,
+        16.4927
+      ],
+      "bbox_max": [
+        125.548,
+        96.8778,
+        131.516
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ColumnOrders_O1": {
+      "triangles": 8860,
+      "vertices": 26580,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        98.661,
+        51.0,
+        16.0656
+      ],
+      "bbox_max": [
+        126.4584,
+        109.2,
+        82.1218
+      ],
+      "under_20k_limit": true
+    },
+    "COL_AtticCornice_Q1": {
+      "triangles": 5580,
+      "vertices": 16740,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        15.7292,
+        65.6,
+        16.5537
+      ],
+      "bbox_max": [
+        126.561,
+        114.6,
+        132.5113
+      ],
+      "under_20k_limit": true
+    },
+    "COL_CaveaSeating_Q1": {
+      "triangles": 11060,
+      "vertices": 33180,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        12.7916,
+        51.0,
+        13.5747
+      ],
+      "bbox_max": [
+        125.4178,
+        109.2,
+        131.3664
+      ],
+      "under_20k_limit": true
+    },
+    "COL_Vomitoria_Q1": {
+      "triangles": 1668,
+      "vertices": 5004,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        14.4362,
+        73.8,
+        15.2194
+      ],
+      "bbox_max": [
+        112.3307,
+        82.3427,
+        118.2794
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ColumnOrders_O2": {
+      "triangles": 8860,
+      "vertices": 26580,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        31.2208,
+        51.0,
+        92.1329
+      ],
+      "bbox_max": [
+        90.7503,
+        109.2,
+        129.0965
+      ],
+      "under_20k_limit": true
+    },
+    "COL_StoneMasonry_Q2": {
+      "triangles": 16832,
+      "vertices": 50496,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -128.0,
+        18.06,
+        0.0
+      ],
+      "bbox_max": [
+        0.0,
+        109.2,
+        134.0
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ExteriorArcade_Q2": {
+      "triangles": 8720,
+      "vertices": 26160,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -125.5592,
+        59.25,
+        16.4337
+      ],
+      "bbox_max": [
+        -15.6721,
+        96.8778,
+        131.5038
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ColumnOrders_O3": {
+      "triangles": 8860,
+      "vertices": 26580,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -78.5555,
+        51.0,
+        103.3449
+      ],
+      "bbox_max": [
+        -15.3125,
+        109.2,
+        132.414
+      ],
+      "under_20k_limit": true
+    },
+    "COL_AtticCornice_Q2": {
+      "triangles": 5580,
+      "vertices": 16740,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -126.561,
+        65.6,
+        16.5537
+      ],
+      "bbox_max": [
+        -15.7292,
+        114.6,
+        132.5113
+      ],
+      "under_20k_limit": true
+    },
+    "COL_CaveaSeating_Q2": {
+      "triangles": 11060,
+      "vertices": 33180,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -125.4178,
+        51.0,
+        13.5747
+      ],
+      "bbox_max": [
+        -12.7916,
+        109.2,
+        131.3664
+      ],
+      "under_20k_limit": true
+    },
+    "COL_Vomitoria_Q2": {
+      "triangles": 1668,
+      "vertices": 5004,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -112.3307,
+        73.8,
+        15.2194
+      ],
+      "bbox_max": [
+        -14.4362,
+        82.3624,
+        118.2794
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ColumnOrders_O4": {
+      "triangles": 8860,
+      "vertices": 26580,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -123.2941,
+        51.0,
+        32.7436
+      ],
+      "bbox_max": [
+        -87.9665,
+        109.2,
+        94.9067
+      ],
+      "under_20k_limit": true
+    },
+    "COL_StoneMasonry_Q3": {
+      "triangles": 16832,
+      "vertices": 50496,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -128.0,
+        18.06,
+        -134.0
+      ],
+      "bbox_max": [
+        -0.0,
+        109.2,
+        0.0
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ExteriorArcade_Q3": {
+      "triangles": 8720,
+      "vertices": 26160,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -125.548,
+        59.25,
+        -131.516
+      ],
+      "bbox_max": [
+        -15.6134,
+        96.8778,
+        -16.4927
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ColumnOrders_O5": {
+      "triangles": 8860,
+      "vertices": 26580,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -126.4584,
+        51.0,
+        -82.1218
+      ],
+      "bbox_max": [
+        -98.661,
+        109.2,
+        -16.0656
+      ],
+      "under_20k_limit": true
+    },
+    "COL_AtticCornice_Q3": {
+      "triangles": 5580,
+      "vertices": 16740,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -126.561,
+        65.6,
+        -132.5113
+      ],
+      "bbox_max": [
+        -15.7292,
+        114.6,
+        -16.5537
+      ],
+      "under_20k_limit": true
+    },
+    "COL_CaveaSeating_Q3": {
+      "triangles": 11060,
+      "vertices": 33180,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -125.4178,
+        51.0,
+        -131.3664
+      ],
+      "bbox_max": [
+        -12.7916,
+        109.2,
+        -13.5747
+      ],
+      "under_20k_limit": true
+    },
+    "COL_Vomitoria_Q3": {
+      "triangles": 1668,
+      "vertices": 5004,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -112.3307,
+        73.8,
+        -118.2794
+      ],
+      "bbox_max": [
+        -14.4362,
+        82.3427,
+        -15.2194
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ColumnOrders_O6": {
+      "triangles": 8860,
+      "vertices": 26580,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -90.7503,
+        51.0,
+        -129.0965
+      ],
+      "bbox_max": [
+        -31.2208,
+        109.2,
+        -92.1329
+      ],
+      "under_20k_limit": true
+    },
+    "COL_StoneMasonry_Q4": {
+      "triangles": 16832,
+      "vertices": 50496,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -0.0,
+        18.06,
+        -134.0
+      ],
+      "bbox_max": [
+        128.0,
+        109.2,
+        -0.0
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ExteriorArcade_Q4": {
+      "triangles": 8720,
+      "vertices": 26160,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        15.6721,
+        59.25,
+        -131.5038
+      ],
+      "bbox_max": [
+        125.5592,
+        96.8778,
+        -16.4337
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ColumnOrders_O7": {
+      "triangles": 8860,
+      "vertices": 26580,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        15.3125,
+        51.0,
+        -132.414
+      ],
+      "bbox_max": [
+        78.5555,
+        109.2,
+        -103.3449
+      ],
+      "under_20k_limit": true
+    },
+    "COL_AtticCornice_Q4": {
+      "triangles": 5580,
+      "vertices": 16740,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        15.7292,
+        65.6,
+        -132.5113
+      ],
+      "bbox_max": [
+        126.561,
+        114.6,
+        -16.5537
+      ],
+      "under_20k_limit": true
+    },
+    "COL_CaveaSeating_Q4": {
+      "triangles": 11060,
+      "vertices": 33180,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        12.7916,
+        51.0,
+        -131.3664
+      ],
+      "bbox_max": [
+        125.4178,
+        109.2,
+        -13.5747
+      ],
+      "under_20k_limit": true
+    },
+    "COL_Vomitoria_Q4": {
+      "triangles": 1668,
+      "vertices": 5004,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        14.4362,
+        73.8,
+        -118.2794
+      ],
+      "bbox_max": [
+        112.3307,
+        82.3624,
+        -15.2194
+      ],
+      "under_20k_limit": true
+    },
+    "COL_ColumnOrders_O8": {
+      "triangles": 8860,
+      "vertices": 26580,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        87.9665,
+        51.0,
+        -94.9067
+      ],
+      "bbox_max": [
+        123.2941,
+        109.2,
+        -32.7436
+      ],
+      "under_20k_limit": true
+    },
+    "COL_GateTower_East": {
+      "triangles": 8488,
+      "vertices": 25464,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        97.9083,
+        48.8,
+        -14.26
+      ],
+      "bbox_max": [
+        130.0917,
+        114.5,
+        14.26
+      ],
+      "under_20k_limit": true
+    },
+    "COL_GateTower_South": {
+      "triangles": 8488,
+      "vertices": 25464,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -14.26,
+        48.8,
+        103.9083
+      ],
+      "bbox_max": [
+        14.26,
+        114.5,
+        136.0917
+      ],
+      "under_20k_limit": true
+    },
+    "COL_GateTower_West": {
+      "triangles": 8488,
+      "vertices": 25464,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -130.0917,
+        48.8,
+        -14.26
+      ],
+      "bbox_max": [
+        -97.9083,
+        114.5,
+        14.26
+      ],
+      "under_20k_limit": true
+    },
+    "COL_GateTower_North": {
+      "triangles": 8488,
+      "vertices": 25464,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -14.26,
+        48.8,
+        -136.0917
+      ],
+      "bbox_max": [
+        14.26,
+        114.5,
+        -103.9083
+      ],
+      "under_20k_limit": true
+    },
+    "COL_NorthReactorCrest": {
+      "triangles": 3496,
+      "vertices": 10488,
+      "world_pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -10.2,
+        114.5,
+        -128.5
+      ],
+      "bbox_max": [
+        10.2,
+        125.0,
+        -111.44
+      ],
+      "under_20k_limit": true
+    }
+  },
+  "world_bbox_min": [
+    -130.0917,
+    18.06,
+    -136.0917
+  ],
+  "world_bbox_max": [
+    130.0917,
+    125.0,
+    136.0917
+  ],
+  "world_dimensions_studs": [
+    260.1834,
+    106.94,
+    272.1834
+  ],
+  "inner_ellipse_axes_studs": {
+    "rx": 98.0,
+    "rz": 104.0
+  },
+  "outer_ellipse_axes_studs": {
+    "rx": 128.0,
+    "rz": 134.0
+  },
+  "radial_min_studs": 98.0,
+  "radial_max_studs": 136.6984,
+  "clearances_to_locked_108x108_grid_studs": {
+    "cardinal_east_west_x_gap": 44.0,
+    "cardinal_north_south_z_gap": 50.0,
+    "diagonal_45deg_radial_gap": 24.4994,
+    "min_euclidean_distance_from_grid_corners": 24.8145,
+    "vertices_intruding_into_inner_ellipse": 0,
+    "lowest_y_above_void_threshold_y15": 3.06
+  },
+  "material_area_sq_studs": {
+    "MAT_TravertineLight": 194077.42,
+    "MAT_TravertineWarm": 340017.69,
+    "MAT_LimestoneCream": 21312.77,
+    "MAT_TuffFoundation": 122605.5,
+    "MAT_BasaltShadow": 24448.8,
+    "MAT_ImperialMarble": 79949.5,
+    "MAT_BronzeClipeus": 1091.71,
+    "MAT_DarkNeutral": 3713.36,
+    "MAT_AltNeutral": 367.6,
+    "MAT_LightTrim": 318.24,
+    "EMI_Cyan": 1853.53,
+    "EMI_Amber": 8.12
+  },
+  "material_area_pct": {
+    "MAT_TravertineLight": 24.57,
+    "MAT_TravertineWarm": 43.05,
+    "MAT_LimestoneCream": 2.7,
+    "MAT_TuffFoundation": 15.52,
+    "MAT_BasaltShadow": 3.1,
+    "MAT_ImperialMarble": 10.12,
+    "MAT_BronzeClipeus": 0.14,
+    "MAT_DarkNeutral": 0.47,
+    "MAT_AltNeutral": 0.05,
+    "MAT_LightTrim": 0.04,
+    "EMI_Cyan": 0.23,
+    "EMI_Amber": 0.0
+  },
+  "emissive_total_pct": 0.23,
+  "texture_atlas": {
+    "path": "textures/T_Colosseum_Production_Atlas_512.png",
+    "resolution": [
+      512,
+      512
+    ]
+  }
+}

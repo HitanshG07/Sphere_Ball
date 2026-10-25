@@ -1,0 +1,540 @@
+{
+  "asset": {
+    "version": "2.0",
+    "generator": "SphereBrawl_Colosseum_Concept02_Generator"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "SM_ArenaEnvironment_Colosseum_01_Concept02",
+      "nodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "COL_ExteriorArcade",
+      "mesh": 0
+    },
+    {
+      "name": "COL_ColumnOrders",
+      "mesh": 1
+    },
+    {
+      "name": "COL_StoneMasonry",
+      "mesh": 2
+    },
+    {
+      "name": "COL_CaveaSeating",
+      "mesh": 3
+    },
+    {
+      "name": "COL_Vomitoria",
+      "mesh": 4
+    },
+    {
+      "name": "COL_AtticCornice",
+      "mesh": 5
+    },
+    {
+      "name": "COL_GateTowers",
+      "mesh": 6
+    },
+    {
+      "name": "COL_NorthReactorCrest",
+      "mesh": 7
+    }
+  ],
+  "meshes": [
+    {
+      "name": "COL_ExteriorArcade",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "COLOR_0": 2
+          },
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "COL_ColumnOrders",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 3,
+            "NORMAL": 4,
+            "COLOR_0": 5
+          },
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "COL_StoneMasonry",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 6,
+            "NORMAL": 7,
+            "COLOR_0": 8
+          },
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "COL_CaveaSeating",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 9,
+            "NORMAL": 10,
+            "COLOR_0": 11
+          },
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "COL_Vomitoria",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 12,
+            "NORMAL": 13,
+            "COLOR_0": 14
+          },
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "COL_AtticCornice",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 15,
+            "NORMAL": 16,
+            "COLOR_0": 17
+          },
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "COL_GateTowers",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 18,
+            "NORMAL": 19,
+            "COLOR_0": 20
+          },
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "COL_NorthReactorCrest",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 21,
+            "NORMAL": 22,
+            "COLOR_0": 23
+          },
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 104640,
+      "type": "VEC3",
+      "min": [
+        -125.55919647216797,
+        59.25,
+        -131.5160369873047
+      ],
+      "max": [
+        125.55919647216797,
+        96.8778305053711,
+        131.5160369873047
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 104640,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 104640,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 91920,
+      "type": "VEC3",
+      "min": [
+        -126.44932556152344,
+        51.0,
+        -132.40476989746094
+      ],
+      "max": [
+        126.44932556152344,
+        109.19999694824219,
+        132.40476989746094
+      ]
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 91920,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 91920,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 109824,
+      "type": "VEC3",
+      "min": [
+        -128.0,
+        18.059999465942383,
+        -134.0
+      ],
+      "max": [
+        128.0,
+        109.19999694824219,
+        134.0
+      ]
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5126,
+      "count": 109824,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 8,
+      "componentType": 5126,
+      "count": 109824,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 9,
+      "componentType": 5126,
+      "count": 90240,
+      "type": "VEC3",
+      "min": [
+        -125.41777801513672,
+        51.0,
+        -131.36643981933594
+      ],
+      "max": [
+        125.41777801513672,
+        109.19999694824219,
+        131.36643981933594
+      ]
+    },
+    {
+      "bufferView": 10,
+      "componentType": 5126,
+      "count": 90240,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 11,
+      "componentType": 5126,
+      "count": 90240,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 12,
+      "componentType": 5126,
+      "count": 29280,
+      "type": "VEC3",
+      "min": [
+        -112.57167053222656,
+        73.80000305175781,
+        -118.48747253417969
+      ],
+      "max": [
+        112.57167053222656,
+        82.38968658447266,
+        118.48747253417969
+      ]
+    },
+    {
+      "bufferView": 13,
+      "componentType": 5126,
+      "count": 29280,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 14,
+      "componentType": 5126,
+      "count": 29280,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 15,
+      "componentType": 5126,
+      "count": 66960,
+      "type": "VEC3",
+      "min": [
+        -126.56097412109375,
+        65.5999984741211,
+        -132.51126098632812
+      ],
+      "max": [
+        126.56097412109375,
+        114.5999984741211,
+        132.51126098632812
+      ]
+    },
+    {
+      "bufferView": 16,
+      "componentType": 5126,
+      "count": 66960,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 17,
+      "componentType": 5126,
+      "count": 66960,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 18,
+      "componentType": 5126,
+      "count": 61488,
+      "type": "VEC3",
+      "min": [
+        -130.02479553222656,
+        48.79999923706055,
+        -136.02479553222656
+      ],
+      "max": [
+        130.02479553222656,
+        114.5,
+        136.02479553222656
+      ]
+    },
+    {
+      "bufferView": 19,
+      "componentType": 5126,
+      "count": 61488,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 20,
+      "componentType": 5126,
+      "count": 61488,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 21,
+      "componentType": 5126,
+      "count": 5412,
+      "type": "VEC3",
+      "min": [
+        -10.199999809265137,
+        114.5,
+        -128.5
+      ],
+      "max": [
+        10.199999809265137,
+        125.0,
+        -111.44000244140625
+      ]
+    },
+    {
+      "bufferView": 22,
+      "componentType": 5126,
+      "count": 5412,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 23,
+      "componentType": 5126,
+      "count": 5412,
+      "type": "VEC3"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 1255680,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1255680,
+      "byteLength": 1255680,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 2511360,
+      "byteLength": 1255680,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 3767040,
+      "byteLength": 1103040,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 4870080,
+      "byteLength": 1103040,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 5973120,
+      "byteLength": 1103040,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 7076160,
+      "byteLength": 1317888,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 8394048,
+      "byteLength": 1317888,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 9711936,
+      "byteLength": 1317888,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 11029824,
+      "byteLength": 1082880,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 12112704,
+      "byteLength": 1082880,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 13195584,
+      "byteLength": 1082880,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 14278464,
+      "byteLength": 351360,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 14629824,
+      "byteLength": 351360,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 14981184,
+      "byteLength": 351360,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 15332544,
+      "byteLength": 803520,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 16136064,
+      "byteLength": 803520,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 16939584,
+      "byteLength": 803520,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 17743104,
+      "byteLength": 737856,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 18480960,
+      "byteLength": 737856,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 19218816,
+      "byteLength": 737856,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 19956672,
+      "byteLength": 64944,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 20021616,
+      "byteLength": 64944,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 20086560,
+      "byteLength": 64944,
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 20151504,
+      "uri": "SM_ArenaEnvironment_Colosseum_01.bin"
+    }
+  ]
+}

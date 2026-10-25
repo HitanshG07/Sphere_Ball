@@ -1,0 +1,109 @@
+# Sphere Brawl: Rolling Rampage — SM_ArenaEnvironment_Colosseum_01 Production Material Library
+newmtl MAT_TravertineLight
+Kd 0.8392 0.7765 0.6745
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_TravertineWarm
+Kd 0.7686 0.6980 0.5882
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_LimestoneCream
+Kd 0.8000 0.7529 0.6745
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_TuffFoundation
+Kd 0.5176 0.4784 0.4235
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_BasaltShadow
+Kd 0.2275 0.2353 0.2667
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_ImperialMarble
+Kd 0.9098 0.8784 0.8235
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_BronzeClipeus
+Kd 0.6902 0.5569 0.3451
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_DarkNeutral
+Kd 0.1255 0.1490 0.2118
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_AltNeutral
+Kd 0.1647 0.1961 0.2745
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl MAT_LightTrim
+Kd 0.6667 0.7451 0.8431
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.0000 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl EMI_Cyan
+Kd 0.0000 0.7647 1.0000
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 0.0000 0.7600 1.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+
+newmtl EMI_Amber
+Kd 1.0000 0.6667 0.0000
+Ka 0.1500 0.1500 0.1500
+Ks 0.2200 0.2200 0.2200
+Ke 1.0000 0.6700 0.0000
+Ns 36.0
+d 1.0
+map_Kd ../textures/T_Colosseum_Production_Atlas_512.png
+

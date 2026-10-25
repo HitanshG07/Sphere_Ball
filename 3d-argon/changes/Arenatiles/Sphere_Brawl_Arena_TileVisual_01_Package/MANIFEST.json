@@ -1,0 +1,297 @@
+{
+  "package_name": "Sphere_Brawl_Arena_TileVisual_01_Package",
+  "asset_id": "SM_Arena_TileVisual_01",
+  "project": "Sphere Brawl: Rolling Rampage",
+  "repository": "HitanshG07/Sphere_Ball",
+  "branch": "3d_mesh",
+  "phase": "Phase 2 \u2014 Final Production Geometry and Asset Package",
+  "approved_concept_archive": "Sphere_Brawl_Arena_TileVisual_Concept_01.zip",
+  "approved_concept_sha256": "fe40cd09419b86b915a896c90d37b3ea8978e0607bb4171c0a13bbc3b1b714d7",
+  "repository_handoff_path": "3d-argon/changes/9/Sphere_Brawl_Arena_TileVisual_01_Package",
+  "scale_convention": "1 Blender unit = 1.0 Roblox stud",
+  "geometry_summary": {
+    "base_tile_dimensions_studs": [
+      11.8,
+      2.0,
+      11.8
+    ],
+    "base_tile_local_origin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "base_tile_local_bounds_min": [
+      -5.9,
+      -1.0,
+      -5.9
+    ],
+    "base_tile_local_bounds_max": [
+      5.9,
+      1.0,
+      5.9
+    ],
+    "base_tile_triangles": 152,
+    "base_tile_vertices": 456,
+    "overlay_dimensions_studs": [
+      11.4,
+      0.05,
+      11.4
+    ],
+    "overlay_local_bounds_min": [
+      -5.7,
+      1.0,
+      -5.7
+    ],
+    "overlay_local_bounds_max": [
+      5.7,
+      1.05,
+      5.7
+    ],
+    "max_combined_cell_state_triangles": 224,
+    "per_cell_triangle_budget_cap": 249
+  },
+  "payload_file_count": 48,
+  "total_payload_bytes": 2689698,
+  "files": [
+    {
+      "path": "INTEGRATION_REPORT.md",
+      "size_bytes": 7198,
+      "sha256": "a30db4e583b98140fd6b875061b7d7272c13bd6cb72b7e5e3ae0ac8e6432e9ec"
+    },
+    {
+      "path": "MODEL_SPECIFICATION.md",
+      "size_bytes": 11157,
+      "sha256": "19e142e0a038ff6d4f5f677f020c026fd840caa7914fb305712131d4c7ba735b"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 11776,
+      "sha256": "f24029371cf45c93d353f5322d8542d72544d12b2875ce3d1e7143bdb93bd820"
+    },
+    {
+      "path": "ROBLOX_STUDIO_IMPORT_GUIDE.md",
+      "size_bytes": 9546,
+      "sha256": "13c1520eadd0b781fd8196652aa572b3d9a5bb0504cfb06c7ae30de613c4c9c1"
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "size_bytes": 13406,
+      "sha256": "a156c9b88d79dd85c750d85aec49c152bf80373d4841fca004a8030ac62cbf47"
+    },
+    {
+      "path": "meshes/SM_Arena_TileVisual_01_VariantA.glb",
+      "size_bytes": 31012,
+      "sha256": "a8923466bb4f67db2cc23208384608076790780c3b7ecf6933d9510fd3909b65"
+    },
+    {
+      "path": "meshes/SM_Arena_TileVisual_01_VariantA.mtl",
+      "size_bytes": 887,
+      "sha256": "e8acf4196214cb88f2b015b68bb8b62c9d5185ea272abf577b04e99848bf5e34"
+    },
+    {
+      "path": "meshes/SM_Arena_TileVisual_01_VariantA.obj",
+      "size_bytes": 31522,
+      "sha256": "10348eaea22096e32a909331fd93575833034f9d36cff4c7c09a5ec96d253b82"
+    },
+    {
+      "path": "meshes/SM_Arena_TileVisual_01_VariantB.glb",
+      "size_bytes": 31012,
+      "sha256": "8080f593c7605d015f16252e793e3ed9a3d8ba8ace81527caf312af79d99514b"
+    },
+    {
+      "path": "meshes/SM_Arena_TileVisual_01_VariantB.mtl",
+      "size_bytes": 887,
+      "sha256": "ff1ac301b82f77b740e5d509893155f5efcb6e9e7602a7a2a79ca4cc74ead009"
+    },
+    {
+      "path": "meshes/SM_Arena_TileVisual_01_VariantB.obj",
+      "size_bytes": 31523,
+      "sha256": "f512f7b7de99cd6ea1f6f3b8df2a8ce6340e3bf813a4da371d8b40b6cdda87e6"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_Boost.glb",
+      "size_bytes": 14876,
+      "sha256": "c8404edaa64f61902536df74166bd66f5cd5d252b551f712a0d6541173ffc173"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_Boost.mtl",
+      "size_bytes": 890,
+      "sha256": "f0b93e28c72f792d0ac09e25fc49be3ed65be273d3ad574d353eb93ec0f9651c"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_Boost.obj",
+      "size_bytes": 8022,
+      "sha256": "0df2fd1df841e72f4de14de9527370f08fd73b91067625f2a78d13dbaada7e65"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_Ice.glb",
+      "size_bytes": 13232,
+      "sha256": "98c5d191e044b6345c25a3344e76dc1d2bd8df0cfda2df82e53ebaae3a02a40d"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_Ice.mtl",
+      "size_bytes": 882,
+      "sha256": "8e294ba3bb65f7c1144e38bbe78e432865b4efb94e7449c499465f370408c846"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_Ice.obj",
+      "size_bytes": 8262,
+      "sha256": "c75e7aab6f1fce1fdd7f6332e2835fac5674a7b57c2bdf7d0417ef890bfe7b9a"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_MagneticAnchor.glb",
+      "size_bytes": 20324,
+      "sha256": "810e55cd4653232144c5f2689b7ece1ef5cc9f71c31abda372ca4248ceb48f20"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_MagneticAnchor.mtl",
+      "size_bytes": 714,
+      "sha256": "d0fc959eea9cf41228d7e4781dc34352551ee41ae6e928b8320767d07e5bc15c"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_MagneticAnchor.obj",
+      "size_bytes": 15239,
+      "sha256": "c559ec23a200c59d56e34f68498c49c7a5281033b297f22fe8ccdca33d999c49"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_MagneticField.glb",
+      "size_bytes": 12468,
+      "sha256": "6a50bb31bd54fa170383caadf5d98f481570e7fbc6a78b588edfeca27403e264"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_MagneticField.mtl",
+      "size_bytes": 521,
+      "sha256": "b4c50af86df7e06deedc8690edba2fc21f93b221ab9abbf1a67805d7d2c587ec"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Active_MagneticField.obj",
+      "size_bytes": 8989,
+      "sha256": "95c8455b3ac72c7fdc68184791f3aada6faae27d4553ca33d894dbd667f40872"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Collapse_Warn.glb",
+      "size_bytes": 11088,
+      "sha256": "a13ab70b9c1142e5daba6473e4efcb73db12ea28cb8f1e04f1d153f3de1da8df"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Collapse_Warn.mtl",
+      "size_bytes": 707,
+      "sha256": "81a86ed86942823b6decd09bbabee8e1ca0deaee64f5349648c8148d7044b561"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Collapse_Warn.obj",
+      "size_bytes": 6980,
+      "sha256": "acf2139b7201127d611f97f93944081ae638cc2559eeec28bca8a22055987776"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Boost.glb",
+      "size_bytes": 11404,
+      "sha256": "9fc962df873c95953425ab07a2158e25771dc91f1bfd9272758528af41af7d28"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Boost.mtl",
+      "size_bytes": 696,
+      "sha256": "5d6cc4da8c445c60b06f573307f1e575f1cc96bca5abdbbc467d6f5298dfd57e"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Boost.obj",
+      "size_bytes": 7382,
+      "sha256": "10330ecbc5d1d33a030287222520b7b3a6b17aa5621297ded586c1c3a2ba84cf"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Ice.glb",
+      "size_bytes": 12016,
+      "sha256": "3dce625993ec6652a2c946220360ed1c1e16181e6eaeaa84f7e44901381a6d19"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Ice.mtl",
+      "size_bytes": 690,
+      "sha256": "d4a9aed463f137da354cda10286c0c96e2352b1ccdb3a94265cbfb39024cda09"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Ice.obj",
+      "size_bytes": 8160,
+      "sha256": "133496be82723aa0528619285603eba622b99d76f7604c18de45171cae506511"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Magnetic.glb",
+      "size_bytes": 14852,
+      "sha256": "c240c59dce56efed7c53242b60ae4e70a6fa05ff82eae930d9d3e29beb4ff5ee"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Magnetic.mtl",
+      "size_bytes": 700,
+      "sha256": "67f116a2d8f012523ea39c6d6b2996b06eb2650cf8708e822fb91a60a4a208a1"
+    },
+    {
+      "path": "meshes/overlays/OVL_Arena_Warn_Magnetic.obj",
+      "size_bytes": 11784,
+      "sha256": "2f12dbf50c97223629ec30af86177489d6786b329ad159de758a3131820bdb7c"
+    },
+    {
+      "path": "previews/01_Production_Safe_Tile_ThreeQuarter.png",
+      "size_bytes": 261861,
+      "sha256": "c0bb2ea708f38b567f364d802fbf4a413ea1c1fc26e143500242643025187001"
+    },
+    {
+      "path": "previews/02_Production_Checkerboard_3x3_Patch.png",
+      "size_bytes": 164501,
+      "sha256": "5f6035e11464e97c3fdfc10b87efc2c4d0fa7641a05ddd75fcd7d49a6263dbb2"
+    },
+    {
+      "path": "previews/03_Production_Tile_Orthographic_Dimensions.png",
+      "size_bytes": 196937,
+      "sha256": "ea39dcfa017f1545bdbf969459cd941936ec39762721d43122650be18f1c4c3c"
+    },
+    {
+      "path": "previews/04_Production_SixState_Overview.png",
+      "size_bytes": 176308,
+      "sha256": "656557cff4bbd1e99c0dd3b67cedc55fd078aec8fd09e0ce8a5fbbd8dfd2be86"
+    },
+    {
+      "path": "previews/05_Production_IceCorridor_Warning_Active.png",
+      "size_bytes": 193044,
+      "sha256": "424333e9909c4bdf1981f97aab127ad60f6b2cfcbc0f4ecd16ca50b56c044503"
+    },
+    {
+      "path": "previews/06_Production_MagneticStorm_Warning_Active.png",
+      "size_bytes": 205589,
+      "sha256": "3d3c0d561ab0f981610cfda25fad49346ddd2088d57dc515f194fbbc71af1482"
+    },
+    {
+      "path": "previews/07_Production_BoostRunway_Warning_Active.png",
+      "size_bytes": 183512,
+      "sha256": "36aac4383b116893a677a6988ee646e732adf608f6942746f2047406fb7ab170"
+    },
+    {
+      "path": "previews/08_Production_RingCollapse_Warning_Sink.png",
+      "size_bytes": 233549,
+      "sha256": "4c312c8af7538681698ddf4e9498444256048bc948850e5d18897f78d4b6605e"
+    },
+    {
+      "path": "previews/09_Production_Arena_9x9_Overview.png",
+      "size_bytes": 342918,
+      "sha256": "e377af3609b2672c6ead1aac8e41816bb7ce1fe3989798cfa1a501a9b42aa8a2"
+    },
+    {
+      "path": "previews/10_Production_Component_And_Collision_Separation.png",
+      "size_bytes": 299618,
+      "sha256": "4f9bad47692507b33b4aeacac3cc1eb93a6af8277c1a1cf17e7e4a05444e639a"
+    },
+    {
+      "path": "scripts/generate_arena_tile_blender.py",
+      "size_bytes": 42681,
+      "sha256": "8c78aed6e4050874b4ceef17ca3caa37ab98af8676aebb1331ecf5e6fbf1dd7a"
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "size_bytes": 17443,
+      "sha256": "df672ecd6c629745b4998bc64cd2c5b98a17e498c57e7d1cc62af0e3e3738ba1"
+    },
+    {
+      "path": "textures/T_Arena_TilePalette_256.png",
+      "size_bytes": 933,
+      "sha256": "3ab02901089d986685060313261da32d2f121c31979bb4b996dd41a3685f6e06"
+    }
+  ]
+}

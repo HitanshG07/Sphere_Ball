@@ -1,0 +1,751 @@
+{
+  "asset_id": "SM_ArenaEnvironment_Colosseum_01",
+  "world_origin": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "total_instances": 45,
+  "instances": [
+    {
+      "instance_index": 1,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 1,
+      "azimuth_deg": 11.25,
+      "reference_pivot_world": [
+        121.6174,
+        51.0,
+        25.3617
+      ],
+      "outward_normal_xz": [
+        0.98247,
+        0.18641
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 2,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 2,
+      "azimuth_deg": 18.75,
+      "reference_pivot_world": [
+        117.4193,
+        51.0,
+        41.7871
+      ],
+      "outward_normal_xz": [
+        0.95137,
+        0.30804
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 3,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 3,
+      "azimuth_deg": 26.25,
+      "reference_pivot_world": [
+        111.2122,
+        51.0,
+        57.4975
+      ],
+      "outward_normal_xz": [
+        0.90489,
+        0.42565
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 4,
+      "archetype_id": "UMOD_03_Vomitorium_Cavea_Bay",
+      "bay_index": 4,
+      "azimuth_deg": 33.75,
+      "reference_pivot_world": [
+        103.1022,
+        51.0,
+        72.2241
+      ],
+      "outward_normal_xz": [
+        0.84329,
+        0.53746
+      ],
+      "triangles": 6712
+    },
+    {
+      "instance_index": 5,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 5,
+      "azimuth_deg": 41.25,
+      "reference_pivot_world": [
+        93.2281,
+        51.0,
+        85.715
+      ],
+      "outward_normal_xz": [
+        0.76703,
+        0.64162
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 6,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 6,
+      "azimuth_deg": 48.75,
+      "reference_pivot_world": [
+        81.7589,
+        51.0,
+        97.7392
+      ],
+      "outward_normal_xz": [
+        0.67682,
+        0.73615
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 7,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 7,
+      "azimuth_deg": 56.25,
+      "reference_pivot_world": [
+        68.8907,
+        51.0,
+        108.091
+      ],
+      "outward_normal_xz": [
+        0.57374,
+        0.81904
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 8,
+      "archetype_id": "UMOD_03_Vomitorium_Cavea_Bay",
+      "bay_index": 8,
+      "azimuth_deg": 63.75,
+      "reference_pivot_world": [
+        54.8438,
+        51.0,
+        116.5935
+      ],
+      "outward_normal_xz": [
+        0.45926,
+        0.8883
+      ],
+      "triangles": 6712
+    },
+    {
+      "instance_index": 9,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 9,
+      "azimuth_deg": 71.25,
+      "reference_pivot_world": [
+        39.8585,
+        51.0,
+        123.1009
+      ],
+      "outward_normal_xz": [
+        0.33528,
+        0.94212
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 10,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 10,
+      "azimuth_deg": 78.75,
+      "reference_pivot_world": [
+        24.1912,
+        51.0,
+        127.5021
+      ],
+      "outward_normal_xz": [
+        0.20415,
+        0.97894
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 11,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 13,
+      "azimuth_deg": 101.25,
+      "reference_pivot_world": [
+        -24.1912,
+        51.0,
+        127.5021
+      ],
+      "outward_normal_xz": [
+        -0.20415,
+        0.97894
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 12,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 14,
+      "azimuth_deg": 108.75,
+      "reference_pivot_world": [
+        -39.8585,
+        51.0,
+        123.1009
+      ],
+      "outward_normal_xz": [
+        -0.33528,
+        0.94212
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 13,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 15,
+      "azimuth_deg": 116.25,
+      "reference_pivot_world": [
+        -54.8438,
+        51.0,
+        116.5935
+      ],
+      "outward_normal_xz": [
+        -0.45926,
+        0.8883
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 14,
+      "archetype_id": "UMOD_03_Vomitorium_Cavea_Bay",
+      "bay_index": 16,
+      "azimuth_deg": 123.75,
+      "reference_pivot_world": [
+        -68.8907,
+        51.0,
+        108.091
+      ],
+      "outward_normal_xz": [
+        -0.57374,
+        0.81904
+      ],
+      "triangles": 6712
+    },
+    {
+      "instance_index": 15,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 17,
+      "azimuth_deg": 131.25,
+      "reference_pivot_world": [
+        -81.7589,
+        51.0,
+        97.7392
+      ],
+      "outward_normal_xz": [
+        -0.67682,
+        0.73615
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 16,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 18,
+      "azimuth_deg": 138.75,
+      "reference_pivot_world": [
+        -93.2281,
+        51.0,
+        85.715
+      ],
+      "outward_normal_xz": [
+        -0.76703,
+        0.64162
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 17,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 19,
+      "azimuth_deg": 146.25,
+      "reference_pivot_world": [
+        -103.1022,
+        51.0,
+        72.2241
+      ],
+      "outward_normal_xz": [
+        -0.84329,
+        0.53746
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 18,
+      "archetype_id": "UMOD_03_Vomitorium_Cavea_Bay",
+      "bay_index": 20,
+      "azimuth_deg": 153.75,
+      "reference_pivot_world": [
+        -111.2122,
+        51.0,
+        57.4975
+      ],
+      "outward_normal_xz": [
+        -0.90489,
+        0.42565
+      ],
+      "triangles": 6712
+    },
+    {
+      "instance_index": 19,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 21,
+      "azimuth_deg": 161.25,
+      "reference_pivot_world": [
+        -117.4193,
+        51.0,
+        41.7871
+      ],
+      "outward_normal_xz": [
+        -0.95137,
+        0.30804
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 20,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 22,
+      "azimuth_deg": 168.75,
+      "reference_pivot_world": [
+        -121.6174,
+        51.0,
+        25.3617
+      ],
+      "outward_normal_xz": [
+        -0.98247,
+        0.18641
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 21,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 25,
+      "azimuth_deg": 191.25,
+      "reference_pivot_world": [
+        -121.6174,
+        51.0,
+        -25.3617
+      ],
+      "outward_normal_xz": [
+        -0.98247,
+        -0.18641
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 22,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 26,
+      "azimuth_deg": 198.75,
+      "reference_pivot_world": [
+        -117.4193,
+        51.0,
+        -41.7871
+      ],
+      "outward_normal_xz": [
+        -0.95137,
+        -0.30804
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 23,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 27,
+      "azimuth_deg": 206.25,
+      "reference_pivot_world": [
+        -111.2122,
+        51.0,
+        -57.4975
+      ],
+      "outward_normal_xz": [
+        -0.90489,
+        -0.42565
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 24,
+      "archetype_id": "UMOD_03_Vomitorium_Cavea_Bay",
+      "bay_index": 28,
+      "azimuth_deg": 213.75,
+      "reference_pivot_world": [
+        -103.1022,
+        51.0,
+        -72.2241
+      ],
+      "outward_normal_xz": [
+        -0.84329,
+        -0.53746
+      ],
+      "triangles": 6712
+    },
+    {
+      "instance_index": 25,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 29,
+      "azimuth_deg": 221.25,
+      "reference_pivot_world": [
+        -93.2281,
+        51.0,
+        -85.715
+      ],
+      "outward_normal_xz": [
+        -0.76703,
+        -0.64162
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 26,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 30,
+      "azimuth_deg": 228.75,
+      "reference_pivot_world": [
+        -81.7589,
+        51.0,
+        -97.7392
+      ],
+      "outward_normal_xz": [
+        -0.67682,
+        -0.73615
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 27,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 31,
+      "azimuth_deg": 236.25,
+      "reference_pivot_world": [
+        -68.8907,
+        51.0,
+        -108.091
+      ],
+      "outward_normal_xz": [
+        -0.57374,
+        -0.81904
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 28,
+      "archetype_id": "UMOD_03_Vomitorium_Cavea_Bay",
+      "bay_index": 32,
+      "azimuth_deg": 243.75,
+      "reference_pivot_world": [
+        -54.8438,
+        51.0,
+        -116.5935
+      ],
+      "outward_normal_xz": [
+        -0.45926,
+        -0.8883
+      ],
+      "triangles": 6712
+    },
+    {
+      "instance_index": 29,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 33,
+      "azimuth_deg": 251.25,
+      "reference_pivot_world": [
+        -39.8585,
+        51.0,
+        -123.1009
+      ],
+      "outward_normal_xz": [
+        -0.33528,
+        -0.94212
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 30,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 34,
+      "azimuth_deg": 258.75,
+      "reference_pivot_world": [
+        -24.1912,
+        51.0,
+        -127.5021
+      ],
+      "outward_normal_xz": [
+        -0.20415,
+        -0.97894
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 31,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 37,
+      "azimuth_deg": 281.25,
+      "reference_pivot_world": [
+        24.1912,
+        51.0,
+        -127.5021
+      ],
+      "outward_normal_xz": [
+        0.20415,
+        -0.97894
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 32,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 38,
+      "azimuth_deg": 288.75,
+      "reference_pivot_world": [
+        39.8585,
+        51.0,
+        -123.1009
+      ],
+      "outward_normal_xz": [
+        0.33528,
+        -0.94212
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 33,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 39,
+      "azimuth_deg": 296.25,
+      "reference_pivot_world": [
+        54.8438,
+        51.0,
+        -116.5935
+      ],
+      "outward_normal_xz": [
+        0.45926,
+        -0.8883
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 34,
+      "archetype_id": "UMOD_03_Vomitorium_Cavea_Bay",
+      "bay_index": 40,
+      "azimuth_deg": 303.75,
+      "reference_pivot_world": [
+        68.8907,
+        51.0,
+        -108.091
+      ],
+      "outward_normal_xz": [
+        0.57374,
+        -0.81904
+      ],
+      "triangles": 6712
+    },
+    {
+      "instance_index": 35,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 41,
+      "azimuth_deg": 311.25,
+      "reference_pivot_world": [
+        81.7589,
+        51.0,
+        -97.7392
+      ],
+      "outward_normal_xz": [
+        0.67682,
+        -0.73615
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 36,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 42,
+      "azimuth_deg": 318.75,
+      "reference_pivot_world": [
+        93.2281,
+        51.0,
+        -85.715
+      ],
+      "outward_normal_xz": [
+        0.76703,
+        -0.64162
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 37,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 43,
+      "azimuth_deg": 326.25,
+      "reference_pivot_world": [
+        103.1022,
+        51.0,
+        -72.2241
+      ],
+      "outward_normal_xz": [
+        0.84329,
+        -0.53746
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 38,
+      "archetype_id": "UMOD_03_Vomitorium_Cavea_Bay",
+      "bay_index": 44,
+      "azimuth_deg": 333.75,
+      "reference_pivot_world": [
+        111.2122,
+        51.0,
+        -57.4975
+      ],
+      "outward_normal_xz": [
+        0.90489,
+        -0.42565
+      ],
+      "triangles": 6712
+    },
+    {
+      "instance_index": 39,
+      "archetype_id": "UMOD_02_Standard_Clipeus_Bay",
+      "bay_index": 45,
+      "azimuth_deg": 341.25,
+      "reference_pivot_world": [
+        117.4193,
+        51.0,
+        -41.7871
+      ],
+      "outward_normal_xz": [
+        0.95137,
+        -0.30804
+      ],
+      "triangles": 5982
+    },
+    {
+      "instance_index": 40,
+      "archetype_id": "UMOD_01_Standard_Window_Bay",
+      "bay_index": 46,
+      "azimuth_deg": 348.75,
+      "reference_pivot_world": [
+        121.6174,
+        51.0,
+        -25.3617
+      ],
+      "outward_normal_xz": [
+        0.98247,
+        -0.18641
+      ],
+      "triangles": 6018
+    },
+    {
+      "instance_index": 41,
+      "archetype_id": "UMOD_04_Cardinal_Triumphal_Gate_Pavilion",
+      "cardinal_direction": "East",
+      "occupied_bays": [
+        47,
+        0
+      ],
+      "azimuth_deg": 0.0,
+      "reference_pivot_world": [
+        114.0,
+        51.0,
+        0.0
+      ],
+      "outward_normal_xz": [
+        1.0,
+        0.0
+      ],
+      "triangles": 8680
+    },
+    {
+      "instance_index": 42,
+      "archetype_id": "UMOD_04_Cardinal_Triumphal_Gate_Pavilion",
+      "cardinal_direction": "South",
+      "occupied_bays": [
+        11,
+        12
+      ],
+      "azimuth_deg": 90.0,
+      "reference_pivot_world": [
+        0.0,
+        51.0,
+        120.0
+      ],
+      "outward_normal_xz": [
+        0.0,
+        1.0
+      ],
+      "triangles": 8680
+    },
+    {
+      "instance_index": 43,
+      "archetype_id": "UMOD_04_Cardinal_Triumphal_Gate_Pavilion",
+      "cardinal_direction": "West",
+      "occupied_bays": [
+        23,
+        24
+      ],
+      "azimuth_deg": 180.0,
+      "reference_pivot_world": [
+        -114.0,
+        51.0,
+        0.0
+      ],
+      "outward_normal_xz": [
+        -1.0,
+        0.0
+      ],
+      "triangles": 8680
+    },
+    {
+      "instance_index": 44,
+      "archetype_id": "UMOD_04_Cardinal_Triumphal_Gate_Pavilion",
+      "cardinal_direction": "North",
+      "occupied_bays": [
+        35,
+        36
+      ],
+      "azimuth_deg": 270.0,
+      "reference_pivot_world": [
+        -0.0,
+        51.0,
+        -120.0
+      ],
+      "outward_normal_xz": [
+        -0.0,
+        -1.0
+      ],
+      "triangles": 8680
+    },
+    {
+      "instance_index": 45,
+      "archetype_id": "UMOD_05_North_Imperial_Reactor_Crest",
+      "cardinal_direction": "North",
+      "occupied_bays": [
+        35,
+        36
+      ],
+      "azimuth_deg": 270.0,
+      "reference_pivot_world": [
+        0.0,
+        114.5,
+        -120.0
+      ],
+      "outward_normal_xz": [
+        0.0,
+        -1.0
+      ],
+      "triangles": 3496
+    }
+  ]
+}

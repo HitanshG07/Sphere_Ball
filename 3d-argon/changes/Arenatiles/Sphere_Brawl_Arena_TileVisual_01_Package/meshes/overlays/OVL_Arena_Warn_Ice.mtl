@@ -1,0 +1,32 @@
+# Sphere Brawl: Rolling Rampage — Production Material Library
+# Asset: OVL_Arena_Warn_Ice (Phase 2 Approved Production Asset)
+
+newmtl MAT_DarkNeutral
+Ka 0.0251 0.0298 0.0424
+Kd 0.1255 0.1490 0.2118
+Ke 0.0000 0.0000 0.0000
+Ks 0.5500 0.6000 0.6800
+Ns 50.0
+d 1.0
+illum 2
+map_Kd ../../textures/T_Arena_TilePalette_256.png
+
+newmtl EMI_Ice
+Ka 0.0000 0.1843 0.2000
+Kd 0.0000 0.9216 1.0000
+Ke 0.0000 0.9216 1.0000
+Ks 0.9000 0.9000 0.9000
+Ns 90.0
+d 1.0
+illum 2
+map_Kd ../../textures/T_Arena_TilePalette_256.png
+
+newmtl EMI_Amber
+Ka 0.2000 0.1333 0.0000
+Kd 1.0000 0.6667 0.0000
+Ke 1.0000 0.6667 0.0000
+Ks 0.9000 0.9000 0.9000
+Ns 90.0
+d 1.0
+illum 2
+map_Kd ../../textures/T_Arena_TilePalette_256.png
