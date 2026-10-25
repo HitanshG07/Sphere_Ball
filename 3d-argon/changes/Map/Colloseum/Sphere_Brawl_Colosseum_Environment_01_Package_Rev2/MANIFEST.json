@@ -1,0 +1,762 @@
+{
+  "package_name": "Sphere_Brawl_Colosseum_Environment_01_Package_Rev2",
+  "asset_id": "SM_ArenaEnvironment_Colosseum_01",
+  "project": "Sphere Brawl: Rolling Rampage",
+  "repository": "HitanshG07/Sphere_Ball",
+  "branch": "3d_mesh",
+  "phase": "Phase 2 Final Correction (Rev 2 \u2014 OBJ/MTL/GLB Export Validation)",
+  "verified_primary_formats": [
+    "OBJ",
+    "MTL",
+    "GLB"
+  ],
+  "secondary_convenience_formats": [
+    "FBX",
+    "GLTF",
+    "BIN"
+  ],
+  "authoritative_rev1_input_zip_sha256": "4b6d883227f707f704ef79dac58764ebb3c8fc289fffe99508658cebb7b894e3",
+  "approved_concept_02_input_zip_sha256": "78a010a3d194f4c2b4577265c4628d8266e7bc7323efa32a5082bae4934b85d4",
+  "unique_archetypes_count": 5,
+  "unique_archetype_triangles": 30888,
+  "section_meshparts_count": 33,
+  "min_section_meshpart_triangles": 1668,
+  "max_section_meshpart_triangles": 16832,
+  "roblox_per_meshpart_triangle_limit": 20000,
+  "assembled_scene_triangles": 283768,
+  "assembled_scene_vertices": 851304,
+  "payload_file_count": 146,
+  "total_payload_bytes": 327533688,
+  "files": [
+    {
+      "path": "INTEGRATION_REPORT.md",
+      "size_bytes": 6347,
+      "sha256": "3552552aa77c6fa0eafa2fc78dbf3a293fb2e9454f21e9bf6bc7e4d3cab8b0d5"
+    },
+    {
+      "path": "MODEL_SPECIFICATION.md",
+      "size_bytes": 15479,
+      "sha256": "13644e9c739f93227a139de7696ac9ba61c80ad86a965a45f3e143f389528567"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 9267,
+      "sha256": "29fb20b3cb64bfd2138bad17572c19098481674ecdd87fd0aef4d77cd20b213f"
+    },
+    {
+      "path": "ROBLOX_STUDIO_IMPORT_GUIDE.md",
+      "size_bytes": 8906,
+      "sha256": "5a59a72a53bdcfdad2d7b4962d6a057c3e545555b67eee38d6c8f912d8e70217"
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "size_bytes": 8785,
+      "sha256": "d6804586e2e3d35ec522fb303c0b21c76875ad092f32bfd74fa3998fbcc98d6d"
+    },
+    {
+      "path": "meshes/SM_ArenaEnvironment_Colosseum_01.bin",
+      "size_bytes": 27241728,
+      "sha256": "51a05aa7f18032b65de2b8d96c357f83b6bc2a42300702343f7269da85c06504"
+    },
+    {
+      "path": "meshes/SM_ArenaEnvironment_Colosseum_01.fbx",
+      "size_bytes": 53708381,
+      "sha256": "3e842d6837c8a3dff3393a825bae10e2f1cc1951ffb6c5ab0bf3529ded16f0f9"
+    },
+    {
+      "path": "meshes/SM_ArenaEnvironment_Colosseum_01.glb",
+      "size_bytes": 27461368,
+      "sha256": "22b7e4f24d0efae6123d0d1ee88f8464f3cbd886baee67a63583188144662a97"
+    },
+    {
+      "path": "meshes/SM_ArenaEnvironment_Colosseum_01.gltf",
+      "size_bytes": 187929,
+      "sha256": "b403fc57b7409cc223b3b7952f2a3bbb185e2ef16ab46031542454e792a657d1"
+    },
+    {
+      "path": "meshes/SM_ArenaEnvironment_Colosseum_01.mtl",
+      "size_bytes": 2380,
+      "sha256": "6825337a592318bcf6f43126995e3b36ecba91b60b55b6c5c237e87d38fce36a"
+    },
+    {
+      "path": "meshes/SM_ArenaEnvironment_Colosseum_01.obj",
+      "size_bytes": 82541589,
+      "sha256": "1c3a7e061676713c8e9714f01b612693d71cd6f5bc0ef2f3bc7fdad5ff1c093b"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_01_Standard_Window_Bay.fbx",
+      "size_bytes": 1086939,
+      "sha256": "2376164005330544a334354a2fa8e8de77791ba6f49e29377a753e53d3e49416"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_01_Standard_Window_Bay.glb",
+      "size_bytes": 696240,
+      "sha256": "e30207c3767faa0f501566542e0b14c1342ec974291b9748f220280b9ff30f1c"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_01_Standard_Window_Bay.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_01_Standard_Window_Bay.obj",
+      "size_bytes": 1620250,
+      "sha256": "f8d96f0bf4bd6fe29d5ec697ed01dcce1316fb631b857ee16faae9a4651d36de"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_02_Standard_Clipeus_Bay.fbx",
+      "size_bytes": 1079777,
+      "sha256": "98a155066d2b8bc21b426c7991f3b4fbadf155cf989ea5c311605970d179e0aa"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_02_Standard_Clipeus_Bay.glb",
+      "size_bytes": 692788,
+      "sha256": "c9dd30e463402e7fcf49760ce18535c4f314190e8502f365e8423eb82ef506bf"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_02_Standard_Clipeus_Bay.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_02_Standard_Clipeus_Bay.obj",
+      "size_bytes": 1609778,
+      "sha256": "9d8e9592cc26a75d282856f588e5396b88dab42a756ff0fc394eddf1c28d6ccb"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_03_Vomitorium_Cavea_Bay.fbx",
+      "size_bytes": 1215906,
+      "sha256": "374738820403c52125dcc9af2be5ee9c55199dc2d536fec86b7b28b856a23216"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_03_Vomitorium_Cavea_Bay.glb",
+      "size_bytes": 763456,
+      "sha256": "898c69405f9829fd5e9717c1d8dae1d57b2c15718db27ab16937c82bf87bff51"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_03_Vomitorium_Cavea_Bay.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_03_Vomitorium_Cavea_Bay.obj",
+      "size_bytes": 1813757,
+      "sha256": "b1464f1d15a7f0f3382e8504d346a3d1c036eb4df3b932ebea32fff7e99aa0f0"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_04_Cardinal_Triumphal_Gate_Pavilion.fbx",
+      "size_bytes": 1596273,
+      "sha256": "4611213e80ed15266a4db0e59c3b12b8731a904f8e36653b803f784250fae62d"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_04_Cardinal_Triumphal_Gate_Pavilion.glb",
+      "size_bytes": 953536,
+      "sha256": "a6780309a5d773a7e67be078a067eb4169249de800ac817045859bfb991bcba1"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_04_Cardinal_Triumphal_Gate_Pavilion.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_04_Cardinal_Triumphal_Gate_Pavilion.obj",
+      "size_bytes": 2374033,
+      "sha256": "bc4d6813d3e0d781bd4975cebf8920091850eae3017ab7cebf0d1ca716435711"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_05_North_Imperial_Reactor_Crest.fbx",
+      "size_bytes": 618254,
+      "sha256": "8ccd032a806f7b26b5b45209810b0bc21538814a25db4250668a1ce9d946ebea"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_05_North_Imperial_Reactor_Crest.glb",
+      "size_bytes": 455220,
+      "sha256": "7076343ade396f4026767970317e3b6b933e6e704cb935f4725d68deee0b3668"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_05_North_Imperial_Reactor_Crest.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/archetypes/UMOD_05_North_Imperial_Reactor_Crest.obj",
+      "size_bytes": 916101,
+      "sha256": "0ca9b789c0addc7b8f2c2af0c35aa4007d20dbc30ebba4c9cab34c0474f96cc3"
+    },
+    {
+      "path": "meshes/archetypes/archetype_instance_transforms.json",
+      "size_bytes": 15443,
+      "sha256": "1d5d77882f728d154240c1e539f15fe2a562b69ab9ced85ce40eb3138f01181b"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q1.glb",
+      "size_bytes": 653004,
+      "sha256": "aad3536a72d088857d4a7e324ff07c4f2f04420b1ea3abca4b18249083d89d3d"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q1.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q1.obj",
+      "size_bytes": 1544312,
+      "sha256": "aa8e4dad9f31fb77f4c014fab255217c7680ff147a5e9bbaf10770f5a4f96236"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q2.glb",
+      "size_bytes": 653012,
+      "sha256": "e7e16623e759f1cc78f36ac59a1ab88bc3a3487cbb40e40c12527058514b333e"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q2.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q2.obj",
+      "size_bytes": 1559586,
+      "sha256": "c4b4071708c13c02acae60b5151e01dd548f19d05d6cf33eb0fd06c225b9560e"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q3.glb",
+      "size_bytes": 653024,
+      "sha256": "a7a5d25a795f80f2e9596a8464dce74f70c72ef10dc410be9d46d0ad5fe45ae3"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q3.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q3.obj",
+      "size_bytes": 1576472,
+      "sha256": "983d130afea481f907bc297686a00f6a93a375f2593987f09c0e9f902132affd"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q4.glb",
+      "size_bytes": 653012,
+      "sha256": "ac986f62dcb91fe545b7595a2fea97898533b2036dc367062706b64296fbf5dc"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q4.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_AtticCornice_Q4.obj",
+      "size_bytes": 1561116,
+      "sha256": "e6ad5175db9ffb7d4e1d703a9c27c87a1c5196ea17f75bef8726b1902d00c65b"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q1.glb",
+      "size_bytes": 1180268,
+      "sha256": "66aab381525af3df45607928fafc516d3236272dac736df39294ef3cacb3aed7"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q1.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q1.obj",
+      "size_bytes": 3082389,
+      "sha256": "ac27277908ecf5628d58e11944caba198adf365d559de1b460dd7d5c61e3686a"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q2.glb",
+      "size_bytes": 1180280,
+      "sha256": "7dc00e3aff7450a95c82bf2837b2b1edc24dd097bd38486f9ffb1792b5512e12"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q2.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q2.obj",
+      "size_bytes": 3115309,
+      "sha256": "2848ea0cad9d586566984d160f793ba9f63ecfd8fb1bd6c065f6dbd924c47997"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q3.glb",
+      "size_bytes": 1180296,
+      "sha256": "5a9f0b4d24e53e503688291cbfb18f74f64b374c353376d06b68ece3861c3aad"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q3.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q3.obj",
+      "size_bytes": 3148398,
+      "sha256": "3c821cb308831ed911c52678952da8d67256a6e19ccee3c4a4d4295dd23e5ac0"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q4.glb",
+      "size_bytes": 1180280,
+      "sha256": "550dd028c87436fd2f9217d20f3ee05fe77c2826d5f534dfb31138e51a91f577"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q4.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_CaveaSeating_Q4.obj",
+      "size_bytes": 3115474,
+      "sha256": "ad98bb8c81e4f8790a169e1e375c81a3be0e4af7b961900ee7da4d7d74339784"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O1.glb",
+      "size_bytes": 967264,
+      "sha256": "960758fc36be7c60f58adac55f78d0c16b38a5f6d99353127bb265a703b977af"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O1.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O1.obj",
+      "size_bytes": 2446029,
+      "sha256": "6d7ca178b58e994f5d0d547e38a26a23b28a8ac3247ea35f34a432d340555c05"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O2.glb",
+      "size_bytes": 967268,
+      "sha256": "9c995dc307202715fa066abe522548bc81b2e84f1c75625e92ef48f7263dc932"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O2.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O2.obj",
+      "size_bytes": 2442801,
+      "sha256": "6e8939058a00d5c5325144d064cc7efbc556ed3a5c629f148f5cc464efa2646c"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O3.glb",
+      "size_bytes": 967272,
+      "sha256": "d8c3648eed318aaf8570cccf3e2d6abd33843517148939e33cca72e33355e17c"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O3.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O3.obj",
+      "size_bytes": 2474505,
+      "sha256": "be701fc25d49a50eea9d208c76cc78a84da4ab3182593016d9bb85fe97bca029"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O4.glb",
+      "size_bytes": 967276,
+      "sha256": "55d0e532cadbb96a90b212eecffbb32239e8eea04505228445082d6b0878aebc"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O4.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O4.obj",
+      "size_bytes": 2467583,
+      "sha256": "8bcf9d88f4fc2789eb3315af8a3663561651933cccfd4fa7752cc822e8a31122"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O5.glb",
+      "size_bytes": 967280,
+      "sha256": "56ac9a8bb7c138e979532c0257a630e7fb7487840107169578b9f46ba94536d1"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O5.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O5.obj",
+      "size_bytes": 2499150,
+      "sha256": "98069031744a5cf7c0aa86eeb56960cf8ea4c4f35448d2cc3f2bf3e34de071d3"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O6.glb",
+      "size_bytes": 967284,
+      "sha256": "0089f9245ec57a5951a62d7ecb58bb87e8e18d6fca08a0718b9c9733fd1bb00e"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O6.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O6.obj",
+      "size_bytes": 2495952,
+      "sha256": "c3a07cebb9abb6167cb2c7f4e4b94fd3bd3d36fb77ab05c1bc8d1354ea688552"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O7.glb",
+      "size_bytes": 967272,
+      "sha256": "97e2dacfb84318ae39f2ae41ad026ff0821b0feecbc1682f79b49b83a8faad22"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O7.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O7.obj",
+      "size_bytes": 2474889,
+      "sha256": "b53673965546182b05d880d1557d1cf3b0af7ccece45d635c8639eb074e5c301"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O8.glb",
+      "size_bytes": 967276,
+      "sha256": "58811b5cd2f9744ba98a46467aa09e6183ae53e350b51c91fd60dd79a803ca9c"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O8.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ColumnOrders_O8.obj",
+      "size_bytes": 2467862,
+      "sha256": "23b801b429f7ddc0744c1e80d06ca9d3326287f87e0b19dd9ff2a24af0d1f215"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q1.glb",
+      "size_bytes": 953248,
+      "sha256": "07986f891077ce1252f39c9563c158d53390c34a8faddcb8c6d6248ffb53b778"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q1.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q1.obj",
+      "size_bytes": 2407177,
+      "sha256": "36221b5225b651b273ac162f22b9f48acd4db74750d0150b6147d0700745c6db"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q2.glb",
+      "size_bytes": 953256,
+      "sha256": "bb359497a8a48e5c3f0064f86f64b66f06b8a3a8ec47c4a5f8f08ef307c6430e"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q2.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q2.obj",
+      "size_bytes": 2432849,
+      "sha256": "463789b749389f263b74b31b2f9ad9b20dc0174717d7e4c4d22e6902c8a94708"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q3.glb",
+      "size_bytes": 953260,
+      "sha256": "6dbaae90d30e310a5f6d241b1b744c8fda34e3f02378ce0e1687af66cab859be"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q3.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q3.obj",
+      "size_bytes": 2458954,
+      "sha256": "a9133aec29c212de82b6b54f517f062433625c7a7eea35b9d4201b94675a16fc"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q4.glb",
+      "size_bytes": 953256,
+      "sha256": "a79abc0713cd33ee661fc7274fba84911a9ab078a990c67b76b9f806e40077fa"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q4.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_ExteriorArcade_Q4.obj",
+      "size_bytes": 2433323,
+      "sha256": "5279b3cbeec2abdd8a70437698a7dee6df537db115c1052f0961b799eed54275"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_East.glb",
+      "size_bytes": 934436,
+      "sha256": "eedad5e0d422ff02e349d04f459ae8335dc2ad95b0b055fab150febe5243eb60"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_East.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_East.obj",
+      "size_bytes": 2337697,
+      "sha256": "2834cc4c6ac47775097548eadbfb8ec0edc78a2581ad002de0e732aa63edc1cb"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_North.glb",
+      "size_bytes": 934460,
+      "sha256": "497053d0e9996dd30eb73ba18c89ea88de66d1bd03e98414e54a794506f01c9f"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_North.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_North.obj",
+      "size_bytes": 2372022,
+      "sha256": "d8a6ded26a50ccef2f5108a4e8f43d1407c2b40bfe52b3f0437704b0935af9f1"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_South.glb",
+      "size_bytes": 934440,
+      "sha256": "f41c9c8345662b15adf60176cdd37b4a3ccd5722cd41f6bd81266ace587cd68e"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_South.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_South.obj",
+      "size_bytes": 2346387,
+      "sha256": "ad7182558b25b86bc835b3195ab942725ec98b4960f7c655d662caa036886642"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_West.glb",
+      "size_bytes": 934452,
+      "sha256": "b35f8e43aba30ec69fe5213bce1bb64729b18a80bc9cade7f1d78e182855ff92"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_West.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_GateTower_West.obj",
+      "size_bytes": 2363377,
+      "sha256": "377b9bb8161454f208df58cf404ca9569bcc90dd567712a1994cbe2b5f009375"
+    },
+    {
+      "path": "meshes/sections/COL_NorthReactorCrest.glb",
+      "size_bytes": 455232,
+      "sha256": "45a7590a6d3042feb69fdcab67366012fd009ac0891930028b65d9f16f42b60c"
+    },
+    {
+      "path": "meshes/sections/COL_NorthReactorCrest.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_NorthReactorCrest.obj",
+      "size_bytes": 958005,
+      "sha256": "18fa54e652df0655bff7cb7b9b77aa14ebc86b92e27f4266a611e8c9776e806a"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q1.glb",
+      "size_bytes": 1732484,
+      "sha256": "c2ff2df77fc90dd34fb1be20613a54da6bbd5cee279fd1b251f276c34f902c88"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q1.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q1.obj",
+      "size_bytes": 4674680,
+      "sha256": "d0a20667bc1e070791bff2279cdc48ee0589ba6e5b3a01cdde49d409950ec66b"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q2.glb",
+      "size_bytes": 1732484,
+      "sha256": "4dd031419d597e84cc8e5225aa71d1f86179d78010198cbb029db637666c4eb2"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q2.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q2.obj",
+      "size_bytes": 4723260,
+      "sha256": "2f6cff0fa0ccfb8163f128668cd458719e7276667905538d03b12be1fe5beef7"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q3.glb",
+      "size_bytes": 1732496,
+      "sha256": "ce221715eda76be797151ce718ae8075ef5509fcd16606a4d0bf122ba868d153"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q3.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q3.obj",
+      "size_bytes": 4772753,
+      "sha256": "d9fecba5f3c60699291c66407c81421324aa9ab8f8cfa4c55ea5ffd22e81639b"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q4.glb",
+      "size_bytes": 1732492,
+      "sha256": "4dcf24b5a1486b804d256cbd8af085ccf5d26f55d91de37ba54ce11c0da1790c"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q4.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_StoneMasonry_Q4.obj",
+      "size_bytes": 4724454,
+      "sha256": "96c8cc61921027eac99a69412f0f08cc173ae5b5e4c6ecc466f54ef1336f22f2"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q1.glb",
+      "size_bytes": 276820,
+      "sha256": "5b0c3cac7eb7cb5bc4f6a0985244cbb06e96a7b7d76aa0cac906a7218fa32c8c"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q1.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q1.obj",
+      "size_bytes": 447889,
+      "sha256": "47f205152bbf78ceda3f6dbf113066e228b8e3db7b94640ae71640a1ad5b393f"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q2.glb",
+      "size_bytes": 276832,
+      "sha256": "7735f95cc793012e02cba2327678d89f784d3c5a1817413a4d508b164ae22594"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q2.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q2.obj",
+      "size_bytes": 452852,
+      "sha256": "f99c14180b0dcb25c90c864573373e4678fff4c7d37c5af08cb3f8638fe8ca2c"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q3.glb",
+      "size_bytes": 276836,
+      "sha256": "5a1712e151b5f27882828324d4f7c52d8f8819f4ef99f264297d2794f6904d24"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q3.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q3.obj",
+      "size_bytes": 457972,
+      "sha256": "8b1ecf3a7dcfe79a403ed34b6f38ffed5fdbf295490829d4c76d9adbbb80a23a"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q4.glb",
+      "size_bytes": 276832,
+      "sha256": "202bd630a5d67ec1c369e8658ebcb3a93e04606b6172ddc5b832da75f6ea197e"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q4.mtl",
+      "size_bytes": 2416,
+      "sha256": "ddd8019bcc2b1b601401eda3cd67e70f23ede6363068b736f97c556aa23b22a2"
+    },
+    {
+      "path": "meshes/sections/COL_Vomitoria_Q4.obj",
+      "size_bytes": 452855,
+      "sha256": "28932faf40e715a4398bb650a4b267b4dd9a0bf673b77f3f6232dc7db332cb62"
+    },
+    {
+      "path": "previews/01_Production_Colosseum_Hero_Interior.png",
+      "size_bytes": 1205256,
+      "sha256": "1f444ac440192f14871431aa6ba8f29204ae2f641c2b45328ce533b5082a027f"
+    },
+    {
+      "path": "previews/02_Production_PlayerHeight_Arena_View.png",
+      "size_bytes": 1047238,
+      "sha256": "2012208c53ddaf82e0d6c2c1de0081bddfff080afb5548945a3b31655c7df1c5"
+    },
+    {
+      "path": "previews/03_Production_Elliptical_Exterior_Overview.png",
+      "size_bytes": 1133449,
+      "sha256": "6c00aa7961836ee37949aedc497629ef04e588a64c370cd42aee4b3645e6b628"
+    },
+    {
+      "path": "previews/04_Production_FourStory_Facade.png",
+      "size_bytes": 757007,
+      "sha256": "2657f31100fcb28797d79ce8e00fa7addbd14251f143411ba8a6aea30ec17a28"
+    },
+    {
+      "path": "previews/05_Production_Classical_Capital_Macro.png",
+      "size_bytes": 244542,
+      "sha256": "f0658440e759506e7effcd24a0c7009ccf8f5a1e6ec10b20b204c7a7b2ba33b3"
+    },
+    {
+      "path": "previews/06_Production_Voussoir_Masonry_Macro.png",
+      "size_bytes": 399772,
+      "sha256": "4fc1def506c6f1442e992aab2bcb789a65608a6a029236a1eddeb11b0ec3bccc"
+    },
+    {
+      "path": "previews/07_Production_Cavea_Seating_Detail.png",
+      "size_bytes": 536276,
+      "sha256": "afa6cdf3358c3a3861486ba1fe10f3b17edbb789d1ff7690c7d3d0bbbd01d06e"
+    },
+    {
+      "path": "previews/08_Production_Triumphal_Gate_Detail.png",
+      "size_bytes": 585934,
+      "sha256": "9be8d5180e5306fbce742a6bc9295f1e949a30ec8d5fdefd66a0783a928aa308"
+    },
+    {
+      "path": "previews/09_Production_NeutralClay_Architecture.png",
+      "size_bytes": 540545,
+      "sha256": "d5b2389661fb053adb391d02929a6e12ec70cb8924133343d30b72ee276b6625"
+    },
+    {
+      "path": "previews/10_Production_Modular_Assembly_And_Void_Clearance.png",
+      "size_bytes": 775857,
+      "sha256": "ed5f965df96ce53c263e0d056747473ce8afe527f7a8d101666a92750ec854bd"
+    },
+    {
+      "path": "previews/11_Production_HighDensity_Wireframe_Extra.png",
+      "size_bytes": 862348,
+      "sha256": "44d4910c20c687b25308582ae27b514779fb4fa7f03cfb96a1743cab5de31476"
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "size_bytes": 23698,
+      "sha256": "95024aa29847ad66c4cab4629bafbe1ea384f2dcdffd5af5415234cbd8ed1bb4"
+    },
+    {
+      "path": "source/colosseum_production_metrics.json",
+      "size_bytes": 16512,
+      "sha256": "42a805e2a97e66e31235949d69fc3369ee0f99cc462df004f9159bf7e1ae29bb"
+    },
+    {
+      "path": "source/generate_colosseum_environment_blender.py",
+      "size_bytes": 99397,
+      "sha256": "b34591b3430bdc1216968caa617c7e7eee74dba1e76b66f15a71bcb7e2f6d3d5"
+    },
+    {
+      "path": "textures/T_Colosseum_Production_Atlas_512.png",
+      "size_bytes": 111122,
+      "sha256": "6bbec54b5e9b72dddf443ef33d2292420656309b7ec820ecc362199b8181ae0e"
+    }
+  ]
+}
