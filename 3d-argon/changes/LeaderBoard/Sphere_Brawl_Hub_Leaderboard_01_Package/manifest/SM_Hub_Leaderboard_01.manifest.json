@@ -1,0 +1,15 @@
+{
+  "id": "hub.station.leaderboard",
+  "name": "SM_Hub_Leaderboard_01",
+  "kind": "model",
+  "status": "EXPORTED",
+  "destination": "Workspace.KineticHub.Stations.SM_Hub_Leaderboard_01",
+  "source": "3d-argon/changes/8/Sphere_Brawl_Hub_Leaderboard_01_Package/scripts/generate_hub_leaderboard_blender.py",
+  "rightsStatus": "ORIGINAL_GENERATED",
+  "robloxAssetId": null,
+  "triangles": 1852,
+  "textureResolution": "64x64",
+  "collision": "VISUAL_ONLY",
+  "platformBudget": "DESKTOP_AND_MOBILE",
+  "notes": "Grand three-board session leaderboard monument and 9-position podium array at (35, 150, -274) facing Hub center (0, 150, -300) via CFrame.new(35, 150, -274) * CFrame.Angles(0, math.rad(-126.60707939), 0). Local envelope 42.0000(W) x 26.0000(H) x 9.0000(D) studs (X in [-11.0, +31.0], Y in [0.0, +26.0], Z in [-4.2, +4.8]). Features 53 named components including 3 themed leaderboard modules (Cyan Session KOs, Amber Session Wins, Magnetic Purple Session Standings), 3 separate 3-place podium stages (9 podiums total), 15 separate flat replaceable UI-ready surfaces (3 headers, 3 main tables, 9 podium nameplates) with zero baked text and zero baked avatars, plus optional 168-triangle collision proxy COL_Leaderboard_Body."
+}

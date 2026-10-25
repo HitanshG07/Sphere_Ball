@@ -1,0 +1,2466 @@
+{
+  "asset_id": "SM_Hub_Leaderboard_01",
+  "approved_concept_archive": "Sphere_Brawl_Hub_Leaderboard_Concept_06.zip",
+  "approved_concept_sha256": "bb705ed9a35fca5ada4f0065f90db818010aafc85f00986946967323080f15e0",
+  "world_anchor": [
+    35.0,
+    150.0,
+    -274.0
+  ],
+  "hub_center": [
+    0.0,
+    150.0,
+    -300.0
+  ],
+  "yaw_degrees": -126.60707939,
+  "yaw_radians": -2.20971031,
+  "forward_unit_vector_world": [
+    -0.80274385,
+    0.0,
+    -0.596324
+  ],
+  "right_unit_vector_world": [
+    -0.596324,
+    0.0,
+    0.80274385
+  ],
+  "up_unit_vector_world": [
+    0.0,
+    1.0,
+    0.0
+  ],
+  "local_bbox_min": [
+    -11.0,
+    0.0,
+    -4.2
+  ],
+  "local_bbox_max": [
+    31.0,
+    26.0,
+    4.8
+  ],
+  "local_dimensions": [
+    42.0,
+    26.0,
+    9.0
+  ],
+  "local_geometric_center_x": 10.0,
+  "world_bbox_min": [
+    13.7938,
+    150.0,
+    -284.2912
+  ],
+  "world_bbox_max": [
+    44.8432,
+    176.0,
+    -246.7044
+  ],
+  "world_dimensions": [
+    31.0494,
+    26.0,
+    37.5868
+  ],
+  "vertex_radial_min_studs": 38.8377,
+  "vertex_radial_max_studs": 56.8872,
+  "visual_triangles": 1852,
+  "visual_vertices": 5556,
+  "collision_proxy_triangles": 168,
+  "collision_proxy_vertices": 504,
+  "min_triangle_area_sq_studs": 0.003,
+  "normal_mismatches": 0,
+  "total_area_3d_sq_studs": 10174.21,
+  "total_area_top_sq_studs": 1734.79,
+  "glb_byte_breakdown": {
+    "total_file_size_bytes": 348236,
+    "header_bytes": 12,
+    "json_chunk_header_bytes": 8,
+    "json_chunk_payload_bytes": 59032,
+    "bin_chunk_header_bytes": 8,
+    "bin_chunk_payload_bytes": 289176
+  },
+  "col_glb_byte_breakdown": {
+    "total_file_size_bytes": 32484,
+    "header_bytes": 12,
+    "json_chunk_header_bytes": 8,
+    "json_chunk_payload_bytes": 5984,
+    "bin_chunk_header_bytes": 8,
+    "bin_chunk_payload_bytes": 26472
+  },
+  "boards": [
+    {
+      "id": "A",
+      "name": "SessionKOs",
+      "title": "SESSION KOs",
+      "subtitle": "CURRENT SERVER \u2022 ALPHA SESSION ONLY",
+      "columns": [
+        "RANK",
+        "PILOT NAME",
+        "KOs"
+      ],
+      "x0": -10.1,
+      "x1": 2.7,
+      "xc": -3.7,
+      "ui_x0": -9.6,
+      "ui_x1": 2.2,
+      "y_bot": 3.8,
+      "y_top": 22.9,
+      "main_y0": 6.2,
+      "main_y1": 19.2,
+      "hdr_y0": 19.55,
+      "hdr_y1": 21.9,
+      "z_back": -3.25,
+      "z_front": 0.18,
+      "emi": "EMI_Cyan",
+      "stage_x0": -9.7,
+      "stage_x1": 2.3,
+      "stage_z0": 0.6,
+      "stage_z1": 4.8,
+      "podiums": [
+        {
+          "rank": 2,
+          "key": "A2",
+          "ord": "2ND",
+          "player": "PLAYER 02",
+          "x0": -9.25,
+          "x1": -5.85,
+          "xc": -7.55,
+          "y1": 1.95,
+          "z0": 1.65,
+          "z1": 4.45,
+          "np_w": 2.9,
+          "np_y0": 0.74,
+          "np_y1": 1.72,
+          "trim": "MAT_LightTrim"
+        },
+        {
+          "rank": 1,
+          "key": "A1",
+          "ord": "1ST",
+          "player": "PLAYER 01",
+          "x0": -5.5,
+          "x1": -1.9,
+          "xc": -3.7,
+          "y1": 2.5,
+          "z0": 1.5,
+          "z1": 4.55,
+          "np_w": 3.1,
+          "np_y0": 0.88,
+          "np_y1": 2.2,
+          "trim": "EMI_Cyan"
+        },
+        {
+          "rank": 3,
+          "key": "A3",
+          "ord": "3RD",
+          "player": "PLAYER 03",
+          "x0": -1.55,
+          "x1": 1.85,
+          "xc": 0.15,
+          "y1": 1.5,
+          "z0": 1.65,
+          "z1": 4.45,
+          "np_w": 2.9,
+          "np_y0": 0.66,
+          "np_y1": 1.34,
+          "trim": "EMI_Cyan"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "SessionWins",
+      "title": "SESSION WINS",
+      "subtitle": "CURRENT SERVER \u2022 ALPHA SESSION ONLY",
+      "columns": [
+        "RANK",
+        "PILOT NAME",
+        "WINS"
+      ],
+      "x0": 3.6,
+      "x1": 16.4,
+      "xc": 10.0,
+      "ui_x0": 4.1,
+      "ui_x1": 15.9,
+      "y_bot": 3.8,
+      "y_top": 23.6,
+      "main_y0": 6.2,
+      "main_y1": 19.6,
+      "hdr_y0": 19.95,
+      "hdr_y1": 22.55,
+      "z_back": -3.32,
+      "z_front": 0.28,
+      "emi": "EMI_Amber",
+      "stage_x0": 4.0,
+      "stage_x1": 16.0,
+      "stage_z0": 0.6,
+      "stage_z1": 4.8,
+      "podiums": [
+        {
+          "rank": 2,
+          "key": "B2",
+          "ord": "2ND",
+          "player": "PLAYER 02",
+          "x0": 4.45,
+          "x1": 7.85,
+          "xc": 6.15,
+          "y1": 1.95,
+          "z0": 1.65,
+          "z1": 4.45,
+          "np_w": 2.9,
+          "np_y0": 0.74,
+          "np_y1": 1.72,
+          "trim": "MAT_LightTrim"
+        },
+        {
+          "rank": 1,
+          "key": "B1",
+          "ord": "1ST",
+          "player": "PLAYER 01",
+          "x0": 8.2,
+          "x1": 11.8,
+          "xc": 10.0,
+          "y1": 2.5,
+          "z0": 1.5,
+          "z1": 4.55,
+          "np_w": 3.1,
+          "np_y0": 0.88,
+          "np_y1": 2.2,
+          "trim": "EMI_Amber"
+        },
+        {
+          "rank": 3,
+          "key": "B3",
+          "ord": "3RD",
+          "player": "PLAYER 03",
+          "x0": 12.15,
+          "x1": 15.55,
+          "xc": 13.85,
+          "y1": 1.5,
+          "z0": 1.65,
+          "z1": 4.45,
+          "np_w": 2.9,
+          "np_y0": 0.66,
+          "np_y1": 1.34,
+          "trim": "EMI_Amber"
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "SessionStandings",
+      "title": "SESSION STANDINGS",
+      "subtitle": "CURRENT SERVER \u2022 COMBINED OVERVIEW",
+      "columns": [
+        "RANK",
+        "PILOT NAME",
+        "KOs",
+        "WINS"
+      ],
+      "x0": 17.3,
+      "x1": 30.1,
+      "xc": 23.7,
+      "ui_x0": 17.8,
+      "ui_x1": 29.6,
+      "y_bot": 3.8,
+      "y_top": 22.9,
+      "main_y0": 6.2,
+      "main_y1": 19.2,
+      "hdr_y0": 19.55,
+      "hdr_y1": 21.9,
+      "z_back": -3.25,
+      "z_front": 0.18,
+      "emi": "EMI_Magnetic",
+      "stage_x0": 17.7,
+      "stage_x1": 29.7,
+      "stage_z0": 0.6,
+      "stage_z1": 4.8,
+      "podiums": [
+        {
+          "rank": 2,
+          "key": "C2",
+          "ord": "2ND",
+          "player": "PLAYER 02",
+          "x0": 18.15,
+          "x1": 21.55,
+          "xc": 19.85,
+          "y1": 1.95,
+          "z0": 1.65,
+          "z1": 4.45,
+          "np_w": 2.9,
+          "np_y0": 0.74,
+          "np_y1": 1.72,
+          "trim": "MAT_LightTrim"
+        },
+        {
+          "rank": 1,
+          "key": "C1",
+          "ord": "1ST",
+          "player": "PLAYER 01",
+          "x0": 21.9,
+          "x1": 25.5,
+          "xc": 23.7,
+          "y1": 2.5,
+          "z0": 1.5,
+          "z1": 4.55,
+          "np_w": 3.1,
+          "np_y0": 0.88,
+          "np_y1": 2.2,
+          "trim": "EMI_Magnetic"
+        },
+        {
+          "rank": 3,
+          "key": "C3",
+          "ord": "3RD",
+          "player": "PLAYER 03",
+          "x0": 25.85,
+          "x1": 29.25,
+          "xc": 27.55,
+          "y1": 1.5,
+          "z0": 1.65,
+          "z1": 4.45,
+          "np_w": 2.9,
+          "np_y0": 0.66,
+          "np_y1": 1.34,
+          "trim": "EMI_Magnetic"
+        }
+      ]
+    }
+  ],
+  "ui_ready_surfaces": [
+    {
+      "component_name": "GEO_Leaderboard_UIHeader_A_SessionKOs",
+      "surface_role": "Display A Header Surface (SESSION KOs)",
+      "board_id": "A",
+      "theme_material": "EMI_Cyan",
+      "panel_width_studs": 11.8,
+      "panel_height_studs": 2.35,
+      "panel_thickness_studs": 0.06,
+      "local_x_span": [
+        -9.6,
+        2.2
+      ],
+      "local_y_span": [
+        19.55,
+        21.9
+      ],
+      "local_z_span": [
+        0.12,
+        0.18
+      ],
+      "front_face_local_center": [
+        -3.7,
+        20.725,
+        0.18
+      ],
+      "front_face_world_center": [
+        37.0619,
+        170.725,
+        -277.0775
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_UIMain_A_SessionKOs",
+      "surface_role": "Display A Main Ranking Table Surface (SESSION KOs)",
+      "board_id": "A",
+      "theme_material": "EMI_Cyan",
+      "panel_width_studs": 11.8,
+      "panel_height_studs": 13.0,
+      "panel_thickness_studs": 0.06,
+      "local_x_span": [
+        -9.6,
+        2.2
+      ],
+      "local_y_span": [
+        6.2,
+        19.2
+      ],
+      "local_z_span": [
+        0.12,
+        0.18
+      ],
+      "front_face_local_center": [
+        -3.7,
+        12.7,
+        0.18
+      ],
+      "front_face_world_center": [
+        37.0619,
+        162.7,
+        -277.0775
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_UIHeader_B_SessionWins",
+      "surface_role": "Display B Header Surface (SESSION WINS)",
+      "board_id": "B",
+      "theme_material": "EMI_Amber",
+      "panel_width_studs": 11.8,
+      "panel_height_studs": 2.6,
+      "panel_thickness_studs": 0.06,
+      "local_x_span": [
+        4.1,
+        15.9
+      ],
+      "local_y_span": [
+        19.95,
+        22.55
+      ],
+      "local_z_span": [
+        0.22,
+        0.28
+      ],
+      "front_face_local_center": [
+        10.0,
+        21.25,
+        0.28
+      ],
+      "front_face_world_center": [
+        28.812,
+        171.25,
+        -266.1395
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_UIMain_B_SessionWins",
+      "surface_role": "Display B Main Ranking Table Surface (SESSION WINS)",
+      "board_id": "B",
+      "theme_material": "EMI_Amber",
+      "panel_width_studs": 11.8,
+      "panel_height_studs": 13.4,
+      "panel_thickness_studs": 0.06,
+      "local_x_span": [
+        4.1,
+        15.9
+      ],
+      "local_y_span": [
+        6.2,
+        19.6
+      ],
+      "local_z_span": [
+        0.22,
+        0.28
+      ],
+      "front_face_local_center": [
+        10.0,
+        12.9,
+        0.28
+      ],
+      "front_face_world_center": [
+        28.812,
+        162.9,
+        -266.1395
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_UIHeader_C_SessionStandings",
+      "surface_role": "Display C Header Surface (SESSION STANDINGS)",
+      "board_id": "C",
+      "theme_material": "EMI_Magnetic",
+      "panel_width_studs": 11.8,
+      "panel_height_studs": 2.35,
+      "panel_thickness_studs": 0.06,
+      "local_x_span": [
+        17.8,
+        29.6
+      ],
+      "local_y_span": [
+        19.55,
+        21.9
+      ],
+      "local_z_span": [
+        0.12,
+        0.18
+      ],
+      "front_face_local_center": [
+        23.7,
+        20.725,
+        0.18
+      ],
+      "front_face_world_center": [
+        20.7226,
+        170.725,
+        -255.0823
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_UIMain_C_SessionStandings",
+      "surface_role": "Display C Main Ranking Table Surface (SESSION STANDINGS)",
+      "board_id": "C",
+      "theme_material": "EMI_Magnetic",
+      "panel_width_studs": 11.8,
+      "panel_height_studs": 13.0,
+      "panel_thickness_studs": 0.06,
+      "local_x_span": [
+        17.8,
+        29.6
+      ],
+      "local_y_span": [
+        6.2,
+        19.2
+      ],
+      "local_z_span": [
+        0.12,
+        0.18
+      ],
+      "front_face_local_center": [
+        23.7,
+        12.7,
+        0.18
+      ],
+      "front_face_world_center": [
+        20.7226,
+        162.7,
+        -255.0823
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_A2_2ND",
+      "surface_role": "Stage A Podium A2 (2ND Place) Replaceable Player Nameplate",
+      "board_id": "A",
+      "podium_key": "A2",
+      "rank": 2,
+      "ordinal": "2ND",
+      "theme_material": "MAT_LightTrim",
+      "panel_width_studs": 2.9,
+      "panel_height_studs": 0.98,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        -9.0,
+        -6.1
+      ],
+      "local_y_span": [
+        0.74,
+        1.72
+      ],
+      "local_z_span": [
+        4.48,
+        4.53
+      ],
+      "front_face_local_center": [
+        -7.55,
+        1.23,
+        4.53
+      ],
+      "front_face_world_center": [
+        35.8658,
+        151.23,
+        -282.7621
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_A1_1ST",
+      "surface_role": "Stage A Podium A1 (1ST Place) Replaceable Player Nameplate",
+      "board_id": "A",
+      "podium_key": "A1",
+      "rank": 1,
+      "ordinal": "1ST",
+      "theme_material": "EMI_Cyan",
+      "panel_width_studs": 3.1,
+      "panel_height_studs": 1.32,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        -5.25,
+        -2.15
+      ],
+      "local_y_span": [
+        0.88,
+        2.2
+      ],
+      "local_z_span": [
+        4.58,
+        4.63
+      ],
+      "front_face_local_center": [
+        -3.7,
+        1.54,
+        4.63
+      ],
+      "front_face_world_center": [
+        33.4897,
+        151.54,
+        -279.7311
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_A3_3RD",
+      "surface_role": "Stage A Podium A3 (3RD Place) Replaceable Player Nameplate",
+      "board_id": "A",
+      "podium_key": "A3",
+      "rank": 3,
+      "ordinal": "3RD",
+      "theme_material": "EMI_Cyan",
+      "panel_width_studs": 2.9,
+      "panel_height_studs": 0.68,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        -1.3,
+        1.6
+      ],
+      "local_y_span": [
+        0.66,
+        1.34
+      ],
+      "local_z_span": [
+        4.48,
+        4.53
+      ],
+      "front_face_local_center": [
+        0.15,
+        1.0,
+        4.53
+      ],
+      "front_face_world_center": [
+        31.2741,
+        151.0,
+        -276.5809
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_B2_2ND",
+      "surface_role": "Stage B Podium B2 (2ND Place) Replaceable Player Nameplate",
+      "board_id": "B",
+      "podium_key": "B2",
+      "rank": 2,
+      "ordinal": "2ND",
+      "theme_material": "MAT_LightTrim",
+      "panel_width_studs": 2.9,
+      "panel_height_studs": 0.98,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        4.7,
+        7.6
+      ],
+      "local_y_span": [
+        0.74,
+        1.72
+      ],
+      "local_z_span": [
+        4.48,
+        4.53
+      ],
+      "front_face_local_center": [
+        6.15,
+        1.23,
+        4.53
+      ],
+      "front_face_world_center": [
+        27.6962,
+        151.23,
+        -271.7645
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_B1_1ST",
+      "surface_role": "Stage B Podium B1 (1ST Place) Replaceable Player Nameplate",
+      "board_id": "B",
+      "podium_key": "B1",
+      "rank": 1,
+      "ordinal": "1ST",
+      "theme_material": "EMI_Amber",
+      "panel_width_studs": 3.1,
+      "panel_height_studs": 1.32,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        8.45,
+        11.55
+      ],
+      "local_y_span": [
+        0.88,
+        2.2
+      ],
+      "local_z_span": [
+        4.58,
+        4.63
+      ],
+      "front_face_local_center": [
+        10.0,
+        1.54,
+        4.63
+      ],
+      "front_face_world_center": [
+        25.3201,
+        151.54,
+        -268.7335
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_B3_3RD",
+      "surface_role": "Stage B Podium B3 (3RD Place) Replaceable Player Nameplate",
+      "board_id": "B",
+      "podium_key": "B3",
+      "rank": 3,
+      "ordinal": "3RD",
+      "theme_material": "EMI_Amber",
+      "panel_width_studs": 2.9,
+      "panel_height_studs": 0.68,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        12.4,
+        15.3
+      ],
+      "local_y_span": [
+        0.66,
+        1.34
+      ],
+      "local_z_span": [
+        4.48,
+        4.53
+      ],
+      "front_face_local_center": [
+        13.85,
+        1.0,
+        4.53
+      ],
+      "front_face_world_center": [
+        23.1045,
+        151.0,
+        -265.5833
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_C2_2ND",
+      "surface_role": "Stage C Podium C2 (2ND Place) Replaceable Player Nameplate",
+      "board_id": "C",
+      "podium_key": "C2",
+      "rank": 2,
+      "ordinal": "2ND",
+      "theme_material": "MAT_LightTrim",
+      "panel_width_studs": 2.9,
+      "panel_height_studs": 0.98,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        18.4,
+        21.3
+      ],
+      "local_y_span": [
+        0.74,
+        1.72
+      ],
+      "local_z_span": [
+        4.48,
+        4.53
+      ],
+      "front_face_local_center": [
+        19.85,
+        1.23,
+        4.53
+      ],
+      "front_face_world_center": [
+        19.5265,
+        151.23,
+        -260.7669
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_C1_1ST",
+      "surface_role": "Stage C Podium C1 (1ST Place) Replaceable Player Nameplate",
+      "board_id": "C",
+      "podium_key": "C1",
+      "rank": 1,
+      "ordinal": "1ST",
+      "theme_material": "EMI_Magnetic",
+      "panel_width_studs": 3.1,
+      "panel_height_studs": 1.32,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        22.15,
+        25.25
+      ],
+      "local_y_span": [
+        0.88,
+        2.2
+      ],
+      "local_z_span": [
+        4.58,
+        4.63
+      ],
+      "front_face_local_center": [
+        23.7,
+        1.54,
+        4.63
+      ],
+      "front_face_world_center": [
+        17.1504,
+        151.54,
+        -257.736
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    },
+    {
+      "component_name": "GEO_Leaderboard_PodiumNameplate_C3_3RD",
+      "surface_role": "Stage C Podium C3 (3RD Place) Replaceable Player Nameplate",
+      "board_id": "C",
+      "podium_key": "C3",
+      "rank": 3,
+      "ordinal": "3RD",
+      "theme_material": "EMI_Magnetic",
+      "panel_width_studs": 2.9,
+      "panel_height_studs": 0.68,
+      "panel_thickness_studs": 0.05,
+      "local_x_span": [
+        26.1,
+        29.0
+      ],
+      "local_y_span": [
+        0.66,
+        1.34
+      ],
+      "local_z_span": [
+        4.48,
+        4.53
+      ],
+      "front_face_local_center": [
+        27.55,
+        1.0,
+        4.53
+      ],
+      "front_face_world_center": [
+        14.9348,
+        151.0,
+        -254.5858
+      ],
+      "front_face_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "front_face_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "recommended_surfacegui_face": "Enum.NormalId.Front"
+    }
+  ],
+  "runtime_avatar_anchors": [
+    {
+      "podium_key": "A2",
+      "stage_id": "A",
+      "board_title": "SESSION KOs",
+      "rank": 2,
+      "ordinal": "2ND",
+      "theme_material": "MAT_LightTrim",
+      "podium_component": "GEO_Leaderboard_Podium_A2_2ND",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_A2_2ND",
+      "podium_top_width_studs": 3.4,
+      "podium_top_depth_studs": 2.8,
+      "podium_top_elevation_y_studs": 1.95,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        -7.55,
+        1.95,
+        3.05
+      ],
+      "avatar_head_top_local_pos": [
+        -7.55,
+        5.95,
+        3.05
+      ],
+      "avatar_feet_world_anchor": [
+        37.0539,
+        151.95,
+        -281.8795
+      ],
+      "avatar_head_top_world_pos": [
+        37.0539,
+        155.95,
+        -281.8795
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 4.25,
+      "avatar_top_vs_screen_bottom_y_studs": -0.25
+    },
+    {
+      "podium_key": "A1",
+      "stage_id": "A",
+      "board_title": "SESSION KOs",
+      "rank": 1,
+      "ordinal": "1ST",
+      "theme_material": "EMI_Cyan",
+      "podium_component": "GEO_Leaderboard_Podium_A1_1ST",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_A1_1ST",
+      "podium_top_width_studs": 3.6,
+      "podium_top_depth_studs": 3.05,
+      "podium_top_elevation_y_studs": 2.5,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        -3.7,
+        2.5,
+        3.025
+      ],
+      "avatar_head_top_local_pos": [
+        -3.7,
+        6.5,
+        3.025
+      ],
+      "avatar_feet_world_anchor": [
+        34.7781,
+        152.5,
+        -278.774
+      ],
+      "avatar_head_top_world_pos": [
+        34.7781,
+        156.5,
+        -278.774
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 3.7,
+      "avatar_top_vs_screen_bottom_y_studs": 0.3
+    },
+    {
+      "podium_key": "A3",
+      "stage_id": "A",
+      "board_title": "SESSION KOs",
+      "rank": 3,
+      "ordinal": "3RD",
+      "theme_material": "EMI_Cyan",
+      "podium_component": "GEO_Leaderboard_Podium_A3_3RD",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_A3_3RD",
+      "podium_top_width_studs": 3.4,
+      "podium_top_depth_studs": 2.8,
+      "podium_top_elevation_y_studs": 1.5,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        0.15,
+        1.5,
+        3.05
+      ],
+      "avatar_head_top_local_pos": [
+        0.15,
+        5.5,
+        3.05
+      ],
+      "avatar_feet_world_anchor": [
+        32.4622,
+        151.5,
+        -275.6984
+      ],
+      "avatar_head_top_world_pos": [
+        32.4622,
+        155.5,
+        -275.6984
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 4.7,
+      "avatar_top_vs_screen_bottom_y_studs": -0.7
+    },
+    {
+      "podium_key": "B2",
+      "stage_id": "B",
+      "board_title": "SESSION WINS",
+      "rank": 2,
+      "ordinal": "2ND",
+      "theme_material": "MAT_LightTrim",
+      "podium_component": "GEO_Leaderboard_Podium_B2_2ND",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_B2_2ND",
+      "podium_top_width_studs": 3.4,
+      "podium_top_depth_studs": 2.8,
+      "podium_top_elevation_y_studs": 1.95,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        6.15,
+        1.95,
+        3.05
+      ],
+      "avatar_head_top_local_pos": [
+        6.15,
+        5.95,
+        3.05
+      ],
+      "avatar_feet_world_anchor": [
+        28.8842,
+        151.95,
+        -270.8819
+      ],
+      "avatar_head_top_world_pos": [
+        28.8842,
+        155.95,
+        -270.8819
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 4.25,
+      "avatar_top_vs_screen_bottom_y_studs": -0.25
+    },
+    {
+      "podium_key": "B1",
+      "stage_id": "B",
+      "board_title": "SESSION WINS",
+      "rank": 1,
+      "ordinal": "1ST",
+      "theme_material": "EMI_Amber",
+      "podium_component": "GEO_Leaderboard_Podium_B1_1ST",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_B1_1ST",
+      "podium_top_width_studs": 3.6,
+      "podium_top_depth_studs": 3.05,
+      "podium_top_elevation_y_studs": 2.5,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        10.0,
+        2.5,
+        3.025
+      ],
+      "avatar_head_top_local_pos": [
+        10.0,
+        6.5,
+        3.025
+      ],
+      "avatar_feet_world_anchor": [
+        26.6085,
+        152.5,
+        -267.7764
+      ],
+      "avatar_head_top_world_pos": [
+        26.6085,
+        156.5,
+        -267.7764
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 3.7,
+      "avatar_top_vs_screen_bottom_y_studs": 0.3
+    },
+    {
+      "podium_key": "B3",
+      "stage_id": "B",
+      "board_title": "SESSION WINS",
+      "rank": 3,
+      "ordinal": "3RD",
+      "theme_material": "EMI_Amber",
+      "podium_component": "GEO_Leaderboard_Podium_B3_3RD",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_B3_3RD",
+      "podium_top_width_studs": 3.4,
+      "podium_top_depth_studs": 2.8,
+      "podium_top_elevation_y_studs": 1.5,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        13.85,
+        1.5,
+        3.05
+      ],
+      "avatar_head_top_local_pos": [
+        13.85,
+        5.5,
+        3.05
+      ],
+      "avatar_feet_world_anchor": [
+        24.2925,
+        151.5,
+        -264.7008
+      ],
+      "avatar_head_top_world_pos": [
+        24.2925,
+        155.5,
+        -264.7008
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 4.7,
+      "avatar_top_vs_screen_bottom_y_studs": -0.7
+    },
+    {
+      "podium_key": "C2",
+      "stage_id": "C",
+      "board_title": "SESSION STANDINGS",
+      "rank": 2,
+      "ordinal": "2ND",
+      "theme_material": "MAT_LightTrim",
+      "podium_component": "GEO_Leaderboard_Podium_C2_2ND",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_C2_2ND",
+      "podium_top_width_studs": 3.4,
+      "podium_top_depth_studs": 2.8,
+      "podium_top_elevation_y_studs": 1.95,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        19.85,
+        1.95,
+        3.05
+      ],
+      "avatar_head_top_local_pos": [
+        19.85,
+        5.95,
+        3.05
+      ],
+      "avatar_feet_world_anchor": [
+        20.7146,
+        151.95,
+        -259.8843
+      ],
+      "avatar_head_top_world_pos": [
+        20.7146,
+        155.95,
+        -259.8843
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 4.25,
+      "avatar_top_vs_screen_bottom_y_studs": -0.25
+    },
+    {
+      "podium_key": "C1",
+      "stage_id": "C",
+      "board_title": "SESSION STANDINGS",
+      "rank": 1,
+      "ordinal": "1ST",
+      "theme_material": "EMI_Magnetic",
+      "podium_component": "GEO_Leaderboard_Podium_C1_1ST",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_C1_1ST",
+      "podium_top_width_studs": 3.6,
+      "podium_top_depth_studs": 3.05,
+      "podium_top_elevation_y_studs": 2.5,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        23.7,
+        2.5,
+        3.025
+      ],
+      "avatar_head_top_local_pos": [
+        23.7,
+        6.5,
+        3.025
+      ],
+      "avatar_feet_world_anchor": [
+        18.4388,
+        152.5,
+        -256.7789
+      ],
+      "avatar_head_top_world_pos": [
+        18.4388,
+        156.5,
+        -256.7789
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 3.7,
+      "avatar_top_vs_screen_bottom_y_studs": 0.3
+    },
+    {
+      "podium_key": "C3",
+      "stage_id": "C",
+      "board_title": "SESSION STANDINGS",
+      "rank": 3,
+      "ordinal": "3RD",
+      "theme_material": "EMI_Magnetic",
+      "podium_component": "GEO_Leaderboard_Podium_C3_3RD",
+      "nameplate_component": "GEO_Leaderboard_PodiumNameplate_C3_3RD",
+      "podium_top_width_studs": 3.4,
+      "podium_top_depth_studs": 2.8,
+      "podium_top_elevation_y_studs": 1.5,
+      "recommended_avatar_height_studs": 4.0,
+      "recommended_avatar_scale_vs_r15_5_5": 0.7273,
+      "avatar_feet_local_anchor": [
+        27.55,
+        1.5,
+        3.05
+      ],
+      "avatar_head_top_local_pos": [
+        27.55,
+        5.5,
+        3.05
+      ],
+      "avatar_feet_world_anchor": [
+        16.1229,
+        151.5,
+        -253.7032
+      ],
+      "avatar_head_top_world_pos": [
+        16.1229,
+        155.5,
+        -253.7032
+      ],
+      "avatar_forward_local_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "avatar_forward_world_normal": [
+        -0.802744,
+        0.0,
+        -0.596324
+      ],
+      "clearance_below_screen_bottom_studs": 4.7,
+      "avatar_top_vs_screen_bottom_y_studs": -0.7
+    }
+  ],
+  "components": {
+    "GEO_Leaderboard_WallPlinth": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 50,
+      "vertices": 150,
+      "area_3d_sq_studs": 709.1347,
+      "area_top_sq_studs": 344.975,
+      "bbox_min": [
+        -11.0,
+        0.0,
+        -4.2
+      ],
+      "bbox_max": [
+        31.0,
+        3.1,
+        0.6
+      ],
+      "area_3d_pct": 6.97,
+      "area_top_pct": 19.89
+    },
+    "GEO_Leaderboard_WallPedestal": {
+      "material": "MAT_AltNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 282.284,
+      "area_top_sq_studs": 171.42,
+      "bbox_min": [
+        -10.6,
+        1.05,
+        -3.85
+      ],
+      "bbox_max": [
+        30.6,
+        2.3,
+        0.35
+      ],
+      "area_3d_pct": 2.77,
+      "area_top_pct": 9.88
+    },
+    "GEO_Leaderboard_SupportPiers": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 88,
+      "vertices": 264,
+      "area_3d_sq_studs": 704.4923,
+      "area_top_sq_studs": 12.0148,
+      "bbox_min": [
+        -10.94,
+        3.1,
+        -3.42
+      ],
+      "bbox_max": [
+        30.94,
+        24.1,
+        0.22
+      ],
+      "area_3d_pct": 6.92,
+      "area_top_pct": 0.69
+    },
+    "GEO_Leaderboard_CollarClamps": {
+      "material": "MAT_LightTrim",
+      "triangles": 160,
+      "vertices": 480,
+      "area_3d_sq_studs": 145.8312,
+      "area_top_sq_studs": 60.8456,
+      "bbox_min": [
+        -11.0,
+        5.92,
+        -3.55
+      ],
+      "bbox_max": [
+        31.0,
+        22.08,
+        0.32
+      ],
+      "area_3d_pct": 1.43,
+      "area_top_pct": 3.51
+    },
+    "GEO_Leaderboard_RearStabilizers": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 40,
+      "vertices": 120,
+      "area_3d_sq_studs": 168.7501,
+      "area_top_sq_studs": 2.272,
+      "bbox_min": [
+        -10.86,
+        1.05,
+        -4.15
+      ],
+      "bbox_max": [
+        30.86,
+        18.2,
+        -3.35
+      ],
+      "area_3d_pct": 1.66,
+      "area_top_pct": 0.13
+    },
+    "GEO_Leaderboard_CrossGirders": {
+      "material": "MAT_AltNeutral",
+      "triangles": 30,
+      "vertices": 90,
+      "area_3d_sq_studs": 612.9436,
+      "area_top_sq_studs": 405.594,
+      "bbox_min": [
+        -10.3,
+        3.0,
+        -3.38
+      ],
+      "bbox_max": [
+        30.3,
+        22.85,
+        -0.05
+      ],
+      "area_3d_pct": 6.02,
+      "area_top_pct": 23.38
+    },
+    "GEO_Leaderboard_Module_A_Housing": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 34,
+      "vertices": 102,
+      "area_3d_sq_studs": 690.9095,
+      "area_top_sq_studs": 42.9912,
+      "bbox_min": [
+        -10.1,
+        3.8,
+        -3.25
+      ],
+      "bbox_max": [
+        2.7,
+        22.9,
+        0.22
+      ],
+      "area_3d_pct": 6.79,
+      "area_top_pct": 2.48
+    },
+    "GEO_Leaderboard_Module_A_Bezel": {
+      "material": "MAT_AltNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 473.008,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        -9.92,
+        3.95,
+        0.02
+      ],
+      "bbox_max": [
+        2.52,
+        22.75,
+        0.16
+      ],
+      "area_3d_pct": 4.65,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_LightTrim": {
+      "material": "MAT_LightTrim",
+      "triangles": 228,
+      "vertices": 684,
+      "area_3d_sq_studs": 188.6542,
+      "area_top_sq_studs": 20.8996,
+      "bbox_min": [
+        -9.95,
+        5.98,
+        0.14
+      ],
+      "bbox_max": [
+        29.95,
+        25.55,
+        0.68
+      ],
+      "area_3d_pct": 1.85,
+      "area_top_pct": 1.2
+    },
+    "GEO_Leaderboard_UIHeader_A_SessionKOs": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 55.742,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        -9.6,
+        19.55,
+        0.12
+      ],
+      "bbox_max": [
+        2.2,
+        21.9,
+        0.18
+      ],
+      "area_3d_pct": 0.55,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_UIMain_A_SessionKOs": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 308.36,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        -9.6,
+        6.2,
+        0.12
+      ],
+      "bbox_max": [
+        2.2,
+        19.2,
+        0.18
+      ],
+      "area_3d_pct": 3.03,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Accent_A": {
+      "material": "EMI_Cyan",
+      "triangles": 64,
+      "vertices": 192,
+      "area_3d_sq_studs": 36.342,
+      "area_top_sq_studs": 1.79,
+      "bbox_min": [
+        -10.04,
+        0.36,
+        -3.75
+      ],
+      "bbox_max": [
+        2.64,
+        23.95,
+        4.68
+      ],
+      "area_3d_pct": 0.36,
+      "area_top_pct": 0.1
+    },
+    "GEO_Leaderboard_RearSpine": {
+      "material": "MAT_AltNeutral",
+      "triangles": 66,
+      "vertices": 198,
+      "area_3d_sq_studs": 966.5221,
+      "area_top_sq_studs": 10.8737,
+      "bbox_min": [
+        -8.1,
+        4.1,
+        -3.74
+      ],
+      "bbox_max": [
+        28.1,
+        21.8,
+        -3.25
+      ],
+      "area_3d_pct": 9.5,
+      "area_top_pct": 0.63
+    },
+    "GEO_Leaderboard_RearServicePanels": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 150,
+      "vertices": 450,
+      "area_3d_sq_studs": 421.416,
+      "area_top_sq_studs": 12.96,
+      "bbox_min": [
+        -7.3,
+        4.7,
+        -3.82
+      ],
+      "bbox_max": [
+        27.3,
+        20.0,
+        -3.63
+      ],
+      "area_3d_pct": 4.14,
+      "area_top_pct": 0.75
+    },
+    "GEO_Leaderboard_Module_B_Housing": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 34,
+      "vertices": 102,
+      "area_3d_sq_studs": 722.0482,
+      "area_top_sq_studs": 45.1672,
+      "bbox_min": [
+        3.6,
+        3.8,
+        -3.32
+      ],
+      "bbox_max": [
+        16.4,
+        23.6,
+        0.32
+      ],
+      "area_3d_pct": 7.1,
+      "area_top_pct": 2.6
+    },
+    "GEO_Leaderboard_Module_B_Bezel": {
+      "material": "MAT_AltNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 490.62,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        3.78,
+        3.95,
+        0.12
+      ],
+      "bbox_max": [
+        16.22,
+        23.45,
+        0.26
+      ],
+      "area_3d_pct": 4.82,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_UIHeader_B_SessionWins": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 61.672,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        4.1,
+        19.95,
+        0.22
+      ],
+      "bbox_max": [
+        15.9,
+        22.55,
+        0.28
+      ],
+      "area_3d_pct": 0.61,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_UIMain_B_SessionWins": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 317.848,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        4.1,
+        6.2,
+        0.22
+      ],
+      "bbox_max": [
+        15.9,
+        19.6,
+        0.28
+      ],
+      "area_3d_pct": 3.12,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Accent_B": {
+      "material": "EMI_Amber",
+      "triangles": 64,
+      "vertices": 192,
+      "area_3d_sq_studs": 37.514,
+      "area_top_sq_studs": 1.87,
+      "bbox_min": [
+        3.66,
+        0.36,
+        -3.82
+      ],
+      "bbox_max": [
+        16.34,
+        24.65,
+        4.68
+      ],
+      "area_3d_pct": 0.37,
+      "area_top_pct": 0.11
+    },
+    "GEO_Leaderboard_Module_C_Housing": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 34,
+      "vertices": 102,
+      "area_3d_sq_studs": 690.9095,
+      "area_top_sq_studs": 42.9912,
+      "bbox_min": [
+        17.3,
+        3.8,
+        -3.25
+      ],
+      "bbox_max": [
+        30.1,
+        22.9,
+        0.22
+      ],
+      "area_3d_pct": 6.79,
+      "area_top_pct": 2.48
+    },
+    "GEO_Leaderboard_Module_C_Bezel": {
+      "material": "MAT_AltNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 473.008,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        17.48,
+        3.95,
+        0.02
+      ],
+      "bbox_max": [
+        29.92,
+        22.75,
+        0.16
+      ],
+      "area_3d_pct": 4.65,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_UIHeader_C_SessionStandings": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 55.742,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        17.8,
+        19.55,
+        0.12
+      ],
+      "bbox_max": [
+        29.6,
+        21.9,
+        0.18
+      ],
+      "area_3d_pct": 0.55,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_UIMain_C_SessionStandings": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 308.36,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        17.8,
+        6.2,
+        0.12
+      ],
+      "bbox_max": [
+        29.6,
+        19.2,
+        0.18
+      ],
+      "area_3d_pct": 3.03,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Accent_C": {
+      "material": "EMI_Magnetic",
+      "triangles": 64,
+      "vertices": 192,
+      "area_3d_sq_studs": 36.342,
+      "area_top_sq_studs": 1.79,
+      "bbox_min": [
+        17.36,
+        0.36,
+        -3.75
+      ],
+      "bbox_max": [
+        30.04,
+        23.95,
+        4.68
+      ],
+      "area_3d_pct": 0.36,
+      "area_top_pct": 0.1
+    },
+    "GEO_Leaderboard_CanopyCrown": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 88,
+      "vertices": 264,
+      "area_3d_sq_studs": 349.1532,
+      "area_top_sq_studs": 175.905,
+      "bbox_min": [
+        -10.4,
+        22.9,
+        -3.15
+      ],
+      "bbox_max": [
+        30.4,
+        26.0,
+        0.6
+      ],
+      "area_3d_pct": 3.43,
+      "area_top_pct": 10.14
+    },
+    "GEO_Leaderboard_PodiumStage_A_Base": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 28,
+      "vertices": 84,
+      "area_3d_sq_studs": 109.2781,
+      "area_top_sq_studs": 49.68,
+      "bbox_min": [
+        -9.7,
+        0.0,
+        0.6
+      ],
+      "bbox_max": [
+        2.3,
+        0.32,
+        4.8
+      ],
+      "area_3d_pct": 1.07,
+      "area_top_pct": 2.86
+    },
+    "GEO_Leaderboard_PodiumStage_A_Deck": {
+      "material": "MAT_AltNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 51.2271,
+      "area_top_sq_studs": 45.25,
+      "bbox_min": [
+        -9.45,
+        0.32,
+        0.65
+      ],
+      "bbox_max": [
+        2.05,
+        0.52,
+        4.62
+      ],
+      "area_3d_pct": 0.5,
+      "area_top_pct": 2.61
+    },
+    "GEO_Leaderboard_Podium_A2_2ND": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 27.6018,
+      "area_top_sq_studs": 10.1216,
+      "bbox_min": [
+        -9.31,
+        0.52,
+        1.59
+      ],
+      "bbox_max": [
+        -5.79,
+        1.95,
+        4.51
+      ],
+      "area_3d_pct": 0.27,
+      "area_top_pct": 0.58
+    },
+    "GEO_Leaderboard_PodiumLightTrim": {
+      "material": "MAT_LightTrim",
+      "triangles": 96,
+      "vertices": 288,
+      "area_3d_sq_studs": 65.0904,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        -9.08,
+        0.61,
+        4.43
+      ],
+      "bbox_max": [
+        29.08,
+        2.25,
+        4.6
+      ],
+      "area_3d_pct": 0.64,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_PodiumNameplate_A2_2ND": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 5.782,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        -9.0,
+        0.74,
+        4.48
+      ],
+      "bbox_max": [
+        -6.1,
+        1.72,
+        4.53
+      ],
+      "area_3d_pct": 0.06,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Podium_A1_1ST": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 37.621,
+      "area_top_sq_studs": 11.6356,
+      "bbox_min": [
+        -5.56,
+        0.52,
+        1.44
+      ],
+      "bbox_max": [
+        -1.84,
+        2.5,
+        4.61
+      ],
+      "area_3d_pct": 0.37,
+      "area_top_pct": 0.67
+    },
+    "GEO_Leaderboard_PodiumAccent_A": {
+      "material": "EMI_Cyan",
+      "triangles": 16,
+      "vertices": 48,
+      "area_3d_sq_studs": 1.232,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        -5.26,
+        1.36,
+        4.48
+      ],
+      "bbox_max": [
+        1.61,
+        2.46,
+        4.64
+      ],
+      "area_3d_pct": 0.01,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_PodiumNameplate_A1_1ST": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 8.316,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        -5.25,
+        0.88,
+        4.58
+      ],
+      "bbox_max": [
+        -2.15,
+        2.2,
+        4.63
+      ],
+      "area_3d_pct": 0.08,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Podium_A3_3RD": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 22.101,
+      "area_top_sq_studs": 10.1216,
+      "bbox_min": [
+        -1.61,
+        0.52,
+        1.59
+      ],
+      "bbox_max": [
+        1.91,
+        1.5,
+        4.51
+      ],
+      "area_3d_pct": 0.22,
+      "area_top_pct": 0.58
+    },
+    "GEO_Leaderboard_PodiumNameplate_A3_3RD": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 4.012,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        -1.3,
+        0.66,
+        4.48
+      ],
+      "bbox_max": [
+        1.6,
+        1.34,
+        4.53
+      ],
+      "area_3d_pct": 0.04,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_PodiumStage_B_Base": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 28,
+      "vertices": 84,
+      "area_3d_sq_studs": 109.2781,
+      "area_top_sq_studs": 49.68,
+      "bbox_min": [
+        4.0,
+        0.0,
+        0.6
+      ],
+      "bbox_max": [
+        16.0,
+        0.32,
+        4.8
+      ],
+      "area_3d_pct": 1.07,
+      "area_top_pct": 2.86
+    },
+    "GEO_Leaderboard_PodiumStage_B_Deck": {
+      "material": "MAT_AltNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 51.2271,
+      "area_top_sq_studs": 45.25,
+      "bbox_min": [
+        4.25,
+        0.32,
+        0.65
+      ],
+      "bbox_max": [
+        15.75,
+        0.52,
+        4.62
+      ],
+      "area_3d_pct": 0.5,
+      "area_top_pct": 2.61
+    },
+    "GEO_Leaderboard_Podium_B2_2ND": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 27.6018,
+      "area_top_sq_studs": 10.1216,
+      "bbox_min": [
+        4.39,
+        0.52,
+        1.59
+      ],
+      "bbox_max": [
+        7.91,
+        1.95,
+        4.51
+      ],
+      "area_3d_pct": 0.27,
+      "area_top_pct": 0.58
+    },
+    "GEO_Leaderboard_PodiumNameplate_B2_2ND": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 5.782,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        4.7,
+        0.74,
+        4.48
+      ],
+      "bbox_max": [
+        7.6,
+        1.72,
+        4.53
+      ],
+      "area_3d_pct": 0.06,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Podium_B1_1ST": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 37.621,
+      "area_top_sq_studs": 11.6356,
+      "bbox_min": [
+        8.14,
+        0.52,
+        1.44
+      ],
+      "bbox_max": [
+        11.86,
+        2.5,
+        4.61
+      ],
+      "area_3d_pct": 0.37,
+      "area_top_pct": 0.67
+    },
+    "GEO_Leaderboard_PodiumAccent_B": {
+      "material": "EMI_Amber",
+      "triangles": 16,
+      "vertices": 48,
+      "area_3d_sq_studs": 1.232,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        8.44,
+        1.36,
+        4.48
+      ],
+      "bbox_max": [
+        15.31,
+        2.46,
+        4.64
+      ],
+      "area_3d_pct": 0.01,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_PodiumNameplate_B1_1ST": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 8.316,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        8.45,
+        0.88,
+        4.58
+      ],
+      "bbox_max": [
+        11.55,
+        2.2,
+        4.63
+      ],
+      "area_3d_pct": 0.08,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Podium_B3_3RD": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 22.101,
+      "area_top_sq_studs": 10.1216,
+      "bbox_min": [
+        12.09,
+        0.52,
+        1.59
+      ],
+      "bbox_max": [
+        15.61,
+        1.5,
+        4.51
+      ],
+      "area_3d_pct": 0.22,
+      "area_top_pct": 0.58
+    },
+    "GEO_Leaderboard_PodiumNameplate_B3_3RD": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 4.012,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        12.4,
+        0.66,
+        4.48
+      ],
+      "bbox_max": [
+        15.3,
+        1.34,
+        4.53
+      ],
+      "area_3d_pct": 0.04,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_PodiumStage_C_Base": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 28,
+      "vertices": 84,
+      "area_3d_sq_studs": 109.2781,
+      "area_top_sq_studs": 49.68,
+      "bbox_min": [
+        17.7,
+        0.0,
+        0.6
+      ],
+      "bbox_max": [
+        29.7,
+        0.32,
+        4.8
+      ],
+      "area_3d_pct": 1.07,
+      "area_top_pct": 2.86
+    },
+    "GEO_Leaderboard_PodiumStage_C_Deck": {
+      "material": "MAT_AltNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 51.2271,
+      "area_top_sq_studs": 45.25,
+      "bbox_min": [
+        17.95,
+        0.32,
+        0.65
+      ],
+      "bbox_max": [
+        29.45,
+        0.52,
+        4.62
+      ],
+      "area_3d_pct": 0.5,
+      "area_top_pct": 2.61
+    },
+    "GEO_Leaderboard_Podium_C2_2ND": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 27.6018,
+      "area_top_sq_studs": 10.1216,
+      "bbox_min": [
+        18.09,
+        0.52,
+        1.59
+      ],
+      "bbox_max": [
+        21.61,
+        1.95,
+        4.51
+      ],
+      "area_3d_pct": 0.27,
+      "area_top_pct": 0.58
+    },
+    "GEO_Leaderboard_PodiumNameplate_C2_2ND": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 5.782,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        18.4,
+        0.74,
+        4.48
+      ],
+      "bbox_max": [
+        21.3,
+        1.72,
+        4.53
+      ],
+      "area_3d_pct": 0.06,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Podium_C1_1ST": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 37.621,
+      "area_top_sq_studs": 11.6356,
+      "bbox_min": [
+        21.84,
+        0.52,
+        1.44
+      ],
+      "bbox_max": [
+        25.56,
+        2.5,
+        4.61
+      ],
+      "area_3d_pct": 0.37,
+      "area_top_pct": 0.67
+    },
+    "GEO_Leaderboard_PodiumAccent_C": {
+      "material": "EMI_Magnetic",
+      "triangles": 16,
+      "vertices": 48,
+      "area_3d_sq_studs": 1.232,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        22.14,
+        1.36,
+        4.48
+      ],
+      "bbox_max": [
+        29.01,
+        2.46,
+        4.64
+      ],
+      "area_3d_pct": 0.01,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_PodiumNameplate_C1_1ST": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 8.316,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        22.15,
+        0.88,
+        4.58
+      ],
+      "bbox_max": [
+        25.25,
+        2.2,
+        4.63
+      ],
+      "area_3d_pct": 0.08,
+      "area_top_pct": 0.0
+    },
+    "GEO_Leaderboard_Podium_C3_3RD": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 22,
+      "vertices": 66,
+      "area_3d_sq_studs": 22.101,
+      "area_top_sq_studs": 10.1216,
+      "bbox_min": [
+        25.79,
+        0.52,
+        1.59
+      ],
+      "bbox_max": [
+        29.31,
+        1.5,
+        4.51
+      ],
+      "area_3d_pct": 0.22,
+      "area_top_pct": 0.58
+    },
+    "GEO_Leaderboard_PodiumNameplate_C3_3RD": {
+      "material": "MAT_DarkNeutral",
+      "triangles": 8,
+      "vertices": 24,
+      "area_3d_sq_studs": 4.012,
+      "area_top_sq_studs": 0.0,
+      "bbox_min": [
+        26.1,
+        0.66,
+        4.48
+      ],
+      "bbox_max": [
+        29.0,
+        1.34,
+        4.53
+      ],
+      "area_3d_pct": 0.04,
+      "area_top_pct": 0.0
+    }
+  },
+  "material_summary": {
+    "MAT_DarkNeutral": {
+      "triangles": 920,
+      "area_3d_sq_studs": 6208.6731,
+      "area_top_sq_studs": 923.9528,
+      "area_3d_pct": 61.02,
+      "area_top_pct": 53.26
+    },
+    "MAT_AltNeutral": {
+      "triangles": 208,
+      "area_3d_sq_studs": 3452.067,
+      "area_top_sq_studs": 723.6377,
+      "area_3d_pct": 33.93,
+      "area_top_pct": 41.71
+    },
+    "MAT_LightTrim": {
+      "triangles": 484,
+      "area_3d_sq_studs": 399.5758,
+      "area_top_sq_studs": 81.7452,
+      "area_3d_pct": 3.93,
+      "area_top_pct": 4.71
+    },
+    "EMI_Cyan": {
+      "triangles": 80,
+      "area_3d_sq_studs": 37.574,
+      "area_top_sq_studs": 1.79,
+      "area_3d_pct": 0.37,
+      "area_top_pct": 0.1
+    },
+    "EMI_Amber": {
+      "triangles": 80,
+      "area_3d_sq_studs": 38.746,
+      "area_top_sq_studs": 1.87,
+      "area_3d_pct": 0.38,
+      "area_top_pct": 0.11
+    },
+    "EMI_Magnetic": {
+      "triangles": 80,
+      "area_3d_sq_studs": 37.574,
+      "area_top_sq_studs": 1.79,
+      "area_3d_pct": 0.37,
+      "area_top_pct": 0.1
+    }
+  }
+}
